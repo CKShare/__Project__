@@ -3,5 +3,5 @@ using Sirenix.OdinInspector;
 
 public class PlayerController : ControllerBase
 {
-
+    
 }

@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebbaea405db7f44ea7fbe0269c4cde0, type: 3}
   m_Name: New Weapon Settings
   m_EditorClassIdentifier: 
-  _weaponType: 0
   _baseDamage: 0
   _boundCenter: {x: 0, y: -0, z: 0}
   _boundSize: {x: 1, y: 1, z: 1}
