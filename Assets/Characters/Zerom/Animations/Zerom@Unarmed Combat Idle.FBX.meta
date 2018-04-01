@@ -160,7 +160,9 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tTransform 'Bip001 Pelvis' is not an ancestor of 'Bip001 L
+      Thigh'\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -653,18 +655,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Zerom Combat Idle(Clone)
+    - name: Zerom@Unarmed Combat Idle(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: PC_Dummy
-      parentName: Zerom Combat Idle(Clone)
+      parentName: Zerom@Unarmed Combat Idle(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip001
-      parentName: Zerom Combat Idle(Clone)
+      parentName: Zerom@Unarmed Combat Idle(Clone)
       position: {x: 0.0059148497, y: 0.96340907, z: -0.11289387}
       rotation: {x: 0.5000601, y: -0.5000594, z: -0.49993992, w: -0.49994057}
       scale: {x: 1.0000002, y: 0.99999976, z: 1}
@@ -1011,10 +1013,11 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
-    hasTranslationDoF: 0
+    hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7c38f3e127d21fd46b6c64f1b8b34eaa,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

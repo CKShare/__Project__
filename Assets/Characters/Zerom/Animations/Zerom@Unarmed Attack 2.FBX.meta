@@ -160,13 +160,12 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tParent for 'Bip001 L Thigh' differs from one found in HumanDescription.
+      'Bip001' was found instead of 'Bip001 Pelvis'.\n"
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Bip001 Spine2' has translation animation that
-      will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -182,7 +181,7 @@ ModelImporter:
       name: Zerom Unarmed Attack 2
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 47
+      lastFrame: 33
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1011,10 +1010,10 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
-    hasTranslationDoF: 0
+    hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0dec3231d3fbd7f49ad4173ac0b9f12e,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7c38f3e127d21fd46b6c64f1b8b34eaa,
     type: 3}
   animationType: 3
   humanoidOversampling: 1

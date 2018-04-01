@@ -12,6 +12,7 @@ public abstract class ControllerBase : MonoBehaviour
     {
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
         _rigidbody.useGravity = false;
     }
 
@@ -21,4 +22,8 @@ public abstract class ControllerBase : MonoBehaviour
         velocity.y = Physics.gravity.y;
         _rigidbody.velocity = velocity;
     }
+
+    protected Transform Transform => _transform;
+    protected Rigidbody Rigidbody => _rigidbody;
+    protected Animator Animator => _animator;
 }

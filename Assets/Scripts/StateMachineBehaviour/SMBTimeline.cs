@@ -111,7 +111,21 @@ public class SMBTimeline : SerializedStateMachineBehaviour
 
         // EventTrigger
         foreach (var triggerInfo in _eventTriggers)
+        {
             triggerInfo.Reset();
+
+            if (triggerInfo.Time <= stateInfo.normalizedTime)
+            {
+                bool condition = triggerInfo.Chance >= UnityEngine.Random.value && (layerIndex == 0 ? true : animator.GetLayerWeight(layerIndex) >= triggerInfo.WeightThreshold);
+                if (condition)
+                {
+                    var triggerEvent = triggerInfo.TriggerEvent;
+                    animator.SendMessage(triggerEvent.Function, triggerEvent.Parameter, SendMessageOptions.DontRequireReceiver);
+                }
+
+                triggerInfo.IsTriggered = true;
+            }
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -655,18 +655,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Zerom Unaremd Attack 1(Clone)
+    - name: Zerom@Unaremd Attack 1(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: PC_Dummy
-      parentName: Zerom Unaremd Attack 1(Clone)
+      parentName: Zerom@Unaremd Attack 1(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip001
-      parentName: Zerom Unaremd Attack 1(Clone)
+      parentName: Zerom@Unaremd Attack 1(Clone)
       position: {x: 0.0059148497, y: 0.96340895, z: -0.031127498}
       rotation: {x: 0.5000601, y: -0.5000594, z: -0.49993992, w: -0.49994057}
       scale: {x: 1.0000002, y: 0.99999976, z: 1}
@@ -1015,7 +1015,7 @@ ModelImporter:
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c0476599e9aa9cc4fbaec6e6b2b25285,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7c38f3e127d21fd46b6c64f1b8b34eaa,
     type: 3}
   animationType: 3
   humanoidOversampling: 1
