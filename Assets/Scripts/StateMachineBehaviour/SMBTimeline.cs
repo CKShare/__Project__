@@ -65,7 +65,7 @@ public class SMBTimeline : SerializedStateMachineBehaviour
         [Tooltip("If true, this event will be triggered before exiting a state.")]
         [SerializeField]
         private bool _triggerBeforeExiting = false;
-
+        
         private bool _isTriggered = false;
 
         public EventInfo TriggerEvent => _triggerEvent;
@@ -85,7 +85,7 @@ public class SMBTimeline : SerializedStateMachineBehaviour
             _isTriggered = false;
         }
     }
-
+    
     [SerializeField, HideReferenceObjectPicker, BoxGroup]
     private EventInfo _stateEnterEvent = new EventInfo(), _stateExitEvent = new EventInfo();
     [SerializeField, HideReferenceObjectPicker]

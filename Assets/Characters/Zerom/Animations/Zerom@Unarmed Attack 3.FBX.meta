@@ -145,7 +145,7 @@ ModelImporter:
     400136: //RootNode
     2100000: 01 - Default
     4300000: PC_Dummy
-    7400000: Zerom Unarmed Attack 3
+    7400000: Zerom Unarmed Attack 3_1
     9500000: //RootNode
     13700000: PC_Dummy
   externalObjects: {}
@@ -160,9 +160,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tParent for 'Bip001 L Thigh' differs from one found in HumanDescription.
-      'Bip001' was found instead of 'Bip001 Pelvis'.\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -178,7 +176,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Zerom Unarmed Attack 3
+      name: Zerom Unarmed Attack 3_1
       takeName: Take 001
       firstFrame: 0
       lastFrame: 49
