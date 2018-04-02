@@ -66,7 +66,7 @@ public class PlayerController : ControllerBase
     {
         if (Input.GetButtonDown(_attackButton))
         {
-
+            Animator.SetTrigger(Hash.Attack);
         }
     }
     
@@ -86,7 +86,7 @@ public class PlayerController : ControllerBase
 
     private void SetToCombating()
     {
-
+        Animator.SetBool(Hash.IsCombating, true);
     }
 
     private void EnterCombat()
@@ -100,5 +100,4 @@ public class PlayerController : ControllerBase
     }
     
     #endregion
-    
 }
