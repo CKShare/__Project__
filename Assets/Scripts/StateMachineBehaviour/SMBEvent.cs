@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SMBTimeline : SerializedStateMachineBehaviour
+public class SMBEvent : SerializedStateMachineBehaviour
 {
     private class EventInfo
     {
@@ -15,7 +15,8 @@ public class SMBTimeline : SerializedStateMachineBehaviour
         public string Function => _function;
         public EventParameter Parameter => _parameter;
     }
-    
+
+
     private class EventScopeInfo
     {
         [Tooltip("Scope of event.")]
@@ -48,7 +49,7 @@ public class SMBTimeline : SerializedStateMachineBehaviour
             _isExited = false;
         }
     }
-    
+
     private class EventTriggerInfo
     {
         [SerializeField, HideLabel, HideReferenceObjectPicker]
@@ -57,7 +58,7 @@ public class SMBTimeline : SerializedStateMachineBehaviour
         [SerializeField, MinValue(0F), MaxValue(1F)]
         private float _time = 0F;
         [Tooltip("Probability to trigger event.\n0 is never triggerd, and 1 is always triggered.")]
-        [SerializeField, MinValue(0F), MaxValue(1F), HideIf("_triggerBeforeExiting", optionalValue:true)]
+        [SerializeField, MinValue(0F), MaxValue(1F), HideIf("_triggerBeforeExiting", optionalValue: true)]
         private float _chance = 1F;
         [Tooltip("Layer weight threshold to trigger event.\n Base Layer is never affected by this.")]
         [SerializeField, MinValue(0F), MaxValue(1F)]
@@ -65,7 +66,7 @@ public class SMBTimeline : SerializedStateMachineBehaviour
         [Tooltip("If true, this event will be triggered before exiting a state.")]
         [SerializeField]
         private bool _triggerBeforeExiting = false;
-        
+
         private bool _isTriggered = false;
 
         public EventInfo TriggerEvent => _triggerEvent;
@@ -85,25 +86,29 @@ public class SMBTimeline : SerializedStateMachineBehaviour
             _isTriggered = false;
         }
     }
-    
-    [SerializeField, HideReferenceObjectPicker, BoxGroup]
-    private EventInfo _stateEnterEvent = new EventInfo(), _stateExitEvent = new EventInfo();
+
+    [SerializeField, HideReferenceObjectPicker]
+    private EventInfo[] _enterEvents = new EventInfo[0];
+    [SerializeField, HideReferenceObjectPicker]
+    private EventInfo[] _exitEvents = new EventInfo[0];
     [SerializeField, HideReferenceObjectPicker]
     private EventScopeInfo[] _eventScopes = new EventScopeInfo[0];
     [SerializeField, HideReferenceObjectPicker]
     private EventTriggerInfo[] _eventTriggers = new EventTriggerInfo[0];
 
     private bool _isTransitioningIn;
+    private bool _isTransitioningOut;
     private float _prevNormalizedTime;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _isTransitioningIn = animator.IsInTransition(layerIndex);
+        _isTransitioningOut = false;
         _prevNormalizedTime = stateInfo.normalizedTime;
 
-        // State Enter Event
-        if (!string.IsNullOrEmpty(_stateEnterEvent.Function))
-            animator.SendMessage(_stateEnterEvent.Function, _stateEnterEvent.Parameter, SendMessageOptions.DontRequireReceiver);
+        // Enter
+        foreach (var e in _enterEvents)
+            animator.SendMessage(e.Function, e.Parameter, SendMessageOptions.DontRequireReceiver);
 
         // EventScope
         foreach (var scopeInfo in _eventScopes)
@@ -134,110 +139,86 @@ public class SMBTimeline : SerializedStateMachineBehaviour
         float curTime = prevTime + (stateInfo.normalizedTime - _prevNormalizedTime);
 
         // Check whether current state is transitioning out to others.
-        bool isTransitioningOut = false;
-        if (animator.IsInTransition(layerIndex))
+        if (!_isTransitioningOut)
         {
-            if (!_isTransitioningIn)
+            if (animator.IsInTransition(layerIndex))
             {
-                isTransitioningOut = true;
-            }
-        }
-        else if (_isTransitioningIn)
-        {
-            _isTransitioningIn = false;
-        }
-
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            IEventScope scopeReference = scopeInfo.ScopeReference;
-
-            if (!scopeInfo.IsEntered)
-            {
-                if (!isTransitioningOut && curTime >= scopeInfo.Scope.x)
+                if (!_isTransitioningIn)
                 {
-                    scopeReference.OnScopeEnter(animator, layerIndex);
-                    scopeInfo.IsEntered = true;
+                    OnStatePreExit(animator, stateInfo, layerIndex);
+                    _isTransitioningOut = true;
                 }
             }
-            else if (!scopeInfo.IsExited)
+            else if (_isTransitioningIn)
             {
-                if (isTransitioningOut || curTime >= scopeInfo.Scope.y)
-                {
-                    scopeReference.OnScopeExit(animator, layerIndex);
-                    scopeInfo.IsExited = true;
-                }
-                else
-                {
-                    scopeReference.OnScopeUpdate(animator, layerIndex);
-                }
+                _isTransitioningIn = false;
             }
-        }
 
-        // EventTrigger
-        if (!isTransitioningOut)
-        {
-            foreach (var triggerInfo in _eventTriggers)
+            if (!_isTransitioningOut)
             {
-                if (!triggerInfo.IsTriggered && triggerInfo.Time <= curTime)
+                // EventScope
+                foreach (var scopeInfo in _eventScopes)
                 {
-                    bool condition = triggerInfo.Chance >= UnityEngine.Random.value && (layerIndex == 0 ? true : animator.GetLayerWeight(layerIndex) >= triggerInfo.WeightThreshold);
-                    if (condition)
+                    IEventScope scopeReference = scopeInfo.ScopeReference;
+
+                    if (!scopeInfo.IsEntered)
                     {
-                        var triggerEvent = triggerInfo.TriggerEvent;
-                        animator.SendMessage(triggerEvent.Function, triggerEvent.Parameter, SendMessageOptions.DontRequireReceiver);
+                        if (curTime >= scopeInfo.Scope.x)
+                        {
+                            scopeReference.OnScopeEnter(animator, layerIndex);
+                            scopeInfo.IsEntered = true;
+                        }
                     }
-
-                    triggerInfo.IsTriggered = true;
+                    else if (!scopeInfo.IsExited)
+                    {
+                        if (curTime >= scopeInfo.Scope.y)
+                        {
+                            scopeReference.OnScopeExit(animator, layerIndex);
+                            scopeInfo.IsExited = true;
+                        }
+                        else
+                        {
+                            scopeReference.OnScopeUpdate(animator, layerIndex);
+                        }
+                    }
                 }
+
+                // EventTrigger
+                foreach (var triggerInfo in _eventTriggers)
+                {
+                    if (!triggerInfo.IsTriggered && triggerInfo.Time <= curTime)
+                    {
+                        bool condition = triggerInfo.Chance >= UnityEngine.Random.value && (layerIndex == 0 ? true : animator.GetLayerWeight(layerIndex) >= triggerInfo.WeightThreshold);
+                        if (condition)
+                        {
+                            var triggerEvent = triggerInfo.TriggerEvent;
+                            animator.SendMessage(triggerEvent.Function, triggerEvent.Parameter, SendMessageOptions.DontRequireReceiver);
+                        }
+
+                        triggerInfo.IsTriggered = true;
+                    }
+                }
+
+                // Loop
+                int diff = Mathf.FloorToInt(stateInfo.normalizedTime) - Mathf.FloorToInt(_prevNormalizedTime);
+                if (diff > 0)
+                {
+                    // Reset
+                    foreach (var scopeInfo in _eventScopes)
+                        scopeInfo.Reset();
+                    foreach (var triggerInfo in _eventTriggers)
+                        triggerInfo.Reset();
+                }
+
+                _prevNormalizedTime = stateInfo.normalizedTime;
             }
         }
-
-        // Loop
-        int diff = Mathf.FloorToInt(stateInfo.normalizedTime) - Mathf.FloorToInt(_prevNormalizedTime);
-        if (diff > 0)
-        {
-            // Reset
-            foreach (var scopeInfo in _eventScopes)
-                scopeInfo.Reset();
-            foreach (var triggerInfo in _eventTriggers)
-                triggerInfo.Reset();
-        }
-
-        _prevNormalizedTime = stateInfo.normalizedTime;
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // State Exit Event
-        if (!string.IsNullOrEmpty(_stateExitEvent.Function))
-            animator.SendMessage(_stateExitEvent.Function, _stateExitEvent.Parameter, SendMessageOptions.DontRequireReceiver);
-
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            if (scopeInfo.IsEntered && !scopeInfo.IsExited)
-            {
-                scopeInfo.ScopeReference.OnScopeExit(animator, layerIndex);
-                scopeInfo.IsExited = true;
-            }
-        }
-
-        // EventTrigger
-        foreach (var triggerInfo in _eventTriggers)
-        {
-            if (triggerInfo.TriggerBeforeExiting && !triggerInfo.IsTriggered)
-            {
-                bool condition = layerIndex == 0 ? true : animator.GetLayerWeight(layerIndex) >= triggerInfo.WeightThreshold;
-                if (condition)
-                {
-                    var triggerEvent = triggerInfo.TriggerEvent;
-                    animator.SendMessage(triggerEvent.Function, triggerEvent.Parameter, SendMessageOptions.DontRequireReceiver);
-                }
-
-                triggerInfo.IsTriggered = true;
-            }
-        }
+        if (!_isTransitioningOut)
+            OnStatePreExit(animator, stateInfo, layerIndex);
     }
 
     public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -263,5 +244,37 @@ public class SMBTimeline : SerializedStateMachineBehaviour
             }
         }
     }
-}
 
+    private void OnStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // EventScope
+        foreach (var scopeInfo in _eventScopes)
+        {
+            if (scopeInfo.IsEntered && !scopeInfo.IsExited)
+            {
+                scopeInfo.ScopeReference.OnScopeExit(animator, layerIndex);
+                scopeInfo.IsExited = true;
+            }
+        }
+
+        // EventTrigger
+        foreach (var triggerInfo in _eventTriggers)
+        {
+            if (triggerInfo.TriggerBeforeExiting && !triggerInfo.IsTriggered)
+            {
+                bool condition = layerIndex == 0 ? true : animator.GetLayerWeight(layerIndex) >= triggerInfo.WeightThreshold;
+                if (condition)
+                {
+                    var triggerEvent = triggerInfo.TriggerEvent;
+                    animator.SendMessage(triggerEvent.Function, triggerEvent.Parameter, SendMessageOptions.DontRequireReceiver);
+                }
+
+                triggerInfo.IsTriggered = true;
+            }
+        }
+
+        // Exit
+        foreach (var e in _exitEvents)
+            animator.SendMessage(e.Function, e.Parameter, SendMessageOptions.DontRequireReceiver);
+    }
+}

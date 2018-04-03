@@ -10,7 +10,7 @@ public class PlayerController : ControllerBase
     [SerializeField, BoxGroup("Control")]
     private float _rotateSpeed = 10F;
 
-    [SerializeField, BoxGroup("Etc")]
+    [SerializeField, BoxGroup("Combat")]
     private float _combatDuration = 4F;
 
     [SerializeField, BoxGroup("Input")]
@@ -24,9 +24,13 @@ public class PlayerController : ControllerBase
 
     private WaitForSeconds _combatDurationRef;
     private Coroutine _combatCoroutine;
-
-    private bool _isStopping = false;
     
+    private int _nextComboNumber = 0;
+    private bool _activeComboInput = false;
+    private bool _activeComboTransition = false;
+
+    private bool _lockMove = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,10 +44,10 @@ public class PlayerController : ControllerBase
         UpdateLocomotion();
         TryAttack();
     }
-    
+
     private void UpdateLocomotion()
     {
-        if (_isStopping)
+        if (_lockMove)
             return;
 
         Vector2 axisValue = new Vector2(Input.GetAxisRaw(_horizontalAxis), Input.GetAxisRaw(_verticalAxis));
@@ -66,7 +70,21 @@ public class PlayerController : ControllerBase
     {
         if (Input.GetButtonDown(_attackButton))
         {
+            if (_activeComboInput)
+            {
+                if (_nextComboNumber == 0)
+                    _activeComboTransition = true;
+                
+                _nextComboNumber = _nextComboNumber % Value.MaxCombo + 1;
+                _activeComboInput = false;
+            }
+        }
+
+        if (_activeComboTransition && !_activeComboInput)
+        {
+            Animator.SetInteger(Hash.ComboNumber, _nextComboNumber);
             Animator.SetTrigger(Hash.Attack);
+            _activeComboTransition = false;
         }
     }
     
@@ -78,10 +96,11 @@ public class PlayerController : ControllerBase
 
     #region Animation Events
 
-    private void SetStopping(object param)
+    private void LockMove(EventParameter param)
     {
-        EventParameter ep = param as EventParameter;
-        _isStopping = ep.BoolParameter;
+        _lockMove = param.BoolParameter;
+        if (_lockMove)
+            Animator.SetBool(Hash.IsMoving, false);
     }
 
     private void SetToCombating()
@@ -98,6 +117,30 @@ public class PlayerController : ControllerBase
     {
         StopCoroutine(_combatCoroutine);
     }
-    
+
+    private void EnableComboInput()
+    {
+        _activeComboInput = true;
+    }
+
+    private void EnableComboTransition()
+    {
+        _activeComboTransition = true;
+    }
+
+    private void DisableCombo()
+    {
+        _activeComboInput = false;
+        _activeComboTransition = false;
+    }
+
+    private void ResetComboNumber(EventParameter param)
+    {
+        if (param.IntParameter == _nextComboNumber)
+        {
+            _nextComboNumber = 0;
+        }
+    }
+
     #endregion
 }

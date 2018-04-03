@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8012d47800a0e2449a4bc473df5584b0
-timeCreated: 1522571678
+guid: 8e9d7d8e5e9d21145ba32f7d9ddf29ca
+timeCreated: 1522679024
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -73,7 +73,8 @@ ModelImporter:
     100130: Bip001 Spine1
     100132: Bip001 Spine2
     100134: Bone001
-    100136: //RootNode
+    100136: Group32289
+    100138: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -142,9 +143,14 @@ ModelImporter:
     400130: Bip001 Spine1
     400132: Bip001 Spine2
     400134: Bone001
-    400136: //RootNode
-    7400000: Standing Running
+    400136: Group32289
+    400138: //RootNode
+    2100000: default
+    2100002: defaultMat
+    4300000: Group32289
+    7400000: Zerom Standing Running
     9500000: //RootNode
+    13700000: Group32289
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -173,10 +179,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Standing Running
-      takeName: mixamo.com
+      name: Zerom Standing Running
+      takeName: Take 001
       firstFrame: 0
-      lastFrame: 22
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -190,9 +196,9 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
-      mirror: 0
+      mirror: 1
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
