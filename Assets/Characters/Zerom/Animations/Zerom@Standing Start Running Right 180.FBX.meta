@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 27ec6d6bf0e7c784cab81191c4d8f72a
-timeCreated: 1522572444
+guid: f94e74eabccd75a43b34edea8c885a09
+timeCreated: 1522854848
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -73,7 +73,8 @@ ModelImporter:
     100130: Bip001 Spine1
     100132: Bip001 Spine2
     100134: Bone001
-    100136: //RootNode
+    100136: Group32289
+    100138: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -142,9 +143,14 @@ ModelImporter:
     400130: Bip001 Spine1
     400132: Bip001 Spine2
     400134: Bone001
-    400136: //RootNode
-    7400000: Zerom Unarmed Standing Idle
+    400136: Group32289
+    400138: //RootNode
+    2100000: default
+    2100002: defaultMat
+    4300000: Group32289
+    7400000: Standing Start Running Right 180
     9500000: //RootNode
+    13700000: Group32289
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -173,24 +179,24 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Zerom Unarmed Standing Idle
-      takeName: mixamo.com
+      name: Standing Start Running Right 180
+      takeName: Take 001
       firstFrame: 0
-      lastFrame: 250
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

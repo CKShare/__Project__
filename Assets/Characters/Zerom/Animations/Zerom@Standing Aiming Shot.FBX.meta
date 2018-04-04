@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 38fd3abfccea49345a0d5c68041c1229
-timeCreated: 1522588510
+guid: ee45ce8d1a734a844a76e757d9ef8414
+timeCreated: 1522822467
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -73,7 +73,8 @@ ModelImporter:
     100130: Bip001 Spine1
     100132: Bip001 Spine2
     100134: Bone001
-    100136: //RootNode
+    100136: Group32289
+    100138: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -142,9 +143,14 @@ ModelImporter:
     400130: Bip001 Spine1
     400132: Bip001 Spine2
     400134: Bone001
-    400136: //RootNode
-    7400000: Standing Running Turn
+    400136: Group32289
+    400138: //RootNode
+    2100000: default
+    2100002: defaultMat
+    4300000: Group32289
+    7400000: Zerom Standing Aimig Shot
     9500000: //RootNode
+    13700000: Group32289
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -173,10 +179,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Standing Running Turn
-      takeName: mixamo.com
+      name: Zerom Standing Aimig Shot
+      takeName: Take 001
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -187,7 +193,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

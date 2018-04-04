@@ -1,145 +1,109 @@
 ﻿using System.Collections;
 using UnityEngine;
+using RootMotion.FinalIK;
 using Sirenix.OdinInspector;
 using static PlayerAnimatorInfo;
 
+[RequireComponent(typeof(AimIK))]
 public class PlayerController : ControllerBase
 {
-    [SerializeField, Required, BoxGroup("Control")]
+    [SerializeField, Required]
     private Camera _camera;
-    [SerializeField, BoxGroup("Control")]
-    private float _rotateSpeed = 10F;
 
-    [SerializeField, BoxGroup("Combat")]
-    private float _combatDuration = 4F;
+    [SerializeField]
+    private float _holsterTransitionSpeed = 0.3F;
+    [SerializeField]
+    private float _unholsterTransitionSpeed = 0.3F;
 
     [SerializeField, BoxGroup("Input")]
-    private string _horizontalAxis = "Horizontal";
+    private string _aimButton = "Aim";
     [SerializeField, BoxGroup("Input")]
-    private string _verticalAxis = "Vertical";
+    private string _lookHoriztonalAxis = "Mouse X";
     [SerializeField, BoxGroup("Input")]
-    private string _attackButton = "Fire1";
+    private string _lookVerticalAxis = "Mouse Y";
 
-    private Transform _camTransform;
+    private Transform _cameraTransform;
+    private AimIK _aimIK;
 
-    private WaitForSeconds _combatDurationRef;
-    private Coroutine _combatCoroutine;
-    
-    private int _nextComboNumber = 0;
-    private bool _activeComboInput = false;
-    private bool _activeComboTransition = false;
-
-    private bool _lockMove = false;
+    private bool _isAiming = false;
+    private bool _isHolstering = false;
+    private bool _isUnholstering = false;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _camTransform = _camera.transform;
-        _combatDurationRef = new WaitForSeconds(_combatDuration);
+        _cameraTransform = _camera.transform;
+        _aimIK = GetComponent<AimIK>();
     }
 
     private void Update()
     {
-        UpdateLocomotion();
-        TryAttack();
+        CheckAim();
+        UpdateLook();
     }
 
-    private void UpdateLocomotion()
+    private void CheckAim()
     {
-        if (_lockMove)
-            return;
-
-        Vector2 axisValue = new Vector2(Input.GetAxisRaw(_horizontalAxis), Input.GetAxisRaw(_verticalAxis));
-        bool isControlling = axisValue.sqrMagnitude > 0F;
-        Vector3 controlDirection = _camTransform.forward * axisValue.y + _camTransform.right * axisValue.x;
-        controlDirection.y = 0F;
-
-        // Move
-        Animator.SetBool(Hash.IsMoving, isControlling);
-
-        // Turn
-        if (isControlling)
+        if (Input.GetButtonDown(_aimButton))
         {
-            Quaternion look = Quaternion.LookRotation(controlDirection);
-            Transform.rotation = Quaternion.Slerp(Transform.rotation, look, Time.deltaTime * _rotateSpeed);
+            OnAimEnabled();
+        }
+        else if (Input.GetButtonUp(_aimButton))
+        {
+            OnAimDisabled();
         }
     }
 
-    private void TryAttack()
+    private void UpdateLook()
     {
-        if (Input.GetButtonDown(_attackButton))
+        if (_isAiming)
         {
-            if (_activeComboInput)
+            RaycastHit hitInfo;
+            Vector3 aimPoint;
+            Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0F));
+            if (Physics.Raycast(ray, out hitInfo, 100F))
             {
-                if (_nextComboNumber == 0)
-                    _activeComboTransition = true;
-                
-                _nextComboNumber = _nextComboNumber % Value.MaxCombo + 1;
-                _activeComboInput = false;
+                aimPoint = hitInfo.point;
             }
-        }
+            else
+            {
+                aimPoint = ray.GetPoint(100F);
+            }
 
-        if (_activeComboTransition && !_activeComboInput)
+            _aimIK.solver.IKPosition = aimPoint;
+
+            if (_isUnholstering)
+                _aimIK.solver.IKPositionWeight = Mathf.Lerp(_aimIK.solver.IKPositionWeight, 1F, _unholsterTransitionSpeed);
+        }
+        else
         {
-            Animator.SetInteger(Hash.ComboNumber, _nextComboNumber);
-            Animator.SetTrigger(Hash.Attack);
-            _activeComboTransition = false;
+            _aimIK.solver.IKPositionWeight = Mathf.Lerp(_aimIK.solver.IKPositionWeight, 0F, _holsterTransitionSpeed);
         }
     }
-    
-    private IEnumerator CombatToNormal()
+
+    private void OnAimEnabled()
     {
-        yield return _combatDurationRef;
-        Animator.SetBool(Hash.IsCombating, false);
+        _isAiming = true;
+        Animator.SetBool(Hash.IsAiming, true);
     }
 
-    #region Animation Events
-
-    private void LockMove(EventParameter param)
+    private void OnAimDisabled()
     {
-        _lockMove = param.BoolParameter;
-        if (_lockMove)
-            Animator.SetBool(Hash.IsMoving, false);
+        _isAiming = false;
+        Animator.SetBool(Hash.IsAiming, false);
     }
 
-    private void SetToCombating()
+    #region Animator Events
+
+    private void SetHolstering(EventParameter param)
     {
-        Animator.SetBool(Hash.IsCombating, true);
+        _isHolstering = param.BoolParameter;
     }
 
-    private void EnterCombat()
+    private void SetUnholstering(EventParameter param)
     {
-        _combatCoroutine = StartCoroutine(CombatToNormal());
-    }
-
-    private void ExitCombat()
-    {
-        StopCoroutine(_combatCoroutine);
-    }
-
-    private void EnableComboInput()
-    {
-        _activeComboInput = true;
-    }
-
-    private void EnableComboTransition()
-    {
-        _activeComboTransition = true;
-    }
-
-    private void DisableCombo()
-    {
-        _activeComboInput = false;
-        _activeComboTransition = false;
-    }
-
-    private void ResetComboNumber(EventParameter param)
-    {
-        if (param.IntParameter == _nextComboNumber)
-        {
-            _nextComboNumber = 0;
-        }
+        _isUnholstering = param.BoolParameter;
     }
 
     #endregion

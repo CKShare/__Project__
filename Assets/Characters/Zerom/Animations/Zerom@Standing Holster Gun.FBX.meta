@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 334958a56996b234ebc4fec27b50c1ab
-timeCreated: 1522854845
+guid: 3629a1159c50bf2408eb23346029ece4
+timeCreated: 1522838724
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -148,7 +148,7 @@ ModelImporter:
     2100000: default
     2100002: defaultMat
     4300000: Group32289
-    7400000: Standing Stop Running
+    7400000: Zerom Standing Holster Gun
     9500000: //RootNode
     13700000: Group32289
   externalObjects: {}
@@ -179,10 +179,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Standing Stop Running
+      name: Zerom Standing Holster Gun
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 13
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
