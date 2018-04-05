@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Cinemachine;
 using RootMotion.FinalIK;
 using Sirenix.OdinInspector;
 using static PlayerAnimatorInfo;
 
-[RequireComponent(typeof(AimIK))]
+[RequireComponent(typeof(LookAtIK))]
 public class PlayerController : ControllerBase
 {
-    [SerializeField, Required]
-    private Camera _camera;
-
-    [SerializeField]
-    private float _holsterTransitionSpeed = 0.3F;
-    [SerializeField]
-    private float _unholsterTransitionSpeed = 0.3F;
+    [SerializeField, Required, BoxGroup("Camera")]
+    private Camera _mainCamera;
+    [SerializeField, Required, BoxGroup("Camera")]
+    private CinemachineFreeLook _aimVCam;
 
     [SerializeField, BoxGroup("Input")]
     private string _aimButton = "Aim";
@@ -23,18 +21,20 @@ public class PlayerController : ControllerBase
     private string _lookVerticalAxis = "Mouse Y";
 
     private Transform _cameraTransform;
-    private AimIK _aimIK;
+    private LookAtIK _lookAtIK;
 
     private bool _isAiming = false;
-    private bool _isHolstering = false;
-    private bool _isUnholstering = false;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _cameraTransform = _camera.transform;
-        _aimIK = GetComponent<AimIK>();
+        _cameraTransform = _mainCamera.transform;
+        _lookAtIK = GetComponent<LookAtIK>();
+
+        // Cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -59,26 +59,27 @@ public class PlayerController : ControllerBase
     {
         if (_isAiming)
         {
-            RaycastHit hitInfo;
-            Vector3 aimPoint;
-            Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0F));
-            if (Physics.Raycast(ray, out hitInfo, 100F))
+            Vector3 dir = (Transform.position - _cameraTransform.position).normalized;
+            Vector3 selfForward = Transform.forward;
+            
+            float yaw = Vector3.SignedAngle(selfForward, new Vector3(dir.x, 0F, dir.z), Vector3.up);
+            float pitch = (_cameraTransform.eulerAngles - Transform.eulerAngles).x;
+            if (pitch > 180F)
+                pitch -= 360F;
+            
+            float value = _aimVCam.m_XAxis.Value;
+            if (value > 90F && value < 270F)
             {
-                aimPoint = hitInfo.point;
-            }
-            else
-            {
-                aimPoint = ray.GetPoint(100F);
+                if (value < 180F)
+                    value = 90F;
+                else
+                    value = 270F;
             }
 
-            _aimIK.solver.IKPosition = aimPoint;
-
-            if (_isUnholstering)
-                _aimIK.solver.IKPositionWeight = Mathf.Lerp(_aimIK.solver.IKPositionWeight, 1F, _unholsterTransitionSpeed);
-        }
-        else
-        {
-            _aimIK.solver.IKPositionWeight = Mathf.Lerp(_aimIK.solver.IKPositionWeight, 0F, _holsterTransitionSpeed);
+            _aimVCam.m_XAxis.Value = value;
+            
+            Animator.SetFloat(Hash.Yaw, yaw, 0.2F, Time.deltaTime);
+            Animator.SetFloat(Hash.Pitch, pitch, 0.2F, Time.deltaTime);
         }
     }
 
@@ -95,16 +96,6 @@ public class PlayerController : ControllerBase
     }
 
     #region Animator Events
-
-    private void SetHolstering(EventParameter param)
-    {
-        _isHolstering = param.BoolParameter;
-    }
-
-    private void SetUnholstering(EventParameter param)
-    {
-        _isUnholstering = param.BoolParameter;
-    }
 
     #endregion
 }
