@@ -37,6 +37,12 @@ public class PlayerController : ControllerBase
         Cursor.visible = false;
     }
 
+    private void FixedUpdate()
+    {
+        // If this is not in FixedUpdate, jitter will be occured when clamped.
+        ClampLook();
+    }
+
     private void Update()
     {
         CheckAim();
@@ -55,31 +61,32 @@ public class PlayerController : ControllerBase
         }
     }
 
+    // Update yaw and pitch when aiming.
     private void UpdateLook()
     {
         if (_isAiming)
         {
-            Vector3 dir = (Transform.position - _cameraTransform.position).normalized;
-            Vector3 selfForward = Transform.forward;
+            Vector3 angleDiff = _cameraTransform.eulerAngles - Transform.eulerAngles;
+            float yaw = angleDiff.y > 180F ? angleDiff.y - 360F : angleDiff.y;
+            float pitch = angleDiff.x > 180F ? angleDiff.x - 360F : angleDiff.x;
             
-            float yaw = Vector3.SignedAngle(selfForward, new Vector3(dir.x, 0F, dir.z), Vector3.up);
-            float pitch = (_cameraTransform.eulerAngles - Transform.eulerAngles).x;
-            if (pitch > 180F)
-                pitch -= 360F;
-            
+            Animator.SetFloat(Hash.Yaw, yaw, 0.1F, Time.deltaTime);
+            Animator.SetFloat(Hash.Pitch, pitch, 0.1F, Time.deltaTime);
+        }
+    }
+
+    // Clamp yaw rotation range when aiming.
+    private void ClampLook()
+    {
+        if (_isAiming)
+        {
             float value = _aimVCam.m_XAxis.Value;
             if (value > 90F && value < 270F)
             {
-                if (value < 180F)
-                    value = 90F;
-                else
-                    value = 270F;
+                value = value < 180F ? 90F : 270F;
             }
 
             _aimVCam.m_XAxis.Value = value;
-            
-            Animator.SetFloat(Hash.Yaw, yaw, 0.2F, Time.deltaTime);
-            Animator.SetFloat(Hash.Pitch, pitch, 0.2F, Time.deltaTime);
         }
     }
 
