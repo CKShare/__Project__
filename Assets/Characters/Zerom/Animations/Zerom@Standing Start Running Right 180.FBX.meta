@@ -182,7 +182,7 @@ ModelImporter:
       name: Standing Start Running Right 180
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 16
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

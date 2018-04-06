@@ -21,6 +21,7 @@ public abstract class ControllerBase : MonoBehaviour
         Vector3 velocity = _animator.deltaPosition / Time.deltaTime;
         velocity.y = Physics.gravity.y;
         _rigidbody.velocity = velocity;
+        _transform.rotation = _animator.rootRotation;
     }
 
     protected Transform Transform => _transform;

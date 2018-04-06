@@ -13,6 +13,11 @@ public class PlayerController : ControllerBase
     [SerializeField, Required, BoxGroup("Camera")]
     private CinemachineFreeLook _aimVCam;
 
+
+    [SerializeField, BoxGroup("Input")]
+    private string _moveHorizontalAxis = "Horizontal";
+    [SerializeField, BoxGroup("Input")]
+    private string _moveVerticalAxis = "Vertical";
     [SerializeField, BoxGroup("Input")]
     private string _aimButton = "Aim";
     [SerializeField, BoxGroup("Input")]
@@ -23,7 +28,9 @@ public class PlayerController : ControllerBase
     private Transform _cameraTransform;
     private LookAtIK _lookAtIK;
 
+    private bool _isRunning = false;
     private bool _isAiming = false;
+    private int _stopFrame = 0;
 
     protected override void Awake()
     {
@@ -39,14 +46,15 @@ public class PlayerController : ControllerBase
 
     private void FixedUpdate()
     {
-        // If this is not in FixedUpdate, jitter will be occured when clamped.
-        ClampLook();
+        // If this is not in FixedUpdate, jitter will be occured when moving or clamped.
+        //UpdateLook();
+        //ClampLook();
     }
 
     private void Update()
     {
-        CheckAim();
-        UpdateLook();
+        //CheckAim();
+        UpdateLocomotion();
     }
 
     private void CheckAim()
@@ -90,6 +98,37 @@ public class PlayerController : ControllerBase
         }
     }
 
+    private void UpdateLocomotion()
+    {
+        Vector2 axisValue = new Vector2(Input.GetAxisRaw(_moveHorizontalAxis), Input.GetAxisRaw(_moveVerticalAxis));
+        float sqrMagnitude = Mathf.Clamp01(axisValue.sqrMagnitude);
+        bool isControlling = sqrMagnitude > 0F;
+        
+        if (isControlling)
+        {
+            Vector3 controlDirection = _cameraTransform.forward * axisValue.y + _cameraTransform.right * axisValue.x;
+            controlDirection.y = 0F;
+            float angle = Vector3.SignedAngle(Transform.forward, controlDirection, Vector3.up);
+
+            if (_isRunning)
+            {
+                Quaternion controlQuaternion = Quaternion.LookRotation(controlDirection);
+                Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * 10F);
+
+                Animator.SetFloat(Hash.Accel, sqrMagnitude, 1F, Time.deltaTime);
+            }
+            Animator.SetFloat(Hash.TurnAngle, angle);
+
+            _stopFrame = 0;
+        }
+        else
+        {
+            _stopFrame++;
+        }
+
+        Animator.SetBool(Hash.IsMoving, isControlling || _stopFrame < 4);
+    }
+
     private void OnAimEnabled()
     {
         _isAiming = true;
@@ -103,6 +142,13 @@ public class PlayerController : ControllerBase
     }
 
     #region Animator Events
+
+    private void SetRunning(EventParameter param)
+    {
+        _isRunning = param.BoolParameter;
+        if (!_isRunning)
+            Animator.SetFloat(Hash.Accel, 0F);
+    }
 
     #endregion
 }
