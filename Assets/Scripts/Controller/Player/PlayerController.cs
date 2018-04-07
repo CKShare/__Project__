@@ -24,13 +24,19 @@ public class PlayerController : ControllerBase
     private string _lookHoriztonalAxis = "Mouse X";
     [SerializeField, BoxGroup("Input")]
     private string _lookVerticalAxis = "Mouse Y";
+    [SerializeField, BoxGroup("Input")]
+    private string _attackButton = "Fire1";
 
     private Transform _cameraTransform;
     private LookAtIK _lookAtIK;
 
     private bool _isRunning = false;
+    private bool _isAttacking = false;
     private bool _isAiming = false;
     private int _stopFrame = 0;
+
+    private bool _comboInputEnabled = false;
+    private bool _comboTransitionEnabled = false;
 
     protected override void Awake()
     {
@@ -55,6 +61,7 @@ public class PlayerController : ControllerBase
     {
         //CheckAim();
         UpdateLocomotion();
+        CheckAttack();
     }
 
     private void CheckAim()
@@ -129,6 +136,23 @@ public class PlayerController : ControllerBase
         Animator.SetBool(Hash.IsMoving, isControlling || _stopFrame < 4);
     }
 
+    private void CheckAttack()
+    {
+        if (Input.GetButtonDown(_attackButton))
+        {
+            if (!_isAttacking || _comboInputEnabled)
+            {
+                _comboInputEnabled = false;
+                _isAttacking = true;
+            }
+        }
+
+        if (_comboTransitionEnabled && !_comboInputEnabled)
+        {
+            Animator.SetTrigger(Hash.Attack);
+        }
+    }
+
     private void OnAimEnabled()
     {
         _isAiming = true;
@@ -148,6 +172,16 @@ public class PlayerController : ControllerBase
         _isRunning = param.BoolParameter;
         if (!_isRunning)
             Animator.SetFloat(Hash.Accel, 0F);
+    }
+
+    private void SetComboInputEnabled(EventParameter param)
+    {
+        _comboInputEnabled = param.BoolParameter;
+    }
+
+    private void SetComboTransitionEnabled(EventParameter param)
+    {
+        _comboTransitionEnabled = param.BoolParameter;
     }
 
     #endregion

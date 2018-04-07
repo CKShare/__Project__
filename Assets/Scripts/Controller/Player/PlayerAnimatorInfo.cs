@@ -10,6 +10,7 @@ public static class PlayerAnimatorInfo
         public static int IsAiming = Animator.StringToHash("IsAiming");
         public static int Yaw = Animator.StringToHash("Yaw");
         public static int Pitch = Animator.StringToHash("Pitch");
+        public static int Attack = Animator.StringToHash("Attack");
     }
 
     public static class Value
