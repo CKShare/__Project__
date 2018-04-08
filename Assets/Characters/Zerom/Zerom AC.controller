@@ -13,43 +13,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Accel
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: TurnAngle
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsAiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Yaw
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Pitch
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -236,7 +236,19 @@ MonoBehaviour:
       Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -245,7 +257,7 @@ MonoBehaviour:
       Data: 
     - Name: _eventScopes
       Entry: 7
-      Data: 2|SMBEvent+EventScopeInfo[], Assembly-CSharp
+      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -257,10 +269,166 @@ MonoBehaviour:
       Data: 
     - Name: _eventTriggers
       Entry: 7
-      Data: 3|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 7|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
       Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: true
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 10|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
+      Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.15
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 12|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: EnableComboInput
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.2
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: EnableComboTransition
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.45
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -298,7 +466,7 @@ MonoBehaviour:
       Data: 1|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
-      Data: SetRunning
+      Data: SetMoving
     - Name: _parameter
       Entry: 7
       Data: 2|EventParameter, Assembly-CSharp
@@ -340,7 +508,7 @@ MonoBehaviour:
       Data: 4|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
-      Data: SetRunning
+      Data: SetMoving
     - Name: _parameter
       Entry: 7
       Data: 5|EventParameter, Assembly-CSharp
@@ -389,6 +557,182 @@ MonoBehaviour:
     - Name: 
       Entry: 12
       Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &114115958925501580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9707fe5622ed11b47968940b5641f79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEvent+EventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: ResetAttacking
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _eventScopes
+      Entry: 7
+      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _eventTriggers
+      Entry: 7
+      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 7|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
+      Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: true
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 10|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
+      Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.1
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -1932,7 +2276,19 @@ MonoBehaviour:
       Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -1941,7 +2297,7 @@ MonoBehaviour:
       Data: 
     - Name: _eventScopes
       Entry: 7
-      Data: 2|SMBEvent+EventScopeInfo[], Assembly-CSharp
+      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -1953,10 +2309,166 @@ MonoBehaviour:
       Data: 
     - Name: _eventTriggers
       Entry: 7
-      Data: 3|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 7|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
       Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: true
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: SetRotateToAttack
+    - Name: _parameter
+      Entry: 7
+      Data: 10|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
+      Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.15
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 12|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: EnableComboInput
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.2
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
+    - Name: _triggerEvent
+      Entry: 7
+      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: EnableComboTransition
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _time
+      Entry: 4
+      Data: 0.45
+    - Name: _chance
+      Entry: 4
+      Data: 1
+    - Name: _weightThreshold
+      Entry: 4
+      Data: 0
+    - Name: _triggerBeforeExiting
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -2233,7 +2745,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101082536865449146
@@ -2254,7 +2766,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101099828237489746
@@ -2272,7 +2784,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2339,7 +2851,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.77272725
   m_HasExitTime: 0
@@ -2365,7 +2877,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101220307998270392
@@ -2482,7 +2994,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101355539711408570
@@ -2503,7 +3015,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101376987261414438
@@ -2519,9 +3031,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2590,7 +3102,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101464628653554816
@@ -2608,7 +3120,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8469388
+  m_ExitTime: 0.7
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2689,7 +3201,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.6875
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101532831551073234
@@ -2711,6 +3223,30 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.7115385
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &1101644293760244932
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 1107098958272521972}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.1
+  m_TransitionOffset: 0
+  m_ExitTime: 0.6875
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2755,7 +3291,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.43
+  m_ExitTime: 0.59
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -2874,6 +3410,30 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.7115385
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &1101844867400383640
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 1107098958272521972}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.7115385
   m_HasExitTime: 0
@@ -3142,6 +3702,7 @@ AnimatorState:
   - {fileID: 1101763461182888076}
   - {fileID: 1101470926410549872}
   - {fileID: 1101783970668054380}
+  - {fileID: 1101844867400383640}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -3293,7 +3854,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zerom Unarmed Attack 2
-  m_Speed: 1
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101131410144712002}
@@ -3346,7 +3907,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zerom Unarmed Attack 1
-  m_Speed: 1
+  m_Speed: 1.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101675120762543108}
@@ -3374,11 +3935,12 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Zerom Unarmed Attack 3_1
-  m_Speed: 1
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101464628653554816}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114115958925501580}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3407,6 +3969,7 @@ AnimatorState:
   - {fileID: 1101220307998270392}
   - {fileID: 1101228514809462136}
   - {fileID: 1101531897215128034}
+  - {fileID: 1101644293760244932}
   m_StateMachineBehaviours:
   - {fileID: 114097040364043128}
   m_Position: {x: 50, y: 50, z: 0}
@@ -3467,14 +4030,14 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102929288655317458}
-    m_Position: {x: 360, y: 48, z: 0}
+    m_Position: {x: 288, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102758529144351752}
-    m_Position: {x: 360, y: 120, z: 0}
+    m_Position: {x: 552, y: 120, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107829859467117544}
-    m_Position: {x: 360, y: 192, z: 0}
+    m_Position: {x: 816, y: 120, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
@@ -3482,10 +4045,10 @@ AnimatorStateMachine:
     second:
     - {fileID: 1109075888380239124}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 48, y: 12, z: 0}
+  m_AnyStatePosition: {x: 48, y: 72, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 672, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 792, y: 24, z: 0}
+  m_ExitPosition: {x: 576, y: 252, z: 0}
+  m_ParentStateMachinePosition: {x: 828, y: -60, z: 0}
   m_DefaultState: {fileID: 1102929288655317458}
 --- !u!1107 &1107273319099504190
 AnimatorStateMachine:
@@ -3597,7 +4160,7 @@ AnimatorStateMachine:
     m_Position: {x: 732, y: 216, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107098958272521972}
-    m_Position: {x: 612, y: 12, z: 0}
+    m_Position: {x: 576, y: -72, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
@@ -3609,10 +4172,13 @@ AnimatorStateMachine:
     second:
     - {fileID: 1109804210880325060}
     - {fileID: 1109629649613923394}
+  - first: {fileID: 1107098958272521972}
+    second:
+    - {fileID: 1109515758963595084}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: -180, y: -36, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 360, y: 12, z: 0}
+  m_ExitPosition: {x: 372, y: -24, z: 0}
   m_ParentStateMachinePosition: {x: -204, y: 120, z: 0}
   m_DefaultState: {fileID: 1102466899962191642}
 --- !u!1107 &1107701830206086258
@@ -3643,7 +4209,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102981005475630572}
-    m_Position: {x: 360, y: 24, z: 0}
+    m_Position: {x: 384, y: 24, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -3816,6 +4382,19 @@ AnimatorTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: IsMoving
     m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102466899962191642}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
+--- !u!1109 &1109515758963595084
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102466899962191642}
   m_Solo: 0

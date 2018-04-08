@@ -13,6 +13,10 @@ public class PlayerController : ControllerBase
     [SerializeField, Required, BoxGroup("Camera")]
     private CinemachineFreeLook _aimVCam;
 
+    [SerializeField, BoxGroup("Locomotion")]
+    private float _runningRotateSpeed = 10F;
+    [SerializeField, BoxGroup("Locomotion")]
+    private float _attackingRotateSpeed = 20F; // Should be high enough to rotate completely during about 0.1 ~ 0.2 seconds.
 
     [SerializeField, BoxGroup("Input")]
     private string _moveHorizontalAxis = "Horizontal";
@@ -30,11 +34,14 @@ public class PlayerController : ControllerBase
     private Transform _cameraTransform;
     private LookAtIK _lookAtIK;
 
-    private bool _isRunning = false;
+    private bool _isMoving = false;
     private bool _isAttacking = false;
     private bool _isAiming = false;
+    private int _controlFrame = 0;
     private int _stopFrame = 0;
 
+    private Transform _attackTarget = null;
+    private bool _rotateToAttack = false;
     private bool _comboInputEnabled = false;
     private bool _comboTransitionEnabled = false;
 
@@ -115,41 +122,58 @@ public class PlayerController : ControllerBase
         {
             Vector3 controlDirection = _cameraTransform.forward * axisValue.y + _cameraTransform.right * axisValue.x;
             controlDirection.y = 0F;
-            float angle = Vector3.SignedAngle(Transform.forward, controlDirection, Vector3.up);
 
-            if (_isRunning)
+            if (_isMoving || _rotateToAttack)
             {
-                Quaternion controlQuaternion = Quaternion.LookRotation(controlDirection);
-                Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * 10F);
+                float rotateSpeed;
+                if (_isMoving)
+                {
+                    rotateSpeed = _runningRotateSpeed;
+                    Animator.SetFloat(Hash.Accel, sqrMagnitude, 1F, Time.deltaTime);
+                }
+                else
+                {
+                    rotateSpeed = _attackingRotateSpeed;
+                }
 
-                Animator.SetFloat(Hash.Accel, sqrMagnitude, 1F, Time.deltaTime);
+                Quaternion controlQuaternion = Quaternion.LookRotation(controlDirection);
+                Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * rotateSpeed);
             }
+
+            float angle = Vector3.SignedAngle(Transform.forward, controlDirection, Vector3.up);
             Animator.SetFloat(Hash.TurnAngle, angle);
 
+            _controlFrame++;
             _stopFrame = 0;
         }
         else
         {
             _stopFrame++;
+            _controlFrame = 0;
         }
 
-        Animator.SetBool(Hash.IsMoving, isControlling || _stopFrame < 4);
+        Animator.SetBool(Hash.IsMoving, _controlFrame > 3 || _stopFrame < 4);
     }
 
     private void CheckAttack()
     {
         if (Input.GetButtonDown(_attackButton))
         {
-            if (!_isAttacking || _comboInputEnabled)
+            if (!_isAttacking)
+            {
+                _comboTransitionEnabled = true;
+                _isAttacking = true;
+            }
+            else if (_comboInputEnabled)
             {
                 _comboInputEnabled = false;
-                _isAttacking = true;
             }
         }
 
         if (_comboTransitionEnabled && !_comboInputEnabled)
         {
             Animator.SetTrigger(Hash.Attack);
+            _comboTransitionEnabled = false;
         }
     }
 
@@ -167,21 +191,40 @@ public class PlayerController : ControllerBase
 
     #region Animator Events
 
-    private void SetRunning(EventParameter param)
+    private void SetMoving(EventParameter param)
     {
-        _isRunning = param.BoolParameter;
-        if (!_isRunning)
+        _isMoving = param.BoolParameter;
+        if (!_isMoving)
             Animator.SetFloat(Hash.Accel, 0F);
     }
 
-    private void SetComboInputEnabled(EventParameter param)
+    private void SetRotateToAttack(EventParameter param)
     {
-        _comboInputEnabled = param.BoolParameter;
+        _rotateToAttack = param.BoolParameter;
     }
 
-    private void SetComboTransitionEnabled(EventParameter param)
+    private void EnableComboInput()
     {
-        _comboTransitionEnabled = param.BoolParameter;
+        _comboInputEnabled = true;
+    }
+
+    private void EnableComboTransition()
+    {
+        _comboTransitionEnabled = true;
+    }
+
+    private void DisableCombo()
+    {
+        if (_comboInputEnabled) // Not be connected to next combo.
+            ResetAttacking();
+
+        _comboInputEnabled = false;
+        _comboTransitionEnabled = false;
+    }
+
+    private void ResetAttacking()
+    {
+        _isAttacking = false;
     }
 
     #endregion
