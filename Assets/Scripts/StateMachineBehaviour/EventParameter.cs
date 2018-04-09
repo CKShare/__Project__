@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [Serializable]
 public class EventParameter
@@ -12,12 +13,12 @@ public class EventParameter
     private string _stringParameter;
     [SerializeField]
     private bool _boolParameter;
-    [SerializeField]
-    private object _objectParameter;
+    [SerializeField, InlineEditor]
+    private UnityEngine.Object _objectParameter;
 
     public int IntParameter => _intParameter;
     public float FloatParameter => _floatParameter;
     public string StringParameter => _stringParameter;
     public bool BoolParameter => _boolParameter;
-    public object ObjectParameter => _objectParameter;
+    public UnityEngine.Object ObjectParameter => _objectParameter;
 }

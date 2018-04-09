@@ -213,7 +213,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 01f09e2726c681340b041b58d055bbb5, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -224,7 +225,37 @@ MonoBehaviour:
       Data: 0|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: StartAttacking
+    - Name: _parameter
+      Entry: 7
+      Data: 2|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
       Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -233,13 +264,13 @@ MonoBehaviour:
       Data: 
     - Name: _exitEvents
       Entry: 7
-      Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
+      Data: 3|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 4|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: DisableCombo
@@ -257,7 +288,7 @@ MonoBehaviour:
       Data: 
     - Name: _eventScopes
       Entry: 7
-      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
+      Data: 5|SMBEvent+EventScopeInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -269,22 +300,22 @@ MonoBehaviour:
       Data: 
     - Name: _eventTriggers
       Entry: 7
-      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+      Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 8|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 7|EventParameter, Assembly-CSharp
+      Data: 9|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -323,16 +354,16 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 10|EventParameter, Assembly-CSharp
+      Data: 12|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -371,10 +402,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 12|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboInput
@@ -401,10 +432,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 15|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 16|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboTransition
@@ -577,7 +608,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: b46b36a81e1224d41b9c20e2550cdae5, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -588,7 +620,37 @@ MonoBehaviour:
       Data: 0|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: StartAttacking
+    - Name: _parameter
+      Entry: 7
+      Data: 2|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
       Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -597,13 +659,13 @@ MonoBehaviour:
       Data: 
     - Name: _exitEvents
       Entry: 7
-      Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
+      Data: 3|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 4|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: ResetAttacking
@@ -621,7 +683,7 @@ MonoBehaviour:
       Data: 
     - Name: _eventScopes
       Entry: 7
-      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
+      Data: 5|SMBEvent+EventScopeInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -633,22 +695,22 @@ MonoBehaviour:
       Data: 
     - Name: _eventTriggers
       Entry: 7
-      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+      Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 8|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 7|EventParameter, Assembly-CSharp
+      Data: 9|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -687,16 +749,16 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 10|EventParameter, Assembly-CSharp
+      Data: 12|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -2253,7 +2315,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 279c93e5dd7e6c5459de615d4f7728f8, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -2264,7 +2327,37 @@ MonoBehaviour:
       Data: 0|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|SMBEvent+EventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: StartAttacking
+    - Name: _parameter
+      Entry: 7
+      Data: 2|EventParameter, Assembly-CSharp
+    - Name: _intParameter
+      Entry: 3
       Data: 0
+    - Name: _floatParameter
+      Entry: 4
+      Data: 0
+    - Name: _stringParameter
+      Entry: 6
+      Data: 
+    - Name: _boolParameter
+      Entry: 5
+      Data: false
+    - Name: _objectParameter
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -2273,13 +2366,13 @@ MonoBehaviour:
       Data: 
     - Name: _exitEvents
       Entry: 7
-      Data: 1|SMBEvent+EventInfo[], Assembly-CSharp
+      Data: 3|SMBEvent+EventInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 2|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 4|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: DisableCombo
@@ -2297,7 +2390,7 @@ MonoBehaviour:
       Data: 
     - Name: _eventScopes
       Entry: 7
-      Data: 3|SMBEvent+EventScopeInfo[], Assembly-CSharp
+      Data: 5|SMBEvent+EventScopeInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -2309,22 +2402,22 @@ MonoBehaviour:
       Data: 
     - Name: _eventTriggers
       Entry: 7
-      Data: 4|SMBEvent+EventTriggerInfo[], Assembly-CSharp
+      Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 5|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 6|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 8|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 7|EventParameter, Assembly-CSharp
+      Data: 9|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -2363,16 +2456,16 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 9|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: SetRotateToAttack
     - Name: _parameter
       Entry: 7
-      Data: 10|EventParameter, Assembly-CSharp
+      Data: 12|EventParameter, Assembly-CSharp
     - Name: _intParameter
       Entry: 3
       Data: 0
@@ -2411,10 +2504,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 12|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboInput
@@ -2441,10 +2534,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 15|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 16|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboTransition
@@ -2745,7 +2838,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 2
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101082536865449146
@@ -2877,7 +2970,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 2
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101220307998270392
@@ -3387,7 +3480,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.7115385
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101783970668054380
@@ -4160,7 +4253,7 @@ AnimatorStateMachine:
     m_Position: {x: 732, y: 216, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107098958272521972}
-    m_Position: {x: 576, y: -72, z: 0}
+    m_Position: {x: 624, y: -72, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:

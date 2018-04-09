@@ -5,7 +5,6 @@ using RootMotion.FinalIK;
 using Sirenix.OdinInspector;
 using static PlayerAnimatorInfo;
 
-[RequireComponent(typeof(LookAtIK))]
 public class PlayerController : ControllerBase
 {
     [SerializeField, Required, BoxGroup("Camera")]
@@ -17,6 +16,9 @@ public class PlayerController : ControllerBase
     private float _runningRotateSpeed = 10F;
     [SerializeField, BoxGroup("Locomotion")]
     private float _attackingRotateSpeed = 20F; // Should be high enough to rotate completely during about 0.1 ~ 0.2 seconds.
+
+    [SerializeField, BoxGroup("Combat")]
+    private LayerMask _attackTargetLayer;
 
     [SerializeField, BoxGroup("Input")]
     private string _moveHorizontalAxis = "Horizontal";
@@ -32,15 +34,17 @@ public class PlayerController : ControllerBase
     private string _attackButton = "Fire1";
 
     private Transform _cameraTransform;
-    private LookAtIK _lookAtIK;
+    private Collider _collider;
 
     private bool _isMoving = false;
     private bool _isAttacking = false;
     private bool _isAiming = false;
-    private int _controlFrame = 0;
     private int _stopFrame = 0;
 
+    private MeleeAttackInfo _attackInfo = null;
+    private Collider[] _attackTargets = new Collider[5];
     private Transform _attackTarget = null;
+    private Vector3 _attackDirection;
     private bool _rotateToAttack = false;
     private bool _comboInputEnabled = false;
     private bool _comboTransitionEnabled = false;
@@ -50,7 +54,7 @@ public class PlayerController : ControllerBase
         base.Awake();
 
         _cameraTransform = _mainCamera.transform;
-        _lookAtIK = GetComponent<LookAtIK>();
+        _collider = GetComponent<Collider>();
 
         // Cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -123,36 +127,46 @@ public class PlayerController : ControllerBase
             Vector3 controlDirection = _cameraTransform.forward * axisValue.y + _cameraTransform.right * axisValue.x;
             controlDirection.y = 0F;
 
-            if (_isMoving || _rotateToAttack)
+            // Set attacking direction during a few frames.
+            if (!_isAttacking || _rotateToAttack)
             {
-                float rotateSpeed;
-                if (_isMoving)
-                {
-                    rotateSpeed = _runningRotateSpeed;
-                    Animator.SetFloat(Hash.Accel, sqrMagnitude, 1F, Time.deltaTime);
-                }
-                else
-                {
-                    rotateSpeed = _attackingRotateSpeed;
-                }
+                _attackDirection = controlDirection;
+            }
 
+            if (_isMoving)
+            {
                 Quaternion controlQuaternion = Quaternion.LookRotation(controlDirection);
-                Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * rotateSpeed);
+                Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * _runningRotateSpeed);
+                Animator.SetFloat(Hash.Accel, sqrMagnitude, 0.5F, Time.deltaTime);
             }
 
             float angle = Vector3.SignedAngle(Transform.forward, controlDirection, Vector3.up);
             Animator.SetFloat(Hash.TurnAngle, angle);
-
-            _controlFrame++;
+            
             _stopFrame = 0;
         }
         else
         {
             _stopFrame++;
-            _controlFrame = 0;
         }
 
-        Animator.SetBool(Hash.IsMoving, _controlFrame > 3 || _stopFrame < 4);
+        // Rotate during attacking using direction vector got above.
+        if (_rotateToAttack)
+        {
+            if (_attackTarget == null)
+                FindAttackTarget();
+            
+            if (_attackTarget != null)
+            {
+                _attackDirection = _attackTarget.position - Transform.position;
+                _attackDirection.y = 0F;
+            }
+
+            Quaternion attackQuaternion = Quaternion.LookRotation(_attackDirection);
+            Transform.rotation = Quaternion.Slerp(Transform.rotation, attackQuaternion, Time.deltaTime * _attackingRotateSpeed);
+        }
+
+        Animator.SetBool(Hash.IsMoving, isControlling || Animator.GetBool(Hash.IsMoving) && _stopFrame < 4);
     }
 
     private void CheckAttack()
@@ -162,7 +176,6 @@ public class PlayerController : ControllerBase
             if (!_isAttacking)
             {
                 _comboTransitionEnabled = true;
-                _isAttacking = true;
             }
             else if (_comboInputEnabled)
             {
@@ -174,6 +187,31 @@ public class PlayerController : ControllerBase
         {
             Animator.SetTrigger(Hash.Attack);
             _comboTransitionEnabled = false;
+        }
+    }
+
+    // Find attack target in nearest angle around attack direction.
+    private void FindAttackTarget()
+    {
+        int count = 0;
+        if ((count = Physics.OverlapSphereNonAlloc(Transform.position, _attackInfo.DetectMaxDistance, _attackTargets, _attackTargetLayer)) > 0)
+        {
+            float nearestAngle = _attackInfo.DetectMaxAngle;
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 diff = _attackTargets[i].transform.position - Transform.position;
+                float angle = Mathf.Acos(Vector3.Dot(_attackDirection.normalized, diff.normalized)) * Mathf.Rad2Deg;
+
+                if (Mathf.Abs(angle) <= _attackInfo.DetectMaxAngle)
+                {
+                    if (_attackTarget == null || angle < nearestAngle)
+                    {
+                        nearestAngle = angle;
+                        _attackTarget = _attackTargets[i].transform;
+                        Debug.Log(_attackTarget.name);
+                    }
+                }
+            }
         }
     }
 
@@ -203,6 +241,18 @@ public class PlayerController : ControllerBase
         _rotateToAttack = param.BoolParameter;
     }
 
+    private void StartAttacking(EventParameter param)
+    {
+        _attackInfo = param.ObjectParameter as MeleeAttackInfo;
+        _isAttacking = true;
+        _attackTarget = null;
+    }
+
+    private void ResetAttacking()
+    {
+        _isAttacking = false;
+    }
+
     private void EnableComboInput()
     {
         _comboInputEnabled = true;
@@ -220,11 +270,6 @@ public class PlayerController : ControllerBase
 
         _comboInputEnabled = false;
         _comboTransitionEnabled = false;
-    }
-
-    private void ResetAttacking()
-    {
-        _isAttacking = false;
     }
 
     #endregion
