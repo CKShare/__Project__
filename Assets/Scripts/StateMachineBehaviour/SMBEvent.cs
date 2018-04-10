@@ -24,12 +24,12 @@ public class SMBEvent : SerializedStateMachineBehaviour
         private Vector2 _scope = new Vector2(0F, 1F);
         [Tooltip("Scope class reference that implements callbacks.")]
         [SerializeField, Required]
-        private IEventScope _scopeReference;
+        private EventScope _scopeReference;
 
         private bool _isEntered = false, _isExited = false;
 
         public Vector2 Scope => _scope;
-        public IEventScope ScopeReference => _scopeReference;
+        public EventScope ScopeReference => _scopeReference;
 
         public bool IsEntered
         {
@@ -159,13 +159,13 @@ public class SMBEvent : SerializedStateMachineBehaviour
                 // EventScope
                 foreach (var scopeInfo in _eventScopes)
                 {
-                    IEventScope scopeReference = scopeInfo.ScopeReference;
+                    EventScope scopeReference = scopeInfo.ScopeReference;
 
                     if (!scopeInfo.IsEntered)
                     {
                         if (curTime >= scopeInfo.Scope.x)
                         {
-                            scopeReference.OnScopeEnter(animator, layerIndex);
+                            scopeReference.OnScopeEnter(animator, stateInfo, layerIndex);
                             scopeInfo.IsEntered = true;
                         }
                     }
@@ -173,12 +173,12 @@ public class SMBEvent : SerializedStateMachineBehaviour
                     {
                         if (curTime >= scopeInfo.Scope.y)
                         {
-                            scopeReference.OnScopeExit(animator, layerIndex);
+                            scopeReference.OnScopeExit(animator, stateInfo, layerIndex);
                             scopeInfo.IsExited = true;
                         }
                         else
                         {
-                            scopeReference.OnScopeUpdate(animator, layerIndex);
+                            scopeReference.OnScopeUpdate(animator, stateInfo, layerIndex);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeMove(animator, layerIndex);
+                scopeInfo.ScopeReference.OnScopeMove(animator, stateInfo, layerIndex);
             }
         }
     }
@@ -240,7 +240,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeIK(animator, layerIndex);
+                scopeInfo.ScopeReference.OnScopeIK(animator, stateInfo, layerIndex);
             }
         }
     }
@@ -252,7 +252,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeExit(animator, layerIndex);
+                scopeInfo.ScopeReference.OnScopeExit(animator, stateInfo, layerIndex);
                 scopeInfo.IsExited = true;
             }
         }

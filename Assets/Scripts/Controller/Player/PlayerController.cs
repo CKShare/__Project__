@@ -38,7 +38,6 @@ public class PlayerController : ControllerBase
     private Vector2 _axisValue;
     private float _sqrAxis;
     
-
     private bool _isMoving = false;
     private bool _isAttacking = false;
     private bool _isAiming = false;
@@ -127,7 +126,6 @@ public class PlayerController : ControllerBase
     private void UpdateLocomotion()
     {
         bool isControlling = _sqrAxis > 0F;
-        
         if (isControlling)
         {
             Vector3 controlDirection = _cameraTransform.forward * _axisValue.y + _cameraTransform.right * _axisValue.x;
