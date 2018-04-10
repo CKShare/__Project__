@@ -13,43 +13,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Accel
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: TurnAngle
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Yaw
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Pitch
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -303,109 +303,13 @@ MonoBehaviour:
       Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
       Data: 8|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 9|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: true
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 12|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0.15
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboInput
@@ -432,10 +336,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 9|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 16|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 10|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboTransition
@@ -698,103 +602,7 @@ MonoBehaviour:
       Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 8|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 9|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
       Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: true
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 12|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0.1
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -2405,109 +2213,13 @@ MonoBehaviour:
       Data: 6|SMBEvent+EventTriggerInfo[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 7|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
       Data: 8|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 9|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: true
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 11|SMBEvent+EventInfo, Assembly-CSharp
-    - Name: _function
-      Entry: 1
-      Data: SetRotateToAttack
-    - Name: _parameter
-      Entry: 7
-      Data: 12|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _time
-      Entry: 4
-      Data: 0.15
-    - Name: _chance
-      Entry: 4
-      Data: 1
-    - Name: _weightThreshold
-      Entry: 4
-      Data: 0
-    - Name: _triggerBeforeExiting
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 13|SMBEvent+EventTriggerInfo, Assembly-CSharp
-    - Name: _triggerEvent
-      Entry: 7
-      Data: 14|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboInput
@@ -2534,10 +2246,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|SMBEvent+EventTriggerInfo, Assembly-CSharp
+      Data: 9|SMBEvent+EventTriggerInfo, Assembly-CSharp
     - Name: _triggerEvent
       Entry: 7
-      Data: 16|SMBEvent+EventInfo, Assembly-CSharp
+      Data: 10|SMBEvent+EventInfo, Assembly-CSharp
     - Name: _function
       Entry: 1
       Data: EnableComboTransition
@@ -2880,7 +2592,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101116628224956966
@@ -3126,10 +2838,10 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.6
+  m_ExitTime: 0.8
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101424609840910738
@@ -3216,7 +2928,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.7
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101470926410549872

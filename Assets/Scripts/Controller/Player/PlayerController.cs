@@ -34,7 +34,10 @@ public class PlayerController : ControllerBase
     private string _attackButton = "Fire1";
 
     private Transform _cameraTransform;
-    private Collider _collider;
+
+    private Vector2 _axisValue;
+    private float _sqrAxis;
+    
 
     private bool _isMoving = false;
     private bool _isAttacking = false;
@@ -45,7 +48,6 @@ public class PlayerController : ControllerBase
     private Collider[] _attackTargets = new Collider[5];
     private Transform _attackTarget = null;
     private Vector3 _attackDirection;
-    private bool _rotateToAttack = false;
     private bool _comboInputEnabled = false;
     private bool _comboTransitionEnabled = false;
 
@@ -54,7 +56,6 @@ public class PlayerController : ControllerBase
         base.Awake();
 
         _cameraTransform = _mainCamera.transform;
-        _collider = GetComponent<Collider>();
 
         // Cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -70,9 +71,16 @@ public class PlayerController : ControllerBase
 
     private void Update()
     {
-        //CheckAim();
+        UpdateInput();
         UpdateLocomotion();
         CheckAttack();
+        //CheckAim();
+    }
+
+    private void UpdateInput()
+    {
+        _axisValue = new Vector2(Input.GetAxisRaw(_moveHorizontalAxis), Input.GetAxisRaw(_moveVerticalAxis));
+        _sqrAxis = Mathf.Clamp01(_axisValue.sqrMagnitude);
     }
 
     private void CheckAim()
@@ -118,26 +126,18 @@ public class PlayerController : ControllerBase
 
     private void UpdateLocomotion()
     {
-        Vector2 axisValue = new Vector2(Input.GetAxisRaw(_moveHorizontalAxis), Input.GetAxisRaw(_moveVerticalAxis));
-        float sqrMagnitude = Mathf.Clamp01(axisValue.sqrMagnitude);
-        bool isControlling = sqrMagnitude > 0F;
+        bool isControlling = _sqrAxis > 0F;
         
         if (isControlling)
         {
-            Vector3 controlDirection = _cameraTransform.forward * axisValue.y + _cameraTransform.right * axisValue.x;
+            Vector3 controlDirection = _cameraTransform.forward * _axisValue.y + _cameraTransform.right * _axisValue.x;
             controlDirection.y = 0F;
-
-            // Set attacking direction during a few frames.
-            if (!_isAttacking || _rotateToAttack)
-            {
-                _attackDirection = controlDirection;
-            }
 
             if (_isMoving)
             {
                 Quaternion controlQuaternion = Quaternion.LookRotation(controlDirection);
                 Transform.rotation = Quaternion.Slerp(Transform.rotation, controlQuaternion, Time.deltaTime * _runningRotateSpeed);
-                Animator.SetFloat(Hash.Accel, sqrMagnitude, 0.5F, Time.deltaTime);
+                Animator.SetFloat(Hash.Accel, _sqrAxis, 0.5F, Time.deltaTime);
             }
 
             float angle = Vector3.SignedAngle(Transform.forward, controlDirection, Vector3.up);
@@ -150,12 +150,9 @@ public class PlayerController : ControllerBase
             _stopFrame++;
         }
 
-        // Rotate during attacking using direction vector got above.
-        if (_rotateToAttack)
+        // Rotate during attacking.
+        if (_isAttacking)
         {
-            if (_attackTarget == null)
-                FindAttackTarget();
-            
             if (_attackTarget != null)
             {
                 _attackDirection = _attackTarget.position - Transform.position;
@@ -187,6 +184,17 @@ public class PlayerController : ControllerBase
         {
             Animator.SetTrigger(Hash.Attack);
             _comboTransitionEnabled = false;
+
+            if (_sqrAxis > 0F)
+            {
+                Vector3 dir = _cameraTransform.forward * _axisValue.y + _cameraTransform.right * _axisValue.x;
+                dir.y = 0F;
+                _attackDirection = dir;
+            }
+            else
+            {
+                _attackDirection = Transform.forward;
+            }
         }
     }
 
@@ -200,6 +208,7 @@ public class PlayerController : ControllerBase
             for (int i = 0; i < count; i++)
             {
                 Vector3 diff = _attackTargets[i].transform.position - Transform.position;
+                diff.y = 0F;
                 float angle = Mathf.Acos(Vector3.Dot(_attackDirection.normalized, diff.normalized)) * Mathf.Rad2Deg;
 
                 if (Mathf.Abs(angle) <= _attackInfo.DetectMaxAngle)
@@ -208,12 +217,14 @@ public class PlayerController : ControllerBase
                     {
                         nearestAngle = angle;
                         _attackTarget = _attackTargets[i].transform;
-                        Debug.Log(_attackTarget.name);
                     }
                 }
             }
+
+            if (_attackTarget != null)
+                Debug.Log($"Attack Target : {_attackTarget.name}");
         }
-    }
+     }
 
     private void OnAimEnabled()
     {
@@ -236,16 +247,13 @@ public class PlayerController : ControllerBase
             Animator.SetFloat(Hash.Accel, 0F);
     }
 
-    private void SetRotateToAttack(EventParameter param)
-    {
-        _rotateToAttack = param.BoolParameter;
-    }
-
     private void StartAttacking(EventParameter param)
     {
-        _attackInfo = param.ObjectParameter as MeleeAttackInfo;
         _isAttacking = true;
         _attackTarget = null;
+
+        _attackInfo = param.ObjectParameter as MeleeAttackInfo;
+        FindAttackTarget();
     }
 
     private void ResetAttacking()
@@ -265,7 +273,7 @@ public class PlayerController : ControllerBase
 
     private void DisableCombo()
     {
-        if (_comboInputEnabled) // Not be connected to next combo.
+        if (_comboInputEnabled)
             ResetAttacking();
 
         _comboInputEnabled = false;
