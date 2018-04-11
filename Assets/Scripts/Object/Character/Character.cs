@@ -1,21 +1,24 @@
 ﻿using System;
 using UnityEngine;
 
-public class Character : SceneObject
+public abstract class Character : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private int _maxHealth = 100;
 
     private int _currentHealth;
-    private event Action<int> _onDamaged;
+    private event Action<int, int> _onDamaged;
     private event Action _onDeath;
 
-    public override void ApplyDamage(int damage, int reactionID = -1)
+    void Awake()
     {
-        base.ApplyDamage(damage, reactionID);
+        CurrentHealth = _maxHealth;
+    }
 
+    public void ApplyDamage(int damage, int reactionID = -1)
+    {
         CurrentHealth -= damage;
-        _onDamaged(damage);
+        _onDamaged?.Invoke(damage, reactionID);
     }
 
     public int MaxHealth => _maxHealth;
@@ -32,13 +35,13 @@ public class Character : SceneObject
             _currentHealth = value;
             if (_currentHealth <= 0)
             {
-                _onDeath();
+                _onDeath?.Invoke();
                 _currentHealth = 0;
             }
         }
     }
 
-    public event Action<int> OnDamaged
+    public event Action<int, int> OnDamaged
     {
         add { _onDamaged += value; }
         remove { _onDamaged -= value; }

@@ -434,8 +434,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 57661839}
-  m_LocalRotation: {x: -0.050556194, y: -0.000000031586183, z: 0.0000000027628189,
-    w: 0.99872124}
+  m_LocalRotation: {x: -0.028890392, y: -0.000000031518855, z: 0.0000000034470102,
+    w: 0.99958265}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -837,7 +837,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 158294244}
-  m_LocalRotation: {x: 0.034101326, y: -0.000000031239292, z: 0.000000005424613, w: 0.99941844}
+  m_LocalRotation: {x: 0.05464157, y: -0.000000031121164, z: 0.000000006065727, w: 0.99850607}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1107,7 +1107,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 45
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1131,8 +1131,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 343136155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.028890556, y: -0.00000004963426, z: -0.000000005792543, w: -0.9995826}
+  m_LocalPosition: {x: 0, y: 1.327431, z: -2.982749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.842785, z: -2.877362}
+  m_FollowOffset: {x: 0, y: 1.951125, z: -2.765176}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2124,7 +2124,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 774342574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.201155, z: -2.944234}
+  m_LocalPosition: {x: 0, y: 1.327431, z: -2.982749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 158294246}
@@ -2434,7 +2434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1242234223
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2586,8 +2586,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1253979020}
-  m_LocalRotation: {x: -0.050556194, y: 0.000000049304706, z: -0.000000019800138,
-    w: 0.99872124}
+  m_LocalRotation: {x: -0.028890392, y: 0.000000048863818, z: -0.000000020864492,
+    w: 0.99958265}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2657,6 +2657,76 @@ Transform:
   - {fileID: 361861331}
   m_Father: {fileID: 1691893847}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1331666312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1331666314}
+  - component: {fileID: 1331666313}
+  m_Layer: 0
+  m_Name: Pool Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1331666313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331666312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c99adfb366786f438f052ca009d918e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _preloadDict
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[PoolManager+PreloadInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _isPersistent: 0
+--- !u!4 &1331666314
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331666312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.124112785, y: -6.8251324, z: 6.6835675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344414207
 GameObject:
@@ -2854,7 +2924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.646633, z: -2.989832}
+  m_FollowOffset: {x: 0, y: 2.781261, z: -2.514894}
   m_XDamping: 1
   m_YDamping: 0
   m_ZDamping: 0
@@ -3089,7 +3159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.842785, z: -2.877362}
+  m_FollowOffset: {x: 0, y: 1.951125, z: -2.765176}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3513,7 +3583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.646633, z: -2.989832}
+  m_FollowOffset: {x: 0, y: 2.781261, z: -2.514894}
   m_XDamping: 1
   m_YDamping: 0
   m_ZDamping: 0
@@ -3625,7 +3695,9 @@ MonoBehaviour:
   m_LayerIndex: 0
   m_ShowDebugText: 1
   m_EnableAllChildCameras: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 774342575}
+  - {fileID: 500141544}
   m_Instructions:
   - m_FullHash: 218235336
     m_VirtualCamera: {fileID: 774342575}
@@ -3857,7 +3929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.646633, z: -2.989832}
+  m_FollowOffset: {x: 0, y: 2.781261, z: -2.514894}
   m_XDamping: 1
   m_YDamping: 0
   m_ZDamping: 0
@@ -4250,7 +4322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.842785, z: -2.877362}
+  m_FollowOffset: {x: 0, y: 1.951125, z: -2.765176}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
