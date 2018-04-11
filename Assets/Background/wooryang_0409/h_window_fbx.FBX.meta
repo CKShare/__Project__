@@ -1,16 +1,23 @@
 fileFormatVersion: 2
-guid: 5e742064382dd95408b0274da66959db
-timeCreated: 1523283126
+guid: 8e02dc200f6bae64e9563a73b1e2db60
+timeCreated: 1523428885
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: Box1334
+    100002: //RootNode
+    100004: Object605
+    400000: Box1334
+    400002: //RootNode
+    400004: Object605
     2100000: 01 - Default
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane200
+    2300000: Box1334
+    2300002: Object605
+    3300000: Box1334
+    3300002: Object605
+    4300000: Object605
+    4300002: Box1334
   externalObjects: {}
   materials:
     importMaterials: 1
