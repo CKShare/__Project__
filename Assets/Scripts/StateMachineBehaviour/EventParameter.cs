@@ -1,24 +1,18 @@
 ﻿using System;
 using UnityEngine;
-using Sirenix.OdinInspector;
+
+public interface IEventParameter { }
 
 [Serializable]
-public class EventParameter
+public abstract class EventParameter<T> : IEventParameter
 {
     [SerializeField]
-    private int _intParameter;
-    [SerializeField]
-    private float _floatParameter;
-    [SerializeField]
-    private string _stringParameter;
-    [SerializeField]
-    private bool _boolParameter;
-    [SerializeField, InlineEditor]
-    private UnityEngine.Object _objectParameter;
-
-    public int IntParameter => _intParameter;
-    public float FloatParameter => _floatParameter;
-    public string StringParameter => _stringParameter;
-    public bool BoolParameter => _boolParameter;
-    public UnityEngine.Object ObjectParameter => _objectParameter;
+    private T _value;
+    public T Value => _value;
 }
+
+public class IntParameter : EventParameter<int> { }
+public class FloatParameter : EventParameter<float> { }
+public class BoolParameter : EventParameter<bool> { }
+public class StringParameter : EventParameter<string> { }
+public class ObjectParameter : EventParameter<UnityEngine.Object> { }

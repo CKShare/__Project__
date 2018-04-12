@@ -17,8 +17,11 @@ public abstract class Character : MonoBehaviour, IDamageable
 
     public void ApplyDamage(int damage, int reactionID = -1)
     {
-        CurrentHealth -= damage;
-        _onDamaged?.Invoke(damage, reactionID);
+        if (_currentHealth > 0)
+        {
+            CurrentHealth -= damage;
+            _onDamaged?.Invoke(damage, reactionID);
+        }
     }
 
     public int MaxHealth => _maxHealth;

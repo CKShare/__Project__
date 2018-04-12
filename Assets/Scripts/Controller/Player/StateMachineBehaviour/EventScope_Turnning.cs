@@ -21,7 +21,7 @@ public class EventScope_Turnning : EventScope
     {
         float deltaYaw = _angleCurve.Evaluate(stateInfo.normalizedTime);
         deltaYaw *= _error;
-
+        
         animator.transform.eulerAngles = new Vector3(0F, _y + deltaYaw, 0F);
     }
 }

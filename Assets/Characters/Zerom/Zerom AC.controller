@@ -234,20 +234,8 @@ MonoBehaviour:
       Data: StartAttacking
     - Name: _parameter
       Entry: 7
-      Data: 2|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
+      Data: 2|ObjectParameter, Assembly-CSharp
+    - Name: _value
       Entry: 10
       Data: 0
     - Name: 
@@ -404,22 +392,10 @@ MonoBehaviour:
       Data: SetMoving
     - Name: _parameter
       Entry: 7
-      Data: 2|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
+      Data: 2|BoolParameter, Assembly-CSharp
+    - Name: _value
       Entry: 5
       Data: true
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -446,22 +422,10 @@ MonoBehaviour:
       Data: SetMoving
     - Name: _parameter
       Entry: 7
-      Data: 5|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
+      Data: 5|BoolParameter, Assembly-CSharp
+    - Name: _value
       Entry: 5
       Data: false
-    - Name: _objectParameter
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -694,20 +658,8 @@ MonoBehaviour:
       Data: StartAttacking
     - Name: _parameter
       Entry: 7
-      Data: 2|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
+      Data: 2|ObjectParameter, Assembly-CSharp
+    - Name: _value
       Entry: 10
       Data: 0
     - Name: 
@@ -3105,20 +3057,8 @@ MonoBehaviour:
       Data: StartAttacking
     - Name: _parameter
       Entry: 7
-      Data: 2|EventParameter, Assembly-CSharp
-    - Name: _intParameter
-      Entry: 3
-      Data: 0
-    - Name: _floatParameter
-      Entry: 4
-      Data: 0
-    - Name: _stringParameter
-      Entry: 6
-      Data: 
-    - Name: _boolParameter
-      Entry: 5
-      Data: false
-    - Name: _objectParameter
+      Data: 2|ObjectParameter, Assembly-CSharp
+    - Name: _value
       Entry: 10
       Data: 0
     - Name: 
@@ -3529,9 +3469,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -3757,9 +3697,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -3778,9 +3718,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
@@ -3865,9 +3805,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2

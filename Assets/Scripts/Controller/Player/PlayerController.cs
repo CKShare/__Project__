@@ -238,19 +238,19 @@ public class PlayerController : ControllerBase
 
     #region Animator Events
 
-    private void SetMoving(EventParameter param)
+    private void SetMoving(BoolParameter isMoving)
     {
-        _isMoving = param.BoolParameter;
+        _isMoving = isMoving.Value;
         if (!_isMoving)
             Animator.SetFloat(Hash.Accel, 0F);
     }
 
-    private void StartAttacking(EventParameter param)
+    private void StartAttacking(ObjectParameter attackInfo)
     {
         _isAttacking = true;
         _attackTarget = null;
 
-        _attackInfo = param.ObjectParameter as MeleeAttackInfo;
+        _attackInfo = attackInfo.Value as MeleeAttackInfo;
         FindAttackTarget();
     }
 

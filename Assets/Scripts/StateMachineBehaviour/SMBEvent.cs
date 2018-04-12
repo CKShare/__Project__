@@ -10,10 +10,10 @@ public class SMBEvent : SerializedStateMachineBehaviour
         private string _function;
         [Tooltip("Parameter to be sent when function is triggered.")]
         [SerializeField]
-        private EventParameter _parameter;
+        private IEventParameter _parameter;
 
         public string Function => _function;
-        public EventParameter Parameter => _parameter;
+        public IEventParameter Parameter => _parameter;
     }
 
 
