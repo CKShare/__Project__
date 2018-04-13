@@ -12,9 +12,4 @@ public static class PlayerAnimatorInfo
         public static int Pitch = Animator.StringToHash("Pitch");
         public static int Attack = Animator.StringToHash("Attack");
     }
-
-    public static class Value
-    {
-
-    }
 }
