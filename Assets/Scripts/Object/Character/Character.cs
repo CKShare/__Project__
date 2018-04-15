@@ -7,7 +7,7 @@ public abstract class Character : MonoBehaviour, IDamageable
     private int _maxHealth = 100;
 
     private int _currentHealth;
-    private event Action<int, int> _onDamaged;
+    private event Action<Transform, int, int> _onDamaged;
     private event Action _onDeath;
 
     void Awake()
@@ -15,12 +15,12 @@ public abstract class Character : MonoBehaviour, IDamageable
         CurrentHealth = _maxHealth;
     }
 
-    public void ApplyDamage(int damage, int reactionID = -1)
+    public void ApplyDamage(Transform attacker, int damage, int reactionID = -1)
     {
         if (_currentHealth > 0)
         {
             CurrentHealth -= damage;
-            _onDamaged?.Invoke(damage, reactionID);
+            _onDamaged?.Invoke(attacker, damage, reactionID);
         }
     }
 
@@ -44,7 +44,7 @@ public abstract class Character : MonoBehaviour, IDamageable
         }
     }
 
-    public event Action<int, int> OnDamaged
+    public event Action<Transform, int, int> OnDamaged
     {
         add { _onDamaged += value; }
         remove { _onDamaged -= value; }

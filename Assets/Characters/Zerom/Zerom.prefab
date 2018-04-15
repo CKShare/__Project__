@@ -156,9 +156,10 @@ GameObject:
   - component: {fileID: 4837845360688462}
   - component: {fileID: 95114178388960670}
   - component: {fileID: 54658553558539684}
-  - component: {fileID: 114437293596252658}
+  - component: {fileID: 136303373992897006}
+  - component: {fileID: 114831260198700000}
   - component: {fileID: 114767663993615746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Zerom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,6 +340,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4256615524011004}
+  - component: {fileID: 135611223089826662}
   m_Layer: 0
   m_Name: Bip001 R Hand
   m_TagString: Untagged
@@ -1921,7 +1923,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127865626304936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.63, y: -0.246, z: -11.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4338514114145890}
@@ -2117,92 +2119,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114437293596252658
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1127865626304936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 776adaaacdc5c4e8ab0395120a6e972b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixTransforms: 0
-  solver:
-    IKPosition: {x: -0.0000004543154, y: 1.231081, z: 2.9791095}
-    IKPositionWeight: 0
-    root: {fileID: 4837845360688462}
-    target: {fileID: 0}
-    spine:
-    - transform: {fileID: 4917874438204850}
-      weight: 0
-      solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 0}
-      defaultLocalPosition: {x: -0.08704056, y: 0.0015229225, z: 0.00000012104894}
-      defaultLocalRotation: {x: -0.0000020504174, y: 0.00000066475474, z: 0.04049122,
-        w: 0.9991799}
-      length: 0
-      sqrMag: 0
-      axis: {x: -0.037077874, y: 0.9993124, z: 0.0000011920929}
-    - transform: {fileID: 4209670641602188}
-      weight: 0
-      solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 0}
-      defaultLocalPosition: {x: -0.13221778, y: -0.00009813308, z: -2.7217537e-10}
-      defaultLocalRotation: {x: 6.053952e-14, y: -0.00000009677588, z: 0.034891795,
-        w: 0.99939114}
-      length: 0
-      sqrMag: 0
-      axis: {x: 0.032705635, y: 0.9994651, z: 0.0000012218952}
-    - transform: {fileID: 4524387604457942}
-      weight: 0
-      solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 0}
-      defaultLocalPosition: {x: -0.12351303, y: -0.00019216894, z: -5.3298205e-10}
-      defaultLocalRotation: {x: -8.282054e-14, y: -0.00000021609515, z: 0.07791141,
-        w: 0.9969603}
-      length: 0
-      sqrMag: 0
-      axis: {x: 0.18757445, y: 0.98225045, z: 0.0000009834766}
-    head:
-      transform: {fileID: 4720017409691408}
-      weight: 1
-      solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 1}
-      defaultLocalPosition: {x: -0.118248135, y: 0, z: 7.2759575e-14}
-      defaultLocalRotation: {x: -1.11798015e-13, y: -0.00000007813774, z: 0.028172709,
-        w: 0.99960303}
-      length: 0
-      sqrMag: 0
-      axis: {x: -0.11271551, y: 0.9936272, z: 0.0000013113022}
-    eyes: []
-    bodyWeight: 0.5
-    headWeight: 0.5
-    eyesWeight: 0
-    clampWeight: 0.5
-    clampWeightHead: 0.5
-    clampWeightEyes: 0.5
-    clampSmoothing: 2
-    spineWeightCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0.3
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    spineTargetOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &114767663993615746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2216,12 +2132,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 0}
   _aimVCam: {fileID: 0}
+  _runningRotateSpeed: 10
+  _attackingRotateSpeed: 20
+  _attackTargetLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _moveHorizontalAxis: Horizontal
   _moveVerticalAxis: Vertical
   _aimButton: Aim
   _lookHoriztonalAxis: Mouse X
   _lookVerticalAxis: Mouse Y
   _attackButton: Fire1
+--- !u!114 &114831260198700000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127865626304936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc25ef029b8b5643873d4c49dff03c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+--- !u!135 &135611223089826662
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233470111189928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136303373992897006
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127865626304936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.32
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!137 &137332522317747624
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

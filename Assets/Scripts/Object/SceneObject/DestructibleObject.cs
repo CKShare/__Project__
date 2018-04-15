@@ -15,7 +15,7 @@ public class DestructibleObject : MonoBehaviour, IDamageable
         _currentHit = _maxHit;
     }
 
-    public void ApplyDamage(int damage, int reactionID = -1)
+    public void ApplyDamage(Transform attacker, int damage, int reactionID = -1)
     {
         if (_currentHit > 0)
         {

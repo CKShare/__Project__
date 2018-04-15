@@ -1,5 +1,6 @@
-﻿
+﻿using UnityEngine;
+
 public interface IDamageable
 {
-    void ApplyDamage(int damage, int reactionID = -1);
+    void ApplyDamage(Transform attacker, int damage, int reactionID = -1);
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0f340cbdb48c3304687a7f9608c487d1
-timeCreated: 1523537937
+guid: e73752c7deda40f4096a6331cdde25a4
+timeCreated: 1523833771
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -72,8 +72,7 @@ ModelImporter:
     100128: Bip001 Spine
     100130: Bip001 Spine1
     100132: Bip001 Spine2
-    100134: mang_model
-    100136: //RootNode
+    100134: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -141,14 +140,9 @@ ModelImporter:
     400128: Bip001 Spine
     400130: Bip001 Spine1
     400132: Bip001 Spine2
-    400134: mang_model
-    400136: //RootNode
-    2100000: default
-    2100002: defaultMat
-    4300000: mang_model
-    7400000: Take 001
+    400134: //RootNode
+    7400000: Head Hit
     9500000: //RootNode
-    13700000: mang_model
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -177,26 +171,26 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
+      name: Head Hit
+      takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 33
+      lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
-      mirror: 1
+      mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
