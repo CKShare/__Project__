@@ -7,13 +7,23 @@ using static EnemyAnimatorInfo;
 public class AIController : ControllerBase
 {
     [SerializeField]
+    private float _patrolSpeed;
+    [SerializeField]
+    private float _chaseSpeed;
+    [SerializeField]
     private Transform _target;
     [SerializeField]
     private float _targetDetectMaxDistance;
     [SerializeField]
     private float _targetDetectMaxAngle;
+    [SerializeField]
+    private float _targetKeepDistance;
+    [SerializeField]
+    private Transform[] _patrolPoints;
 
     private RichAI _ai;
+    private int _currentPointIdx = -1;
+    private bool _isInversed;
 
     protected override void Awake()
     {
@@ -42,8 +52,19 @@ public class AIController : ControllerBase
         return false;
     }
 
-    public void SetDestination(Transform destination)
+    public bool IsPatrolPointReached()
     {
-        
+        return _ai.reachedEndOfPath;
+    }
+
+    public void GoToNextPatrolPoint()
+    {
+        if (_currentPointIdx == _patrolPoints.Length - 1)
+            _isInversed = true;
+        else if (_currentPointIdx == 0)
+            _isInversed = false;
+
+        _currentPointIdx += _isInversed ? -1 : 1;
+        _ai.destination = _patrolPoints[_currentPointIdx].position;
     }
 }
