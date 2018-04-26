@@ -17,7 +17,7 @@ public class MeleeAttackInfo : AttackInfo
     private float _hitMaxDistance;
     [SerializeField]
     private float _hitMaxAngle;
-
+ 
     public float HitSlowScale => _hitSlowScale;
     public float HitSlowDuration => _hitSlowDuration;
     public NoiseSettings HitNoiseSettings => _hitNoiseSettings;

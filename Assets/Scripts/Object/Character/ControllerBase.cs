@@ -112,7 +112,7 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
     public Rigidbody Rigidbody => _rigidbody;
     public Animator Animator => _animator;
 
-    #region Animator Events;
+    #region Animator Events
 
     private void OnLeftFootPlant()
     {

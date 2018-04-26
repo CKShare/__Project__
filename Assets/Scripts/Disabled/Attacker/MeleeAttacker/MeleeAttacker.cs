@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+[Serializable]
 public class MeleeAttacker
 {
+    [Serializable]
     private struct MeleeAttackElement
     {
         [SerializeField, InlineEditor, Required]
@@ -39,7 +42,7 @@ public class MeleeAttacker
                     List<EffectPair> effectList = null;
                     if (attackInfo.HitEffectDict.TryGetValue(textureName, out effectList))
                     {
-                        EffectPair effectInfo = effectList[Random.Range(0, effectList.Count)];
+                        EffectPair effectInfo = effectList[UnityEngine.Random.Range(0, effectList.Count)];
 
                         // Vfx
                         GameObject vfx = PoolManager.Instance[effectInfo.Particle].Spawn();
