@@ -9,6 +9,8 @@ public class PoolManager : MonoSingleton<PoolManager>
     [Serializable]
     private struct PreloadInfo
     {
+        [SerializeField]
+        private Transform _parent;
         [SerializeField, Required]
         private GameObject _prefab;
         [SerializeField]
@@ -16,6 +18,7 @@ public class PoolManager : MonoSingleton<PoolManager>
         [SerializeField, MinValue(1)]
         private int _extendCapacity;
 
+        public Transform Parent => _parent;
         public GameObject Prefab => _prefab;
         public int InitialCapacity => _initialCapacity;
         public int ExtendCapacity => _extendCapacity;
@@ -39,11 +42,19 @@ public class PoolManager : MonoSingleton<PoolManager>
             Pool<GameObject> newPool = new Pool<GameObject>(preload.Value.InitialCapacity,
             () =>
             {
-                Transform container = FindContainer(preload.Key);
-                if (container == null)
+                Transform container = null;
+                if (preload.Value.Parent == null)
                 {
-                    container = new GameObject(preload.Key).transform;
-                    container.parent = transform;
+                    container = FindContainer(preload.Key);
+                    if (container == null)
+                    {
+                        container = new GameObject(preload.Key).transform;
+                        container.parent = transform;
+                    }
+                }
+                else
+                {
+                    container = preload.Value.Parent;
                 }
 
                 GameObject instance = Instantiate(preload.Value.Prefab, container);

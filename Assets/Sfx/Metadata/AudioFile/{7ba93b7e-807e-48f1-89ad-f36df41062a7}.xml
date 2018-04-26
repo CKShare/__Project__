@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{7ba93b7e-807e-48f1-89ad-f36df41062a7}">
+        <property name="assetPath">
+            <value>Foot_Metal1_SneakerRun06.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.30816326530612242</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{be9ea6e3-fd00-407c-b218-b46296989983}</destination>
+        </relationship>
+    </object>
+</objects>

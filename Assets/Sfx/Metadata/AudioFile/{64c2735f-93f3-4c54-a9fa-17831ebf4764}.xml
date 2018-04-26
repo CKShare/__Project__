@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{64c2735f-93f3-4c54-a9fa-17831ebf4764}">
+        <property name="assetPath">
+            <value>Foot_Carpet_SneakerRun09.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.28555555555555556</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{be9ea6e3-fd00-407c-b218-b46296989983}</destination>
+        </relationship>
+    </object>
+</objects>

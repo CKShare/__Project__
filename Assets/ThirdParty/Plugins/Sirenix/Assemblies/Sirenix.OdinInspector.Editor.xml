@@ -2859,55 +2859,55 @@
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.OdinMenuEditorWindow">
-            <summary>
-            Draws an editor window with a menu tree.
-            </summary>
-            <example>
-            <code>
-            public class OdinMenuEditorWindowExample : OdinMenuEditorWindow
-            {
-                [SerializeField, HideLabel]
-                private SomeData someData = new SomeData();
+             <summary>
+             Draws an editor window with a menu tree.
+             </summary>
+             <example>
+             <code>
+             public class OdinMenuEditorWindowExample : OdinMenuEditorWindow
+             {
+                 [SerializeField, HideLabel]
+                 private SomeData someData = new SomeData();
             
-                protected override OdinMenuTree BuildMenuTree()
-                {
-                    OdinMenuTree tree = new OdinMenuTree(supportsMultiSelect: true)
-                    {
-                        { "Home",                           this,                           EditorIcons.House       }, // draws the someDataField in this case.
-                        { "Odin Settings",                  null,                           EditorIcons.SettingsCog },
-                        { "Odin Settings/Color Palettes",   ColorPaletteManager.Instance,   EditorIcons.EyeDropper  },
-                        { "Odin Settings/AOT Generation",   AOTGenerationConfig.Instance,   EditorIcons.SmartPhone  },
-                        { "Camera current",                 Camera.current                                          },
-                        { "Some Class",                     this.someData                                           }
-                    };
+                 protected override OdinMenuTree BuildMenuTree()
+                 {
+                     OdinMenuTree tree = new OdinMenuTree(supportsMultiSelect: true)
+                     {
+                         { "Home",                           this,                           EditorIcons.House       }, // draws the someDataField in this case.
+                         { "Odin Settings",                  null,                           EditorIcons.SettingsCog },
+                         { "Odin Settings/Color Palettes",   ColorPaletteManager.Instance,   EditorIcons.EyeDropper  },
+                         { "Odin Settings/AOT Generation",   AOTGenerationConfig.Instance,   EditorIcons.SmartPhone  },
+                         { "Camera current",                 Camera.current                                          },
+                         { "Some Class",                     this.someData                                           }
+                     };
             
-                    tree.AddAllAssetsAtPath("More Odin Settings", SirenixAssetPaths.OdinEditorConfigsPath, typeof(ScriptableObject), true)
-                        .AddThumbnailIcons();
+                     tree.AddAllAssetsAtPath("More Odin Settings", SirenixAssetPaths.OdinEditorConfigsPath, typeof(ScriptableObject), true)
+                         .AddThumbnailIcons();
             
-                    tree.AddAssetAtPath("Odin Getting Started", SirenixAssetPaths.SirenixPluginPath + "Getting Started With Odin.asset");
+                     tree.AddAssetAtPath("Odin Getting Started", SirenixAssetPaths.SirenixPluginPath + "Getting Started With Odin.asset");
             
-                    var customMenuItem = new OdinMenuItem(tree, "Menu Style", tree.DefaultMenuStyle);
-                    tree.MenuItems.Insert(2, customMenuItem);
+                     var customMenuItem = new OdinMenuItem(tree, "Menu Style", tree.DefaultMenuStyle);
+                     tree.MenuItems.Insert(2, customMenuItem);
             
-                    tree.Add("Menu/Items/Are/Created/As/Needed", new GUIContent());
-                    tree.Add("Menu/Items/Are/Created", new GUIContent("And can be overridden"));
+                     tree.Add("Menu/Items/Are/Created/As/Needed", new GUIContent());
+                     tree.Add("Menu/Items/Are/Created", new GUIContent("And can be overridden"));
             
-                    // As you can see, Odin provides a few ways to quickly add editors / objects to your menu tree.
-                    // The API also gives you full control over the selection, etc..
-                    // Make sure to check out the API Documentation for OdinMenuEditorWindow, OdinMenuTree and OdinMenuItem for more information on what you can do!
+                     // As you can see, Odin provides a few ways to quickly add editors / objects to your menu tree.
+                     // The API also gives you full control over the selection, etc..
+                     // Make sure to check out the API Documentation for OdinMenuEditorWindow, OdinMenuTree and OdinMenuItem for more information on what you can do!
             
-                    return tree;
-                }
-            }
-            </code>
-            </example>
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinEditorWindow" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTree" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuItem" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuStyle" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTreeSelection" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions" />
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuEditorWindow" />
+                     return tree;
+                 }
+             }
+             </code>
+             </example>
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinEditorWindow" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTree" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuItem" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuStyle" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTreeSelection" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions" />
+             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuEditorWindow" />
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinMenuEditorWindow.OnDestroy">
             <summary>
@@ -3119,6 +3119,16 @@
         <member name="P:Sirenix.OdinInspector.Editor.OdinMenuItem.ObjectInstances">
             <summary>
             Gets the object instances the menu item represents
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuItem.SetObjectInstance(System.Object)">
+            <summary>
+            Sets the object instance
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuItem.SetObjectInstances(System.Collections.IList)">
+            <summary>
+            Sets the object instances
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.OdinMenuItem.SmartName">
@@ -3588,7 +3598,7 @@
             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuTreeSelection" />
             <seealso cref="T:Sirenix.OdinInspector.Editor.OdinMenuEditorWindow" />
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.AddMenuItemAtPath(Sirenix.OdinInspector.Editor.OdinMenuTree,System.Collections.Generic.List{Sirenix.OdinInspector.Editor.OdinMenuItem},System.String,Sirenix.OdinInspector.Editor.OdinMenuItem)">
+        <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.AddMenuItemAtPath(Sirenix.OdinInspector.Editor.OdinMenuTree,System.Collections.Generic.ICollection{Sirenix.OdinInspector.Editor.OdinMenuItem},System.String,Sirenix.OdinInspector.Editor.OdinMenuItem)">
             <summary>
             Adds the menu item at the specified menu item path and populates the result list with all menu items created in order to add the menuItem at the specified path.
             </summary>

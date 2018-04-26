@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{8d9711c5-56da-433f-8a93-cd4a35e75df8}">
+        <property name="assetPath">
+            <value>Punch_Boxing_BodyHit01.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.42653061224489797</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{be9ea6e3-fd00-407c-b218-b46296989983}</destination>
+        </relationship>
+    </object>
+</objects>

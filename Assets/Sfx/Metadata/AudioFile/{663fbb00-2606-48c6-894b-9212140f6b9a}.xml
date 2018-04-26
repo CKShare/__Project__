@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{663fbb00-2606-48c6-894b-9212140f6b9a}">
+        <property name="assetPath">
+            <value>Foot_Tile_ShoesRun04.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.19482993197278911</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{be9ea6e3-fd00-407c-b218-b46296989983}</destination>
+        </relationship>
+    </object>
+</objects>

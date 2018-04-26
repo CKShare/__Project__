@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{6bd6b1f8-7bcf-49a2-8db3-5aa7db58dae8}">
+        <property name="assetPath">
+            <value>Hit_BeatManWithClub4.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.54648526077097503</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{be9ea6e3-fd00-407c-b218-b46296989983}</destination>
+        </relationship>
+    </object>
+</objects>

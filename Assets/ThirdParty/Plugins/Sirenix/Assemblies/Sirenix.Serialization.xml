@@ -6021,6 +6021,12 @@
             Whether the object contains any serialized data.
             </summary>
         </member>
+        <member name="P:Sirenix.Serialization.SerializationData.ContainsData">
+            <summary>
+            Gets a value indicating whether the struct contains any data.
+            If this is false, then it could mean that Unity has not yet deserialized the struct.
+            </summary>
+        </member>
         <member name="F:Sirenix.Serialization.SerializationData.SerializedBytesString">
             <summary>
             The serialized data when serializing with the JSON format.

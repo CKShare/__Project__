@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{b5f83f34-2c37-4beb-9039-de4aa4a4e118}">
+        <property name="name">
+            <value>reverve</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ef4694ff-f9dc-4ef1-a185-a0b69e22c81a}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{e84cb1dd-3980-41ae-9cdc-0910bb020454}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{e84cb1dd-3980-41ae-9cdc-0910bb020454}">
+        <property name="maximum">
+            <value>2</value>
+        </property>
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

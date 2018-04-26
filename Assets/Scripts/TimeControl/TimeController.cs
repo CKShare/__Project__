@@ -13,12 +13,6 @@ public class TimeController : SerializedMonoBehaviour
     private Dictionary<object, float> _effectors = new Dictionary<object, float>();
     private bool _isChanged = false;
 
-    private void Awake()
-    {
-        foreach (var comp in _components)
-            comp.Initialize();
-    }
-
     private void FixedUpdate()
     {
         DeltaTime = Time.fixedDeltaTime * TimeScale;
@@ -65,9 +59,11 @@ public class TimeController : SerializedMonoBehaviour
 
         private set
         {
+            float prev = _timeScale;
             _timeScale = value;
+
             foreach (var comp in _components)
-                comp.AdjustTimeScale(_timeScale);
+                comp.AdjustTimeScale(_timeScale / prev);
         }
     }
 
