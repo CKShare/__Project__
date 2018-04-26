@@ -4,26 +4,21 @@ using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public abstract class ControllerBase : MonoBehaviour, IDamageable
+public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable where TDatabase : CharacterDatabase
 {
-    [SerializeField, BoxGroup("Base")]
-    private int _maxHealth = 100;
-    [SerializeField, BoxGroup("Etc")]
+    [SerializeField]
+    private TDatabase _database;
+    [SerializeField]
     private Transform _leftFoot, _rightFoot;
-    [SerializeField, BoxGroup("Etc")]
-    private LayerMask _footRayMask;
-    [SerializeField, BoxGroup("Etc")]
-    private float _footRayOffset;
-    [SerializeField, BoxGroup("Etc")]
-    private FootEffectCollection _footEffectCollection;
 
-    private event Action<int> _onHealthChanged = null;
+    private event Action<float> _onHealthChanged = null;
     private event Action<Transform, int> _onDamaged = null;
     private Transform _transform = null;
     private Rigidbody _rigidbody = null;
     private Animator _animator = null;
 
-    private int _currentHealth = 0;
+    private float _currentHealth = 0F;
+    private bool _isDead = false;
 
     protected virtual void Awake()
     {
@@ -34,12 +29,12 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        CurrentHealth = _maxHealth;
+        _currentHealth = Database.MaxHealth;
     }
 
     public virtual void ApplyDamage(Transform attacker, int damage, int reactionID = -1)
     {
-        if (_currentHealth > 0)
+        if (!_isDead)
         {
             CurrentHealth -= damage;
             _onDamaged?.Invoke(attacker, damage);
@@ -48,21 +43,22 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
 
     protected virtual void OnDeath()
     {
-        _rigidbody.isKinematic = true;
-        GetComponent<Collider>().enabled = false;
+        _isDead = true;
     }
 
     private void OnFootPlant(Vector3 origin)
     {
+        var footSettings = Database.FootEffectSettings;
+
         RaycastHit hitInfo;
-        if (Physics.Raycast(origin + new Vector3(0F, _footRayOffset, 0F), Vector3.down, out hitInfo, _footRayOffset + 0.5F, _footRayMask))
+        if (Physics.Raycast(origin + new Vector3(0F, footSettings.RayHeightOffset, 0F), Vector3.down, out hitInfo, footSettings.RayHeightOffset + 0.5F, footSettings.RayMask))
         {
             var sceneObj = hitInfo.transform.GetComponent<SceneObject>();
             if (sceneObj != null)
             {
                 string textureName = sceneObj.TextureName;
                 EffectPair pair;
-                if (_footEffectCollection.FootEffectDict.TryGetValue(textureName, out pair))
+                if (footSettings.TryGetEffectPair(textureName, out pair))
                 {
                     GameObject particle = PoolManager.Instance[pair.Particle].Spawn();
                     particle.transform.position = hitInfo.point;
@@ -72,8 +68,7 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
         }
     }
 
-    public int MaxHealth => _maxHealth;
-    public int CurrentHealth
+    public float CurrentHealth
     {
         get
         {
@@ -82,7 +77,7 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
 
         protected set
         {
-            _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
+            _currentHealth = Mathf.Clamp(value, 0, Database.MaxHealth);
             if (_currentHealth <= 0)
             {
                 OnDeath();
@@ -93,7 +88,7 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
         }
     }
 
-    public event Action<int> OnHealthChanged
+    public event Action<float> OnHealthChanged
     {
         add { _onHealthChanged += value; }
         remove { _onHealthChanged -= value; }
@@ -105,12 +100,12 @@ public abstract class ControllerBase : MonoBehaviour, IDamageable
         remove { _onDamaged -= value; }
     }
 
-    protected LayerMask FootRayMask => _footRayMask;
-    protected float FootRayOffset => _footRayOffset;
-
     public Transform Transform => _transform;
     public Rigidbody Rigidbody => _rigidbody;
     public Animator Animator => _animator;
+
+    public TDatabase Database => _database;
+    public bool IsDead => _isDead;
 
     #region Animator Events
 

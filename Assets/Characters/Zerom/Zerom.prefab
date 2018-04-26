@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 95114178388960670}
   - component: {fileID: 54658553558539684}
   - component: {fileID: 136303373992897006}
-  - component: {fileID: 114767663993615746}
+  - component: {fileID: 114514674864239320}
   m_Layer: 8
   m_Name: Zerom
   m_TagString: Untagged
@@ -2225,7 +2225,7 @@ Animator:
   m_GameObject: {fileID: 1127865626304936}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7c38f3e127d21fd46b6c64f1b8b34eaa, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9da8e28c01f663441b289a8c2af6b210, type: 2}
+  m_Controller: {fileID: 9100000, guid: f66410139d9aa4a44a123f16c74988c6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -2233,7 +2233,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114767663993615746
+--- !u!114 &114514674864239320
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2241,157 +2241,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1127865626304936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741d35bdd3a1554086d294f6ae6ee61, type: 3}
+  m_Script: {fileID: 11500000, guid: a789199308d2cfa428fef1d4b018b724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 8d4d96512d2fc58418b50e3d253c3f91, type: 2}
-    - {fileID: 4327517335124312}
-    - {fileID: 11400000, guid: 128f920b0e1412646ab6684328ff6c1b, type: 2}
-    - {fileID: 4936901329078140}
-    - {fileID: 11400000, guid: 818f330321a28e44faa873c44168e7a7, type: 2}
-    - {fileID: 4571354130524020}
-    - {fileID: 11400000, guid: 01c809a5719ed034493168082dc53925, type: 2}
-    - {fileID: 4120977110859848}
-    - {fileID: 11400000, guid: d01b54cd9ba92444183fb97e705abbf7, type: 2}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _meleeAttacker
-      Entry: 7
-      Data: 0|MeleeAttacker, Assembly-CSharp
-    - Name: _attackList
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[MeleeAttacker+MeleeAttackElement,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 7
-      Data: MeleeAttacker+MeleeAttackElement, Assembly-CSharp
-    - Name: _attackInfo
-      Entry: 10
-      Data: 0
-    - Name: _hitOrigin
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: MeleeAttacker+MeleeAttackElement, Assembly-CSharp
-    - Name: _attackInfo
-      Entry: 10
-      Data: 2
-    - Name: _hitOrigin
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: MeleeAttacker+MeleeAttackElement, Assembly-CSharp
-    - Name: _attackInfo
-      Entry: 10
-      Data: 4
-    - Name: _hitOrigin
-      Entry: 10
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: MeleeAttacker+MeleeAttackElement, Assembly-CSharp
-    - Name: _attackInfo
-      Entry: 10
-      Data: 6
-    - Name: _hitOrigin
-      Entry: 10
-      Data: 7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _gunAttacker
-      Entry: 7
-      Data: 2|SlowGunAttacker, Assembly-CSharp
-    - Name: _muzzle
-      Entry: 6
-      Data: 
-    - Name: _muzzleEffect
-      Entry: 6
-      Data: 
-    - Name: _attackInfo
-      Entry: 10
-      Data: 8
-    - Name: 
-      Entry: 8
-      Data: 
-  _textureName: Skin
-  _maxHealth: 500
-  _leftFoot: {fileID: 4684526574864868}
-  _rightFoot: {fileID: 4666743612079094}
-  _footRayMask:
-    serializedVersion: 2
-    m_Bits: 1
-  _footRayOffset: 1
-  _footEffectCollection: {fileID: 11400000, guid: 0b03b58ccfca6054d82067785303b217,
-    type: 2}
-  _healthRegenUnit: 1
-  _runningRotateSpeed: 10
-  _attackingRotateSpeed: 20
-  _attackTargetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  _targetDetectMaxDistance: 1.5
-  _targetDetectMaxAngle: 70
-  _moveHorizontalAxis: Horizontal
-  _moveVerticalAxis: Vertical
-  _aimButton: Aim
-  _lookHoriztonalAxis: Mouse X
-  _lookVerticalAxis: Mouse Y
-  _attackButton: Fire1
-  _visionButton: Vision
-  _crouchButton: Crouch
-  _dashButton: Dash
-  _visionRadius: 10
-  _dashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 100
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.2
-      value: 2000
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  _dashDelay: 1.5
-  _slowGunDelay: 5
+  _leftFoot: {fileID: 0}
+  _rightFoot: {fileID: 0}
+  _database: {fileID: 11400000, guid: a28092c4bb3371f45a90c384edd0429a, type: 2}
 --- !u!136 &136303373992897006
 CapsuleCollider:
   m_ObjectHideFlags: 1

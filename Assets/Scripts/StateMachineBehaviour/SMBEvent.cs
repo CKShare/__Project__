@@ -24,12 +24,12 @@ public class SMBEvent : SerializedStateMachineBehaviour
         private Vector2 _scope = new Vector2(0F, 1F);
         [Tooltip("Scope class reference that implements callbacks.")]
         [SerializeField, Required]
-        private EventScope _scopeReference;
+        private EventScope _reference;
 
         private bool _isEntered = false, _isExited = false;
 
         public Vector2 Scope => _scope;
-        public EventScope ScopeReference => _scopeReference;
+        public EventScope Reference => _reference;
 
         public bool IsEntered
         {
@@ -60,10 +60,10 @@ public class SMBEvent : SerializedStateMachineBehaviour
         [Tooltip("Probability to trigger event.\n0 is never triggerd, and 1 is always triggered.")]
         [SerializeField, MinValue(0F), MaxValue(1F), HideIf("_triggerBeforeExiting", optionalValue: true)]
         private float _chance = 1F;
-        [Tooltip("Layer weight threshold to trigger event.\n Base Layer is never affected by this.")]
+        [Tooltip("Layer weight threshold to trigger event.\nBase Layer is never affected by this.")]
         [SerializeField, MinValue(0F), MaxValue(1F)]
         private float _weightThreshold = 0F;
-        [Tooltip("If true, this event will be triggered before exiting a state.")]
+        [Tooltip("If true, this event will be necessarily triggered before exiting a state.")]
         [SerializeField]
         private bool _triggerBeforeExiting = false;
 
@@ -112,7 +112,9 @@ public class SMBEvent : SerializedStateMachineBehaviour
 
         // EventScope
         foreach (var scopeInfo in _eventScopes)
+        {
             scopeInfo.Reset();
+        }
 
         // EventTrigger
         foreach (var triggerInfo in _eventTriggers)
@@ -159,7 +161,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
                 // EventScope
                 foreach (var scopeInfo in _eventScopes)
                 {
-                    EventScope scopeReference = scopeInfo.ScopeReference;
+                    EventScope scopeReference = scopeInfo.Reference;
 
                     if (!scopeInfo.IsEntered)
                     {
@@ -228,7 +230,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeMove(animator, stateInfo, layerIndex);
+                scopeInfo.Reference.OnScopeMove(animator, stateInfo, layerIndex);
             }
         }
     }
@@ -240,7 +242,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeIK(animator, stateInfo, layerIndex);
+                scopeInfo.Reference.OnScopeIK(animator, stateInfo, layerIndex);
             }
         }
     }
@@ -252,7 +254,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
         {
             if (scopeInfo.IsEntered && !scopeInfo.IsExited)
             {
-                scopeInfo.ScopeReference.OnScopeExit(animator, stateInfo, layerIndex);
+                scopeInfo.Reference.OnScopeExit(animator, stateInfo, layerIndex);
                 scopeInfo.IsExited = true;
             }
         }
