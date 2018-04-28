@@ -7,6 +7,12 @@ public class PlayerDatabase : CharacterDatabase
     [SerializeField]
     private float _healthRegenUnit;
     [SerializeField]
+    private AnimationCurve _moveCurve;
+    [SerializeField]
+    private float _rotateSpeed;
+    [SerializeField]
+    private float _dashSpeed;
+    [SerializeField]
     private float _dashCoolTime;
 
     [SerializeField]
@@ -19,6 +25,8 @@ public class PlayerDatabase : CharacterDatabase
     private string _inputDash = "Dash";
     
     public float HealthRegenUnit => _healthRegenUnit;
+    public AnimationCurve MoveCurve => _moveCurve;
+    public float RotateSpeed => _rotateSpeed;
     public float DashCoolTime => _dashCoolTime;
     public string InputHorizontal => _inputHorizontal;
     public string InputVertical => _inputVertical;

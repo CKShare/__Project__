@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[Serializable]
 public abstract class EventScope
 {
     public virtual void OnScopeEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }

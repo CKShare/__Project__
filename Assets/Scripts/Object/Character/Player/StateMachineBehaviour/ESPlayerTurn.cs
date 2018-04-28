@@ -27,7 +27,6 @@ public class ESPlayerTurn : EventScope
 
     public override void OnScopeUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log(animator.deltaRotation.eulerAngles);
         float angle = _turnCurve.Evaluate(stateInfo.normalizedTime) * _error;
         _rigidbody.rotation = Quaternion.Euler(0F, _initialAngle + angle, 0F);
     }

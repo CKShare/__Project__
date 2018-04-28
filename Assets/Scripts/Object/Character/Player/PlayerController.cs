@@ -19,6 +19,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
     private Vector2 _axisValue;
     private float _axisSqrMag;
     private Vector3 _controlDirection;
+    private float _movingElapsedTime;
  
     private bool _dashPressed;
     //private Coroutine _dashCrt;
@@ -43,6 +44,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
     private void OnAnimatorMove()
     {
         Vector3 velocity = Animator.deltaPosition / Time.fixedDeltaTime;
+        velocity.y = Rigidbody.velocity.y;
         Rigidbody.velocity = velocity;
     }
 
@@ -64,14 +66,18 @@ public class PlayerController : ControllerBase<PlayerDatabase>
 
     private void UpdateLocomotion()
     {
-        if (_axisSqrMag > 0F)
-        {
-            Vector3 controlDirection;
-            if (TryGetControlDirection(out controlDirection))
-                _controlDirection = controlDirection;
-        }
+        //if (_axisSqrMag > 0F)
+        //{
+        //    Vector3 controlDirection;
+        //    if (TryGetControlDirection(out controlDirection))
+        //        _controlDirection = controlDirection;
+        //}
 
-        Animator.SetFloat(Hash.TurnAngle, Vector3.SignedAngle(Transform.forward, _controlDirection, Vector3.up));
+        Vector3 controlDirection;
+        _movingElapsedTime = TryGetControlDirection(out controlDirection) ? _movingElapsedTime + Time.fixedDeltaTime : 0F;
+        Rigidbody.velocity = controlDirection * (Database. * Time.fixedDeltaTime);
+
+        //Animator.SetFloat(Hash.TurnAngle, Vector3.SignedAngle(Transform.forward, _controlDirection, Vector3.up));
         Animator.SetFloat(Hash.Accel, Mathf.Clamp01(_axisSqrMag), 0.1F, Time.deltaTime);
         Animator.SetBool(Hash.IsMoving, _axisSqrMag > 0F);
     }
