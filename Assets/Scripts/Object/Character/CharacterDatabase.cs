@@ -6,8 +6,8 @@ public class CharacterDatabase : SerializedScriptableObject
     [SerializeField]
     private float _maxHealth;
     [SerializeField, Required]
-    private FootEffectSettings _footEffectSettings;
+    private FootSettings _footSettings;
 
     public float MaxHealth => _maxHealth;
-    public FootEffectSettings FootEffectSettings => _footEffectSettings;
+    public FootSettings FootSettings => _footSettings;
 }

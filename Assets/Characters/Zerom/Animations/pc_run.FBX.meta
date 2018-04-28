@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d6277da7b1e529944bfd8aac6e249fe9
-timeCreated: 1523894747
+guid: d7436894669649b4f8478d9d0bfaa2db
+timeCreated: 1524879700
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -193,12 +193,12 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
-      mirror: 1
+      mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []

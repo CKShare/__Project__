@@ -15,7 +15,7 @@ public class DestructibleObject : SceneObject, IDamageable
         _currentHit = _maxHit;
     }
 
-    public void ApplyDamage(Transform attacker, int damage, int reactionID = -1)
+    public void ApplyDamage(Transform attacker, HitInfo hitInfo)
     {
         if (_currentHit > 0)
         {

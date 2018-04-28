@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(Animator))]
 public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable where TDatabase : CharacterDatabase
 {
-    [SerializeField]
+    [SerializeField, InlineEditor, Required]
     private TDatabase _database;
     [SerializeField]
     private Transform _leftFoot, _rightFoot;
@@ -32,12 +32,12 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
         _currentHealth = Database.MaxHealth;
     }
 
-    public virtual void ApplyDamage(Transform attacker, int damage, int reactionID = -1)
+    public virtual void ApplyDamage(Transform attacker, HitInfo hitInfo)
     {
         if (!_isDead)
         {
-            CurrentHealth -= damage;
-            _onDamaged?.Invoke(attacker, damage);
+            CurrentHealth -= hitInfo.Damage;
+            _onDamaged?.Invoke(attacker, hitInfo.Damage);
         }
     }
 
@@ -48,20 +48,24 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
 
     private void OnFootPlant(Vector3 origin)
     {
-        var footSettings = Database.FootEffectSettings;
+        var footSettings = Database.FootSettings;
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(origin + new Vector3(0F, footSettings.RayHeightOffset, 0F), Vector3.down, out hitInfo, footSettings.RayHeightOffset + 0.5F, footSettings.RayMask))
+        if (Physics.Raycast(origin + new Vector3(0F, footSettings.RayHeightOffset, 0F), Vector3.down, out hitInfo, footSettings.RayHeightOffset + 0.1F, footSettings.RayMask))
         {
             var sceneObj = hitInfo.transform.GetComponent<SceneObject>();
             if (sceneObj != null)
             {
                 string textureName = sceneObj.TextureName;
                 EffectPair pair;
-                if (footSettings.TryGetEffectPair(textureName, out pair))
+                if (footSettings.StepEffectSettings.TryGetEffectPair(textureName, out pair))
                 {
-                    GameObject particle = PoolManager.Instance[pair.Particle].Spawn();
+                    // Vfx
+                    string particlePool = pair.ParticlePools[UnityEngine.Random.Range(0, pair.ParticlePools.Count)];
+                    GameObject particle = PoolManager.Instance[particlePool].Spawn();
                     particle.transform.position = hitInfo.point;
+
+                    // Sfx
                     FMODUnity.RuntimeManager.PlayOneShot(pair.Sound, hitInfo.point);
                 }
             }

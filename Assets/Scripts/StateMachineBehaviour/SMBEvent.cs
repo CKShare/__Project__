@@ -16,40 +16,6 @@ public class SMBEvent : SerializedStateMachineBehaviour
         public IEventParameter Parameter => _parameter;
     }
 
-
-    private class EventScopeInfo
-    {
-        [Tooltip("Scope of event.")]
-        [SerializeField, MinMaxSlider(0F, 1F, true)]
-        private Vector2 _scope = new Vector2(0F, 1F);
-        [Tooltip("Scope class reference that implements callbacks.")]
-        [SerializeField, Required]
-        private EventScope _reference;
-
-        private bool _isEntered = false, _isExited = false;
-
-        public Vector2 Scope => _scope;
-        public EventScope Reference => _reference;
-
-        public bool IsEntered
-        {
-            get { return _isEntered; }
-            set { _isEntered = value; }
-        }
-
-        public bool IsExited
-        {
-            get { return _isExited; }
-            set { _isExited = value; }
-        }
-
-        public void Reset()
-        {
-            _isEntered = false;
-            _isExited = false;
-        }
-    }
-
     private class EventTriggerInfo
     {
         [SerializeField, HideLabel, HideReferenceObjectPicker]
@@ -92,8 +58,6 @@ public class SMBEvent : SerializedStateMachineBehaviour
     [SerializeField, HideReferenceObjectPicker]
     private EventInfo[] _exitEvents = new EventInfo[0];
     [SerializeField, HideReferenceObjectPicker]
-    private EventScopeInfo[] _eventScopes = new EventScopeInfo[0];
-    [SerializeField, HideReferenceObjectPicker]
     private EventTriggerInfo[] _eventTriggers = new EventTriggerInfo[0];
 
     private bool _isTransitioningIn;
@@ -105,16 +69,10 @@ public class SMBEvent : SerializedStateMachineBehaviour
         _isTransitioningIn = animator.IsInTransition(layerIndex);
         _isTransitioningOut = false;
         _prevNormalizedTime = stateInfo.normalizedTime;
-
+        
         // Enter
         foreach (var e in _enterEvents)
             animator.SendMessage(e.Function, e.Parameter, SendMessageOptions.DontRequireReceiver);
-
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            scopeInfo.Reset();
-        }
 
         // EventTrigger
         foreach (var triggerInfo in _eventTriggers)
@@ -139,7 +97,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
     {
         float prevTime = _prevNormalizedTime % 1F;
         float curTime = prevTime + (stateInfo.normalizedTime - _prevNormalizedTime);
-
+        
         // Check whether current state is transitioning out to others.
         if (!_isTransitioningOut)
         {
@@ -158,33 +116,6 @@ public class SMBEvent : SerializedStateMachineBehaviour
 
             if (!_isTransitioningOut)
             {
-                // EventScope
-                foreach (var scopeInfo in _eventScopes)
-                {
-                    EventScope scopeReference = scopeInfo.Reference;
-
-                    if (!scopeInfo.IsEntered)
-                    {
-                        if (curTime >= scopeInfo.Scope.x)
-                        {
-                            scopeReference.OnScopeEnter(animator, stateInfo, layerIndex);
-                            scopeInfo.IsEntered = true;
-                        }
-                    }
-                    else if (!scopeInfo.IsExited)
-                    {
-                        if (curTime >= scopeInfo.Scope.y)
-                        {
-                            scopeReference.OnScopeExit(animator, stateInfo, layerIndex);
-                            scopeInfo.IsExited = true;
-                        }
-                        else
-                        {
-                            scopeReference.OnScopeUpdate(animator, stateInfo, layerIndex);
-                        }
-                    }
-                }
-
                 // EventTrigger
                 foreach (var triggerInfo in _eventTriggers)
                 {
@@ -205,9 +136,6 @@ public class SMBEvent : SerializedStateMachineBehaviour
                 int diff = Mathf.FloorToInt(stateInfo.normalizedTime) - Mathf.FloorToInt(_prevNormalizedTime);
                 if (diff > 0)
                 {
-                    // Reset
-                    foreach (var scopeInfo in _eventScopes)
-                        scopeInfo.Reset();
                     foreach (var triggerInfo in _eventTriggers)
                         triggerInfo.Reset();
                 }
@@ -223,42 +151,8 @@ public class SMBEvent : SerializedStateMachineBehaviour
             OnStatePreExit(animator, stateInfo, layerIndex);
     }
 
-    public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            if (scopeInfo.IsEntered && !scopeInfo.IsExited)
-            {
-                scopeInfo.Reference.OnScopeMove(animator, stateInfo, layerIndex);
-            }
-        }
-    }
-
-    public override void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            if (scopeInfo.IsEntered && !scopeInfo.IsExited)
-            {
-                scopeInfo.Reference.OnScopeIK(animator, stateInfo, layerIndex);
-            }
-        }
-    }
-
     private void OnStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // EventScope
-        foreach (var scopeInfo in _eventScopes)
-        {
-            if (scopeInfo.IsEntered && !scopeInfo.IsExited)
-            {
-                scopeInfo.Reference.OnScopeExit(animator, stateInfo, layerIndex);
-                scopeInfo.IsExited = true;
-            }
-        }
-
         // EventTrigger
         foreach (var triggerInfo in _eventTriggers)
         {
