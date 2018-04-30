@@ -141,7 +141,7 @@ ModelImporter:
     400130: Bip001 Spine1
     400132: Bip001 Spine2
     400134: //RootNode
-    7400000: mixamo.com
+    7400000: mang_hit_front_2
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -171,7 +171,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: mang_hit_front_2
       takeName: mixamo.com
       firstFrame: 0
       lastFrame: 29

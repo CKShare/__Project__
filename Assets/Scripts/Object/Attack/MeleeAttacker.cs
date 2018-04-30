@@ -26,6 +26,7 @@ public class MeleeAttacker : MonoBehaviour
     [SerializeField]
     private MeleeAttackElement[] _attacks = new MeleeAttackElement[0];
 
+    private event Action<int, Vector3> _onHit;
     private GameObject _target;
     private int _attackID;
 
@@ -36,6 +37,12 @@ public class MeleeAttacker : MonoBehaviour
     }
 
     public int AttackCount => _attacks.Length;
+
+    public event Action<int, Vector3> OnHit
+    {
+        add { _onHit += value; }
+        remove { _onHit -= value; }
+    }
 
     #region Animator Events
 

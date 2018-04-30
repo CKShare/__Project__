@@ -11,6 +11,7 @@ public abstract class EnemyController<TState> : ControllerBase
 {
     public static class Hash
     {
+        public static readonly int TypeID = Animator.StringToHash("TypeID");
         public static readonly int Random = Animator.StringToHash("Random");
         public static readonly int Speed = Animator.StringToHash("Speed");
         public static readonly int Detect = Animator.StringToHash("Detect");
@@ -20,6 +21,8 @@ public abstract class EnemyController<TState> : ControllerBase
         public static readonly int IsDead = Animator.StringToHash("IsDead");
     }
 
+    [SerializeField]
+    private int _typeID = 0;
     [SerializeField, Required]
     private string _targetTag = "Player";
     [SerializeField]
@@ -34,7 +37,7 @@ public abstract class EnemyController<TState> : ControllerBase
     private float _patrolSpeed = 2F;
     [SerializeField]
     private float _patrolDistanceError = 0.5F;
-    [SerializeField]
+    [SerializeField, Required]
     private Transform _patrolContainer;
     [SerializeField]
     private bool _patrolOnAwake;
@@ -69,6 +72,9 @@ public abstract class EnemyController<TState> : ControllerBase
         _patrolPoints = new Vector3[_patrolContainer.childCount];
         for (int i = 0; i < _patrolPoints.Length; i++)
             _patrolPoints[i] = _patrolContainer.GetChild(i).position;
+
+        //
+        Animator.SetInteger(Hash.TypeID, _typeID);
     }
 
     protected void Initialize(TState initialState)
@@ -131,6 +137,7 @@ public abstract class EnemyController<TState> : ControllerBase
     }
 
     protected Transform Target => _target;
+    protected Collider TargetCollider => _targetCollider;
     protected TimeController TimeController => _timeController;
     protected RichAI RichAI => _richAI;
     protected Seeker Seeker => _seeker;

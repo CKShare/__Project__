@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -8,12 +10,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     protected override void Awake()
     {
-        base.Awake();
-
         if (!Application.isEditor)
         {
             foreach (var index in _sceneIndices)
-                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(index);
         }
     }
 }

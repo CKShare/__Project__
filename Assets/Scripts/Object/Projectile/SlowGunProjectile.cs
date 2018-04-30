@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class SlowGunProjectile : Projectile
 {
-    [SerializeField]
-    private GameObject _slowArea;
-    [SerializeField]
-    private AnimationCurve _slowCurve;
-    [SerializeField]
-    private float _duration;
-    [SerializeField]
-    private float _applyDelay;
+    [SerializeField, Required]
+    private string _slowAreaPool;
 
-    protected override void OnCollideWith(Transform target)
+    private Pool<GameObject> _slowAreaPoolRef;
+
+    protected override void Start()
     {
-        base.OnCollideWith(target);
-        
-        _slowArea.GetComponent<SlowArea>().Set(_applyDelay, _duration, _slowCurve);
-        _slowArea.SetActive(true);
+        base.Start();
+
+        _slowAreaPoolRef = PoolManager.Instance[_slowAreaPool];
+    }
+
+    protected override void OnCollideWith(Transform target, Vector3 position)
+    {
+        base.OnCollideWith(target, position);
+
+        GameObject slowArea = _slowAreaPoolRef.Spawn(); 
+        slowArea.transform.position = position;
         gameObject.SetActive(false);
     }
 }

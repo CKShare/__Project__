@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Pathfinding;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(MeleeAttacker))]
 public class HenchMeleeController : EnemyController<HenchMeleeState>
@@ -15,6 +16,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     private float _chaseFastSpeed = 4F;
     [SerializeField]
     private float _chaseSlowSpeed = 2F;
+    [SerializeField, Required]
+    private Weapon _meleeWeapon;
     [SerializeField]
     private float _attackDelay = 1F;
 
@@ -37,7 +40,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         {
             case HenchMeleeState.Idle:
                 {
-                    RichAI.canMove = RichAI.canSearch = false;
+                    RichAI.canSearch = false;
+                    RichAI.isStopped = true;
 
                     if (PatrolOnAwake)
                         ChangeState(HenchMeleeState.Patrol);
@@ -52,7 +56,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                     if (PatrolToNearestPoint)
                     {
                         Seeker.StartMultiTargetPath(Transform.position, PatrolPoints, false, OnPathComplete);
-                        RichAI.canSearch = RichAI.canMove = false; // Block finding new path to the current patrol point.
+                        RichAI.canSearch = false; // Block finding new path to the current patrol point.
+                        RichAI.isStopped = true;
                         PatrolToNearestPoint = false;
                     }
 
@@ -62,7 +67,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Detected:
                 {
-                    RichAI.canMove = false;
+                    RichAI.isStopped = true;
                     _detectElapsedTime = 0F;
                     Animator.SetTrigger(Hash.Detect);
                 }
@@ -71,20 +76,24 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             case HenchMeleeState.Chase:
                 {
                     RichAI.endReachedDistance = _chaseKeepDistance;
+                    RichAI.destination = Target.position;
+                    RichAI.SearchPath();
                     Animator.SetFloat(Hash.Speed, 0F);
                 }
                 break;
 
             case HenchMeleeState.Combat:
                 {
-                    RichAI.canMove = false;
+                    RichAI.canSearch = false;
+                    RichAI.isStopped = true;
                     _attackElapsedTime = 0F;
                 }
                 break;
 
             case HenchMeleeState.Attack:
                 {
-                    RichAI.canMove = false;
+                    RichAI.canSearch = false;
+                    RichAI.isStopped = true;
 
                     int attackID = UnityEngine.Random.Range(1, _attacker.AttackCount + 1);
                     Animator.SetInteger(Hash.Random, attackID);
@@ -95,14 +104,18 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
-                    RichAI.canMove = false;
+                    RichAI.canSearch = false;
+                    RichAI.isStopped = true;
                     Animator.SetTrigger(Hash.Hit);
                 }
                 break;
 
             case HenchMeleeState.Dead:
                 {
-                    RichAI.canMove = false;
+                    _meleeWeapon.Drop();
+
+                    RichAI.canSearch = false;
+                    RichAI.isStopped = true;
                     Animator.SetBool(Hash.IsDead, true);
                 }
                 break;
@@ -206,6 +219,13 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     {
         switch (state)
         {
+            case HenchMeleeState.Idle:
+                {
+                    RichAI.canSearch = true;
+                    RichAI.isStopped = false;
+                }
+                break;
+
             case HenchMeleeState.Patrol:
                 {
                     Seeker.CancelCurrentPathRequest();
@@ -214,25 +234,28 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Detected:
                 {
-                    RichAI.canMove = true;
+                    RichAI.isStopped = false;
                 }
                 break;
 
             case HenchMeleeState.Combat:
                 {
-                    RichAI.canMove = true;
+                    RichAI.canSearch = true;
+                    RichAI.isStopped = false;
                 }
                 break;
 
             case HenchMeleeState.Attack:
                 {
-                    RichAI.canMove = true;
+                    RichAI.canSearch = true;
+                    RichAI.isStopped = false;
                 }
                 break;
 
             case HenchMeleeState.Hit:
                 {
-                    RichAI.canMove = true;
+                    RichAI.canSearch = true;
+                    RichAI.isStopped = false;
                 }
                 break;
         }
@@ -248,7 +271,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
         int targetIndex = (p as MultiTargetPath).chosenTarget;
         CurrentPatrolIndex = targetIndex;
-        RichAI.canSearch = RichAI.canMove = true;
+        RichAI.canSearch = true;
+        RichAI.isStopped = false;
     }
 
     public override void ApplyDamage(Transform attacker, HitInfo hitInfo)
