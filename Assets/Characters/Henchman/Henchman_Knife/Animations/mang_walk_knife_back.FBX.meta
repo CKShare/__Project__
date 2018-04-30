@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6f08f4bea22ce7e42b1b794d6bc76c4e
-timeCreated: 1524603200
+guid: b5a523376f51dd64c8d5c70e032aacaf
+timeCreated: 1525015999
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -191,7 +191,7 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

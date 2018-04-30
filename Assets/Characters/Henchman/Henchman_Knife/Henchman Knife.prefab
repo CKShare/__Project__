@@ -732,7 +732,8 @@ GameObject:
   - component: {fileID: 114141978013184080}
   - component: {fileID: 114492699659643982}
   - component: {fileID: 114001813226058364}
-  - component: {fileID: 114988964045648680}
+  - component: {fileID: 114452776929838088}
+  - component: {fileID: 114401678079103870}
   m_Layer: 9
   m_Name: Henchman Knife
   m_TagString: Untagged
@@ -1217,7 +1218,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728685804900634}
-  m_LocalRotation: {x: -0.67934453, y: 0.2792424, z: 0.6137326, w: 0.2895634}
+  m_LocalRotation: {x: -0.67934453, y: 0.27924243, z: 0.6137326, w: 0.28956342}
   m_LocalPosition: {x: -0.028190952, y: 0.006606498, z: -0.10414689}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_Children:
@@ -1233,7 +1234,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437404304234610}
-  m_LocalRotation: {x: -0.19223063, y: 0.9740634, z: -0.04260766, w: -0.11150089}
+  m_LocalRotation: {x: -0.19223064, y: 0.9740634, z: -0.042607665, w: -0.11150089}
   m_LocalPosition: {x: -0.0000001937151, y: -0.000000074719786, z: -0.1047649}
   m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
   m_Children:
@@ -1514,7 +1515,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1717598343436004}
-  m_LocalRotation: {x: 0.1797912, y: 0.11474314, z: -0.15699226, w: 0.9642939}
+  m_LocalRotation: {x: 0.17979118, y: 0.11474314, z: -0.15699224, w: 0.9642939}
   m_LocalPosition: {x: -0.24036902, y: -0.00008248864, z: -0.000000020954758}
   m_LocalScale: {x: 1.0000001, y: 1, z: 0.99999994}
   m_Children:
@@ -1528,7 +1529,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558710630458344}
-  m_LocalRotation: {x: -0.08511594, y: -0.004490311, z: -0.013551622, w: 0.99626875}
+  m_LocalRotation: {x: -0.08511594, y: -0.0044903113, z: -0.013551622, w: 0.9962688}
   m_LocalPosition: {x: -0.09511435, y: -0.00007564806, z: -0.00000001408625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1668,12 +1669,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1666227439790882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.103, y: 0.056, z: 0.137}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.000000029802315, y: -0.00000005960463, z: 0.000000007450579,
+    w: 1}
+  m_LocalPosition: {x: -0.36, y: 0.4, z: 0.257}
+  m_LocalScale: {x: 20.000027, y: 20.000029, z: 3.3333378}
   m_Children: []
-  m_Father: {fileID: 4773811014363940}
-  m_RootOrder: 5
+  m_Father: {fileID: 4902836932834260}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4616512711600024
 Transform:
@@ -1856,7 +1858,6 @@ Transform:
   - {fileID: 4678653597831872}
   - {fileID: 4578482396516006}
   - {fileID: 4425904431325748}
-  - {fileID: 4609058380901132}
   - {fileID: 4902836932834260}
   m_Father: {fileID: 4873689844453612}
   m_RootOrder: 0
@@ -1996,9 +1997,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.085, y: 0.036, z: 0.139}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.3}
-  m_Children: []
+  m_Children:
+  - {fileID: 4609058380901132}
   m_Father: {fileID: 4773811014363940}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4904148164327658
 Transform:
@@ -2150,7 +2152,7 @@ Animator:
   m_GameObject: {fileID: 1644110021223030}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 146299ae5809c29429348536b64121be, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8b440ede2d018aa4892a008811fd6804, type: 2}
+  m_Controller: {fileID: 9100000, guid: c9df8bc9adfa8694aa1a0272c32b8448, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2210,6 +2212,56 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask: -1
+--- !u!114 &114401678079103870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644110021223030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301d29cd0e53efa4f88e94198f3471c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attacks:
+  - _hitInfo:
+      _damage: 15
+      _reactionID: 0
+    _hitRadius: 1.5
+    _hitEffectSettings: {fileID: 0}
+    _hitOrigin: {fileID: 4609058380901132}
+--- !u!114 &114452776929838088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644110021223030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543e79d381725f49bf3570969b7a76e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _footSettings: {fileID: 0}
+  _leftFoot: {fileID: 0}
+  _rightFoot: {fileID: 0}
+  _targetTag: Player
+  _detectMaxDistance: 20
+  _detectMaxAngle: 95
+  _detectHeightOffset: 1.5
+  _lookRotateSpeed: 15
+  _patrolSpeed: 2
+  _patrolDistanceError: 0.5
+  _patrolContainer: {fileID: 0}
+  _patrolOnAwake: 1
+  _patrolToNearestPoint: 0
+  _patrolReversely: 0
+  _detectToChaseDelay: 1
+  _chaseKeepDistance: 2
+  _chaseFastToSlowThreshold: 5
+  _chaseFastSpeed: 4
+  _chaseSlowSpeed: 2
+  _attackDelay: 1
 --- !u!114 &114492699659643982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2294,73 +2346,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
---- !u!114 &114988964045648680
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1644110021223030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50a7c02c0d934e4cb748d879bdecceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _meleeAttacker
-      Entry: 7
-      Data: 0|MeleeAttacker, Assembly-CSharp
-    - Name: _attackList
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[MeleeAttacker+MeleeAttackElement,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  _textureName: Skin
-  _maxHealth: 100
-  _leftFoot: {fileID: 0}
-  _rightFoot: {fileID: 0}
-  _footRayMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _footRayOffset: 0
-  _footEffectCollection: {fileID: 0}
-  _target: {fileID: 0}
-  _targetDetectMaxDistance: 20
-  _targetDetectMaxAngle: 90
-  _targetDetectRayOffset: 1
-  _targetLookRotateSpeed: 10
-  _patrolOnAwake: 1
-  _patrolContainer: {fileID: 0}
-  _patrolToNearestPoint: 0
-  _patrolReversely: 0
-  _patrolSpeed: 2
-  _patrolDistanceError: 0.1
-  _chaseSpeed: 3
-  _chaseKeepDistance: 7
-  _approachSpeed: 1.5
-  _approachKeepDistance: 1.5
-  _followDelay: 1
-  _missingTimeThreshold: 5
-  _alertToPatrolDelay: 3
-  _attackDelay: 1
 --- !u!136 &136411211757549652
 CapsuleCollider:
   m_ObjectHideFlags: 1

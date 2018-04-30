@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(TimeController))]
-public abstract class Projectile<TProjectileInfo> : MonoBehaviour where TProjectileInfo : ProjectileInfo
+public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private TProjectileInfo _projectileInfo;
+    private string _pool;
+    [SerializeField, InlineEditor]
+    private EffectSettings _hitEffectSettings;
 
-    private Pool<GameObject> _pool;
+    private Pool<GameObject> _poolRef;
     private TimeController _timeController;
     private Transform _attacker;
     private LayerMask _ignoreMask;
@@ -17,7 +20,11 @@ public abstract class Projectile<TProjectileInfo> : MonoBehaviour where TProject
     private void Awake()
     {
         _timeController = GetComponent<TimeController>();
-        _pool = PoolManager.Instance[_projectileInfo.Pool];
+    }
+
+    private void Start()
+    {
+        _poolRef = PoolManager.Instance[_pool];
     }
 
     private void Update()
@@ -31,27 +38,28 @@ public abstract class Projectile<TProjectileInfo> : MonoBehaviour where TProject
             if (damageable != null)
                 damageable.ApplyDamage(_attacker, _hitInfo);
 
-            OnCollideWith(target);
-
-            // Vfx & Sfx
-            var sceneObj = target.GetComponent<SceneObject>();
-            if (sceneObj != null)
+            if (_hitEffectSettings != null)
             {
-                string textureName = sceneObj.TextureName;
-                EffectPair pair;
-                if (_projectileInfo.HitEffectSettings.TryGetEffectPair(textureName, out pair))
+                var sceneObj = target.GetComponent<SceneObject>();
+                if (sceneObj != null)
                 {
-                    // Vfx
-                    string particlePool = pair.ParticlePools[Random.Range(0, pair.ParticlePools.Count)];
-                    GameObject vfx = PoolManager.Instance[particlePool].Spawn();
-                    vfx.transform.position = hitInfo.point;
+                    string textureName = sceneObj.TextureName;
+                    EffectPair pair;
+                    if (_hitEffectSettings.TryGetEffectPair(textureName, out pair))
+                    {
+                        // Vfx
+                        string particlePool = pair.ParticlePools[Random.Range(0, pair.ParticlePools.Count)];
+                        GameObject vfx = PoolManager.Instance[particlePool].Spawn();
+                        vfx.transform.position = hitInfo.point;
 
-                    // Sfx
-                    FMODUnity.RuntimeManager.PlayOneShot(pair.Sound, hitInfo.point);
+                        // Sfx
+                        FMODUnity.RuntimeManager.PlayOneShot(pair.Sound, hitInfo.point);
+                    }
                 }
             }
 
-            _pool.Despawn(gameObject);
+            OnCollideWith(target);
+            _poolRef.Despawn(gameObject);
             transform.position = hitInfo.point;
         }
         else
@@ -61,12 +69,12 @@ public abstract class Projectile<TProjectileInfo> : MonoBehaviour where TProject
     }
 
     protected virtual void OnCollideWith(Transform target) { }
-    protected TProjectileInfo ProjectileInfo => _projectileInfo;
 
-    public void Set(Transform attacker, float fireForce, Vector3 startPosition, Vector3 direction)
+    public void Set(Transform attacker, HitInfo hitInfo, float fireForce, Vector3 startPosition, Vector3 direction)
     {
         _attacker = attacker;
         _ignoreMask = (1 << attacker.gameObject.layer | 1 << gameObject.layer);
+        _hitInfo = hitInfo;
         _fireForce = fireForce;
         transform.position = startPosition;
         transform.forward = direction;

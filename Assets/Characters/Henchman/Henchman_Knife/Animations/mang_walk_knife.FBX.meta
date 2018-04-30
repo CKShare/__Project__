@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0f340cbdb48c3304687a7f9608c487d1
-timeCreated: 1523537937
+guid: 0c6820cca040b284892c7c3cffdc19a0
+timeCreated: 1525015998
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -180,7 +180,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 33
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -191,12 +191,12 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
-      mirror: 1
+      mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []

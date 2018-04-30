@@ -4,10 +4,12 @@ using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable where TDatabase : CharacterDatabase
+public abstract class ControllerBase : MonoBehaviour, IDamageable
 {
-    [SerializeField, InlineEditor, Required]
-    private TDatabase _database;
+    [SerializeField]
+    private float _maxHealth;
+    [SerializeField, Required]
+    private FootSettings _footSettings;
     [SerializeField]
     private Transform _leftFoot, _rightFoot;
 
@@ -29,7 +31,7 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
 
     protected virtual void Start()
     {
-        _currentHealth = Database.MaxHealth;
+        _currentHealth = _maxHealth;
     }
 
     public virtual void ApplyDamage(Transform attacker, HitInfo hitInfo)
@@ -48,17 +50,15 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
 
     private void OnFootPlant(Vector3 origin)
     {
-        var footSettings = Database.FootSettings;
-
         RaycastHit hitInfo;
-        if (Physics.Raycast(origin + new Vector3(0F, footSettings.RayHeightOffset, 0F), Vector3.down, out hitInfo, footSettings.RayHeightOffset + 0.1F, footSettings.RayMask))
+        if (Physics.Raycast(origin + new Vector3(0F, _footSettings.RayHeightOffset, 0F), Vector3.down, out hitInfo, _footSettings.RayHeightOffset + 0.1F, _footSettings.RayMask))
         {
             var sceneObj = hitInfo.transform.GetComponent<SceneObject>();
             if (sceneObj != null)
             {
                 string textureName = sceneObj.TextureName;
                 EffectPair pair;
-                if (footSettings.StepEffectSettings.TryGetEffectPair(textureName, out pair))
+                if (_footSettings.StepEffectSettings.TryGetEffectPair(textureName, out pair))
                 {
                     // Vfx
                     string particlePool = pair.ParticlePools[UnityEngine.Random.Range(0, pair.ParticlePools.Count)];
@@ -81,7 +81,7 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
 
         protected set
         {
-            _currentHealth = Mathf.Clamp(value, 0, Database.MaxHealth);
+            _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
             if (_currentHealth <= 0)
             {
                 OnDeath();
@@ -108,7 +108,7 @@ public abstract class ControllerBase<TDatabase> : MonoBehaviour, IDamageable whe
     public Rigidbody Rigidbody => _rigidbody;
     public Animator Animator => _animator;
 
-    public TDatabase Database => _database;
+    public float MaxHealth => _maxHealth;
     public bool IsDead => _isDead;
 
     #region Animator Events

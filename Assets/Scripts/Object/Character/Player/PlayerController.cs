@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using RootMotion.FinalIK;
 
-[RequireComponent(typeof(AimIK))]
-public class PlayerController : ControllerBase<PlayerDatabase>
+public class PlayerController : ControllerBase
 {
     public static class Hash
     {
@@ -20,12 +20,65 @@ public class PlayerController : ControllerBase<PlayerDatabase>
         public static readonly int IsAiming = Animator.StringToHash("IsAiming");
     }
 
+    [Serializable]
+    private struct ComboSet
+    {
+        [SerializeField, Required]
+        MeleeAttacker _attacker;
+        [SerializeField]
+        private int _maxCombo;
+
+        public MeleeAttacker Attacker => _attacker;
+        public int MaxCombo => _maxCombo;
+    }
+
     private static readonly float TurnningAttackAngleThreshold = 75F;
     private static readonly float AttackRotateSpeed = 30F;
     private static readonly float AimingRotateSpeed = 30F;
 
+    [SerializeField]
+    private float _healthRegenUnit;
+    [SerializeField]
+    private AnimationCurve _moveCurve;
+    [SerializeField]
+    private float _moveLerpTime;
+    [SerializeField]
+    private float _rotateSpeed;
+    [SerializeField]
+    private AnimationCurve _dashCurve;
+    [SerializeField]
+    private float _dashCoolTime;
+    [SerializeField]
+    private LayerMask _targetLayer;
+    [SerializeField]
+    private float _targetingMaxDistance;
+    [SerializeField]
+    private float _targetingMaxAngle;
+    [SerializeField]
+    private ComboSet[] _comboSets = new ComboSet[0];
+    [SerializeField, Required]
+    private RangeWeapon _rangeWeapon;
+    [SerializeField, Required]
+    private Transform _weaponGrip;
+    [SerializeField, Required]
+    private Transform _weaponHolster;
+
+    [SerializeField]
+    private string _inputHorizontal = "Horizontal";
+    [SerializeField]
+    private string _inputVertical = "Vertical";
+    [SerializeField]
+    private string _inputAttack = "Attack";
+    [SerializeField]
+    private string _inputDash = "Dash";
+    [SerializeField]
+    private string _inputAim = "Aim";
+
+    private Camera _camera;
     private Transform _cameraTr;
-    private AimIK _aimIK;
+
+    private Vector3 _velocity;
+    private Quaternion _rotation;
 
     private Vector2 _axisValue;
     private float _axisSqrMag;
@@ -52,19 +105,21 @@ public class PlayerController : ControllerBase<PlayerDatabase>
     private bool _isAiming;
 
     private bool _applyRootMotion = true;
-    private bool _lockMove;
+    private bool _lockMove, _lockWeapon, _lockMelee;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _cameraTr = Camera.main.transform;
-        _aimIK = GetComponent<AimIK>();
+        _camera = Camera.main;
+        _cameraTr = _camera.transform;
     }
 
     protected override void Start()
     {
         base.Start();
+        
+        _rotation = Quaternion.LookRotation(Transform.forward);
     }
 
     private void OnAnimatorMove()
@@ -79,29 +134,42 @@ public class PlayerController : ControllerBase<PlayerDatabase>
 
     private void FixedUpdate()
     {
-        UpdateLocomotion();
+        UpdateVelocity();
+        UpdateRotation();
+    }
+
+    private void UpdateVelocity()
+    {
+        _velocity.y = Rigidbody.velocity.y;
+        Rigidbody.velocity = _velocity;
+    }
+
+    private void UpdateRotation()
+    {
+        Rigidbody.rotation = _rotation;
     }
 
     private void Update()
     {
         UpdateInput();
-        CheckDash();
-        CheckAttack();
-        CheckAim();
+        UpdateLocomotion();
+        UpdateWeapon();
+        UpdateMelee();
+        UpdateDash();
     }
 
     private void UpdateInput()
     {
-        _axisValue = new Vector2(Input.GetAxisRaw(Database.InputHorizontal), Input.GetAxisRaw(Database.InputVertical));
+        _axisValue = new Vector2(Input.GetAxisRaw(_inputHorizontal), Input.GetAxisRaw(_inputVertical));
         _axisSqrMag = _axisValue.sqrMagnitude;
-        _dashPressed = Input.GetButtonDown(Database.InputDash);
-        _attackPressed = Input.GetButtonDown(Database.InputAttack);
-        _aimPressing = Input.GetButton(Database.InputAim);
+        _dashPressed = Input.GetButtonDown(_inputDash);
+        _attackPressed = Input.GetButtonDown(_inputAttack);
+        _aimPressing = Input.GetButton(_inputAim);
     }
 
     private void UpdateLocomotion()
     {
-        Vector3 controlDirection, velocity;
+        Vector3 controlDirection;
         bool isControlling = TryGetControlDirection(out controlDirection);
         bool isMoving = !_lockMove && isControlling;
 
@@ -109,40 +177,23 @@ public class PlayerController : ControllerBase<PlayerDatabase>
         if (isMoving)
         {
             _movingElapsedTime = _movingElapsedTime + Time.fixedDeltaTime;
-            velocity = controlDirection * Database.MoveCurve.Evaluate(_movingElapsedTime);
-            velocity = Vector3.Lerp(Rigidbody.velocity, velocity, Time.fixedDeltaTime * Database.MoveLerpTime);
+            _velocity = controlDirection * _moveCurve.Evaluate(_movingElapsedTime);
+            _velocity = Vector3.Lerp(Rigidbody.velocity, _velocity, Time.fixedDeltaTime * _moveLerpTime);
         }
         else
         {
-            velocity = Vector3.zero;
+            _velocity = Vector3.zero;
         }
-        velocity.y = Rigidbody.velocity.y;
-        Rigidbody.velocity = velocity;
 
         // Rotate
-        if (isMoving) // Moving
+        if (isMoving)
         {
             Quaternion look = Quaternion.LookRotation(controlDirection);
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, look, Database.RotateSpeed * Time.fixedDeltaTime);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _rotateSpeed * Time.fixedDeltaTime);
         }
-        else if (_isAttacking && !_comboTransitionEnabled) // Attacking
+        else
         {
-            if (_target != null)
-            {
-                _attackDirection = _target.position - Transform.position;
-                _attackDirection.y = 0F;
-            }
-            
-            Quaternion look = Quaternion.LookRotation(_attackDirection);
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, look, AttackRotateSpeed * Time.fixedDeltaTime);
-        }
-        else if (_aimPressing) // Aiming
-        {
-            Vector3 camForward = _cameraTr.forward;
-            camForward.y = 0F;
-
-            Quaternion look = Quaternion.LookRotation(camForward);
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, look, AimingRotateSpeed * Time.fixedDeltaTime);
+            _rotation = Quaternion.LookRotation(Transform.forward);
         }
 
         // Animator
@@ -150,12 +201,12 @@ public class PlayerController : ControllerBase<PlayerDatabase>
         Animator.SetBool(Hash.IsMoving, isMoving);
     }
 
-    private void CheckDash()
+    private void UpdateDash()
     {
         if (_dashCooldown)
         {
             _dashElapsedCoolTime += Time.deltaTime;
-            if (_dashElapsedCoolTime >= Database.DashCoolTime)
+            if (_dashElapsedCoolTime >= _dashCoolTime)
             {
                 _dashCooldown = false;
                 _dashElapsedCoolTime = 0F;
@@ -173,7 +224,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
 
     private IEnumerator Dash()
     {
-        var curve = Database.DashCurve;
+        var curve = _dashCurve;
         float maxTime = curve.keys[curve.length - 1].time;
         float elapsedTime = 0F;
         Vector3 direction;
@@ -186,7 +237,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
         while (elapsedTime < maxTime)
         {
             Rigidbody.AddForce(direction * curve.Evaluate(elapsedTime), ForceMode.Acceleration);
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, look, Time.fixedDeltaTime * Database.RotateSpeed * 2F);
+            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, look, Time.fixedDeltaTime * _rotateSpeed * 2F);
 
             elapsedTime += Time.fixedDeltaTime;
             yield return _waitForFixedUpdate;
@@ -195,8 +246,11 @@ public class PlayerController : ControllerBase<PlayerDatabase>
         _dashCrt = null;
     }
 
-    private void CheckAttack()
+    private void UpdateMelee()
     {
+        if (_lockMelee)
+            return;
+
         if (_attackPressed)
         {
             if (!_isAttacking)
@@ -212,6 +266,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
             }
         }
 
+        // Go to the next combo.
         if (_comboSaved && _comboTransitionEnabled)
         {
             if (!TryGetControlDirection(out _attackDirection))
@@ -230,30 +285,77 @@ public class PlayerController : ControllerBase<PlayerDatabase>
                 }
             }
 
-            // Get target for targeting.
-            _target = GameUtility.FindTargetInView(_targetPool, Transform.position, _attackDirection, Database.TargetingMaxDistance, Database.TargetingMaxAngle, Database.TargetLayer);
-
             _comboSaved = false;
             _comboTransitionEnabled = false;
-            _comboNumber = _comboNumber % Database.MaxCombos[(int)_attackType - 1] + 1;
+            _comboNumber = _comboNumber % _comboSets[(int)_attackType - 1].MaxCombo + 1;
             Animator.SetInteger(Hash.AttackType, (int)_attackType);
             Animator.SetInteger(Hash.ComboNumber, _comboNumber);
             Animator.SetTrigger(Hash.Attack);
+
+            // Get target for targeting and Attack him.
+            _target = GameUtility.FindTargetInView(_targetPool, Transform.position, _attackDirection, _targetingMaxDistance, _targetingMaxAngle, _targetLayer);
+            _comboSets[(int)_attackType - 1].Attacker.Attack(_target != null ? _target.gameObject : null, _comboNumber);
+        }
+
+        // Rotate towards attacking direction.
+        if (_isAttacking && !_comboTransitionEnabled)
+        {
+            if (_target != null)
+            {
+                _attackDirection = _target.position - Transform.position;
+                _attackDirection.y = 0F;
+            }
+
+            Quaternion look = Quaternion.LookRotation(_attackDirection);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, AttackRotateSpeed * Time.fixedDeltaTime);
         }
     }
 
-    private void CheckAim()
+    private void UpdateWeapon()
     {
-        if (_aimPressing)
+        bool isAiming = !_lockWeapon && _aimPressing;
+        if (isAiming)
         {
             if (!Animator.GetBool(Hash.IsAiming))
             {
                 _lockMove = true;
+                _lockMelee = true;
                 Animator.SetTrigger(Hash.Aim);
             }
-        }
+            else
+            {
+                // Rotate towards aiming direction.
+                Vector3 camForward = _cameraTr.forward;
+                camForward.y = 0F;
 
-        Animator.SetBool(Hash.IsAiming, _aimPressing);
+                Quaternion look = Quaternion.LookRotation(camForward);
+                _rotation = Quaternion.Slerp(Rigidbody.rotation, look, AimingRotateSpeed * Time.fixedDeltaTime);
+
+                // Pitch
+                Vector3 targetPosition;
+                RaycastHit hitInfo;
+                Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0F));
+                targetPosition = Physics.Raycast(ray, out hitInfo, 100F, ~(1 << gameObject.layer)) ? hitInfo.point : ray.GetPoint(100F);
+
+
+                // Fire
+                if (_isAiming && _attackPressed)
+                {
+                    _rangeWeapon.Attack(Transform);
+                }
+            }
+        }
+        else
+        {
+            if (Animator.GetBool(Hash.IsAiming))
+            {
+                _lockMove = false;
+                _lockMelee = false;
+                if (_lockWeapon)
+                    HolsterWeapon();
+            }
+        }
+        Animator.SetBool(Hash.IsAiming, isAiming);
     }
 
     private bool TryGetControlDirection(out Vector3 controlDirection)
@@ -272,34 +374,36 @@ public class PlayerController : ControllerBase<PlayerDatabase>
 
     #region Animator Events
 
-    private void OnRunStart()
+    private void OnRunEnter()
     {
         _applyRootMotion = false;
     }
 
-    private void OnRunFinish()
+    private void OnRunExit()
     {
         _applyRootMotion = true;
     }
 
-    private void OnDashStart()
+    private void OnDashEnter()
     {
         _lockMove = true;
     }
 
-    private void OnDashFinish()
+    private void OnDashExit()
     {
         _lockMove = false;
     }
 
-    private void OnAttackStart()
+    private void OnAttackEnter()
     {
         _lockMove = true;
+        _lockWeapon = true;
     }
 
-    private void OnAttackFinish()
+    private void OnAttackExit()
     {
         _lockMove = false;
+        _lockWeapon = false;
     }
 
     private void EnableComboInput()
@@ -310,6 +414,7 @@ public class PlayerController : ControllerBase<PlayerDatabase>
     private void EnableComboTransition()
     {
         _comboTransitionEnabled = true;
+        _lockWeapon = false;
     }
 
     private void ResetCombo()
@@ -326,6 +431,26 @@ public class PlayerController : ControllerBase<PlayerDatabase>
     {
         if (_comboTransitionEnabled)
             ResetCombo();
+    }
+
+    private void HolsterWeapon()
+    {
+        _rangeWeapon.transform.SetParent(_weaponHolster, false);
+    }
+
+    private void UnholsterWeapon()
+    {
+        _rangeWeapon.transform.SetParent(_weaponGrip, false);
+    }
+
+    private void OnAimEnter()
+    {
+        _isAiming = true;
+    }
+
+    private void OnAimExit()
+    {
+        _isAiming = false;
     }
 
     #endregion
