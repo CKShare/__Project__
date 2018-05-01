@@ -60,10 +60,11 @@ public class TimeController : SerializedMonoBehaviour
         private set
         {
             float prev = _timeScale;
-            _timeScale = value;
+            _timeScale = Mathf.Approximately(value, 0) ? 0.01F : value;
 
+            float ratio = _timeScale / prev;
             foreach (var comp in _components)
-                comp.AdjustTimeScale(_timeScale / prev);
+                comp.AdjustTimeScale(ratio);
         }
     }
 

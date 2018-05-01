@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4185114409310888}
   - component: {fileID: 33339935468259226}
   - component: {fileID: 23154703695529204}
+  - component: {fileID: 136094729197335606}
   - component: {fileID: 114061916078276338}
   - component: {fileID: 114628025318402892}
   - component: {fileID: 114764858559417890}
@@ -246,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: PistolBullet
-  _hitEffectSettings: {fileID: 0}
+  _hitEffectSettings: {fileID: 11400000, guid: 8033405b3b2972f4484f88c510542727, type: 2}
 --- !u!114 &114764858559417890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,4 +260,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolName: PistolBullet
-  _duration: 3
+  _poolType: 0
+  _duration: 10
+--- !u!136 &136094729197335606
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1252613854234990}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

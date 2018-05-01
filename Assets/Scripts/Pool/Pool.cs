@@ -37,8 +37,6 @@ public class Pool<T> where T : class
         _spawnCallback = spawnCallback;
         _despawnCallback = despawnCallback;
         _pool = new Stack<T>(_InitialCapacity);
-
-        ExtendPool();
     }
 
     //[MethodImpl(MethodImplOptions.Synchronized)]

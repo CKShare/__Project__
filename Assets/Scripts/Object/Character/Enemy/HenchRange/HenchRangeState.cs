@@ -4,10 +4,8 @@ public enum HenchRangeState
     Idle,
     Detected,
     Patrol,
-    ApproachToCover,
-    Cover,
+    Chase,
     Combat,
-    Strafe,
     Hit,
     Dead
 }

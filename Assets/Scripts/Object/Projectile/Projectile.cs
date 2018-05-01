@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(TimeController))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Required]
     private string _pool;
     [SerializeField, InlineEditor]
     private EffectSettings _hitEffectSettings;
@@ -13,7 +12,6 @@ public class Projectile : MonoBehaviour
     private Pool<GameObject> _poolRef;
     private TimeController _timeController;
     private Transform _attacker;
-    private LayerMask _ignoreMask;
     private float _fireForce;
     private HitInfo _hitInfo;
 
@@ -22,7 +20,7 @@ public class Projectile : MonoBehaviour
         _timeController = GetComponent<TimeController>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _poolRef = PoolManager.Instance[_pool];
     }
@@ -31,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         RaycastHit hitInfo;
         Vector3 newPosition = transform.position + transform.forward * (_fireForce * _timeController.DeltaTime);
-        if (Physics.Linecast(transform.position, newPosition, out hitInfo, ~_ignoreMask))
+        if (Physics.Linecast(transform.position, newPosition, out hitInfo, ~(1 << _attacker.gameObject.layer)))
         {
             Transform target = hitInfo.transform;
             var damageable = target.GetComponent<IDamageable>();
@@ -58,7 +56,7 @@ public class Projectile : MonoBehaviour
                 }
             }
 
-            OnCollideWith(target);
+            OnCollideWith(target, hitInfo.point);
             _poolRef.Despawn(gameObject);
             transform.position = hitInfo.point;
         }
@@ -68,12 +66,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void OnCollideWith(Transform target) { }
+    protected virtual void OnCollideWith(Transform target, Vector3 position) { }
 
     public void Set(Transform attacker, HitInfo hitInfo, float fireForce, Vector3 startPosition, Vector3 direction)
     {
         _attacker = attacker;
-        _ignoreMask = (1 << attacker.gameObject.layer | 1 << gameObject.layer);
         _hitInfo = hitInfo;
         _fireForce = fireForce;
         transform.position = startPosition;

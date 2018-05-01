@@ -16,16 +16,29 @@ public class MeleeAttacker : MonoBehaviour
         private EffectSettings _hitEffectSettings;
         [SerializeField, Required]
         private Transform _hitOrigin;
+        [SerializeField]
+        private Cinemachine.NoiseSettings _noiseSettings;
+        [SerializeField]
+        private float _noiseDuration;
+        [SerializeField]
+        private float _timeScaleAmount;
+        [SerializeField]
+        private float _timeScaleDuration;
 
         public HitInfo HitInfo => _hitInfo;
         public float HitRadius => _hitRadius;
         public EffectSettings HitEffectSettings => _hitEffectSettings;
         public Transform HitOrigin => _hitOrigin;
+        public Cinemachine.NoiseSettings NoiseSettings => _noiseSettings;
+        public float NoiseDuration => _noiseDuration;
+        public float TimeScaleAmount => _timeScaleAmount;
+        public float TimeScaleDuration => _timeScaleDuration;
     }
 
     [SerializeField]
     private MeleeAttackElement[] _attacks = new MeleeAttackElement[0];
 
+    private event Action<int, Vector3> _onHit;
     private GameObject _target;
     private int _attackID;
 
@@ -36,6 +49,12 @@ public class MeleeAttacker : MonoBehaviour
     }
 
     public int AttackCount => _attacks.Length;
+
+    public event Action<int, Vector3> OnHit
+    {
+        add { _onHit += value; }
+        remove { _onHit -= value; }
+    }
 
     #region Animator Events
 
@@ -71,6 +90,10 @@ public class MeleeAttacker : MonoBehaviour
                     }
                 }
             }
+
+            if (elem.NoiseSettings != null)
+                GameUtility.ShakeCamera(elem.NoiseSettings, elem.NoiseDuration);
+            GameUtility.SetTimeScale(elem.TimeScaleAmount, elem.TimeScaleDuration);
         }
     }
 

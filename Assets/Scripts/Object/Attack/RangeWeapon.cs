@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class RangeWeapon : MonoBehaviour
+public class RangeWeapon : Weapon
 {
     [SerializeField, Required]
     private Transform _muzzle;
@@ -20,12 +20,14 @@ public class RangeWeapon : MonoBehaviour
 
     private Pool<GameObject> _pool;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _pool = PoolManager.Instance[_projectilePool];
     }
 
-    public void Attack(Transform attacker)
+    public void Attack(Transform attacker, Vector3 targetPosition)
     {
         // Vfx
         if (_muzzleEffect != null)
@@ -38,6 +40,6 @@ public class RangeWeapon : MonoBehaviour
         // Projectile
         var obj = _pool.Spawn();
         var pj = obj.GetComponent<Projectile>();
-        pj.Set(attacker, _hitInfo, _fireForce, _muzzle.position, _muzzle.forward + _muzzle.TransformVector(new Vector2(Random.Range(_horizontalError.x, _horizontalError.y), Random.Range(_verticalError.x, _verticalError.y))));
+        pj.Set(attacker, _hitInfo, _fireForce, _muzzle.position, (targetPosition - _muzzle.position) + _muzzle.TransformDirection(new Vector2(Random.Range(_horizontalError.x, _horizontalError.y), Random.Range(_verticalError.x, _verticalError.y))));
     }
 }

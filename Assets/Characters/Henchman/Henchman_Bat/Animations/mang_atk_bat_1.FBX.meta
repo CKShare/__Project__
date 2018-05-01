@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 18113d8f8a557d6479a3129b84e3cf5c
-timeCreated: 1524603086
+guid: 71563fe593129684a9ea7012f6b5e85e
+timeCreated: 1525098417
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -146,7 +146,7 @@ ModelImporter:
     2100000: default
     2100002: defaultMat
     4300000: mang_model
-    7400000: Henchman Bat Attack 1
+    7400000: Take 001
     9500000: //RootNode
     13700000: mang_model
   externalObjects: {}
@@ -177,7 +177,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Henchman Bat Attack 1
+      name: Take 001
       takeName: Take 001
       firstFrame: 0
       lastFrame: 48
@@ -191,7 +191,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

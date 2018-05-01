@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Henchman Pistol AC
+  m_Controller: {fileID: 9100000, guid: c9df8bc9adfa8694aa1a0272c32b8448, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5201c14e73d361442a70cbccf86cd15b, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: af6b45f7e25a6c84d885246aabeaf55c, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 42829b0095dc1c24fb1516f73941dd61, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 42829b0095dc1c24fb1516f73941dd61, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 0c6820cca040b284892c7c3cffdc19a0, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 2790fe2d12d417647b19f10181acec8b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 8f0a314257fdea84fa08d8e67ca8abad, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 47038193321e51246b9d2c5795ee3f10, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 07535bcb89d59754b9cb4526fea286ff, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: b267229d371427d4a91aa32938827127, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 279d97129dbe2544db35fc6f3f183b9d, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 279d97129dbe2544db35fc6f3f183b9d, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: a6bd3ce3374967f459c2b73367eeafb1, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: fe98bc69608b8584bbe66f1a651db7fa, type: 3}

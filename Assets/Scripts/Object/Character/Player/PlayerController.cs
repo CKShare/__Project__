@@ -18,6 +18,7 @@ public class PlayerController : ControllerBase
         public static readonly int ComboNumber = Animator.StringToHash("ComboNumber");
         public static readonly int Aim = Animator.StringToHash("Aim");
         public static readonly int IsAiming = Animator.StringToHash("IsAiming");
+        public static readonly int Pitch = Animator.StringToHash("Pitch");
     }
 
     [Serializable]
@@ -107,12 +108,19 @@ public class PlayerController : ControllerBase
     private bool _applyRootMotion = true;
     private bool _lockMove, _lockWeapon, _lockMelee;
 
+    private event Action<bool> _onAimActiveChanged;
+    private event Action<bool> _onDashActiveChanged;
+    private event Action<bool> _onWeaponActiveChanged;
+
     protected override void Awake()
     {
         base.Awake();
 
         _camera = Camera.main;
         _cameraTr = _camera.transform;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     protected override void Start()
@@ -151,11 +159,17 @@ public class PlayerController : ControllerBase
 
     private void Update()
     {
+        UpdateHealth();
         UpdateInput();
         UpdateLocomotion();
         UpdateWeapon();
         UpdateMelee();
         UpdateDash();
+    }
+
+    private void UpdateHealth()
+    {
+        CurrentHealth += _healthRegenUnit * Time.deltaTime;
     }
 
     private void UpdateInput()
@@ -232,6 +246,7 @@ public class PlayerController : ControllerBase
             direction = Transform.forward;
         Quaternion look = Quaternion.LookRotation(direction);
 
+        _onDashActiveChanged?.Invoke(true);
         Animator.SetTrigger(Hash.Dash);
 
         while (elapsedTime < maxTime)
@@ -243,6 +258,7 @@ public class PlayerController : ControllerBase
             yield return _waitForFixedUpdate;
         }
 
+        _onDashActiveChanged?.Invoke(false);
         _dashCrt = null;
     }
 
@@ -318,6 +334,7 @@ public class PlayerController : ControllerBase
         {
             if (!Animator.GetBool(Hash.IsAiming))
             {
+                _onAimActiveChanged?.Invoke(true);
                 _lockMove = true;
                 _lockMelee = true;
                 Animator.SetTrigger(Hash.Aim);
@@ -337,11 +354,17 @@ public class PlayerController : ControllerBase
                 Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0F));
                 targetPosition = Physics.Raycast(ray, out hitInfo, 100F, ~(1 << gameObject.layer)) ? hitInfo.point : ray.GetPoint(100F);
 
+                float pitch = _cameraTr.eulerAngles.x;
+                if (pitch > 180F)
+                    pitch -= 360F;
+                pitch *= -1F;
+                Animator.SetFloat(Hash.Pitch, pitch);
 
                 // Fire
-                if (_isAiming && _attackPressed)
+                if (_attackPressed)
                 {
-                    _rangeWeapon.Attack(Transform);
+                    _rangeWeapon.Attack(Transform, targetPosition);
+                    //Animator.SetTrigger(Hash.Attack);
                 }
             }
         }
@@ -349,6 +372,7 @@ public class PlayerController : ControllerBase
         {
             if (Animator.GetBool(Hash.IsAiming))
             {
+                _onAimActiveChanged?.Invoke(false);
                 _lockMove = false;
                 _lockMelee = false;
                 if (_lockWeapon)
@@ -371,6 +395,30 @@ public class PlayerController : ControllerBase
         controlDirection = Vector3.zero;
         return false;
     }
+
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+
+        this.enabled = false;
+        Animator.SetBool("IsDead", true);
+    }
+
+    public event Action<bool> OnDashActiveChanged
+    {
+        add { _onDashActiveChanged += value; }
+        remove { _onDashActiveChanged -= value; }
+    }
+
+    public event Action<bool> OnAimActiveChanged
+    {
+        add { _onAimActiveChanged += value; }
+        remove { _onAimActiveChanged -= value; }
+    }
+
+    public bool IsDashCooldown => _dashCooldown;
+    public float DashCoolTime => _dashCoolTime;
+    public float DashRemainingCoolTime => _dashCoolTime - _dashElapsedCoolTime;
 
     #region Animator Events
 
