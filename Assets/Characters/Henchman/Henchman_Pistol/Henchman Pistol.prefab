@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 114309452581236944}
   - component: {fileID: 114076913684284814}
   - component: {fileID: 114289371536894222}
+  - component: {fileID: 114452621930952018}
   m_Layer: 9
   m_Name: Henchman Pistol
   m_TagString: Untagged
@@ -2441,6 +2442,29 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _textureName: Skin
+--- !u!114 &114452621930952018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1494956043281466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b6ac22864756440b9423b002fa70d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _eventDict
+      Entry: 6
+      Data: 
 --- !u!114 &114613849376962622
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -168,7 +168,7 @@ public abstract class EnemyController<TState> : ControllerBase
 
     #region Animator Events
 
-    private void SetColliderActive(BoolParameter active)
+    private void Setinvincibility(BoolParameter active)
     {
         GetComponent<Collider>().enabled = active.Value;
     }

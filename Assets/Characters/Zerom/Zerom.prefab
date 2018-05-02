@@ -3388,16 +3388,26 @@ MonoBehaviour:
   _attacks:
   - _hitInfo:
       _damage: 25
-      _reactionID: 0
+      _reactionID: 2
     _hitRadius: 0
-    _hitEffectSettings: {fileID: 0}
+    _hitEffectSettings: {fileID: 11400000, guid: a260304892d612d4186c03304d6b6317,
+      type: 2}
     _hitOrigin: {fileID: 4327517335124312}
+    _noiseSettings: {fileID: 11400000, guid: 56ed466517bfaaf4ab2f5c85b14db678, type: 2}
+    _noiseDuration: 0.1
+    _timeScaleAmount: 0.1
+    _timeScaleDuration: 0.1
   - _hitInfo:
       _damage: 50
-      _reactionID: 0
+      _reactionID: 3
     _hitRadius: 0
-    _hitEffectSettings: {fileID: 0}
+    _hitEffectSettings: {fileID: 11400000, guid: a260304892d612d4186c03304d6b6317,
+      type: 2}
     _hitOrigin: {fileID: 4571354130524020}
+    _noiseSettings: {fileID: 11400000, guid: 56ed466517bfaaf4ab2f5c85b14db678, type: 2}
+    _noiseDuration: 0.1
+    _timeScaleAmount: 0.1
+    _timeScaleDuration: 0.1
 --- !u!114 &114206899287107330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3432,8 +3442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _footSettings: {fileID: 11400000, guid: 12c4bb9f5ff3984459c5876859dde281, type: 2}
-  _leftFoot: {fileID: 0}
-  _rightFoot: {fileID: 0}
+  _leftFoot: {fileID: 4750599148399434}
+  _rightFoot: {fileID: 4415254360422992}
   _healthRegenUnit: 30
   _moveCurve:
     serializedVersion: 2
@@ -3550,6 +3560,10 @@ MonoBehaviour:
     _hitEffectSettings: {fileID: 11400000, guid: a260304892d612d4186c03304d6b6317,
       type: 2}
     _hitOrigin: {fileID: 4936901329078140}
+    _noiseSettings: {fileID: 11400000, guid: b2d3a709d063a2f439678c027599c6c8, type: 2}
+    _noiseDuration: 0.1
+    _timeScaleAmount: 0
+    _timeScaleDuration: 0
   - _hitInfo:
       _damage: 25
       _reactionID: 0
@@ -3557,6 +3571,10 @@ MonoBehaviour:
     _hitEffectSettings: {fileID: 11400000, guid: a260304892d612d4186c03304d6b6317,
       type: 2}
     _hitOrigin: {fileID: 4327517335124312}
+    _noiseSettings: {fileID: 11400000, guid: f2748c770e379544095e0a1f076dada6, type: 2}
+    _noiseDuration: 0.1
+    _timeScaleAmount: 0
+    _timeScaleDuration: 0
   - _hitInfo:
       _damage: 50
       _reactionID: 0
@@ -3564,12 +3582,20 @@ MonoBehaviour:
     _hitEffectSettings: {fileID: 11400000, guid: a260304892d612d4186c03304d6b6317,
       type: 2}
     _hitOrigin: {fileID: 4571354130524020}
+    _noiseSettings: {fileID: 11400000, guid: 56ed466517bfaaf4ab2f5c85b14db678, type: 2}
+    _noiseDuration: 0.1
+    _timeScaleAmount: 0.1
+    _timeScaleDuration: 0.1
   - _hitInfo:
       _damage: 50
       _reactionID: 3
     _hitRadius: 1
     _hitEffectSettings: {fileID: 0}
     _hitOrigin: {fileID: 4120977110859848}
+    _noiseSettings: {fileID: 0}
+    _noiseDuration: 0
+    _timeScaleAmount: 0
+    _timeScaleDuration: 0
 --- !u!114 &114832171893821500
 MonoBehaviour:
   m_ObjectHideFlags: 1

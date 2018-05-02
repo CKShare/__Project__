@@ -300,7 +300,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         ChangeState(HenchMeleeState.Combat);
     }
 
-    private void OnHitFinish()
+    private void OnHitRecovery()
     {
         if (!IsDead)
             ChangeState(HenchMeleeState.Combat);
