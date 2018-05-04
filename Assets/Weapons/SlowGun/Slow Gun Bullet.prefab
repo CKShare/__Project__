@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23128592029949004}
   - component: {fileID: 114170485759823448}
   - component: {fileID: 114202979511324148}
-  - component: {fileID: 114458441168711100}
   m_Layer: 0
   m_Name: Slow Gun Bullet
   m_TagString: Untagged
@@ -245,23 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde973685fa786f4d8368b3f885615f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ignoreMask:
-    serializedVersion: 2
-    m_Bits: 1024
   _pool: SlowBullet
   _hitEffectSettings: {fileID: 0}
   _slowAreaPool: SlowArea
---- !u!114 &114458441168711100
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025162488114960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1139cf1e5b03f894d94061c7b3dc1cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _poolName: SlowBullet
-  _poolType: 0
-  _duration: 3
