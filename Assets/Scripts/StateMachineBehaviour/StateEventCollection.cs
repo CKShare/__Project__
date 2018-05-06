@@ -8,7 +8,8 @@ using UnityEditor;
 using UnityEditor.Animations;
 #endif
 
-public class StateEventCollection : SerializedMonoBehaviour
+[CreateAssetMenu]
+public class StateEventCollection : SerializedScriptableObject
 {
     private class StateInfoEqualityComparer : IEqualityComparer<StateInfo>
     {
@@ -87,3 +88,4 @@ public class StateEventCollection : SerializedMonoBehaviour
         return _eventDict.TryGetValue(stateHash, out eventInfo);
     }
 }
+

@@ -14,7 +14,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
     {
         if (_eventInfo == null)
         {
-            if (!animator.GetComponent<StateEventCollection>().TryGetEventInfo(stateInfo.fullPathHash, out _eventInfo))
+            if (!animator.GetComponent<StateEvent>().TryGetEventInfo(stateInfo.fullPathHash, out _eventInfo))
             {
                 _eventInfo = DummyEventInfo;
             }

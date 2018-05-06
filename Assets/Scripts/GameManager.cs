@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
