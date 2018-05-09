@@ -556,7 +556,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240641833}
-  m_LocalRotation: {x: 0.0000001608695, y: -0.2055269, z: -0.000000022817826, w: 0.9786515}
+  m_LocalRotation: {x: 0.00000016086952, y: -0.20552683, z: -0.000000022817838, w: 0.9786515}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -606,6 +606,8 @@ GameObject:
   - component: {fileID: 248350960}
   - component: {fileID: 248350959}
   - component: {fileID: 248350958}
+  - component: {fileID: 248350962}
+  - component: {fileID: 248350961}
   m_Layer: 5
   m_Name: Static UI
   m_TagString: Untagged
@@ -676,6 +678,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &248350961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 248350957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc258957e94624710928e65beef13de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ik: {fileID: 0}
+  ragdollToAnimationTime: 0.2
+  applyIkOnRagdoll: 0
+  applyVelocity: 1
+  applyAngularVelocity: 1
+--- !u!95 &248350962
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 248350957}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &248475819
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +829,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 35
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -818,8 +853,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 343136155}
-  m_LocalRotation: {x: 0.00000003994387, y: -0.25664335, z: -0.000000004512776, w: 0.9665062}
-  m_LocalPosition: {x: -0.2770605, y: -2.070178, z: 0.36944056}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.9336452, y: -2.7595985, z: 7.319836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1560018982}
@@ -914,7 +949,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 436653649}
-  m_LocalRotation: {x: 0.00000006897801, y: -0.13025522, z: -0.00000002890347, w: 0.9914805}
+  m_LocalRotation: {x: 0.00000006897801, y: -0.13025516, z: -0.000000028903477, w: 0.9914805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1221,7 +1256,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 774329242}
-  m_LocalRotation: {x: -0.08177773, y: -0.12981142, z: -0.0107444925, w: 0.98810226}
+  m_LocalRotation: {x: -0.08177773, y: -0.12981136, z: -0.010744486, w: 0.98810226}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3434,9 +3469,7 @@ MonoBehaviour:
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_EnableAllChildCameras: 1
-  m_ChildCameras:
-  - {fileID: 774342575}
-  - {fileID: 1877321680}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: 0
     m_VirtualCamera: {fileID: 774342575}
@@ -3550,8 +3583,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db60412984904340a17878e5ddd5152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _database: {fileID: 0}
-  _inputSettings: {fileID: 11400000, guid: 7ede76e81514b8547a7c02439f8b2d03, type: 2}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _weaponInventory
+      Entry: 6
+      Data: 
+  _maxHealth: 100
+  _healthRegenUnit: 5
+  _moveSpeedMultiplier: 10
+  _moveSpeedLerpMultiplier: 10
+  _moveRotateLerpMultiplier: 10
+  _horizontalAxisName: Horizontal
+  _verticalAxisName: Vertical
+  _attackButtonName: Attack
 --- !u!114 &1874800165
 MonoBehaviour:
   m_ObjectHideFlags: 0
