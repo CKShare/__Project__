@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class PlayerController : CharacterControllerBase<PlayerDatabase>
+public class PlayerController : CharacterControllerBase
 {
     private static class Hash
     {
@@ -9,8 +9,21 @@ public class PlayerController : CharacterControllerBase<PlayerDatabase>
         public static readonly int Accel = Animator.StringToHash("Accel");
     }
 
-    [SerializeField, Required]
-    private InputSettings _inputSettings;
+    [SerializeField, TitleGroup("Stats")]
+    private float _healthRegenUnit = 5F;
+    [SerializeField, TitleGroup("Stats")]
+    private float _moveSpeedMultiplier = 10F;
+    [SerializeField, TitleGroup("Stats")]
+    private float _moveSpeedLerpMultiplier = 10F;
+    [SerializeField, TitleGroup("Stats")]
+    private float _moveRotateLerpMultiplier = 10F;
+
+    [SerializeField, Required, TitleGroup("Input")]
+    private string _horizontalAxisName = "Horizontal";
+    [SerializeField, Required, TitleGroup("Input")]
+    private string _verticalAxisName = "Vertical";
+    [SerializeField, Required, TitleGroup("Input")]
+    private string _attackButtonName = "Attack";
 
     private Camera _camera;
     private Transform _cameraTr;
@@ -76,9 +89,9 @@ public class PlayerController : CharacterControllerBase<PlayerDatabase>
 
     private void UpdateInput()
     {
-        _axisValue = new Vector2(Input.GetAxisRaw(_inputSettings.HorizontalAxisName), Input.GetAxisRaw(_inputSettings.VerticalAxisName));
+        _axisValue = new Vector2(Input.GetAxisRaw(_horizontalAxisName), Input.GetAxisRaw(_verticalAxisName));
         _axisSqrMagnitude = _axisValue.sqrMagnitude;
-        _attackPressed = Input.GetButtonDown(_inputSettings.AttackButtonName);
+        _attackPressed = Input.GetButtonDown(_attackButtonName);
     }
     
     private void UpdateTransform()
@@ -90,8 +103,8 @@ public class PlayerController : CharacterControllerBase<PlayerDatabase>
             controlDir.Normalize();
             controlDir.y = 0F;
 
-            _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * Database.MoveSpeedMultiplier, Time.fixedDeltaTime * Database.MoveSpeedLerpMultiplier);
-            _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), Time.fixedDeltaTime * Database.MoveRotateLerpMultiplier);
+            _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeedMultiplier, Time.fixedDeltaTime * _moveSpeedLerpMultiplier);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), Time.fixedDeltaTime * _moveRotateLerpMultiplier);
         }
         else
         {
@@ -106,6 +119,6 @@ public class PlayerController : CharacterControllerBase<PlayerDatabase>
 
     private void RegenHealth()
     {
-        CurrentHealth += Database.HealthRegenUnit * Time.deltaTime;
+        CurrentHealth += _healthRegenUnit * Time.deltaTime;
     }
 }

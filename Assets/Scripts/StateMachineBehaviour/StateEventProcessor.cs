@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SMBEvent : SerializedStateMachineBehaviour
+public class StateEventProcessor : SerializedStateMachineBehaviour
 {
     private static StateEventInfo DummyEventInfo = new StateEventInfo();
 
@@ -14,7 +14,7 @@ public class SMBEvent : SerializedStateMachineBehaviour
     {
         if (_eventInfo == null)
         {
-            if (!animator.GetComponent<StateEvent>().TryGetEventInfo(stateInfo.fullPathHash, out _eventInfo))
+            if (!animator.GetComponent<StateEventMediator>().TryGetEventInfo(stateInfo.fullPathHash, out _eventInfo))
             {
                 _eventInfo = DummyEventInfo;
             }

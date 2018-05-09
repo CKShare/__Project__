@@ -1,6 +1,7 @@
-﻿
-public enum TextureType
+﻿using UnityEngine;
+
+[CreateAssetMenu]
+public class TextureType : ScriptableObject
 {
-    Skin,
-    Concrete,
+
 }

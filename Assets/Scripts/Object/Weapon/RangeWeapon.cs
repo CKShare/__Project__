@@ -3,8 +3,8 @@ using Sirenix.OdinInspector;
 
 public class RangeWeapon : Weapon
 {
-    [SerializeField, Required]
-    private string _projectile;
+    [SerializeField, HideLabel]
+    private PoolInfo _projectile;
     [SerializeField, Required]
     private Transform _muzzle;
     [SerializeField]
@@ -15,15 +15,6 @@ public class RangeWeapon : Weapon
     private int _fireForce;
     [SerializeField]
     private Vector2 _horizontalError, verticalError;
-
-    private Pool<GameObject> _prjPool;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        
-        _prjPool = PoolManager.Instance[_projectile];
-    }
 
     public void Fire(Vector3 targetPosition)
     {
@@ -36,7 +27,7 @@ public class RangeWeapon : Weapon
             FMODUnity.RuntimeManager.PlayOneShot(_fireSound, _muzzle.position);
 
         // Projectile
-        var prjObj = _prjPool.Spawn();
+        var prjObj = _projectile.Pool.Spawn();
         
     }
 }

@@ -1,22 +1,11 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
 public abstract class Weapon : SerializedMonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, PropertyOrder(1)]
     private bool _isDroppable = true;
     
-    private Rigidbody _rigidbody;
-    private Collider _collider;
-
-    protected virtual void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         // Drop Sfx
@@ -27,9 +16,17 @@ public abstract class Weapon : SerializedMonoBehaviour
         if (!_isDroppable)
             return;
 
-        _rigidbody.isKinematic = false;
-        _collider.isTrigger = false;
+        // Now, this weapon can be affected by physics. 
+        var rigidbody = GetComponent<Rigidbody>();
+        var collider = GetComponent<Collider>();
+        if (rigidbody != null && collider != null)
+        {
+            rigidbody.isKinematic = false;
+            collider.isTrigger = false;
+        }
+
         transform.SetParent(null, true);
+        Owner = null;
     }
 
     public GameObject Owner { get; set; }

@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[Serializable]
 public class WeaponInventory
 {
     [Serializable]
     private struct WeaponSlot
     {
-        [SerializeField]
+        [SerializeField, Required]
         private GameObject _holder;
-        [SerializeField]
+        [SerializeField, Required]
         private GameObject _grip;
+        [SerializeField, AssetsOnly]
+        private Weapon _weapon;
 
         public void Initialize(GameObject owner)
         {
-            // Destroy all the children of Grip.
-            foreach (Transform child in _grip.transform)
-                GameObject.Destroy(child.gameObject);
+            _holder.SetActive(false);
+            _grip.SetActive(false);
 
-            // Take only one weapon from Holder.
-            int childCount = _holder.transform.childCount;
-            for (int i = 0; i < childCount - 1; i++)
-                GameObject.Destroy(_holder.transform.GetChild(i).gameObject);
-
-            // Set Owner.
-            Weapon = _holder.transform.GetChild(childCount - 1).GetComponent<Weapon>();
-            Weapon.Owner = owner;
+            if (_weapon != null)
+            {
+                Weapon = GameObject.Instantiate(_weapon.gameObject).GetComponent<Weapon>();
+                Weapon.Owner = owner;
+                SetActive(true);
+            }
         }
 
         public void SetActive(bool active)
@@ -37,13 +35,17 @@ public class WeaponInventory
             Weapon.transform.SetParent(active ? _grip.transform : _holder.transform, false);
         }
 
-        public Weapon Weapon { get; set; }
+        public Weapon Weapon
+        {
+            get { return _weapon; }
+            set { _weapon = value; }
+        }
     }
 
     [SerializeField]
     private WeaponType _initialWeaponType = WeaponType.Primary;
     [SerializeField, DisableContextMenu]
-    private Dictionary<WeaponType, WeaponSlot> _slotDict = new Dictionary<WeaponType, WeaponSlot>();
+    private Dictionary<WeaponType, WeaponSlot> _slotDict = new Dictionary<WeaponType, WeaponSlot>(new WeaponTypeComparer());
 
     private Weapon _currentWeapon;
     private WeaponType _currentWeaponType;
@@ -64,14 +66,17 @@ public class WeaponInventory
 
     public void SwapTo(WeaponType weaponType)
     {
-        if (_currentWeaponType == weaponType || !_slotDict.ContainsKey(weaponType))
+        if (_currentWeaponType == weaponType)
+            return;
+
+        WeaponSlot newSlot;
+        if (!_slotDict.TryGetValue(weaponType, out newSlot) || newSlot.Weapon == null)
             return;
 
         // Holster
         _slotDict[_currentWeaponType].SetActive(false);
 
         // Unholster
-        var newSlot = _slotDict[weaponType];
         newSlot.SetActive(true);
         _currentWeapon = newSlot.Weapon;
         _currentWeaponType = weaponType;

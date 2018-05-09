@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class StateEvent : MonoBehaviour
+public class StateEventMediator : MonoBehaviour
 {
     [SerializeField, Required]
     private StateEventCollection _collection;

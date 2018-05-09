@@ -7,11 +7,11 @@ public class HitInfo
     [SerializeField]
     private int _damage;
     [SerializeField]
-    private int _reactionID;
+    private float _force;
     [SerializeField]
     private EffectSettings _hitEffect;
 
     public int Damage => _damage;
-    public int ReactionID => _reactionID;
+    public float Force => _force;
     public EffectSettings HitEffect => _hitEffect;
 }

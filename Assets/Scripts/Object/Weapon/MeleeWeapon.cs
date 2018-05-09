@@ -12,13 +12,13 @@ public class MeleeWeapon : Weapon
 
     [SerializeField]
     private Dictionary<int, MeleeHitInfo> _hitDict = new Dictionary<int, MeleeHitInfo>();
-
+    
     public void CheckHit(int attackCode)
     {
         MeleeHitInfo hitInfo;
         if (_hitDict.TryGetValue(attackCode, out hitInfo))
         {
-
+            
         }
     }
 }
