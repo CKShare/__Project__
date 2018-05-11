@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[Serializable]
 public struct EffectInfo
 {
     [SerializeField]
     private string _sound;
     [SerializeField]
-    private string _particle;
+    private PoolInfo _particle;
 
     public string Sound => _sound;
-    public string Particle => _particle;
+    public Pool<GameObject> ParticlePool => _particle.Pool;
 }

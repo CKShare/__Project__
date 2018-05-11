@@ -2,5 +2,5 @@
 
 public interface IDamageable
 {
-    void ApplyDamage(Transform attacker, int damage);
+    void ApplyDamage(GameObject attacker, int damage);
 }

@@ -43,12 +43,12 @@ public class WeaponInventory
     }
 
     [SerializeField]
-    private WeaponType _initialWeaponType = WeaponType.Primary;
+    private WeaponSlotType _initialWeaponType = WeaponSlotType.Primary;
     [SerializeField, DisableContextMenu]
-    private Dictionary<WeaponType, WeaponSlot> _slotDict = new Dictionary<WeaponType, WeaponSlot>(new WeaponTypeComparer());
+    private Dictionary<WeaponSlotType, WeaponSlot> _slotDict = new Dictionary<WeaponSlotType, WeaponSlot>(new WeaponSlotTypeComparer());
 
     private Weapon _currentWeapon;
-    private WeaponType _currentWeaponType;
+    private WeaponSlotType _currentWeaponType;
 
     public void Initialize(GameObject owner)
     {
@@ -64,13 +64,13 @@ public class WeaponInventory
         _currentWeaponType = _initialWeaponType;
     }
 
-    public void SwapTo(WeaponType weaponType)
+    public void SwapTo(WeaponSlotType slotType)
     {
-        if (_currentWeaponType == weaponType)
+        if (_currentWeaponType == slotType)
             return;
 
         WeaponSlot newSlot;
-        if (!_slotDict.TryGetValue(weaponType, out newSlot) || newSlot.Weapon == null)
+        if (!_slotDict.TryGetValue(slotType, out newSlot) || newSlot.Weapon == null)
             return;
 
         // Holster
@@ -79,7 +79,7 @@ public class WeaponInventory
         // Unholster
         newSlot.SetActive(true);
         _currentWeapon = newSlot.Weapon;
-        _currentWeaponType = weaponType;
+        _currentWeaponType = slotType;
     }
 
     public Weapon CurrentWeapon => _currentWeapon;

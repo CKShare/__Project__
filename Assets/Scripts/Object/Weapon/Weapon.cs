@@ -1,14 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Sirenix.OdinInspector;
 
 public abstract class Weapon : SerializedMonoBehaviour
 {
-    [SerializeField, PropertyOrder(1)]
+    [SerializeField, DisableContextMenu, PropertyOrder(1)]
+    private Dictionary<string, HitPoint> _castPointDict = new Dictionary<string, HitPoint>();
+    [SerializeField, PropertyOrder(2)]
     private bool _isDroppable = true;
-    
-    private void OnCollisionEnter(Collision collision)
+
+    private HitPoint _currentPoint;
+
+    public void EnableHit(CastHitInfo hitInfo)
     {
-        // Drop Sfx
+        _currentPoint = _castPointDict[hitInfo.PointName];
+        _currentPoint.Set(Owner, hitInfo);
+        _currentPoint.enabled = true;
+    }
+
+    private void DisableHit()
+    {
+        if (_currentPoint == null)
+            return;
+
+        _currentPoint.enabled = false;
+        _currentPoint = null;
     }
 
     public void Drop()
@@ -31,6 +47,3 @@ public abstract class Weapon : SerializedMonoBehaviour
 
     public GameObject Owner { get; set; }
 }
-
-
-
