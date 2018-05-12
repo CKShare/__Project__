@@ -14,20 +14,14 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private float _maxHealth = 100F;
     [SerializeField, HideLabel, HideReferenceObjectPicker, TitleGroup("Weapon")]
     private WeaponInventory _weaponInventory = new WeaponInventory();
+    [SerializeField, TitleGroup("Foot"), Required]
+    private Transform _leftFoot, _rightFoot;
     [SerializeField, TitleGroup("Foot")]
     private LayerMask _footRayLayerMask;
     [SerializeField, TitleGroup("Foot")]
     private float _footRayHeightOffset = 1F;
     [SerializeField, TitleGroup("Foot")]
     private EffectSettings _footstepEffect;
-    [SerializeField, TitleGroup("Foot")]
-    private bool _useFootIK = true;
-    [SerializeField, TitleGroup("Foot"), ShowIf("_useFootIK")]
-    private float _footIKMaxHeight = 0.5F;
-    [SerializeField, TitleGroup("Foot"), ShowIf("_useFootIK")]
-    private float _footIKLandingSpeed = 3F;
-    [SerializeField, TitleGroup("Foot"), ShowIf("_useFootIK")]
-    private float _footIKHeightOffset = 0.2F;
     [SerializeField, TitleGroup("Etc")]
     private PhysiqueType _physiqueType = PhysiqueType.Normal;
 
@@ -57,33 +51,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     {
         _currentHealth = _maxHealth;
         //_weaponInventory.Initialize(gameObject);
-    }
-
-    private void LateUpdate()
-    {
-        if (_useFootIK)
-        {
-            RaycastHit lfHitInfo, rfHitInfo;
-            var lfEffector = _fbbik.solver.leftFootEffector;
-            var rfEffector = _fbbik.solver.rightFootEffector;
-            if (TryFootRaycast(_fbbik.references.leftFoot.position, out lfHitInfo))
-            {
-                float distance = lfHitInfo.distance - _footRayHeightOffset;
-
-                lfEffector.position = lfHitInfo.point;
-                lfEffector.positionOffset = new Vector3(0F, _footIKHeightOffset, 0F);
-                lfEffector.positionWeight = Mathf.Lerp(lfEffector.positionWeight, Mathf.Clamp01(distance / _footIKMaxHeight), Time.deltaTime * _footIKLandingSpeed);
-                
-            }
-            if (TryFootRaycast(_fbbik.references.rightFoot.position, out rfHitInfo))
-            {
-                float distance = rfHitInfo.distance - _footRayHeightOffset;
-
-                rfEffector.position = rfHitInfo.point;
-                rfEffector.positionOffset = new Vector3(0F, _footIKHeightOffset, 0F);
-                rfEffector.positionWeight = Mathf.Lerp(rfEffector.positionWeight, Mathf.Clamp01(distance / _footIKMaxHeight), Time.deltaTime * _footIKLandingSpeed);
-            }
-        }
     }
 
     private bool TryFootRaycast(Vector3 origin, out RaycastHit hitInfo)
@@ -176,12 +143,12 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 
     private void OnLeftFootPlant()
     {
-        OnFootPlant(_fbbik.references.leftFoot.position);
+        OnFootPlant(_leftFoot.position);
     }
 
     private void OnRightFootPlant()
     {
-        OnFootPlant(_fbbik.references.rightFoot.position);
+        OnFootPlant(_rightFoot.position);
     }
 
     #endregion

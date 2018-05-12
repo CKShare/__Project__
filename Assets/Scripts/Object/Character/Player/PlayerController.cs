@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using RootMotion.FinalIK;
 
+[RequireComponent(typeof(GrounderFBBIK))]
 public class PlayerController : CharacterControllerBase
 {
     private static class Hash

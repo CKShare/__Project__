@@ -988,6 +988,7 @@ GameObject:
   - component: {fileID: 54916633485146286}
   - component: {fileID: 136903775174358868}
   - component: {fileID: 114254769828826128}
+  - component: {fileID: 114637482148774830}
   - component: {fileID: 114055598423769436}
   - component: {fileID: 114955521404122500}
   - component: {fileID: 114160471549823888}
@@ -3616,10 +3617,12 @@ MonoBehaviour:
       Data: 
   _textureType: {fileID: 0}
   _maxHealth: 100
+  _leftFoot: {fileID: 4521952600177100}
+  _rightFoot: {fileID: 4689258273205206}
   _footRayLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _footRayHeightOffset: 1
+    m_Bits: 1
+  _footRayHeightOffset: 0.5
   _footstepEffect: {fileID: 0}
   _physiqueType: 0
   _healthRegenUnit: 5
@@ -4086,6 +4089,42 @@ MonoBehaviour:
     spineStiffness: 0.5
     pullBodyVertical: 0.5
     pullBodyHorizontal: 0
+--- !u!114 &114637482148774830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621569592859118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c72e1df647af4c0098866e944a04b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  solver:
+    layers:
+      serializedVersion: 2
+      m_Bits: 1
+    maxStep: 0.5
+    heightOffset: 0
+    footSpeed: 2.5
+    footRadius: 0.15
+    footCenterOffset: 0
+    prediction: 0.05
+    footRotationWeight: 1
+    footRotationSpeed: 7
+    maxFootRotationAngle: 45
+    rotateSolver: 0
+    pelvisSpeed: 5
+    pelvisDamper: 0
+    lowerPelvisWeight: 1
+    liftPelvisWeight: 0
+    rootSphereCastRadius: 0.1
+    quality: 0
+  ik: {fileID: 114254769828826128}
+  spineBend: 2
+  spineSpeed: 3
+  spine: []
 --- !u!114 &114662936983719420
 MonoBehaviour:
   m_ObjectHideFlags: 1
