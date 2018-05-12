@@ -11,6 +11,17 @@ public abstract class Weapon : SerializedMonoBehaviour
 
     private HitPoint _currentPoint;
 
+    protected virtual void Start()
+    {
+        foreach (var point in _castPointDict)
+            point.Value.enabled = false;
+    }
+
+    public virtual void Trigger()
+    {
+
+    }
+
     public void EnableHit(CastHitInfo hitInfo)
     {
         _currentPoint = _castPointDict[hitInfo.PointName];
@@ -18,7 +29,7 @@ public abstract class Weapon : SerializedMonoBehaviour
         _currentPoint.enabled = true;
     }
 
-    private void DisableHit()
+    public void DisableHit()
     {
         if (_currentPoint == null)
             return;
@@ -27,7 +38,7 @@ public abstract class Weapon : SerializedMonoBehaviour
         _currentPoint = null;
     }
 
-    public void Drop()
+    public void Drop(Vector3 force)
     {
         if (!_isDroppable)
             return;
@@ -39,6 +50,8 @@ public abstract class Weapon : SerializedMonoBehaviour
         {
             rigidbody.isKinematic = false;
             collider.isTrigger = false;
+
+            rigidbody.AddForce(force, ForceMode.VelocityChange);
         }
 
         transform.SetParent(null, true);

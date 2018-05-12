@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 
 public class StateEventMediator : MonoBehaviour
 {
-    [SerializeField, Required]
+    [SerializeField, InlineEditor, Required]
     private StateEventCollection _collection;
 
     public bool TryGetEventInfo(int stateHash, out StateEventInfo eventInfo)

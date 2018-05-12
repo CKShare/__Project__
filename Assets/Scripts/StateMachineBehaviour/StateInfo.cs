@@ -17,21 +17,21 @@ public class StateInfoEqualityComparer : IEqualityComparer<StateInfo>
 
     public int GetHashCode(StateInfo obj)
     {
-        return obj.StateHash;
+        return obj.GetHashCode();
     }
 }
 
 [Serializable]
 public struct StateInfo
 {
-    [SerializeField, HideInInspector]
+    [SerializeField]
     private int _stateHash;
 
     public static implicit operator StateInfo(int stateHash)
     {
         StateInfo info = new StateInfo();
         info._stateHash = stateHash;
-
+        
         return info;
     }
 
@@ -46,7 +46,7 @@ public struct StateInfo
         get
         {
             List<string> stateNames = new List<string>();
-            AnimatorController controller = Selection.activeGameObject.GetComponent<Animator>().runtimeAnimatorController as AnimatorController;
+            AnimatorController controller = (Selection.activeObject as StateEventCollection).AnimatorController;
             foreach (var layer in controller.layers)
             {
                 AddStateNameRecursively(stateNames, layer.name, layer.stateMachine);

@@ -12,8 +12,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 {
     [SerializeField, TitleGroup("Stats")]
     private float _maxHealth = 100F;
-    [SerializeField, HideLabel, HideReferenceObjectPicker, TitleGroup("Weapon")]
-    private WeaponInventory _weaponInventory = new WeaponInventory();
     [SerializeField, TitleGroup("Foot"), Required]
     private Transform _leftFoot, _rightFoot;
     [SerializeField, TitleGroup("Foot")]
@@ -116,9 +114,9 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public bool IsDead => _isDead;
     public PhysiqueType PhysiqueType => _physiqueType;
 
-    protected Transform Transform => _transform;
-    protected Rigidbody Rigidbody => _rigidbody;
-    protected Animator Animator => _animator;
+    public Transform Transform => _transform;
+    public Rigidbody Rigidbody => _rigidbody;
+    public Animator Animator => _animator;
 
     private void OnFootPlant(Vector3 origin)
     {

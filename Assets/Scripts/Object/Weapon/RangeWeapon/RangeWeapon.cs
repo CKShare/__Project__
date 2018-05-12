@@ -16,7 +16,7 @@ public class RangeWeapon : Weapon
     [SerializeField]
     private Vector2 _horizontalError, verticalError;
 
-    public void Fire(Vector3 targetPosition)
+    public override void Trigger()
     {
         // Vfx
         if (_muzzleEffect != null)
