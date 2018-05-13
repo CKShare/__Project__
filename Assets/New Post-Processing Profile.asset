@@ -104,7 +104,7 @@ MonoBehaviour:
         threshold: 1.1
         softKnee: 0.5
         radius: 4
-        antiFlicker: 0
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
@@ -140,7 +140,7 @@ MonoBehaviour:
         linear:
           lift: {r: 0.89890105, g: 0.858131, b: 1, a: 0}
           gamma: {r: 0.9474613, g: 0.9767383, b: 1, a: 0}
-          gain: {r: 0.999243, g: 1, b: 0.9672881, a: 0}
+          gain: {r: 0.8478341, g: 1, b: 0.92880535, a: 0}
       curves:
         master:
           curve:
