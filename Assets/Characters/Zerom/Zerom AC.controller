@@ -44,7 +44,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: PatternID
+  - m_Name: PatternType
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 1
@@ -105,6 +105,86 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114015049085798894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d493c9acf1c844ca397a44ad5ae52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _preExitEvents
+      Entry: 7
+      Data: 1|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: CheckResetCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableHit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &114139513617776656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +205,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
---- !u!114 &114192113567829628
+--- !u!114 &114229601474228218
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -133,7 +213,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be26f052eb99ca840a12dc1b96561829, type: 3}
+  m_Script: {fileID: 11500000, guid: 95d493c9acf1c844ca397a44ad5ae52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -144,7 +224,67 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _preExitEvents
+      Entry: 7
+      Data: 1|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: ResetCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableHit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &114268622096405110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,7 +299,7 @@ MonoBehaviour:
   _parameter: Random
   _minValue: 1
   _maxValue: 1
---- !u!114 &114363787775864204
+--- !u!114 &114373716165706436
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -167,18 +307,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be26f052eb99ca840a12dc1b96561829, type: 3}
+  m_Script: {fileID: 11500000, guid: f4d55f48af92b2b4d9f7dcf4bd157236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
+  _parameter: Random
+  _minValue: 1
+  _maxValue: 2
 --- !u!114 &114436460879649870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,6 +346,114 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!114 &114452543161127254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d55f48af92b2b4d9f7dcf4bd157236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parameter: Random
+  _minValue: 1
+  _maxValue: 1
+--- !u!114 &114466289595477464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d55f48af92b2b4d9f7dcf4bd157236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parameter: Random
+  _minValue: 1
+  _maxValue: 1
+--- !u!114 &114476587057698310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d493c9acf1c844ca397a44ad5ae52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _preExitEvents
+      Entry: 7
+      Data: 1|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: ResetCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableHit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &114483786125788820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,7 +522,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
---- !u!114 &114654012836155872
+--- !u!114 &114571564544170440
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -288,7 +530,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be26f052eb99ca840a12dc1b96561829, type: 3}
+  m_Script: {fileID: 11500000, guid: c868567da33fa774d86009a88abb343e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -299,7 +541,55 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: OnAttackEnter
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: OnAttackExit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &114659471249032704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,7 +618,7 @@ MonoBehaviour:
   _parameter: Random
   _randomRange: {x: -1.6601539e+9, y: 0}
   _hash: 0
---- !u!114 &114873154605605584
+--- !u!114 &114773466825715616
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -336,7 +626,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be26f052eb99ca840a12dc1b96561829, type: 3}
+  m_Script: {fileID: 11500000, guid: 95d493c9acf1c844ca397a44ad5ae52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -347,7 +637,147 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _preExitEvents
+      Entry: 7
+      Data: 1|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: CheckResetCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableHit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &114799090746603966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d493c9acf1c844ca397a44ad5ae52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _enterEvents
+      Entry: 7
+      Data: 0|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _preExitEvents
+      Entry: 7
+      Data: 1|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _exitEvents
+      Entry: 7
+      Data: 2|SMBEventInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: CheckResetCombo
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SMBEventInfo, Assembly-CSharp
+    - Name: _function
+      Entry: 1
+      Data: DisableHit
+    - Name: _parameter
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &114958344085975606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1095,12 +1525,11 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Combo 2 - 1
-  m_Speed: 1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101194772866815212}
-  m_StateMachineBehaviours:
-  - {fileID: 114363787775864204}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1203,8 +1632,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101281510744914572}
-  m_StateMachineBehaviours:
-  - {fileID: 114654012836155872}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1230,7 +1658,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101847797762401086}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114476587057698310}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1330,12 +1759,11 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Combo 1 - 1
-  m_Speed: 1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101039784700045630}
-  m_StateMachineBehaviours:
-  - {fileID: 114192113567829628}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1361,7 +1789,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101482121408662630}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114773466825715616}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1413,8 +1842,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101987547101445494}
-  m_StateMachineBehaviours:
-  - {fileID: 114873154605605584}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1600,7 +2028,8 @@ AnimatorStateMachine:
   - {fileID: 1109550977602357848}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours:
-  - {fileID: 114532514436760614}
+  - {fileID: 114452543161127254}
+  - {fileID: 114015049085798894}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 768, y: 120, z: 0}
@@ -1736,22 +2165,23 @@ AnimatorStateMachine:
   - {fileID: 1109992841267904184}
   - {fileID: 1109508812111632512}
   m_StateMachineTransitions:
-  - first: {fileID: 1107506302309026608}
-    second:
-    - {fileID: 1109968989082142576}
-  - first: {fileID: 1107395289975647352}
-    second:
-    - {fileID: 1109865449014289292}
-  - first: {fileID: 1107627116038333642}
-    second:
-    - {fileID: 1109651446861827354}
-  - first: {fileID: 1107584593761591972}
-    second:
-    - {fileID: 1109287067330069224}
   - first: {fileID: 1107309036160506790}
     second:
     - {fileID: 1109815425758297134}
-  m_StateMachineBehaviours: []
+  - first: {fileID: 1107395289975647352}
+    second:
+    - {fileID: 1109865449014289292}
+  - first: {fileID: 1107506302309026608}
+    second:
+    - {fileID: 1109968989082142576}
+  - first: {fileID: 1107584593761591972}
+    second:
+    - {fileID: 1109287067330069224}
+  - first: {fileID: 1107627116038333642}
+    second:
+    - {fileID: 1109651446861827354}
+  m_StateMachineBehaviours:
+  - {fileID: 114571564544170440}
   m_AnyStatePosition: {x: 96, y: 60, z: 0}
   m_EntryPosition: {x: 96, y: 144, z: 0}
   m_ExitPosition: {x: 612, y: 144, z: 0}
@@ -1784,12 +2214,12 @@ AnimatorStateMachine:
   - first: {fileID: 1107129751682347484}
     second:
     - {fileID: 1109917019067467674}
-  - first: {fileID: 1107988685125964450}
-    second:
-    - {fileID: 1109085387877413526}
   - first: {fileID: 1107775712921613454}
     second:
     - {fileID: 1109875324622948504}
+  - first: {fileID: 1107988685125964450}
+    second:
+    - {fileID: 1109085387877413526}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -1880,7 +2310,8 @@ AnimatorStateMachine:
   - {fileID: 1109210171222402772}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours:
-  - {fileID: 114483786125788820}
+  - {fileID: 114373716165706436}
+  - {fileID: 114229601474228218}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 720, y: 120, z: 0}
@@ -1917,14 +2348,14 @@ AnimatorStateMachine:
   - {fileID: 1101683571045892344}
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: 1107167432959061772}
+    second:
+    - {fileID: 1109143357782534290}
   - first: {fileID: 1107168987168211222}
     second: []
   - first: {fileID: 1107418672359741770}
     second:
     - {fileID: 1109415424460362200}
-  - first: {fileID: 1107167432959061772}
-    second:
-    - {fileID: 1109143357782534290}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 300, y: -24, z: 0}
   m_EntryPosition: {x: 300, y: 156, z: 0}
@@ -1948,7 +2379,8 @@ AnimatorStateMachine:
   - {fileID: 1109219796294445596}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours:
-  - {fileID: 114268622096405110}
+  - {fileID: 114466289595477464}
+  - {fileID: 114799090746603966}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
@@ -1978,7 +2410,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: PatternID
+    m_ConditionEvent: PatternType
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 1107395289975647352}
   m_DstState: {fileID: 0}
@@ -2107,7 +2539,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: PatternID
+    m_ConditionEvent: PatternType
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 1107506302309026608}
   m_DstState: {fileID: 0}
@@ -2123,7 +2555,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: PatternID
+    m_ConditionEvent: PatternType
     m_EventTreshold: 4
   m_DstStateMachine: {fileID: 1107627116038333642}
   m_DstState: {fileID: 0}
@@ -2139,7 +2571,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: PatternID
+    m_ConditionEvent: PatternType
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 1107309036160506790}
   m_DstState: {fileID: 0}
@@ -2378,7 +2810,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: PatternID
+    m_ConditionEvent: PatternType
     m_EventTreshold: 5
   m_DstStateMachine: {fileID: 1107584593761591972}
   m_DstState: {fileID: 0}

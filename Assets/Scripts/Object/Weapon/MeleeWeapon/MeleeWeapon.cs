@@ -4,5 +4,8 @@ using Sirenix.OdinInspector;
 
 public class MeleeWeapon : Weapon
 {
+    private void CheckHit()
+    {
 
+    }
 }

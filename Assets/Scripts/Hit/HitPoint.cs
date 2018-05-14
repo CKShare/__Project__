@@ -9,7 +9,10 @@ public abstract class HitPoint : MonoBehaviour
 
     protected void NotifyHit(Vector3 rayDirection, RaycastHit rayHitInfo)
     {
-        var sceneObj = rayHitInfo.transform.GetComponent<SceneObject>();
+        var rootLinker = rayHitInfo.transform.GetComponent<RootLinker>();
+        var root = rootLinker == null ? rayHitInfo.transform.gameObject : rootLinker.Root;
+        
+        var sceneObj = root.GetComponent<SceneObject>();
         if (sceneObj != null)
         {
             // Effect

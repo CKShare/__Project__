@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
+  - HitPoint
+  - Joint
   - Player
   - Enemy
-  - SlowArea
-  - 
   - 
   - 
   - 

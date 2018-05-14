@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114987552412292590}
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   EditorEvents:
   - {fileID: 114977508155196704}
   - {fileID: 114954122378833970}
@@ -25,9 +25,9 @@ MonoBehaviour:
   - {fileID: 114238461894166210}
   - {fileID: 114718749703421716}
   - {fileID: 114946484540911024}
-  MasterBankRef: {fileID: 114150241360186044}
+  MasterBankRef: {fileID: 114734516531324140}
   StringsBankRef: {fileID: 114987552412292590}
-  stringsBankWriteTime: 636603545475095562
+  stringsBankWriteTime: 636604159260053496
   cacheVersion: 2
 --- !u!114 &114021324254685162
 MonoBehaviour:
@@ -61,7 +61,7 @@ MonoBehaviour:
   Path: event:/SFX/NPC/weapon/gun
   guid: 27370108b580704b8fc64fd201166e37
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/carpet
   guid: 3f4d94b6fa249d45909707ec3fcecdcc
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_1
   guid: 62bc6f7e5cb9ea40b683855c8349ed17
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -113,6 +113,21 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 426
+--- !u!114 &114136683472054780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: reverve
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114150241360186044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +191,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_2
   guid: 86916190f982f2448d08220778135aec
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -232,12 +247,12 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/concrete
   guid: 2d997e6bb608404c83661cd92439c3cc
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 114746790639979630}
+  - {fileID: 114136683472054780}
   MinDistance: 1
   MaxDistance: 15
   Length: 180
@@ -270,7 +285,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_3
   guid: 608cc61d38367c4b801b3792fc3ce014
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -383,7 +398,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/tile
   guid: b6d8e6a0b1876f41a3b7a07de9d1fcb5
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -406,6 +421,25 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+--- !u!114 &114734516531324140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: "D:\\\uD504\uB85C\uC81D\uD2B8\\unity\\__Project__\\Assets\\Sfx\\Build\\Desktop\\Master
+    Bank.bank"
+  lastModified: 636604159260023274
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 243168
+  Exists: 1
 --- !u!114 &114746790639979630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +503,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_ex
   guid: ebe071aa40e8dd4dba0ec818e16366cc
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -491,7 +525,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_end
   guid: 25a843621921e84eba3d0cc710d2875a
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -513,7 +547,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/metal_bleacher
   guid: 1b0ecf3903d28e449cc0302f18fcad67
   Banks:
-  - {fileID: 114150241360186044}
+  - {fileID: 114734516531324140}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -533,7 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\Sfx\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636603545475095562
+  lastModified: 636604159260053496
   LoadResult: 0
   FileSizes:
   - Name: Desktop

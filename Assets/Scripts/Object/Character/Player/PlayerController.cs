@@ -12,9 +12,8 @@ public class PlayerController : CharacterControllerBase
         public static readonly int Random = Animator.StringToHash("Random");
         public static readonly int IsMoving = Animator.StringToHash("IsMoving");
         public static readonly int Accel = Animator.StringToHash("Accel");
-        public static readonly int MaxCombo = Animator.StringToHash("MaxCombo");
         public static readonly int ComboNumber = Animator.StringToHash("ComboNumber");
-        public static readonly int PatternID = Animator.StringToHash("PatternID");
+        public static readonly int PatternType = Animator.StringToHash("PatternType");
         public static readonly int Attack = Animator.StringToHash("Attack");
     }
 
@@ -22,18 +21,19 @@ public class PlayerController : CharacterControllerBase
     private float _healthRegenUnit = 5F;
 
     [SerializeField, TitleGroup("Movement")]
-    private float _moveSpeed = 10F;
+    private float _moveSpeed = 7.5F;
     [SerializeField, TitleGroup("Movement")]
-    private float _moveLerpSpeed = 10F;
+    private float _moveLerpSpeed = 7.5F;
     [SerializeField, TitleGroup("Movement")]
     private float _moveRotateSpeed = 10F;
 
-    [SerializeField, DisableContextMenu, HideReferenceObjectPicker, TitleGroup("Weapon")]
-    private WeaponSlot<ComboWeapon> _basicWeaponSlot = new WeaponSlot<ComboWeapon>();
-    
+    [SerializeField, DisableContextMenu, TitleGroup("Combat")]
+    private Dictionary<int, HitInfo> _attackDict = new Dictionary<int, HitInfo>();
     [SerializeField, TitleGroup("Combat")]
-    private float _attackRotateSpeed = 30F;
-    
+    private int[] _maxCombos = new int[0];
+    [SerializeField, TitleGroup("Combat")]
+    private float _attackRotateSpeed = 10F;
+
     [SerializeField, Required, TitleGroup("Input")]
     private string _horizontalAxisName = "Horizontal";
     [SerializeField, Required, TitleGroup("Input")]
@@ -54,15 +54,13 @@ public class PlayerController : CharacterControllerBase
     
     private bool _attackPressed;
     private Vector3 _attackDirection;
-    private IReadOnlyList<ComboPattern> _comboPatterns;
-    private ComboPattern _currentPattern;
+    private PatternType _currentPatternType = PatternType.Front;
     private int _currentComboNumber;
     private bool _isAttacking;
     private bool _comboSaved;
     private bool _comboInputEnabled;
     private bool _comboTransitionEnabled;
-    private Weapon _currentWeapon;
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -70,10 +68,8 @@ public class PlayerController : CharacterControllerBase
         _camera = Camera.main;
         _cameraTr = _camera.transform;
 
-        _basicWeaponSlot.Initialize(gameObject);
-        _currentWeapon = _basicWeaponSlot.Weapon;
-        _comboPatterns = _basicWeaponSlot.Weapon.Patterns;
-        _basicWeaponSlot.SetActive(true);
+        foreach (var weapon in GetComponentsInChildren<Weapon>())
+            weapon.Owner = gameObject;
 
         // Cursor
         Cursor.visible = false;
@@ -167,33 +163,32 @@ public class PlayerController : CharacterControllerBase
 
         if (_comboSaved && _comboTransitionEnabled)
         {
-            ComboPattern newPattern = null;
-            foreach (var pattern in _comboPatterns)
-            {
-                if (newPattern != null)
-                {
-                    if (pattern.Priority > _currentPattern.Priority && pattern.CheckTransition(this))
-                    {
-                        newPattern = pattern;
-                    }
-                }
-                else if (pattern.CheckTransition(this))
-                {
-                    newPattern = pattern;
-                }
-            }
+            _attackDirection = _axisSqrMagnitude > 0F ? _cameraTr.forward * _axisValue.y + _cameraTr.right * _axisValue.x : Transform.forward;
+            _attackDirection.y = 0F;
 
-            if (_currentPattern != newPattern)
+            // Pattern
+            PatternType newPatternType = _currentPatternType;
+
+            float angleDiff = Vector3.Angle(Transform.forward, _attackDirection);
+            if (angleDiff > 75F)
+                newPatternType = PatternType.Turn;
+
+            if (_currentPatternType != newPatternType)
                 _currentComboNumber = 0;
-            _currentPattern = newPattern;
+            _currentPatternType = newPatternType;
 
             _comboSaved = false;
             _comboTransitionEnabled = false;
-            _currentComboNumber = _currentComboNumber % _currentPattern.MaxCombo + 1;
+            _currentComboNumber = _currentComboNumber % _maxCombos[(int)_currentPatternType - 1] + 1;
 
-            Animator.SetInteger(Hash.PatternID, _currentPattern.PatternID);
+            Animator.SetInteger(Hash.PatternType, (int)_currentPatternType);
             Animator.SetInteger(Hash.ComboNumber, _currentComboNumber);
             Animator.SetTrigger(Hash.Attack);
+        }
+
+        if (_isAttacking && !_comboTransitionEnabled)
+        {
+            _rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(_attackDirection), Time.deltaTime * _attackRotateSpeed);
         }
     }
 
@@ -202,23 +197,41 @@ public class PlayerController : CharacterControllerBase
         CurrentHealth += _healthRegenUnit * Time.deltaTime;
     }
 
-    #region Animator Events
+    #region Animation Events
 
     private void EnableComboInput()
     {
-        Debug.Log("Test");
         _comboInputEnabled = true;
     }
 
     private void EnableComboTransition()
     {
-        Debug.Log("Test2");
         _comboTransitionEnabled = true;
     }
 
+    private void CheckHit(int attackID)
+    {
+        var hitInfo = _attackDict[attackID];
+        
+    }
+
+    #endregion
+
+    #region Animator Events
+
+    private void OnAttackEnter()
+    {
+        _lockMove = true;
+    }
+
+    private void OnAttackExit()
+    {
+        _lockMove = false;
+    }
+    
     private void ResetCombo()
     {
-        _currentPattern = null;
+        _currentPatternType = PatternType.Front;
         _currentComboNumber = 0;
         _isAttacking = false;
         _comboSaved = false;
@@ -231,7 +244,6 @@ public class PlayerController : CharacterControllerBase
         if (_comboTransitionEnabled)
             ResetCombo();
     }
-
 
     #endregion
 }
