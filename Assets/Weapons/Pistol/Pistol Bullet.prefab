@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23154703695529204}
   - component: {fileID: 136094729197335606}
   - component: {fileID: 114061916078276338}
-  - component: {fileID: 114628025318402892}
+  - component: {fileID: 114299526632792166}
   m_Layer: 0
   m_Name: Pistol Bullet
   m_TagString: Untagged
@@ -234,7 +234,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
---- !u!114 &114628025318402892
+--- !u!114 &114299526632792166
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -242,11 +242,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1252613854234990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8e26a1543b6a54988bf54c986c6e8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bea51d5585b56c4884a851ab9b51a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: PistolBullet
-  _hitEffectSettings: {fileID: 11400000, guid: 8033405b3b2972f4484f88c510542727, type: 2}
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!136 &136094729197335606
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d27781a3aa2f64747984e51115b85043
-timeCreated: 1525102099
+guid: f475cf9e77dcf26449ca782bbc75f659
+timeCreated: 1526331430
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -89,9 +89,20 @@ ModelImporter:
     100162: Bone011
     100164: Bone012
     100166: Bone013
-    100168: clothes
-    100170: //RootNode
-    100172: skin
+    100168: Bone014
+    100170: Bone014(mirrored)
+    100172: Bone015
+    100174: Bone015(mirrored)
+    100176: Bone016
+    100178: Bone016(mirrored)
+    100180: jerome_clothes
+    100182: jerome_eyelash
+    100184: jerome_eyes
+    100186: jerome_eyespec
+    100188: jerome_hairbase
+    100190: jerome_hairflow
+    100192: jerome_skin
+    100194: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -176,17 +187,37 @@ ModelImporter:
     400162: Bone011
     400164: Bone012
     400166: Bone013
-    400168: clothes
-    400170: //RootNode
-    400172: skin
+    400168: Bone014
+    400170: Bone014(mirrored)
+    400172: Bone015
+    400174: Bone015(mirrored)
+    400176: Bone016
+    400178: Bone016(mirrored)
+    400180: jerome_clothes
+    400182: jerome_eyelash
+    400184: jerome_eyes
+    400186: jerome_eyespec
+    400188: jerome_hairbase
+    400190: jerome_hairflow
+    400192: jerome_skin
+    400194: //RootNode
     2100000: default
-    2100002: skin_m
-    4300000: clothes
-    4300002: skin
+    4300000: jerome_hairbase
+    4300002: jerome_hairflow
+    4300004: jerome_skin
+    4300006: jerome_clothes
+    4300008: jerome_eyelash
+    4300010: jerome_eyespec
+    4300012: jerome_eyes
     7400000: Take 001
     9500000: //RootNode
-    13700000: clothes
-    13700002: skin
+    13700000: jerome_clothes
+    13700002: jerome_eyelash
+    13700004: jerome_eyes
+    13700006: jerome_eyespec
+    13700008: jerome_hairbase
+    13700010: jerome_hairflow
+    13700012: jerome_skin
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -232,7 +263,7 @@ ModelImporter:
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -267,15 +298,15 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 2
-    tangentImportMode: 2
+    normalImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human:
-    - boneName: Bip001 Pelvis
+    - boneName: Bip001
       humanName: Hips
       limit:
         min: {x: 0, y: 0, z: 0}

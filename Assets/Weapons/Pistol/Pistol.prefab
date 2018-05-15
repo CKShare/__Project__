@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23206700907022448}
   - component: {fileID: 65562546870675980}
   - component: {fileID: 54402773961806420}
-  - component: {fileID: 114120364796890746}
+  - component: {fileID: 114171606292819332}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -173,7 +173,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02675139, y: 0.13304017, z: 0.21896309}
   m_Center: {x: 0.00092035346, y: -0.017900653, z: 0.03644365}
---- !u!114 &114120364796890746
+--- !u!114 &114171606292819332
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -181,19 +181,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1169734508991168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c782feaf3c546334d9fb4c0add70af39, type: 3}
+  m_Script: {fileID: 11500000, guid: 29bff367e38e8384d84f40cc20201b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _isDroppable: 1
+  _projectile:
+    _poolName: PistolBullet
+  _hitInfo:
+    _damage: 40
+    _force: 2
+    _enableRagdoll: 0
+    _hitEffect: {fileID: 11400000, guid: be3ab29efa6361644af987ffcdc11a41, type: 2}
   _muzzle: {fileID: 4413240747296194}
   _muzzleEffect: {fileID: 198799760393116166}
-  _hitInfo:
-    _damage: 30
-    _reactionID: 0
-  _projectilePool: PistolBullet
   _fireSound: event:/SFX/NPC/weapon/gun
   _fireForce: 100
-  _horizontalError: {x: -0.5, y: 0.5}
-  _verticalError: {x: -0.5, y: 0.5}
+  _horizontalError: {x: -1, y: 1}
+  verticalError: {x: -1, y: 1}
 --- !u!198 &198799760393116166
 ParticleSystem:
   m_ObjectHideFlags: 1
