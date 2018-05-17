@@ -222,7 +222,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
                     Vector3 diff = Target.position - Transform.position;
                     diff.y = 0F;
-                    if (diff.sqrMagnitude > _combatKeepDistance * _combatKeepDistance)
+                    if (diff.sqrMagnitude > _combatKeepDistance * _combatKeepDistance || !IsTargetInView())
                     {
                         ChangeState(HenchMeleeState.Chase);
                         return;

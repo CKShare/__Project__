@@ -212,7 +212,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
                     float targetSpeed = 0F;
                     float sqrDist = diff.sqrMagnitude;
-                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance)
+                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance || !IsTargetInView())
                     {
                         ChangeState(HenchRangeState.Chase);
                         return;
