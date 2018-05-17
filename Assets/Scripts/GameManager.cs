@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -13,7 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (!Application.isEditor)
         {
             foreach (var index in _sceneIndices)
-                SceneManager.LoadSceneAsync(index);
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
         }
     }
 }

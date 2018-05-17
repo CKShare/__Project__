@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4957249099681906}
   m_Layer: 0
-  m_Name: Hit Origin
+  m_Name: Hit Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23932431255580616}
   - component: {fileID: 65984603509943110}
   - component: {fileID: 54630034611534530}
-  - component: {fileID: 114868955438885968}
+  - component: {fileID: 114300707599166478}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -53,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661325523130518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.085, y: 0.036, z: 0.139}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.3}
+  m_LocalPosition: {x: -0.074, y: 0.038, z: 0.172}
+  m_LocalScale: {x: 0.05000015, y: 0.05000015, z: 0.4003405}
   m_Children:
   - {fileID: 4957249099681906}
   m_Father: {fileID: 0}
@@ -142,7 +142,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000017, y: 1.0000019, z: 1.0000006}
   m_Center: {x: -0.000015258789, y: -0.00012207031, z: -0.0000038146973}
---- !u!114 &114868955438885968
+--- !u!114 &114300707599166478
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -150,6 +150,105 @@ MonoBehaviour:
   m_GameObject: {fileID: 1661325523130518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d94d1d388cac1843a0f3b7f9243e3f9, type: 3}
+  m_Script: {fileID: 11500000, guid: aca848749e9c97442a6124be90381910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4957249099681906}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _hitInfoDict
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeleeHitInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|MeleeHitInfo, Assembly-CSharp
+    - Name: _hitPoint
+      Entry: 10
+      Data: 0
+    - Name: _damage
+      Entry: 3
+      Data: 40
+    - Name: _force
+      Entry: 4
+      Data: 3.5
+    - Name: _reactionID
+      Entry: 3
+      Data: 1001
+    - Name: _enableRagdoll
+      Entry: 5
+      Data: false
+    - Name: _hitEffect
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|MeleeHitInfo, Assembly-CSharp
+    - Name: _hitPoint
+      Entry: 10
+      Data: 0
+    - Name: _damage
+      Entry: 3
+      Data: 40
+    - Name: _force
+      Entry: 4
+      Data: 3.5
+    - Name: _reactionID
+      Entry: 3
+      Data: 1002
+    - Name: _enableRagdoll
+      Entry: 5
+      Data: false
+    - Name: _hitEffect
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _isDroppable: 1
+  _hitDistanceThreshold: 1.5
+  _hitAngleThreshold: 75

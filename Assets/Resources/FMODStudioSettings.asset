@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Assets\Sfx\SFX.fspro
-  SourceProjectPathUnformatted: Assets\Sfx\SFX.fspro
-  SourceBankPathUnformatted: Assets\Sfx\Build
+  sourceProjectPath: Assets\Effects\Sfx\SFX.fspro
+  SourceProjectPathUnformatted: Assets\Effects\Sfx\SFX.fspro
+  SourceBankPathUnformatted: Assets\Effects\Sfx\Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0

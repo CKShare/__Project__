@@ -101,11 +101,4 @@ public class SlowArea : MonoBehaviour
             _scaleElapsed -= _applyDelay;
         }
     }
-
-    public void Set(float applyDelay, float duration, AnimationCurve slowCurve)
-    {
-        _applyDelay = applyDelay;
-        _duration = duration;
-        _slowCurve = slowCurve;
-    }
 }

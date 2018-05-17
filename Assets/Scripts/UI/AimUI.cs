@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class AimUI : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController _playerController;
-    [SerializeField]
-    private Image _aim;
+    [SerializeField, Required]
+    private PlayerController _controller;
+    [SerializeField, Required]
+    private GameObject _aimUI;
 
     private void OnEnable()
     {
-        _playerController.OnAimActiveChanged += OnAimActiveChanged;
+        _controller.OnAimActiveChanged += OnAimActiveChanged;
     }
 
     private void OnDisable()
     {
-        _playerController.OnAimActiveChanged -= OnAimActiveChanged;
+        _controller.OnAimActiveChanged -= OnAimActiveChanged;
     }
 
     private void OnAimActiveChanged(bool active)
     {
-        _aim.gameObject.SetActive(active);
+        _aimUI.SetActive(active);
     }
-
 }

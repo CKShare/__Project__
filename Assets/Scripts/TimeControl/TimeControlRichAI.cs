@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Pathfinding;
 
+[Serializable]
 public class TimeControlRichAI : ITimeControl
 {
     [SerializeField]

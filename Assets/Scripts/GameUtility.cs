@@ -43,7 +43,7 @@ public class GameUtility : MonoSingleton<GameUtility>
         Instance._cameraShakeRef.Shake(noiseSettings, duration);
     }
 
-    public static Transform FindTargetInView(Collider[] targetPool, Vector3 position, Vector3 direction, float maxDistance, float maxAngle, LayerMask mask)
+    public static Transform FindNearestTargetInView(Collider[] targetPool, Vector3 position, Vector3 direction, float maxDistance, float maxAngle, LayerMask mask)
     {
         Transform target = null;
         int count = 0;

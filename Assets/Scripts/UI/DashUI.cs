@@ -1,37 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class DashUI : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController _playerController;
-    [SerializeField]
-    private Image _dashCooldown;
-    [SerializeField]
-    private Image _dashAvailable;
-
-    private void OnEnable()
-    {
-        _playerController.OnDashActiveChanged += OnDashActiveChanged;
-    }
-
-    private void OnDisable()
-    {
-        _playerController.OnDashActiveChanged -= OnDashActiveChanged;
-    }
-
-    private void OnDashActiveChanged(bool active)
-    {
-        _dashCooldown.gameObject.SetActive(active);
-        _dashAvailable.gameObject.SetActive(!active);
-    }
+    [SerializeField, Required]
+    private PlayerController _controller;
+    [SerializeField, Required]
+    private Image _fillImage;
 
     private void Update()
     {
-        if (_playerController.IsDashCooldown)
-        {
-            float dashRatio = _playerController.DashRemainingCoolTime / _playerController.DashCoolTime;
-            _dashCooldown.fillAmount = dashRatio;
-        }
+        _fillImage.fillAmount = 1F - _controller.DashRemainingTime / _controller.DashCoolTime;
     }
 }

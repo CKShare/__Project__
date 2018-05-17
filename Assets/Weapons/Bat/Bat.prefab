@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23613680401827592}
   - component: {fileID: 65568172689410916}
   - component: {fileID: 54170807367243118}
-  - component: {fileID: 114623741983129774}
+  - component: {fileID: 114927792401950794}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -215,7 +215,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.82, y: 1.5, z: 2.48}
   m_Center: {x: 0.000030517578, y: 0, z: 0.72}
---- !u!114 &114623741983129774
+--- !u!114 &114927792401950794
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -223,6 +223,104 @@ MonoBehaviour:
   m_GameObject: {fileID: 1037331446482540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d94d1d388cac1843a0f3b7f9243e3f9, type: 3}
+  m_Script: {fileID: 11500000, guid: aca848749e9c97442a6124be90381910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _hitInfoDict
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeleeHitInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|MeleeHitInfo, Assembly-CSharp
+    - Name: _hitPoint
+      Entry: 6
+      Data: 
+    - Name: _damage
+      Entry: 3
+      Data: 40
+    - Name: _force
+      Entry: 4
+      Data: 3.5
+    - Name: _reactionID
+      Entry: 3
+      Data: 2001
+    - Name: _enableRagdoll
+      Entry: 5
+      Data: false
+    - Name: _hitEffect
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|MeleeHitInfo, Assembly-CSharp
+    - Name: _hitPoint
+      Entry: 6
+      Data: 
+    - Name: _damage
+      Entry: 3
+      Data: 40
+    - Name: _force
+      Entry: 4
+      Data: 3.5
+    - Name: _reactionID
+      Entry: 3
+      Data: 2002
+    - Name: _enableRagdoll
+      Entry: 5
+      Data: false
+    - Name: _hitEffect
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _isDroppable: 1
+  _hitDistanceThreshold: 1.5
+  _hitAngleThreshold: 75

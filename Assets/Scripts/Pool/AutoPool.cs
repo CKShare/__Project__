@@ -10,8 +10,8 @@ public class AutoPool : MonoBehaviour
         Disabled
     }
 
-    [SerializeField]
-    private string _poolName;
+    [SerializeField, HideLabel]
+    private PoolInfo _poolInfo;
     [SerializeField]
     private PoolType _poolType = PoolType.Duration;
     [SerializeField, ShowIf("_poolType", optionalValue:PoolType.Duration)]
@@ -26,7 +26,7 @@ public class AutoPool : MonoBehaviour
     private void OnDisable()
     {
         if (_poolType == PoolType.Disabled)
-            PoolManager.Instance[_poolName].Despawn(gameObject);
+            _poolInfo.Pool.Despawn(gameObject);
     }
 
     private IEnumerator CheckTime()
@@ -38,6 +38,6 @@ public class AutoPool : MonoBehaviour
             yield return null;
         }
 
-        PoolManager.Instance[_poolName].Despawn(gameObject);
+        _poolInfo.Pool.Despawn(gameObject);
     }
 }

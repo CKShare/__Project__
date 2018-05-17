@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4867235449947704}
   - component: {fileID: 33281292227724044}
   - component: {fileID: 23128592029949004}
+  - component: {fileID: 136254962129454246}
   - component: {fileID: 114170485759823448}
-  - component: {fileID: 114202979511324148}
-  - component: {fileID: 114458441168711100}
+  - component: {fileID: 114089002293816188}
   m_Layer: 0
   m_Name: Slow Gun Bullet
   m_TagString: Untagged
@@ -202,6 +202,22 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.05
   m_Autodestruct: 0
+--- !u!114 &114089002293816188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1025162488114960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3840b421a21b31b4c83c70388a7c6488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 513
+  _slowArea:
+    _poolName: SlowArea
 --- !u!114 &114170485759823448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,34 +250,16 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
---- !u!114 &114202979511324148
-MonoBehaviour:
+--- !u!136 &136254962129454246
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1025162488114960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde973685fa786f4d8368b3f885615f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ignoreMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  _pool: SlowBullet
-  _hitEffectSettings: {fileID: 0}
-  _slowAreaPool: SlowArea
---- !u!114 &114458441168711100
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025162488114960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1139cf1e5b03f894d94061c7b3dc1cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _poolName: SlowBullet
-  _poolType: 0
-  _duration: 3
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -114,7 +114,7 @@ namespace RootMotion.FinalIK {
 				}
 
 				r.isKinematic = false;
-
+                
 				// Transfer velocity from animation
 				if (velocityWeight != 0f) {
 					r.velocity = (deltaPosition / deltaTime) * velocityWeight;

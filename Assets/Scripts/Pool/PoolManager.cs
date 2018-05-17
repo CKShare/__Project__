@@ -103,4 +103,8 @@ public class PoolManager : MonoSingleton<PoolManager>
             return GetPool(poolName);
         }
     }
+
+#if UNITY_EDITOR
+    public List<string> PreloadPoolNames => new List<string>(_preloadDict.Keys);
+#endif
 }

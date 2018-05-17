@@ -3,8 +3,8 @@ using Sirenix.OdinInspector;
 
 public class SceneObject : SerializedMonoBehaviour
 {
-    [SerializeField, BoxGroup("Base")]
-    private string _textureName;
+    [SerializeField, Required, TitleGroup("Etc", order:1)]
+    private TextureType _textureType;
 
-    public string TextureName => _textureName;
+    public TextureType TextureType => _textureType;
 }
