@@ -4,9 +4,7 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(TimeController))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]
     private LayerMask _hitLayer;
-
     private TimeController _timeController;
     private GameObject _attacker;
     private int _fireForce;
@@ -16,6 +14,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         _timeController = GetComponent<TimeController>();
+        _hitLayer = LayerMask.GetMask("Ground", "Obstacle", "HitCollider");
     }
 
     private void Update()

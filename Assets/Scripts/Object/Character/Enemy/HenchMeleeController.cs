@@ -138,7 +138,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
-                    
+                    RichAI.isStopped = true;
+                    RichAI.canSearch = false;
                 }
                 break;
 
@@ -235,7 +236,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
-
+                    if (!HitReaction.inProgress)
+                        ChangeState(HenchMeleeState.Combat);
                 }
                 break;
 
@@ -286,7 +288,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
-
+                    RichAI.isStopped = false;
+                    RichAI.canSearch = true;
                 }
                 break;
 
@@ -310,6 +313,22 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         _currentPatrolPointIdx = targetIndex;
         RichAI.canSearch = true;
         RichAI.isStopped = false;
+    }
+
+    public override void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
+    {
+        base.ReactToHit(reactionID, point, force, enableRagdoll);
+
+        if (!IsDead)
+            ChangeState(HenchMeleeState.Hit);
+    }
+
+    public override void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
+    {
+        base.ReactToHit(collider, point, force, enableRagdoll);
+
+        if (!IsDead)
+            ChangeState(HenchMeleeState.Hit);
     }
 
     #region Animation Events

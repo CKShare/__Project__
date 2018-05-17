@@ -314,9 +314,8 @@ public class PlayerController : CharacterControllerBase
         _lockSlowGun = true;
         Animator.SetBool(Hash.IsDashing, true);
 
-        LayerMask layer = ~(1 << gameObject.layer | GroundLayer | Physics.IgnoreRaycastLayer);
-        CapsuleCollider collider = GetComponent<CapsuleCollider>();
-        float h = (collider.height - collider.radius * 2F) * 0.5F;
+        LayerMask layer = LayerMask.NameToLayer("Obstacle");
+        float h = (Collider.height - Collider.radius * 2F) * 0.5F;
         Vector3 offset = Vector3.up * h;
         float distance = 0F;
         while (distance < _dashDistance)
@@ -329,10 +328,10 @@ public class PlayerController : CharacterControllerBase
             float d = (velocity * Time.deltaTime).magnitude;
 
             // Stop If collides with obstacle.
-            Vector3 center = collider.bounds.center;
+            Vector3 center = Collider.bounds.center;
             Vector3 point1 = center + offset;
             Vector3 point2 = center - offset;
-            if (Physics.CapsuleCast(point1, point2, collider.radius, diff, d, layer))
+            if (Physics.CapsuleCast(point1, point2, Collider.radius, diff, d, 1 << layer))
             {
                 break;
             }

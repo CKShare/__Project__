@@ -75,7 +75,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
             {
                 float offset = _targetCollider.bounds.size.y * 0.9F;
                 RaycastHit rayHitInfo;
-                if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, maxDistance, ~(1 << gameObject.layer | _ignoreLayer)))
+                if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, maxDistance, (1 << Target.gameObject.layer | 1 << LayerMask.NameToLayer("Obstacle"))))
                 {
                     return rayHitInfo.transform.gameObject.layer == _target.gameObject.layer;
                 }

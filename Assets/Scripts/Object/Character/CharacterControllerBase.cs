@@ -17,8 +17,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     [SerializeField, TitleGroup("Foot"), Required]
     private Transform _leftFoot, _rightFoot;
     [SerializeField, TitleGroup("Foot")]
-    private LayerMask _groundLayer;
-    [SerializeField, TitleGroup("Foot")]
     private EffectSettings _footstepEffect;
 
     [SerializeField, TitleGroup("Hit")]
@@ -26,6 +24,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 
     private Transform _transform;
     private Rigidbody _rigidbody;
+    private CapsuleCollider _collider;
     private Animator _animator;
     private RagdollUtility _ragdoll;
     private HitReaction _hitReaction;
@@ -41,6 +40,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     {
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<CapsuleCollider>();
         _animator = GetComponent<Animator>();
         _ragdoll = GetComponent<RagdollUtility>();
         _hitReaction = GetComponent<HitReaction>();
@@ -59,7 +59,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 
     private bool TryFootRaycast(Vector3 origin, out RaycastHit hitInfo)
     {
-        return Physics.Raycast(origin + new Vector3(0F, 1F, 0F), Vector3.down, out hitInfo, 1F + 0.5F, _groundLayer);
+        return Physics.Raycast(origin + new Vector3(0F, 1F, 0F), Vector3.down, out hitInfo, 1F + 0.5F, 1 << LayerMask.NameToLayer("Ground"));
     }
 
     protected virtual void OnDeathInternal()
@@ -88,11 +88,11 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         CurrentHealth -= damage;
     }
 
-    public void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
+    public virtual void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
     {
         if (enableRagdoll)
             _ragdoll.EnableRagdoll();
-
+        
         Collider collider;
         if (_hitColliderDict.TryGetValue(reactionID, out collider))
         {
@@ -100,7 +100,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         }
     }
 
-    public void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
+    public virtual void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
     {
         if (enableRagdoll)
             _ragdoll.EnableRagdoll();
@@ -139,15 +139,15 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
             _onHealthChanged?.Invoke(_currentHealth);
         }
     }
-
-    protected LayerMask GroundLayer => _groundLayer;
-
+    
     public float MaxHealth => _maxHealth;
     public bool IsDead => _isDead;
 
     public Transform Transform => _transform;
     public Rigidbody Rigidbody => _rigidbody;
+    public CapsuleCollider Collider => _collider;
     public Animator Animator => _animator;
+    public HitReaction HitReaction => _hitReaction;
     public Material[][] Materials => _materials;
 
     private void OnFootPlant(Vector3 origin)

@@ -134,7 +134,8 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
             case HenchRangeState.Hit:
                 {
-                    
+                    RichAI.isStopped = true;
+                    RichAI.canSearch = false;
                 }
                 break;
 
@@ -210,6 +211,8 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     Vector3 diff = Target.position - Transform.position;
                     diff.y = 0F;
 
+                    bool isBackwards = false;
+                    bool isBlocked = false;
                     float targetSpeed = 0F;
                     float sqrDist = diff.sqrMagnitude;
                     if (sqrDist > _chaseKeepDistance * _chaseKeepDistance || !IsTargetInView(_chaseKeepDistance, DetectMaxAngle))
@@ -224,14 +227,34 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     else if (sqrDist < (_combatKeepDistance - _combatDistanceError) * (_combatKeepDistance - _combatDistanceError))
                     {
                         targetSpeed = -1F;
+                        isBackwards = true;
                     }
 
                     Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(diff), _lookRotateSpeed * TimeController.DeltaTime);
-                    
-                    
+
+                    Vector3 dv = diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime);
+                    if (isBackwards)
+                    {
+                        float d = dv.magnitude;
+                        LayerMask layer = LayerMask.NameToLayer("Obstacle");
+                        float h = (Collider.height - Collider.radius * 2F) * 0.5F;
+                        Vector3 offset = Vector3.up * h;
+                        Vector3 center = Collider.bounds.center;
+                        Vector3 point1 = center + offset;
+                        Vector3 point2 = center - offset;
+                        if (Physics.CapsuleCast(point1, point2, Collider.radius, -diff, d, 1 << layer))
+                        {
+                            targetSpeed = 0F;
+                            isBlocked = true;
+                        }
+                    }
+
+                    if (!isBlocked)
+                    {
+                        RichAI.Move(diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime));
+                    }
                     Animator.SetFloat(Hash.Speed, targetSpeed, 0.1F, TimeController.DeltaTime);
-                    RichAI.Move(diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime));
-                    
+
                     _fireElapsedTime += TimeController.DeltaTime;
                     if (_fireElapsedTime >= _fireDelay)
                     {
@@ -248,7 +271,8 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
             case HenchRangeState.Hit:
                 {
-
+                    if (!HitReaction.inProgress)
+                        ChangeState(HenchRangeState.Combat);
                 }
                 break;
 
@@ -282,18 +306,26 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     RichAI.isStopped = false;
                 }
                 break;
+
+            case HenchRangeState.Chase:
+                {
+                    Animator.SetFloat(Hash.Speed, 0F);
+                }
+                break;
                 
             case HenchRangeState.Combat:
                 {
                     RichAI.isStopped = false;
                     RichAI.canSearch = true;
                     RichAI.updateRotation = true;
+                    Animator.SetFloat(Hash.Speed, 0F);
                 }
                 break;
 
             case HenchRangeState.Hit:
                 {
-
+                    RichAI.isStopped = false;
+                    RichAI.canSearch = true;
                 }
                 break;
 
@@ -317,5 +349,21 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         _currentPatrolPointIdx = targetIndex;
         RichAI.canSearch = true;
         RichAI.isStopped = false;
+    }
+
+    public override void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
+    {
+        base.ReactToHit(reactionID, point, force, enableRagdoll);
+
+        if (!IsDead)
+            ChangeState(HenchRangeState.Hit);
+    }
+
+    public override void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
+    {
+        base.ReactToHit(collider, point, force, enableRagdoll);
+
+        if (!IsDead)
+            ChangeState(HenchRangeState.Hit);
     }
 }
