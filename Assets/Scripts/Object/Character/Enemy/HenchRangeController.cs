@@ -152,14 +152,14 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         {
             case HenchRangeState.Idle:
                 {
-                    if (IsTargetInView())
+                    if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                         ChangeState(HenchRangeState.Detected);
                 }
                 break;
 
             case HenchRangeState.Patrol:
                 {
-                    if (IsTargetInView())
+                    if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                     {
                         ChangeState(HenchRangeState.Detected);
                         return;
@@ -212,7 +212,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
                     float targetSpeed = 0F;
                     float sqrDist = diff.sqrMagnitude;
-                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance)
+                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance || !IsTargetInView(_chaseKeepDistance, DetectMaxAngle))
                     {
                         ChangeState(HenchRangeState.Chase);
                         return;
@@ -227,9 +227,11 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     }
 
                     Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(diff), _lookRotateSpeed * TimeController.DeltaTime);
+                    
+                    
                     Animator.SetFloat(Hash.Speed, targetSpeed, 0.1F, TimeController.DeltaTime);
                     RichAI.Move(diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime));
-
+                    
                     _fireElapsedTime += TimeController.DeltaTime;
                     if (_fireElapsedTime >= _fireDelay)
                     {

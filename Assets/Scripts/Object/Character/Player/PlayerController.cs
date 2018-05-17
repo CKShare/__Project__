@@ -176,8 +176,8 @@ public class PlayerController : CharacterControllerBase
         UpdateInput();
         Movement();
         MeleeAttack();
-        SlowGun();
         Dash();
+        SlowGun();
         Concentrate();
 
         RegenHealth();
@@ -311,6 +311,7 @@ public class PlayerController : CharacterControllerBase
 
         _updateRigidbody = false;
         _lockMove = true;
+        _lockSlowGun = true;
         Animator.SetBool(Hash.IsDashing, true);
 
         LayerMask layer = ~(1 << gameObject.layer | GroundLayer | Physics.IgnoreRaycastLayer);
@@ -327,7 +328,7 @@ public class PlayerController : CharacterControllerBase
             velocity.y = 0F;
             float d = (velocity * Time.deltaTime).magnitude;
 
-            // Stop If hit obstacle.
+            // Stop If collides with obstacle.
             Vector3 center = collider.bounds.center;
             Vector3 point1 = center + offset;
             Vector3 point2 = center - offset;
@@ -345,6 +346,7 @@ public class PlayerController : CharacterControllerBase
 
         _updateRigidbody = true;
         _lockMove = false;
+        _lockSlowGun = false;
         Animator.SetBool(Hash.IsDashing, false);
         // Reset velocity not to move abnormally fast.
         Rigidbody.velocity = Vector3.zero;
@@ -463,17 +465,18 @@ public class PlayerController : CharacterControllerBase
     private void OnAttackEnter()
     {
         _applyRootMotion = true;
-        //_updateRigidbody = false;
         _lockMove = true;
         _lockSlowGun = true;
     }
 
     private void OnAttackExit()
     {
-        _applyRootMotion = false;
-        //_updateRigidbody = true;
-        _lockMove = false;
-        _lockSlowGun = false;
+        //if (_comboTransitionEnabled)
+        {
+            _applyRootMotion = false;
+            _lockMove = false;
+            _lockSlowGun = false;
+        }
     }
     
     private void ResetCombo()
@@ -499,7 +502,8 @@ public class PlayerController : CharacterControllerBase
 
     private void UnholsterGun()
     {
-        _slowGun.transform.SetParent(_grip, false);
+        if (!_lockSlowGun)
+            _slowGun.transform.SetParent(_grip, false);
     }
 
     #endregion

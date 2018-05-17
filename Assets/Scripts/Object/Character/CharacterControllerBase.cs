@@ -24,7 +24,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     [SerializeField, TitleGroup("Hit")]
     private Dictionary<int, Collider> _hitColliderDict = new Dictionary<int, Collider>();
 
-
     private Transform _transform;
     private Rigidbody _rigidbody;
     private Animator _animator;

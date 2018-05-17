@@ -14,6 +14,8 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     [SerializeField]
     private Transform _head;
     [SerializeField]
+    private LayerMask _ignoreLayer;
+    [SerializeField]
     private float _detectMaxDistance = 10F;
     [SerializeField]
     private float _detectMaxAngle = 90F;
@@ -62,18 +64,18 @@ public abstract class EnemyController<TState> : CharacterControllerBase
         OnStateUpdate(_currentState);
     }
 
-    protected bool IsTargetInView()
+    protected bool IsTargetInView(float maxDistance, float maxAngle)
     {
         Vector3 diff = _target.position - _head.position;
         float sqrDist = diff.sqrMagnitude;
-        if (sqrDist < _detectMaxDistance * _detectMaxDistance)
+        if (sqrDist < maxDistance * maxDistance)
         {
             float angle = Vector3.Angle(Transform.forward, diff);
-            if (angle < _detectMaxAngle)
+            if (angle < maxAngle)
             {
                 float offset = _targetCollider.bounds.size.y * 0.9F;
                 RaycastHit rayHitInfo;
-                if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, _detectMaxDistance, ~(1 << gameObject.layer)))
+                if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, maxDistance, ~(1 << gameObject.layer | _ignoreLayer)))
                 {
                     return rayHitInfo.transform.gameObject.layer == _target.gameObject.layer;
                 }
@@ -92,4 +94,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     protected TimeController TimeController => _timeController;
     protected RichAI RichAI => _richAI;
     protected Seeker Seeker => _seeker;
+
+    protected float DetectMaxDistance => _detectMaxDistance;
+    protected float DetectMaxAngle => _detectMaxAngle;
 }

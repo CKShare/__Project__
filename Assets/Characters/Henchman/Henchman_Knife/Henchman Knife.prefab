@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 54696645562465904}
   - component: {fileID: 144141702073847948}
   - component: {fileID: 114978571197929106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip001 Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 65911361994054960}
   - component: {fileID: 54872727572986940}
   - component: {fileID: 114487530618890710}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2197,7 +2197,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742771327827650}
   serializedVersion: 2
-  m_Mass: 10.9375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2212,7 +2212,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411821051458422}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2227,7 +2227,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954148058452294}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2242,7 +2242,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423149175058932}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2257,7 +2257,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440672164229310}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2272,7 +2272,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738481300104044}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2287,7 +2287,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764393894745374}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2302,7 +2302,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1822064549476338}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2317,7 +2317,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1782634815839524}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2332,7 +2332,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343523603247820}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2362,7 +2362,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059919605300450}
   serializedVersion: 2
-  m_Mass: 10.9375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -3973,6 +3973,9 @@ MonoBehaviour:
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _target: {fileID: 0}
   _head: {fileID: 4834918598087314}
+  _ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 16896
   _detectMaxDistance: 10
   _detectMaxAngle: 90
   _patrolOnAwake: 0
@@ -4001,7 +4004,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 95923507938997138}
+    - {fileID: 114988402514588422}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -4017,8 +4022,8 @@ MonoBehaviour:
       Entry: 7
       Data: 1|TimeControlAnimator, Assembly-CSharp
     - Name: _animator
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -4026,8 +4031,8 @@ MonoBehaviour:
       Entry: 7
       Data: 2|TimeControlRichAI, Assembly-CSharp
     - Name: _richAI
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

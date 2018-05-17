@@ -156,14 +156,14 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         {
             case HenchMeleeState.Idle:
                 {
-                    if (IsTargetInView())
+                    if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                         ChangeState(HenchMeleeState.Detected);
                 }
                 break;
 
             case HenchMeleeState.Patrol:
                 {
-                    if (IsTargetInView())
+                    if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                     {
                         ChangeState(HenchMeleeState.Detected);
                         return;
@@ -222,7 +222,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
                     Vector3 diff = Target.position - Transform.position;
                     diff.y = 0F;
-                    if (diff.sqrMagnitude > _combatKeepDistance * _combatKeepDistance)
+                    if (diff.sqrMagnitude > _combatKeepDistance * _combatKeepDistance || !IsTargetInView(_combatKeepDistance, DetectMaxAngle))
                     {
                         ChangeState(HenchMeleeState.Chase);
                         return;

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65562546870675980}
   - component: {fileID: 54402773961806420}
   - component: {fileID: 114171606292819332}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
   _fireSound: event:/SFX/NPC/weapon/gun
   _fireForce: 100
   _horizontalError: {x: -1, y: 1}
-  verticalError: {x: -1, y: 1}
+  _verticalError: {x: 0, y: 0}
 --- !u!198 &198799760393116166
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 54003108935809928}
   - component: {fileID: 144373774399498288}
   - component: {fileID: 114944875645313934}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip001 Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 65407636340621406}
   - component: {fileID: 54746332225957042}
   - component: {fileID: 114230702219704004}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2213,7 +2213,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1481027489272382}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2228,7 +2228,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1075145326305210}
   serializedVersion: 2
-  m_Mass: 10.9375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2243,7 +2243,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763043115208688}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2258,7 +2258,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971884806012930}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2273,7 +2273,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1203164939737144}
   serializedVersion: 2
-  m_Mass: 10.9375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2288,7 +2288,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262150904450232}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2303,7 +2303,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1050104456259880}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2318,7 +2318,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466562293099580}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2348,7 +2348,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1795131985218050}
   serializedVersion: 2
-  m_Mass: 6.5625
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2378,7 +2378,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212946106016020}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2393,7 +2393,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1447241418619878}
   serializedVersion: 2
-  m_Mass: 4.375
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -4035,13 +4035,16 @@ MonoBehaviour:
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _target: {fileID: 0}
   _head: {fileID: 4985404318719396}
+  _ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 16896
   _detectMaxDistance: 10
   _detectMaxAngle: 90
   _patrolOnAwake: 0
   _patrolContainer: {fileID: 0}
   _patrolSpeed: 1.5
   _patrolEndReachedDistance: 0.5
-  _detectDelay: 1.5
+  _detectDelay: 0.5
   _lookRotateSpeed: 10
   _chaseSpeed: 3
   _chaseKeepDistance: 15

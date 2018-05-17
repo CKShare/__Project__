@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65358575070430568}
   - component: {fileID: 54582845095784158}
   - component: {fileID: 114671744074578600}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Slow Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ MonoBehaviour:
   _fireSound: event:/SFX/NPC/weapon/gun
   _fireForce: 100
   _horizontalError: {x: 0, y: 0}
-  verticalError: {x: 0, y: 0}
+  _verticalError: {x: 0, y: 0}
 --- !u!198 &198893412150317366
 ParticleSystem:
   m_ObjectHideFlags: 1
