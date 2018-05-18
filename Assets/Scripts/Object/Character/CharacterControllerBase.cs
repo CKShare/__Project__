@@ -19,9 +19,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     [SerializeField, TitleGroup("Foot")]
     private EffectSettings _footstepEffect;
 
-    [SerializeField, TitleGroup("Hit")]
-    private Dictionary<int, Collider> _hitColliderDict = new Dictionary<int, Collider>();
-
     private Transform _transform;
     private Rigidbody _rigidbody;
     private CapsuleCollider _collider;
@@ -30,6 +27,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private HitReaction _hitReaction;
     private FullBodyBipedIK _fbbik;
     private Material[][] _materials;
+    private Dictionary<int, ReactionPoint> _reactionPointDict = new Dictionary<int, ReactionPoint>();
 
     private event Action<float> _onHealthChanged;
     private event Action _onDeath;
@@ -50,6 +48,10 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _materials = new Material[renderers.Length][];
         for (int i = 0; i < renderers.Length; i++)
             _materials[i] = renderers[i].materials;
+
+        var reactions = GetComponentsInChildren<ReactionPoint>();
+        foreach (var reaction in reactions)
+            _reactionPointDict[reaction.ReactionID] = reaction;
     }
 
     protected virtual void Start()
@@ -88,23 +90,20 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         CurrentHealth -= damage;
     }
 
-    public virtual void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
+    public virtual void ReactToHit(int reactionID)
     {
-        if (enableRagdoll)
-            _ragdoll.EnableRagdoll();
+        var reaction = _reactionPointDict[reactionID];
         
-        Collider collider;
-        if (_hitColliderDict.TryGetValue(reactionID, out collider))
+        if (reaction.EnableRagdoll)
         {
-            _hitReaction.Hit(collider, force, point);
+            _ragdoll.EnableRagdoll();
         }
+
+        _hitReaction.Hit(reaction.Collider, reaction.ReactionForce, reaction.Point);
     }
 
-    public virtual void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
+    public virtual void ReactToHit(Collider collider, Vector3 point, Vector3 force)
     {
-        if (enableRagdoll)
-            _ragdoll.EnableRagdoll();
-
         _hitReaction.Hit(collider, force, point);
     }
 

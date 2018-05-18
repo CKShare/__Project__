@@ -5,11 +5,18 @@ using Sirenix.OdinInspector;
 public class MeleeWeapon : Weapon
 {
     [SerializeField]
-    private Dictionary<int, MeleeHitInfo> _hitInfoDict = new Dictionary<int, MeleeHitInfo>();
-    [SerializeField]
     private float _hitDistanceThreshold;
     [SerializeField]
     private float _hitAngleThreshold;
+
+    private Dictionary<int, MeleeHitPoint> _hitPointDict = new Dictionary<int, MeleeHitPoint>();
+
+    private void Awake()
+    {
+        var points = GetComponentsInChildren<MeleeHitPoint>();
+        foreach (var point in points)
+            _hitPointDict[point.AttackID] = point;
+    }
 
     public void CheckHit(GameObject target, int attackID)
     {
@@ -26,21 +33,21 @@ public class MeleeWeapon : Weapon
                 var sceneObj = target.GetComponent<SceneObject>();
                 if (sceneObj != null)
                 {
-                    MeleeHitInfo hitInfo = _hitInfoDict[attackID];
+                    var hitPoint = _hitPointDict[attackID];
 
                     // Effect
-                    if (hitInfo.HitEffect != null)
+                    if (hitPoint.HitEffect != null)
                     {
                         TextureType textureType = sceneObj.TextureType;
                         EffectInfo effectInfo;
-                        if (hitInfo.HitEffect.TryGetEffectInfo(textureType, out effectInfo))
+                        if (hitPoint.HitEffect.TryGetEffectInfo(textureType, out effectInfo))
                         {
                             // Vfx
                             GameObject vfx = effectInfo.ParticlePool.Spawn();
-                            vfx.transform.position = hitInfo.HitPoint;
+                            vfx.transform.position = hitPoint.Point;
 
                             // Sfx
-                            FMODUnity.RuntimeManager.PlayOneShot(effectInfo.Sound, hitInfo.HitPoint);
+                            FMODUnity.RuntimeManager.PlayOneShot(effectInfo.Sound, hitPoint.Point);
                         }
                     }
 
@@ -48,12 +55,12 @@ public class MeleeWeapon : Weapon
                     var damageable = sceneObj as IDamageable;
                     if (damageable != null)
                     {
-                        damageable.ApplyDamage(Owner, hitInfo.Damage);
+                        damageable.ApplyDamage(Owner, hitPoint.Damage);
 
                         var hitReactive = damageable as IHitReactive;
                         if (hitReactive != null)
                         {
-                            hitReactive.ReactToHit(hitInfo.ReactionID, hitInfo.HitPoint, hitInfo.Force, hitInfo.EnableRagdoll);
+                            hitReactive.ReactToHit(hitPoint.ReactionID);
                         }
                     }
                 }

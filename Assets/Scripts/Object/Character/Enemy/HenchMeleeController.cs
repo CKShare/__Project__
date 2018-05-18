@@ -315,17 +315,17 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         RichAI.isStopped = false;
     }
 
-    public override void ReactToHit(int reactionID, Vector3 point, Vector3 force, bool enableRagdoll)
+    public override void ReactToHit(int reactionID)
     {
-        base.ReactToHit(reactionID, point, force, enableRagdoll);
+        base.ReactToHit(reactionID);
 
         if (!IsDead)
             ChangeState(HenchMeleeState.Hit);
     }
 
-    public override void ReactToHit(Collider collider, Vector3 point, Vector3 force, bool enableRagdoll)
+    public override void ReactToHit(Collider collider, Vector3 point, Vector3 force)
     {
-        base.ReactToHit(collider, point, force, enableRagdoll);
+        base.ReactToHit(collider, point, force);
 
         if (!IsDead)
             ChangeState(HenchMeleeState.Hit);

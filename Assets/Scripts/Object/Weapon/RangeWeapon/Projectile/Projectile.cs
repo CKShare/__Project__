@@ -6,10 +6,7 @@ public class Projectile : MonoBehaviour
 {
     private LayerMask _hitLayer;
     private TimeController _timeController;
-    private GameObject _attacker;
-    private int _fireForce;
-    private RangeHitInfo _hitInfo;
-    private Pool<GameObject> _pool;
+    private RangeWeapon _weapon;
 
     private void Awake()
     {
@@ -20,7 +17,7 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         RaycastHit rayHitInfo;
-        Vector3 newPosition = transform.position + transform.forward * (_fireForce * _timeController.DeltaTime);
+        Vector3 newPosition = transform.position + transform.forward * (_weapon.FireForce * _timeController.DeltaTime);
         if (Physics.Linecast(transform.position, newPosition, out rayHitInfo, _hitLayer))
         {
             GameObject target = rayHitInfo.transform.gameObject;
@@ -36,11 +33,11 @@ public class Projectile : MonoBehaviour
             if (sceneObj != null)
             {
                 // Effect
-                if (_hitInfo.HitEffect != null)
+                if (_weapon.HitEffect != null)
                 {
                     TextureType textureType = sceneObj.TextureType;
                     EffectInfo effectInfo;
-                    if (_hitInfo.HitEffect.TryGetEffectInfo(textureType, out effectInfo))
+                    if (_weapon.HitEffect.TryGetEffectInfo(textureType, out effectInfo))
                     {
                         // Vfx
                         GameObject vfx = effectInfo.ParticlePool.Spawn();
@@ -55,18 +52,18 @@ public class Projectile : MonoBehaviour
                 var damageable = sceneObj as IDamageable;
                 if (damageable != null)
                 {
-                    damageable.ApplyDamage(_attacker, _hitInfo.Damage);
+                    damageable.ApplyDamage(_weapon.Owner, _weapon.Damage);
 
                     var hitReactive = damageable as IHitReactive;
                     if (hitReactive != null)
                     {
-                        hitReactive.ReactToHit(rayHitInfo.collider, rayHitInfo.point, transform.forward * _hitInfo.Force, _hitInfo.EnableRagdoll);
+                        hitReactive.ReactToHit(rayHitInfo.collider, rayHitInfo.point, transform.forward * _weapon.ReactionForce);
                     }
                 }
             }
 
             OnCollideWith(target, rayHitInfo.point);
-            _pool.Despawn(gameObject);
+            _weapon.ProjectilePool.Despawn(gameObject);
             transform.position = rayHitInfo.point;
         }
         else
@@ -77,13 +74,8 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnCollideWith(GameObject target, Vector3 position) { }
 
-    public void Set(GameObject attacker, RangeHitInfo hitInfo, int fireForce, Vector3 startPosition, Vector3 direction, Pool<GameObject> pool)
+    public void Set(RangeWeapon weapon)
     {
-        _attacker = attacker;
-        _pool = pool;
-        _fireForce = fireForce;
-        _hitInfo = hitInfo;
-        transform.position = startPosition;
-        transform.forward = direction;
+        _weapon = weapon;
     }
 }

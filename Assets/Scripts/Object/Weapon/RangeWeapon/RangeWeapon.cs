@@ -6,7 +6,11 @@ public class RangeWeapon : Weapon
     [SerializeField]
     private PoolInfo _projectile;
     [SerializeField]
-    private RangeHitInfo _hitInfo;
+    private int _damage;
+    [SerializeField]
+    private float _reactionForce;
+    [SerializeField]
+    private EffectSettings _hitEffect;
     [SerializeField, Required]
     private Transform _muzzle;
     [SerializeField]
@@ -31,8 +35,14 @@ public class RangeWeapon : Weapon
         // Projectile
         var prjObj = _projectile.Pool.Spawn();
         var prj = prjObj.GetComponent<Projectile>();
-        prj.Set(Owner, _hitInfo, _fireForce, _muzzle.position, direction + _muzzle.TransformDirection(new Vector2(Random.Range(_horizontalError.x, _horizontalError.y), Random.Range(_verticalError.x, _verticalError.y))), _projectile.Pool);
+        prj.Set(this);
     }
 
     public Vector3 MuzzlePosition => _muzzle.position;
+    public int Damage => _damage;
+    public float ReactionForce => _reactionForce;
+    public EffectSettings HitEffect => _hitEffect;
+    public int FireForce => _fireForce;
+    public Vector2 Error => new Vector2(Random.Range(_horizontalError.x, _horizontalError.y), Random.Range(_verticalError.x, _verticalError.y));
+    public Pool<GameObject> ProjectilePool => _projectile.Pool;
 }
