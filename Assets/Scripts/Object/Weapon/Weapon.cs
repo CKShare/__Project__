@@ -6,21 +6,15 @@ public abstract class Weapon : SerializedMonoBehaviour
     [SerializeField, PropertyOrder(2)]
     private bool _isDroppable = true;
 
-    public void Drop(Vector3 force)
+    public void Drop()
     {
         if (!_isDroppable)
             return;
 
-        // Now, this weapon can be affected by physics. 
-        var rigidbody = GetComponent<Rigidbody>();
+        // Now, this weapon can be affected by physics.
         var collider = GetComponent<Collider>();
-        if (rigidbody != null && collider != null)
-        {
-            rigidbody.isKinematic = false;
+        if (collider != null)
             collider.isTrigger = false;
-
-            rigidbody.AddForce(force, ForceMode.VelocityChange);
-        }
 
         transform.SetParent(null, true);
         Owner = null;

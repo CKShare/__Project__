@@ -35,7 +35,7 @@ public class RangeWeapon : Weapon
         // Projectile
         var prjObj = _projectile.Pool.Spawn();
         var prj = prjObj.GetComponent<Projectile>();
-        prj.Set(this);
+        prj.Set(this, direction);
     }
 
     public Vector3 MuzzlePosition => _muzzle.position;

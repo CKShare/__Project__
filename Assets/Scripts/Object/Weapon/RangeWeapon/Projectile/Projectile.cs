@@ -74,8 +74,10 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnCollideWith(GameObject target, Vector3 position) { }
 
-    public void Set(RangeWeapon weapon)
+    public void Set(RangeWeapon weapon, Vector3 direction)
     {
         _weapon = weapon;
+        transform.position = weapon.MuzzlePosition;
+        transform.forward = direction;
     }
 }

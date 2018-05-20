@@ -440,6 +440,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1479791736232882
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4515259457380684}
+  - component: {fileID: 114350375638680492}
+  m_Layer: 0
+  m_Name: Hit Point 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1485290248663762
 GameObject:
   m_ObjectHideFlags: 1
@@ -749,8 +765,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4121912662446064}
+  - component: {fileID: 114690028188707618}
   m_Layer: 0
-  m_Name: Hit Point
+  m_Name: Hit Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1220,14 +1237,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686817063872494}
-  m_LocalRotation: {x: 0.000000029802315, y: -0.00000005960463, z: 0.000000007450579,
-    w: 1}
-  m_LocalPosition: {x: -0.36, y: 0.4, z: 1.678}
+  m_LocalRotation: {x: -0.7055424, y: 0.08085586, z: 0.62190056, w: 0.3300181}
+  m_LocalPosition: {x: 0.29, y: 0.87, z: 1.211}
   m_LocalScale: {x: 20.000027, y: 20.000029, z: 3.3333378}
   m_Children: []
   m_Father: {fileID: 4685580821968002}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -34.489002, y: -90.602005, z: 158.925}
 --- !u!4 &4126326486599458
 Transform:
   m_ObjectHideFlags: 1
@@ -1768,6 +1784,19 @@ Transform:
   m_Father: {fileID: 4021913547282022}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4515259457380684
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479791736232882}
+  m_LocalRotation: {x: -0.7055424, y: 0.08085586, z: 0.62190056, w: 0.3300181}
+  m_LocalPosition: {x: 0.29, y: 0.87, z: 1.211}
+  m_LocalScale: {x: 20.000027, y: 20.000029, z: 3.3333378}
+  m_Children: []
+  m_Father: {fileID: 4685580821968002}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -34.489002, y: -90.602005, z: 158.925}
 --- !u!4 &4519664137231308
 Transform:
   m_ObjectHideFlags: 1
@@ -1932,6 +1961,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.31605977}
   m_Children:
   - {fileID: 4200050845190814}
+  - {fileID: 4515259457380684}
   - {fileID: 4121912662446064}
   m_Father: {fileID: 4741769339435008}
   m_RootOrder: 5
@@ -3069,132 +3099,19 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 135836164124950100}
-    - {fileID: 65288025577051606}
-    - {fileID: 65974266002861032}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _hitColliderDict
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[UnityEngine.Collider,
-        UnityEngine.PhysicsModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 7
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 111
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 121
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 122
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 131
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 132
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 133
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 134
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
   _maxHealth: 100
   _leftFoot: {fileID: 4564123762211626}
   _rightFoot: {fileID: 4153453629163636}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _target: {fileID: 0}
   _head: {fileID: 4642334778901966}
-  _ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 16896
   _detectMaxDistance: 10
   _detectMaxAngle: 90
   _patrolOnAwake: 0
@@ -3206,9 +3123,31 @@ MonoBehaviour:
   _chaseSpeed: 3
   _chaseKeepDistance: 5
   _combatStrafeSpeed: 1.5
-  _combatKeepDistance: 1.5
+  _combatKeepDistance: 1
   _meleeWeapon: {fileID: 114923747954505536}
-  _attackDelay: 1
+  _attackDelay: 2
+--- !u!114 &114350375638680492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479791736232882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121e0a79d6bc24e418cc59e0195d44d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackID: 1
+  _damage: 30
+  _lightReactionInfo:
+    _boneType: 2
+    _force: 5
+    _enableRagdoll: 0
+  _heavyReactionInfo:
+    _boneType: 0
+    _force: 0
+    _enableRagdoll: 0
+  _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
 --- !u!114 &114359419215122818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3234,13 +3173,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   repathRate: 0.1
-  canSearch: 0
+  canSearch: 1
   canMove: 1
   maxSpeed: 4
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4096
   centerOffset: 1
   rotationIn2D: 0
   targetCompatibility: {fileID: 0}
@@ -3960,6 +3899,28 @@ MonoBehaviour:
     boneLinks:
     - bone: {fileID: 4642334778901966}
       weight: 1
+--- !u!114 &114690028188707618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686817063872494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121e0a79d6bc24e418cc59e0195d44d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackID: 2
+  _damage: 30
+  _lightReactionInfo:
+    _boneType: 0
+    _force: 5
+    _enableRagdoll: 0
+  _heavyReactionInfo:
+    _boneType: 0
+    _force: 0
+    _enableRagdoll: 0
+  _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
 --- !u!114 &114727344989674444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4022,102 +3983,14 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 4121912662446064}
-    - {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _hitInfoDict
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeleeHitInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 2|MeleeHitInfo, Assembly-CSharp
-    - Name: _hitPoint
-      Entry: 10
-      Data: 0
-    - Name: _damage
-      Entry: 3
-      Data: 40
-    - Name: _force
-      Entry: 4
-      Data: 3.5
-    - Name: _reactionID
-      Entry: 3
-      Data: 2001
-    - Name: _enableRagdoll
-      Entry: 5
-      Data: false
-    - Name: _hitEffect
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 3|MeleeHitInfo, Assembly-CSharp
-    - Name: _hitPoint
-      Entry: 10
-      Data: 0
-    - Name: _damage
-      Entry: 3
-      Data: 40
-    - Name: _force
-      Entry: 4
-      Data: 3.5
-    - Name: _reactionID
-      Entry: 3
-      Data: 2002
-    - Name: _enableRagdoll
-      Entry: 5
-      Data: false
-    - Name: _hitEffect
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _isDroppable: 1
-  _hitDistanceThreshold: 1.5
+  _hitDistanceThreshold: 4
   _hitAngleThreshold: 75
 --- !u!114 &114979924170468498
 MonoBehaviour:

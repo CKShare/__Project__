@@ -8,10 +8,8 @@ AnimatorOverrideController:
   m_Name: Henchman Bat AC
   m_Controller: {fileID: 9100000, guid: c9df8bc9adfa8694aa1a0272c32b8448, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 1b2bac7353cf4494f8acc0c536c5b9a0, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: 1b2bac7353cf4494f8acc0c536c5b9a0, type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: a6bd3ce3374967f459c2b73367eeafb1, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: 71563fe593129684a9ea7012f6b5e85e, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 5e25a11163f5daa468d779f62e5a2da2, type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: 07535bcb89d59754b9cb4526fea286ff, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: a66001fba6f18c140ba321f71942fa10, type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: 8f0a314257fdea84fa08d8e67ca8abad, type: 3}
@@ -22,3 +20,7 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 506dbbf9d2ff3a04681119b049c1658a, type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: 0c6820cca040b284892c7c3cffdc19a0, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: 8f3f4e1ef9992244ab84631c03162830, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 9e58072f422789044844df8e0bedb812, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 71563fe593129684a9ea7012f6b5e85e, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: db07621bed575774db3191f3be2d26ec, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 1b2bac7353cf4494f8acc0c536c5b9a0, type: 3}

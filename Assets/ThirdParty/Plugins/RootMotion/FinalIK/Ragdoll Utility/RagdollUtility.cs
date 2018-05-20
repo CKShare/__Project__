@@ -42,12 +42,15 @@ namespace RootMotion.FinalIK {
 		/// </summary>
 		public float applyAngularVelocity = 1f;
 
+        private LayerMask _layer;
+
 		/// <summary>
 		/// Switches to ragdoll.
 		/// </summary>
-		public void EnableRagdoll() {
+		public void EnableRagdoll(LayerMask layer) {
 			if (isRagdoll) return;
-			
+
+            _layer = layer;
 			StopAllCoroutines();
 			enableRagdollFlag = true;
 		}
@@ -345,11 +348,17 @@ namespace RootMotion.FinalIK {
 			// Switch Animator update mode to AnimatePhysics, so IK is updated in the fixed time step
 			animatorUpdateMode = animator.updateMode;
 			animator.updateMode = AnimatorUpdateMode.AnimatePhysics;
-
+            
 			// Disable the Animator so it won't overwrite physics
 			animator.enabled = false;
-			
-			for (int i = 0; i < rigidbones.Length; i++) rigidbones[i].WakeUp(applyVelocity, applyAngularVelocity);
+
+            for (int i = 0; i < rigidbones.Length; i++)
+            {
+                if ((_layer & 1 << rigidbones[i].r.gameObject.layer) != 0)
+                {
+                    rigidbones[i].WakeUp(applyVelocity, applyAngularVelocity);
+                }
+            }
 
 			// Remember some variables so we can revert to them when coming back from ragdoll
 			for (int i = 0; i < fixTransforms.Length; i++) {

@@ -8,8 +8,17 @@ public class MeleeWeapon : Weapon
     private float _hitDistanceThreshold;
     [SerializeField]
     private float _hitAngleThreshold;
-
+    [ShowInInspector, ReadOnly]
     private Dictionary<int, MeleeHitPoint> _hitPointDict = new Dictionary<int, MeleeHitPoint>();
+
+    [Button]
+    private void ShowPoints()
+    {
+        _hitPointDict.Clear();
+        var points = GetComponentsInChildren<MeleeHitPoint>();
+        foreach (var point in points)
+            _hitPointDict[point.AttackID] = point;
+    }
 
     private void Awake()
     {
@@ -18,7 +27,7 @@ public class MeleeWeapon : Weapon
             _hitPointDict[point.AttackID] = point;
     }
 
-    public void CheckHit(GameObject target, int attackID)
+    public void Hit(GameObject target, int attackID)
     {
         Transform tr = target.transform;
         if (Physics.CheckSphere(Owner.transform.position, _hitDistanceThreshold, 1 << target.layer))
@@ -60,7 +69,16 @@ public class MeleeWeapon : Weapon
                         var hitReactive = damageable as IHitReactive;
                         if (hitReactive != null)
                         {
-                            hitReactive.ReactToHit(hitPoint.ReactionID);
+                            if (hitReactive.PhysiqueType == PhysiqueType.Light)
+                            {
+                                var info = hitPoint.LightReactionInfo;
+                                hitReactive.ReactToHit(info.BoneType, hitPoint.Point, hitPoint.Direction * info.Force, info.EnableRagdoll);
+                            }
+                            else if (hitReactive.PhysiqueType == PhysiqueType.Heavy)
+                            {
+                                var info = hitPoint.HeavyReactionInfo;
+                                hitReactive.ReactToHit(info.BoneType, hitPoint.Point, hitPoint.Direction * info.Force, info.EnableRagdoll);
+                            }
                         }
                     }
                 }

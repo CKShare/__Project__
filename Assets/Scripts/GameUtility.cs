@@ -43,11 +43,11 @@ public class GameUtility : MonoSingleton<GameUtility>
         Instance._cameraShakeRef.Shake(noiseSettings, duration);
     }
 
-    public static Transform FindNearestTargetInView(Collider[] targetPool, Vector3 position, Vector3 direction, float maxDistance, float maxAngle, LayerMask mask)
+    public static Transform FindNearestTargetInView(Collider[] targetPool, Vector3 position, Vector3 direction, float maxDistance, float maxAngle, int targetLayer)
     {
         Transform target = null;
         int count = 0;
-        if ((count = Physics.OverlapSphereNonAlloc(position, maxDistance, targetPool, mask)) > 0)
+        if ((count = Physics.OverlapSphereNonAlloc(position, maxDistance, targetPool, 1 << targetLayer)) > 0)
         {
             float nearestAngle = maxAngle;
             for (int i = 0; i < count; i++)
@@ -59,7 +59,7 @@ public class GameUtility : MonoSingleton<GameUtility>
                 if (Mathf.Abs(angle) < nearestAngle)
                 {
                     RaycastHit hitInfo;
-                    if (Physics.Raycast(position + new Vector3(0F, 1F, 0F), diff, out hitInfo, maxDistance))
+                    if (Physics.Raycast(position + new Vector3(0F, 1F, 0F), diff, out hitInfo, maxDistance, 1 << targetLayer | 1 << LayerMask.NameToLayer("Obstacle")))
                     {
                         if (hitInfo.transform == targetPool[i].transform)
                         {

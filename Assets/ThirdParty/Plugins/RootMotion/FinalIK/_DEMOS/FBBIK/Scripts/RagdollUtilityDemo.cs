@@ -18,7 +18,7 @@ namespace RootMotion.Demos {
 		}
 
 		void Update() {
-			if (Input.GetKeyDown(KeyCode.R)) ragdollUtility.EnableRagdoll();
+			if (Input.GetKeyDown(KeyCode.R)) ragdollUtility.EnableRagdoll(LayerMask.GetMask());
 			if (Input.GetKeyDown(KeyCode.A)) {
 				// Move the root of the character to where the pelvis is without moving the ragdoll
 				Vector3 toPelvis = pelvis.position - root.position;

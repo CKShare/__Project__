@@ -26,9 +26,10 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private RagdollUtility _ragdoll;
     private HitReaction _hitReaction;
     private FullBodyBipedIK _fbbik;
-    private Material[][] _materials;
-    private Dictionary<int, ReactionPoint> _reactionPointDict = new Dictionary<int, ReactionPoint>();
+    private List<Collider> _hitColliders = new List<UnityEngine.Collider>();
+    private List<Rigidbody> _hitRigidbodies = new List<Rigidbody>();
 
+    private event Action<GameObject, GameObject, int> _onDamaged;
     private event Action<float> _onHealthChanged;
     private event Action _onDeath;
     private float _currentHealth;
@@ -43,15 +44,16 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _ragdoll = GetComponent<RagdollUtility>();
         _hitReaction = GetComponent<HitReaction>();
         _fbbik = GetComponent<FullBodyBipedIK>();
-
-        var renderers = GetComponentsInChildren<Renderer>();
-        _materials = new Material[renderers.Length][];
-        for (int i = 0; i < renderers.Length; i++)
-            _materials[i] = renderers[i].materials;
-
-        var reactions = GetComponentsInChildren<ReactionPoint>();
-        foreach (var reaction in reactions)
-            _reactionPointDict[reaction.ReactionID] = reaction;
+        
+        var colliders = GetComponentsInChildren<Collider>();
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("HitCollider"))
+            {
+                _hitColliders.Add(collider);
+                _hitRigidbodies.Add(collider.GetComponent<Rigidbody>());
+            }
+        }
     }
 
     protected virtual void Start()
@@ -68,19 +70,13 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     {
         _isDead = true;
         this.enabled = false; // Disable Controller
-        GetComponent<Collider>().enabled = false;
         Rigidbody.useGravity = false;
 
+        var weapon = GetComponentInChildren<Weapon>();
+        weapon.Drop();
+
         // Ragdoll
-        var colliders = GetComponentsInChildren<Collider>();
-        foreach (var col in colliders)
-        {
-            if (col.gameObject.layer == LayerMask.NameToLayer("HitCollider"))
-            {
-                col.isTrigger = false;
-            }
-        }
-        _ragdoll.EnableRagdoll();
+        SetRagdollActive(true, LayerMask.GetMask("HitCollider", "Weapon"));
 
         _onDeath?.Invoke();
     }
@@ -88,23 +84,74 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public virtual void ApplyDamage(GameObject attacker, int damage)
     {
         CurrentHealth -= damage;
+        _onDamaged?.Invoke(attacker, gameObject, damage);
     }
 
-    public virtual void ReactToHit(int reactionID)
+    public virtual void ReactToHit(BoneType boneType, Vector3 point, Vector3 force, bool enableRagdoll)
     {
-        var reaction = _reactionPointDict[reactionID];
-        
-        if (reaction.EnableRagdoll)
+        var refs = _fbbik.references;
+        Collider collider = null;
+        switch (boneType)
         {
-            _ragdoll.EnableRagdoll();
+            case BoneType.Head:
+                collider = refs.head.GetComponent<Collider>();
+                break;
+            case BoneType.Pelvis:
+                collider = refs.pelvis.GetComponent<Collider>();
+                break;
+            case BoneType.Spine:
+                collider = refs.spine[1].GetComponent<Collider>();
+                break;
+            case BoneType.LeftUpperArm:
+                collider = refs.leftUpperArm.GetComponent<Collider>();
+                break;
+            case BoneType.LeftForeArm:
+                collider = refs.leftForearm.GetComponent<Collider>();
+                break;
+            case BoneType.RightUpperArm:
+                collider = refs.rightUpperArm.GetComponent<Collider>();
+                break;
+            case BoneType.RightForeArm:
+                collider = refs.rightForearm.GetComponent<Collider>();
+                break;
+            case BoneType.LeftThigh:
+                collider = refs.leftThigh.GetComponent<Collider>();
+                break;
+            case BoneType.LeftCalf:
+                collider = refs.leftCalf.GetComponent<Collider>();
+                break;
+            case BoneType.RightThigh:
+                collider = refs.rightThigh.GetComponent<Collider>();
+                break;
+            case BoneType.RightCalf:
+                collider = refs.rightCalf.GetComponent<Collider>();
+                break;
         }
 
-        _hitReaction.Hit(reaction.Collider, reaction.ReactionForce, reaction.Point);
+        if (!IsDead && enableRagdoll)
+            SetRagdollActive(true, 1 << LayerMask.NameToLayer("HitCollider"));
+        
+        _hitReaction.Hit(collider, force, point);
     }
 
     public virtual void ReactToHit(Collider collider, Vector3 point, Vector3 force)
     {
         _hitReaction.Hit(collider, force, point);
+    }
+
+    protected virtual void SetRagdollActive(bool active, LayerMask layer)
+    {
+        Collider.enabled = !active;
+        foreach (var col in _hitColliders)
+            col.isTrigger = !active;
+        if (active)
+            _ragdoll.EnableRagdoll(layer);
+    }
+
+    public event Action<GameObject, GameObject, int> OnDamaged
+    {
+        add { _onDamaged += value; }
+        remove { _onDamaged -= value; }
     }
 
     public event Action<float> OnHealthChanged
@@ -147,7 +194,8 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public CapsuleCollider Collider => _collider;
     public Animator Animator => _animator;
     public HitReaction HitReaction => _hitReaction;
-    public Material[][] Materials => _materials;
+
+    public abstract PhysiqueType PhysiqueType { get; }
 
     private void OnFootPlant(Vector3 origin)
     {

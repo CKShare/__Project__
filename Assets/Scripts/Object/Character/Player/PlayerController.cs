@@ -67,10 +67,7 @@ public class PlayerController : CharacterControllerBase
     private float _dashLerpSpeed = 10F;
     [SerializeField, TitleGroup("Dash")]
     private float _dashRotateSpeed = 10F;
-
-    [SerializeField, Required, InlineEditor, TitleGroup("Concentrate")]
-    private ConcentrateSphere _concentrateSphere;
-
+    
     [SerializeField, Required, TitleGroup("Input")]
     private string _horizontalAxisName = "Horizontal";
     [SerializeField, Required, TitleGroup("Input")]
@@ -83,9 +80,6 @@ public class PlayerController : CharacterControllerBase
     private string _concentrateButtonName = "Concentrate";
     [SerializeField, Required, TitleGroup("Input")]
     private string _dashButtonName = "Dash";
-
-    [SerializeField, TitleGroup("Etc")]
-    private LayerMask _enemyLayer;
 
     private Camera _camera;
     private Transform _cameraTr;
@@ -123,6 +117,9 @@ public class PlayerController : CharacterControllerBase
     private Coroutine _dashCrt;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
     private bool _lockDash;
+    
+    private GameObject _concentrateCamera;
+    private bool _isConcentrateEnabled;
 
     protected override void Awake()
     {
@@ -130,7 +127,11 @@ public class PlayerController : CharacterControllerBase
         
         _camera = Camera.main;
         _cameraTr = _camera.transform;
-        
+        var concentrateCamera = _cameraTr.GetChild(0).GetComponent<Camera>();
+        concentrateCamera.SetReplacementShader(Shader.Find("Hidden/XRay"), "XRay");
+        concentrateCamera.clearStencilAfterLightingPass = true;
+        _concentrateCamera = concentrateCamera.gameObject;
+
         foreach (var weapon in GetComponentsInChildren<Weapon>())
             weapon.Owner = gameObject;
 
@@ -142,7 +143,7 @@ public class PlayerController : CharacterControllerBase
     protected override void Start()
     {
         base.Start();
-
+        
         _rotation = Quaternion.LookRotation(Transform.forward);
     }
 
@@ -199,8 +200,8 @@ public class PlayerController : CharacterControllerBase
         if (isControlling)
         {
             Vector3 controlDir = _cameraTr.forward * _axisValue.y + _cameraTr.right * _axisValue.x;
-            controlDir.Normalize();
             controlDir.y = 0F;
+            controlDir.Normalize();
 
             _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeed, Time.deltaTime * _moveLerpSpeed);
             _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), Time.deltaTime * _moveRotateSpeed);
@@ -260,7 +261,8 @@ public class PlayerController : CharacterControllerBase
             Animator.SetInteger(Hash.ComboNumber, _currentComboNumber);
             Animator.SetTrigger(Hash.Attack);
 
-            _target = GameUtility.FindNearestTargetInView(_nearTargets, Transform.position, _attackDirection, _targetingMaxDistance, _targetingMaxAngle, _enemyLayer);
+            _target = GameUtility.FindNearestTargetInView(_nearTargets, Transform.position, _attackDirection, _targetingMaxDistance, _targetingMaxAngle, LayerMask.NameToLayer("Enemy"));
+            Debug.Log(_target == null);
         }
 
         // Rotate towards the target or control-direction.
@@ -280,7 +282,16 @@ public class PlayerController : CharacterControllerBase
     {
         if (_concentratePressed)
         {
-            _concentrateSphere.enabled = !_concentrateSphere.enabled;
+            if (!_isConcentrateEnabled)
+            {
+                _concentrateCamera.SetActive(true);
+                _isConcentrateEnabled = true;
+            }
+            else
+            {
+                _concentrateCamera.SetActive(false);
+                _isConcentrateEnabled = false;
+            }
         }
     }
 
@@ -418,16 +429,12 @@ public class PlayerController : CharacterControllerBase
         CurrentHealth += _healthRegenUnit * Time.deltaTime;
     }
 
-    //public override void ApplyDamage(GameObject attacker, int damage, int reactionID, bool enableRagdoll)
-    //{
-    //    base.ApplyDamage(attacker, damage, reactionID, enableRagdoll);
+    protected override void SetRagdollActive(bool active, LayerMask layer)
+    {
+        base.SetRagdollActive(active, layer);
 
-    //    if (!IsDead)
-    //    {
-    //        if (reactionID != 0)
-    //            Animator.SetInteger(Hash.ReactionID, reactionID);
-    //    }
-    //}
+        Rigidbody.isKinematic = active;
+    }
 
     public event Action<bool> OnAimActiveChanged
     {
@@ -439,6 +446,8 @@ public class PlayerController : CharacterControllerBase
     public float DashRemainingTime => _dashRemainingTime;
     public float SlowGunCoolTime => _slowGunCoolTime;
     public float SlowGunRemainingTime => _slowGunRemainingTime;
+
+    public override PhysiqueType PhysiqueType => PhysiqueType.Light; 
 
     #region Animation Events
     
@@ -458,7 +467,7 @@ public class PlayerController : CharacterControllerBase
         if (_target == null)
             return;
 
-        _meleeWeapon.CheckHit(_target.gameObject, attackID);
+        _meleeWeapon.Hit(_target.gameObject, attackID);
     }
 
     private void OnAttackEnter()

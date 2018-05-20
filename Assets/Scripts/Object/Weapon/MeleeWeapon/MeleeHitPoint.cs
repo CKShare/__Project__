@@ -7,7 +7,9 @@ public class MeleeHitPoint : MonoBehaviour
     [SerializeField]
     private int _damage;
     [SerializeField]
-    private int _reactionID;
+    private ReactionInfo _lightReactionInfo;
+    [SerializeField]
+    private ReactionInfo _heavyReactionInfo;
     [SerializeField]
     private EffectSettings _hitEffect;
 
@@ -15,11 +17,14 @@ public class MeleeHitPoint : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, 0.1F);
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 
     public int AttackID => _attackID;
     public Vector3 Point => transform.position;
+    public Vector3 Direction => transform.forward;
     public int Damage => _damage;
-    public int ReactionID => _reactionID;
+    public ReactionInfo LightReactionInfo => _lightReactionInfo;
+    public ReactionInfo HeavyReactionInfo => _heavyReactionInfo;
     public EffectSettings HitEffect => _hitEffect;
 }

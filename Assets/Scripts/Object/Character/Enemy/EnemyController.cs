@@ -9,12 +9,11 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(RVOController))]
 public abstract class EnemyController<TState> : CharacterControllerBase
 {
+    [TitleGroup("AI")]
     [SerializeField]
     private Transform _target;
     [SerializeField]
     private Transform _head;
-    [SerializeField]
-    private LayerMask _ignoreLayer;
     [SerializeField]
     private float _detectMaxDistance = 10F;
     [SerializeField]
@@ -68,7 +67,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     {
         Vector3 diff = _target.position - _head.position;
         float sqrDist = diff.sqrMagnitude;
-        if (sqrDist < maxDistance * maxDistance)
+        if (sqrDist < _detectMaxDistance * _detectMaxDistance)
         {
             float angle = Vector3.Angle(Transform.forward, diff);
             if (angle < maxAngle)

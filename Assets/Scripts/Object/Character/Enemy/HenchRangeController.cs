@@ -19,7 +19,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
     private static class Hash
     {
         public static readonly int Speed = Animator.StringToHash("Speed");
-        public static readonly int Detect = Animator.StringToHash("Detect");
+        public static readonly int IsDetected = Animator.StringToHash("IsDetected");
         public static readonly int Trigger = Animator.StringToHash("Trigger");
         public static readonly int IsDead = Animator.StringToHash("IsDead");
     }
@@ -108,7 +108,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 {
                     RichAI.isStopped = true;
                     _detectElapsedTime = 0F;
-                    Animator.SetTrigger(Hash.Detect);
+                    Animator.SetBool(Hash.IsDetected, true);
                 }
                 break;
 
@@ -272,7 +272,16 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             case HenchRangeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                        ChangeState(HenchRangeState.Combat);
+                    {
+                        if (Animator.GetBool(Hash.IsDetected))
+                        {
+                            ChangeState(HenchRangeState.Combat);
+                        }
+                        else
+                        {
+                            ChangeState(HenchRangeState.Detected);
+                        }
+                    }
                 }
                 break;
 
@@ -351,9 +360,9 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         RichAI.isStopped = false;
     }
 
-    public override void ReactToHit(int reactionID)
+    public override void ReactToHit(BoneType boneType, Vector3 point, Vector3 force, bool enableRagdoll)
     {
-        base.ReactToHit(reactionID);
+        base.ReactToHit(boneType, point, force, enableRagdoll);
 
         if (!IsDead)
             ChangeState(HenchRangeState.Hit);
@@ -366,4 +375,6 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         if (!IsDead)
             ChangeState(HenchRangeState.Hit);
     }
+
+    public override PhysiqueType PhysiqueType => PhysiqueType.Light;
 }

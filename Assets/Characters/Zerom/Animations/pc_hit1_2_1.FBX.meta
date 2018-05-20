@@ -276,19 +276,19 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.2624563
+        functionName: CheckHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 121
+        messageOptions: 0
       - time: 0.516827
         functionName: EnableComboTransition
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
-        messageOptions: 0
-      - time: 0.3533654
-        functionName: CheckHit
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 121
         messageOptions: 0
       transformMask: []
       maskType: 3
