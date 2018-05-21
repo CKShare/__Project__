@@ -135,6 +135,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1088580368388076
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4986430150066338}
+  - component: {fileID: 114732213060330420}
+  m_Layer: 0
+  m_Name: Hit Point 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1106828936226230
 GameObject:
   m_ObjectHideFlags: 1
@@ -259,8 +275,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4895740854874366}
+  - component: {fileID: 114339745616979486}
   m_Layer: 0
-  m_Name: Hit Point
+  m_Name: Hit Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,6 +1261,7 @@ Transform:
   m_LocalPosition: {x: -0.074, y: 0.038, z: 0.172}
   m_LocalScale: {x: 0.05000015, y: 0.05000015, z: 0.4003405}
   m_Children:
+  - {fileID: 4986430150066338}
   - {fileID: 4895740854874366}
   m_Father: {fileID: 4553572223575332}
   m_RootOrder: 5
@@ -2056,14 +2074,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329067569232154}
-  m_LocalRotation: {x: 0.000000029802315, y: -0.00000005960463, z: 0.000000007450579,
-    w: 1}
-  m_LocalPosition: {x: -0.36, y: 0.4, z: 0.257}
-  m_LocalScale: {x: 20.000027, y: 20.000029, z: 3.3333378}
+  m_LocalRotation: {x: -0.0000005960461, y: -0.52698594, z: 0.0000006258484, w: 0.8498741}
+  m_LocalPosition: {x: -0.36000606, y: 0.11999668, z: 0.25699872}
+  m_LocalScale: {x: 19.999949, y: 20.000206, z: 3.3333476}
   m_Children: []
   m_Father: {fileID: 4070655193749754}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -63.604004, z: 0}
 --- !u!4 &4916485474818632
 Transform:
   m_ObjectHideFlags: 1
@@ -2091,6 +2108,20 @@ Transform:
   - {fileID: 4549679981868686}
   m_Father: {fileID: 4278250523085224}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4986430150066338
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088580368388076}
+  m_LocalRotation: {x: 0.000000029802315, y: -0.00000005960463, z: 0.000000007450579,
+    w: 1}
+  m_LocalPosition: {x: -0.36, y: 0.12, z: 0.257}
+  m_LocalScale: {x: 20.000027, y: 20.000029, z: 3.3333378}
+  m_Children: []
+  m_Father: {fileID: 4070655193749754}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4987362170034266
 Transform:
@@ -2458,7 +2489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixTransforms: 1
+  fixTransforms: 0
   references:
     root: {fileID: 4274468374008372}
     pelvis: {fileID: 4822069332902296}
@@ -3573,6 +3604,28 @@ MonoBehaviour:
     boneLinks:
     - bone: {fileID: 4834918598087314}
       weight: 1
+--- !u!114 &114339745616979486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329067569232154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121e0a79d6bc24e418cc59e0195d44d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackID: 2
+  _damage: 30
+  _lightReactionInfo:
+    _boneType: 0
+    _force: 4
+    _enableRagdoll: 0
+  _heavyReactionInfo:
+    _boneType: 0
+    _force: 0
+    _enableRagdoll: 0
+  _hitEffect: {fileID: 0}
 --- !u!114 &114345010200323558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3661,100 +3714,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 4957249099681906, guid: 97761acdf2ab09f49bf70eba36855b11, type: 2}
-    - {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _hitInfoDict
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeleeHitInfo,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 2|MeleeHitInfo, Assembly-CSharp
-    - Name: _hitPoint
-      Entry: 10
-      Data: 0
-    - Name: _damage
-      Entry: 3
-      Data: 40
-    - Name: _force
-      Entry: 4
-      Data: 3.5
-    - Name: _reactionID
-      Entry: 3
-      Data: 1001
-    - Name: _enableRagdoll
-      Entry: 5
-      Data: false
-    - Name: _hitEffect
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 3|MeleeHitInfo, Assembly-CSharp
-    - Name: _hitPoint
-      Entry: 10
-      Data: 0
-    - Name: _damage
-      Entry: 3
-      Data: 40
-    - Name: _force
-      Entry: 4
-      Data: 3.5
-    - Name: _reactionID
-      Entry: 3
-      Data: 1002
-    - Name: _enableRagdoll
-      Entry: 5
-      Data: false
-    - Name: _hitEffect
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _isDroppable: 1
   _hitDistanceThreshold: 1.5
   _hitAngleThreshold: 75
@@ -3836,6 +3801,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneObject: {fileID: 114750797166031180}
+--- !u!114 &114732213060330420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088580368388076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121e0a79d6bc24e418cc59e0195d44d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackID: 1
+  _damage: 30
+  _lightReactionInfo:
+    _boneType: 2
+    _force: 4
+    _enableRagdoll: 0
+  _heavyReactionInfo:
+    _boneType: 0
+    _force: 0
+    _enableRagdoll: 0
+  _hitEffect: {fileID: 0}
 --- !u!114 &114750797166031180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3850,135 +3837,23 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 135452190566045970}
-    - {fileID: 65465363533028342}
-    - {fileID: 65465316899819168}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _hitColliderDict
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[UnityEngine.Collider,
-        UnityEngine.PhysicsModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 7
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 111
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 121
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 122
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 131
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 132
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 133
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 3
-      Data: 134
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
   _maxHealth: 100
   _leftFoot: {fileID: 4079373178010412}
   _rightFoot: {fileID: 4987438356867278}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
+  _faintRecoveryTime: 2.5
   _target: {fileID: 0}
   _head: {fileID: 4834918598087314}
-  _ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 16896
   _detectMaxDistance: 10
   _detectMaxAngle: 90
-  _patrolOnAwake: 0
+  _patrolOnAwake: 1
   _patrolContainer: {fileID: 0}
   _patrolSpeed: 1.5
   _patrolEndReachedDistance: 0.5
@@ -4073,7 +3948,7 @@ MonoBehaviour:
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4096
   centerOffset: 1
   rotationIn2D: 0
   targetCompatibility: {fileID: 0}

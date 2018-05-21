@@ -2,6 +2,7 @@
 using Pathfinding;
 using Pathfinding.RVO;
 using Sirenix.OdinInspector;
+using System;
 
 [RequireComponent(typeof(TimeController))]
 [RequireComponent(typeof(Seeker))]
@@ -96,4 +97,6 @@ public abstract class EnemyController<TState> : CharacterControllerBase
 
     protected float DetectMaxDistance => _detectMaxDistance;
     protected float DetectMaxAngle => _detectMaxAngle;
+
+    public override float DeltaTime => _timeController.DeltaTime;
 }

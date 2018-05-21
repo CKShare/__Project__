@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -19,6 +20,9 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     [SerializeField, TitleGroup("Foot")]
     private EffectSettings _footstepEffect;
 
+    [SerializeField, TitleGroup("Etc")]
+    private float _faintRecoveryTime = 2.5F;
+
     private Transform _transform;
     private Rigidbody _rigidbody;
     private CapsuleCollider _collider;
@@ -27,13 +31,14 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private HitReaction _hitReaction;
     private FullBodyBipedIK _fbbik;
     private List<Collider> _hitColliders = new List<UnityEngine.Collider>();
-    private List<Rigidbody> _hitRigidbodies = new List<Rigidbody>();
 
     private event Action<GameObject, GameObject, int> _onDamaged;
     private event Action<float> _onHealthChanged;
     private event Action _onDeath;
     private float _currentHealth;
     private bool _isDead;
+    private bool _isFainted;
+    private Coroutine _getUpCrt;
 
     protected virtual void Awake()
     {
@@ -44,14 +49,13 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _ragdoll = GetComponent<RagdollUtility>();
         _hitReaction = GetComponent<HitReaction>();
         _fbbik = GetComponent<FullBodyBipedIK>();
-        
+
         var colliders = GetComponentsInChildren<Collider>();
         foreach (var collider in colliders)
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("HitCollider"))
             {
                 _hitColliders.Add(collider);
-                _hitRigidbodies.Add(collider.GetComponent<Rigidbody>());
             }
         }
     }
@@ -129,14 +133,36 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         }
 
         if (!IsDead && enableRagdoll)
+        {
+            _isFainted = true;
             SetRagdollActive(true, 1 << LayerMask.NameToLayer("HitCollider"));
-        
+            StartCoroutine(GetUpCrt());
+        }
+
         _hitReaction.Hit(collider, force, point);
     }
 
     public virtual void ReactToHit(Collider collider, Vector3 point, Vector3 force)
     {
         _hitReaction.Hit(collider, force, point);
+    }
+
+    private IEnumerator GetUpCrt()
+    {
+        float elpasedTime = 0F;
+        while (elpasedTime < _faintRecoveryTime)
+        {
+            elpasedTime += DeltaTime;
+            yield return null;
+        }
+
+        // Move root position to pelvis position.
+        Vector3 toPelvis = _fbbik.references.pelvis.position - Transform.position;
+        Transform.position += toPelvis;
+        _fbbik.references.pelvis.position -= toPelvis;
+
+        // Disable ragdoll and Enable animator.
+        _ragdoll.DisableRagdoll();
     }
 
     protected virtual void SetRagdollActive(bool active, LayerMask layer)
@@ -196,6 +222,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public HitReaction HitReaction => _hitReaction;
 
     public abstract PhysiqueType PhysiqueType { get; }
+    public abstract float DeltaTime { get; }
 
     private void OnFootPlant(Vector3 origin)
     {

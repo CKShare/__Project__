@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4167307084503550}
   - component: {fileID: 137004731761336438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mang_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixTransforms: 1
+  fixTransforms: 0
   references:
     root: {fileID: 4830864191775784}
     pelvis: {fileID: 4119524308811512}
@@ -3110,6 +3110,7 @@ MonoBehaviour:
   _leftFoot: {fileID: 4564123762211626}
   _rightFoot: {fileID: 4153453629163636}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
+  _faintRecoveryTime: 2.5
   _target: {fileID: 0}
   _head: {fileID: 4642334778901966}
   _detectMaxDistance: 10

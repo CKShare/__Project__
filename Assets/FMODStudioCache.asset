@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114837938849685944}
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   EditorEvents:
   - {fileID: 114888410395178166}
   - {fileID: 114505139440734610}
@@ -25,9 +25,9 @@ MonoBehaviour:
   - {fileID: 114540577469131190}
   - {fileID: 114159493673888942}
   - {fileID: 114355205369821406}
-  MasterBankRef: {fileID: 114294389429238322}
+  MasterBankRef: {fileID: 114974708662236520}
   StringsBankRef: {fileID: 114837938849685944}
-  stringsBankWriteTime: 636623324678696622
+  stringsBankWriteTime: 636621510886449654
   cacheVersion: 2
 --- !u!114 &114021324254685162
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_1
   guid: 62bc6f7e5cb9ea40b683855c8349ed17
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/tile
   guid: b6d8e6a0b1876f41a3b7a07de9d1fcb5
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -333,7 +333,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 243168
-  Exists: 1
+  Exists: 0
 --- !u!114 &114355205369821406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_ex
   guid: ebe071aa40e8dd4dba0ec818e16366cc
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -407,7 +407,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_3
   guid: 608cc61d38367c4b801b3792fc3ce014
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -444,7 +444,7 @@ MonoBehaviour:
   Path: event:/SFX/NPC/weapon/gun
   guid: 27370108b580704b8fc64fd201166e37
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -452,6 +452,21 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 970
+--- !u!114 &114443781997618116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: reverve
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114480034684544112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +519,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_end
   guid: 25a843621921e84eba3d0cc710d2875a
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -545,7 +560,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Hit/hit_2
   guid: 86916190f982f2448d08220778135aec
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -657,7 +672,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/carpet
   guid: 3f4d94b6fa249d45909707ec3fcecdcc
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -696,7 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\Effects\Sfx\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636623324678696622
+  lastModified: 636621510886449654
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -716,7 +731,7 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/metal_bleacher
   guid: 1b0ecf3903d28e449cc0302f18fcad67
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -753,12 +768,12 @@ MonoBehaviour:
   Path: event:/SFX/PC/Walk/concrete
   guid: 2d997e6bb608404c83661cd92439c3cc
   Banks:
-  - {fileID: 114294389429238322}
+  - {fileID: 114974708662236520}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 114089574086756146}
+  - {fileID: 114443781997618116}
   MinDistance: 1
   MaxDistance: 15
   Length: 180
@@ -806,6 +821,25 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 680
+--- !u!114 &114974708662236520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\210-11\Desktop\CEH\__Project__\Assets\Effects\Sfx\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636621510886439621
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 243168
+  Exists: 1
 --- !u!114 &114977508155196704
 MonoBehaviour:
   m_ObjectHideFlags: 0

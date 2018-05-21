@@ -3703,7 +3703,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
-  _maxHealth: 10000
+  _maxHealth: 500
   _leftFoot: {fileID: 4521952600177100}
   _rightFoot: {fileID: 4689258273205206}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
@@ -3723,8 +3723,8 @@ MonoBehaviour:
   _aimRotateSpeed: 15
   _dashCoolTime: 1
   _dashDistance: 7
-  _dashSpeed: 7
-  _dashLerpSpeed: 1
+  _dashSpeed: 1
+  _dashLerpSpeed: 4
   _dashRotateSpeed: 20
   _horizontalAxisName: Horizontal
   _verticalAxisName: Vertical
@@ -3732,9 +3732,6 @@ MonoBehaviour:
   _aimButtonName: Aim
   _concentrateButtonName: Concentrate
   _dashButtonName: Dash
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!114 &114216435133537884
 MonoBehaviour:
   m_ObjectHideFlags: 1

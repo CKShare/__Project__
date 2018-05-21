@@ -22,7 +22,8 @@ public class PlayerController : CharacterControllerBase
         public static readonly int Aim = Animator.StringToHash("Aim");
         public static readonly int Pitch = Animator.StringToHash("Pitch");
         public static readonly int Trigger = Animator.StringToHash("Trigger");
-        public static readonly int IsDashing = Animator.StringToHash("IsDashing");
+        public static readonly int Dash = Animator.StringToHash("Dash");
+        public static readonly int CancelDash = Animator.StringToHash("CancelDash");
     }
 
     [SerializeField, TitleGroup("Stats")]
@@ -203,8 +204,8 @@ public class PlayerController : CharacterControllerBase
             controlDir.y = 0F;
             controlDir.Normalize();
 
-            _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeed, Time.deltaTime * _moveLerpSpeed);
-            _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), Time.deltaTime * _moveRotateSpeed);
+            _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeed, DeltaTime * _moveLerpSpeed);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), DeltaTime * _moveRotateSpeed);
         }
         else
         {
@@ -213,7 +214,7 @@ public class PlayerController : CharacterControllerBase
         }
 
         // Animator
-        Animator.SetFloat(Hash.Accel, Mathf.Clamp01(_axisSqrMagnitude), 0.1F, Time.deltaTime);
+        Animator.SetFloat(Hash.Accel, Mathf.Clamp01(_axisSqrMagnitude), 0.1F, DeltaTime);
         Animator.SetBool(Hash.IsMoving, isControlling);
     }
 
@@ -262,7 +263,6 @@ public class PlayerController : CharacterControllerBase
             Animator.SetTrigger(Hash.Attack);
 
             _target = GameUtility.FindNearestTargetInView(_nearTargets, Transform.position, _attackDirection, _targetingMaxDistance, _targetingMaxAngle, LayerMask.NameToLayer("Enemy"));
-            Debug.Log(_target == null);
         }
 
         // Rotate towards the target or control-direction.
@@ -274,7 +274,7 @@ public class PlayerController : CharacterControllerBase
                 _attackDirection.y = 0F;
             }
 
-            _rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(_attackDirection), Time.deltaTime * _attackRotateSpeed);
+            _rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(_attackDirection), DeltaTime * _attackRotateSpeed);
         }
     }
 
@@ -299,7 +299,7 @@ public class PlayerController : CharacterControllerBase
     {
         if (_dashRemainingTime > 0F)
         {
-            _dashRemainingTime -= Time.deltaTime;
+            _dashRemainingTime -= DeltaTime;
             if (_dashRemainingTime <= 0F)
                 _dashRemainingTime = 0F;
         }
@@ -323,9 +323,9 @@ public class PlayerController : CharacterControllerBase
         _updateRigidbody = false;
         _lockMove = true;
         _lockSlowGun = true;
-        Animator.SetBool(Hash.IsDashing, true);
+        Animator.SetTrigger(Hash.Dash);
 
-        LayerMask layer = LayerMask.NameToLayer("Obstacle");
+        int layer = 1 << LayerMask.NameToLayer("Obstacle") | 1 << LayerMask.NameToLayer("Enemy");
         float h = (Collider.height - Collider.radius * 2F) * 0.5F;
         Vector3 offset = Vector3.up * h;
         float distance = 0F;
@@ -333,31 +333,35 @@ public class PlayerController : CharacterControllerBase
         {
             Vector3 nextPosition = Rigidbody.position + dashDirection * _dashSpeed;
             Vector3 diff = nextPosition - Rigidbody.position;
-            Vector3 velocity = diff / Time.deltaTime;
-            velocity = Vector3.Lerp(Rigidbody.velocity, velocity, Time.deltaTime * _dashLerpSpeed);
+            Vector3 velocity = diff / DeltaTime;
+            velocity = Vector3.Lerp(Rigidbody.velocity, velocity, DeltaTime * _dashLerpSpeed);
             velocity.y = 0F;
-            float d = (velocity * Time.deltaTime).magnitude;
+            float d = (velocity * DeltaTime).magnitude;
 
             // Stop If collides with obstacle.
             Vector3 center = Collider.bounds.center;
             Vector3 point1 = center + offset;
             Vector3 point2 = center - offset;
-            if (Physics.CapsuleCast(point1, point2, Collider.radius, diff, d, 1 << layer))
+            if (Physics.CapsuleCast(point1, point2, Collider.radius - 0.01F, diff, d, layer))
             {
                 break;
             }
 
             Rigidbody.velocity = velocity;
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(dashDirection), Time.deltaTime * _dashRotateSpeed);
+            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(dashDirection), DeltaTime * _dashRotateSpeed);
 
             distance += d;
             yield return _waitForFixedUpdate;
         }
 
+        Animator.SetTrigger(Hash.CancelDash);
+        yield return _waitForFixedUpdate;
+
+        Animator.ResetTrigger(Hash.CancelDash);
         _updateRigidbody = true;
         _lockMove = false;
         _lockSlowGun = false;
-        Animator.SetBool(Hash.IsDashing, false);
+        
         // Reset velocity not to move abnormally fast.
         Rigidbody.velocity = Vector3.zero;
 
@@ -368,7 +372,7 @@ public class PlayerController : CharacterControllerBase
     {
         if (_slowGunRemainingTime > 0F)
         {
-            _slowGunRemainingTime -= Time.deltaTime;
+            _slowGunRemainingTime -= DeltaTime;
             if (_slowGunRemainingTime <= 0F)
                 _slowGunRemainingTime = 0F;
         }
@@ -393,7 +397,7 @@ public class PlayerController : CharacterControllerBase
             Vector3 xzDir = dir;
             xzDir.y = 0F;
             Quaternion look = Quaternion.LookRotation(xzDir);
-            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * Time.deltaTime);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * DeltaTime);
 
             float pitch = _cameraTr.eulerAngles.x;
             if (pitch > 180F)
@@ -426,7 +430,7 @@ public class PlayerController : CharacterControllerBase
     
     private void RegenHealth()
     {
-        CurrentHealth += _healthRegenUnit * Time.deltaTime;
+        CurrentHealth += _healthRegenUnit * DeltaTime;
     }
 
     protected override void SetRagdollActive(bool active, LayerMask layer)
@@ -447,7 +451,8 @@ public class PlayerController : CharacterControllerBase
     public float SlowGunCoolTime => _slowGunCoolTime;
     public float SlowGunRemainingTime => _slowGunRemainingTime;
 
-    public override PhysiqueType PhysiqueType => PhysiqueType.Light; 
+    public override PhysiqueType PhysiqueType => PhysiqueType.Light;
+    public override float DeltaTime => Time.deltaTime;
 
     #region Animation Events
     
