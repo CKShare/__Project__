@@ -3436,7 +3436,7 @@ MonoBehaviour:
     - effector: 0
       weight: -0.5
   - name: L Thigh
-    collider: {fileID: 0}
+    collider: {fileID: 136831209144264896}
     crossFadeTime: 0.05
     offsetInForceDirection:
       serializedVersion: 2
@@ -3687,7 +3687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5105462c9d3696c47ad0635ea2393154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneObject: {fileID: 0}
+  _sceneObject: {fileID: 114750797166031180}
 --- !u!114 &114459717550240164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3773,7 +3773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ik: {fileID: 114215969477542270}
-  ragdollToAnimationTime: 0.2
+  ragdollToAnimationTime: 0.4
   applyIkOnRagdoll: 0
   applyVelocity: 1
   applyAngularVelocity: 1
@@ -3788,7 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5105462c9d3696c47ad0635ea2393154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneObject: {fileID: 0}
+  _sceneObject: {fileID: 114750797166031180}
 --- !u!114 &114654071133040712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3815,7 +3815,7 @@ MonoBehaviour:
   _attackID: 1
   _damage: 30
   _lightReactionInfo:
-    _boneType: 2
+    _boneType: 1
     _force: 4
     _enableRagdoll: 0
   _heavyReactionInfo:
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   _head: {fileID: 4834918598087314}
   _detectMaxDistance: 10
   _detectMaxAngle: 90
-  _patrolOnAwake: 1
+  _patrolOnAwake: 0
   _patrolContainer: {fileID: 0}
   _patrolSpeed: 1.5
   _patrolEndReachedDistance: 0.5
@@ -4020,10 +4020,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.12206178
-  m_Height: 0.6103089
+  m_Radius: 0.07219626
+  m_Height: 0.288785
   m_Direction: 0
-  m_Center: {x: -0.30515444, y: 0, z: 0}
+  m_Center: {x: -0.09, y: 0, z: 0}
 --- !u!136 &136537053937689092
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4049,7 +4049,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.99, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!136 &136611105827873676
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4059,10 +4059,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.023040442
-  m_Height: 0.1152022
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.0576011, z: 0}
+  m_Radius: 0.07219376
+  m_Height: 0.2887751
+  m_Direction: 0
+  m_Center: {x: -0.09, y: 0, z: 0}
 --- !u!136 &136725620631033838
 CapsuleCollider:
   m_ObjectHideFlags: 1

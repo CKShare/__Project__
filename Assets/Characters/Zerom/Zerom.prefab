@@ -1024,6 +1024,8 @@ GameObject:
   - component: {fileID: 95755328858452888}
   - component: {fileID: 54916633485146286}
   - component: {fileID: 136903775174358868}
+  - component: {fileID: 114770304216819140}
+  - component: {fileID: 114023241629617158}
   - component: {fileID: 114254769828826128}
   - component: {fileID: 114637482148774830}
   - component: {fileID: 114955521404122500}
@@ -3658,6 +3660,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114023241629617158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621569592859118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  unwrap: 1
+  splitAtEveryPortal: 0
 --- !u!114 &114066797376870984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3707,6 +3723,7 @@ MonoBehaviour:
   _leftFoot: {fileID: 4521952600177100}
   _rightFoot: {fileID: 4689258273205206}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
+  _faintRecoveryTime: 2.5
   _healthRegenUnit: 8
   _moveSpeed: 8
   _moveLerpSpeed: 8
@@ -3730,7 +3747,7 @@ MonoBehaviour:
   _verticalAxisName: Vertical
   _attackButtonName: Attack
   _aimButtonName: Aim
-  _concentrateButtonName: Concentrate
+  _crouchButtonName: Crouch
   _dashButtonName: Dash
 --- !u!114 &114216435133537884
 MonoBehaviour:
@@ -5030,6 +5047,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneObject: {fileID: 114160471549823888}
+--- !u!114 &114770304216819140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621569592859118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114772250900893658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5300,10 +5343,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.012560363
-  m_Height: 0.062801816
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.031400908, z: 0}
+  m_Radius: 0.07370908
+  m_Height: 0.2948363
+  m_Direction: 0
+  m_Center: {x: -0.16, y: 0, z: 0}
 --- !u!136 &136688245399260488
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -5326,10 +5369,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.012560338
-  m_Height: 0.06280169
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.031400844, z: 0}
+  m_Radius: 0.07370915
+  m_Height: 0.2948366
+  m_Direction: 0
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!136 &136898926867021872
 CapsuleCollider:
   m_ObjectHideFlags: 1

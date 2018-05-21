@@ -37,7 +37,6 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private event Action _onDeath;
     private float _currentHealth;
     private bool _isDead;
-    private bool _isFainted;
     private Coroutine _getUpCrt;
 
     protected virtual void Awake()
@@ -80,7 +79,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         weapon.Drop();
 
         // Ragdoll
-        SetRagdollActive(true, LayerMask.GetMask("HitCollider", "Weapon"));
+        SetRagdollActive(true);
 
         _onDeath?.Invoke();
     }
@@ -134,9 +133,10 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 
         if (!IsDead && enableRagdoll)
         {
-            _isFainted = true;
-            SetRagdollActive(true, 1 << LayerMask.NameToLayer("HitCollider"));
-            StartCoroutine(GetUpCrt());
+            SetRagdollActive(true);
+            if (_getUpCrt == null)
+                _getUpCrt = StartCoroutine(GetUpCrt());
+            OnFaint();
         }
 
         _hitReaction.Hit(collider, force, point);
@@ -147,8 +147,21 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _hitReaction.Hit(collider, force, point);
     }
 
+    protected virtual void OnFaint() { }
+    protected virtual void OnGetUp(bool isFront) { }
+
     private IEnumerator GetUpCrt()
     {
+        Transform pelvis = _fbbik.references.pelvis;
+
+        // Check whether the body is on the ground or obstacle.
+        int layer = 1 << LayerMask.NameToLayer("Ground") | 1 << LayerMask.NameToLayer("Obstacle");
+        while (!Physics.Raycast(pelvis.position, Vector3.down, 1F, layer))
+        {
+            yield return null;
+        }  
+
+        // If the body is on the ground or obstacle, Make the body get up after a few seconds.
         float elpasedTime = 0F;
         while (elpasedTime < _faintRecoveryTime)
         {
@@ -156,22 +169,33 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
             yield return null;
         }
 
-        // Move root position to pelvis position.
-        Vector3 toPelvis = _fbbik.references.pelvis.position - Transform.position;
-        Transform.position += toPelvis;
-        _fbbik.references.pelvis.position -= toPelvis;
+        // Move root position to pelvis position without moving ragdoll.
+        Vector3 toPelvisPosition = pelvis.position - Transform.position;
+        Transform.position += toPelvisPosition;
+        pelvis.position -= toPelvisPosition;
+
+        //
+        Vector3 toPelvisRotation = pelvis.eulerAngles - Transform.eulerAngles;
+        Transform.eulerAngles -= new Vector3(0F, toPelvisRotation.y, 0F);
+        pelvis.eulerAngles += new Vector3(0F, toPelvisRotation.y, 0F);
 
         // Disable ragdoll and Enable animator.
-        _ragdoll.DisableRagdoll();
+        SetRagdollActive(false);
+
+        // 
+        bool isFront = Vector3.Dot(pelvis.up, Vector3.up) > 0;
+        OnGetUp(isFront);
     }
 
-    protected virtual void SetRagdollActive(bool active, LayerMask layer)
+    protected virtual void SetRagdollActive(bool active)
     {
         Collider.enabled = !active;
         foreach (var col in _hitColliders)
             col.isTrigger = !active;
         if (active)
-            _ragdoll.EnableRagdoll(layer);
+            _ragdoll.EnableRagdoll(1 << LayerMask.NameToLayer("HitCollider"));
+        else
+            _ragdoll.DisableRagdoll();
     }
 
     public event Action<GameObject, GameObject, int> OnDamaged
@@ -211,7 +235,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
             _onHealthChanged?.Invoke(_currentHealth);
         }
     }
-    
+
     public float MaxHealth => _maxHealth;
     public bool IsDead => _isDead;
 

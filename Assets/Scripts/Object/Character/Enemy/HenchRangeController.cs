@@ -11,6 +11,7 @@ public enum HenchRangeState
     Combat,
     Chase,
     Hit,
+    Faint,
     Dead
 }
 
@@ -21,6 +22,8 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         public static readonly int Speed = Animator.StringToHash("Speed");
         public static readonly int IsDetected = Animator.StringToHash("IsDetected");
         public static readonly int Trigger = Animator.StringToHash("Trigger");
+        public static readonly int GetUpFront = Animator.StringToHash("GetUpFront");
+        public static readonly int GetUpBack = Animator.StringToHash("GetUpBack");
         public static readonly int IsDead = Animator.StringToHash("IsDead");
     }
 
@@ -133,6 +136,13 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 break;
 
             case HenchRangeState.Hit:
+                {
+                    RichAI.isStopped = true;
+                    RichAI.canSearch = false;
+                }
+                break;
+
+            case HenchRangeState.Faint:
                 {
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
@@ -272,16 +282,13 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             case HenchRangeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                    {
-                        if (Animator.GetBool(Hash.IsDetected))
-                        {
-                            ChangeState(HenchRangeState.Combat);
-                        }
-                        else
-                        {
-                            ChangeState(HenchRangeState.Detected);
-                        }
-                    }
+                        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detected);
+                }
+                break;
+
+            case HenchRangeState.Faint:
+                {
+
                 }
                 break;
 
@@ -338,6 +345,13 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
+            case HenchRangeState.Faint:
+                {
+                    RichAI.isStopped = false;
+                    RichAI.canSearch = true;
+                }
+                break;
+
             case HenchRangeState.Dead:
                 {
 
@@ -365,7 +379,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
         base.ReactToHit(boneType, point, force, enableRagdoll);
 
         if (!IsDead)
-            ChangeState(HenchRangeState.Hit);
+            ChangeState(enableRagdoll ? HenchRangeState.Faint : HenchRangeState.Hit);
     }
 
     public override void ReactToHit(Collider collider, Vector3 point, Vector3 force)
@@ -376,5 +390,29 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             ChangeState(HenchRangeState.Hit);
     }
 
+    protected override void OnFaint()
+    {
+        base.OnFaint();
+
+        Animator.ResetTrigger(Hash.Trigger);
+        ChangeState(HenchRangeState.Faint);
+    }
+
+    protected override void OnGetUp(bool isFront)
+    {
+        base.OnGetUp(isFront);
+
+        Animator.SetTrigger(isFront ? Hash.GetUpFront : Hash.GetUpBack);
+    }
+
     public override PhysiqueType PhysiqueType => PhysiqueType.Light;
+
+    #region Animation Events
+
+    private void OnGetUpExit()
+    {
+        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detected);
+    }
+
+    #endregion
 }

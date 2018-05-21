@@ -2725,7 +2725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ik: {fileID: 114506733814281524}
-  ragdollToAnimationTime: 0.2
+  ragdollToAnimationTime: 0.4
   applyIkOnRagdoll: 0
   applyVelocity: 1
   applyAngularVelocity: 1
@@ -4089,7 +4089,7 @@ MonoBehaviour:
   _lookRotateSpeed: 10
   _chaseSpeed: 3
   _chaseKeepDistance: 15
-  _combatStrafeSpeed: 0
+  _combatStrafeSpeed: 1.5
   _combatKeepDistance: 10
   _combatDistanceError: 1
   _rangeWeapon: {fileID: 114230702219704004}
@@ -4116,10 +4116,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.12206178
-  m_Height: 0.6103089
+  m_Radius: 0.07219626
+  m_Height: 0.288785
   m_Direction: 0
-  m_Center: {x: -0.30515444, y: 0, z: 0}
+  m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!136 &136153922214798998
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4129,10 +4129,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.023040442
-  m_Height: 0.1152022
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.0576011, z: 0}
+  m_Radius: 0.07219376
+  m_Height: 0.2887751
+  m_Direction: 0
+  m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!136 &136172447709596204
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4158,7 +4158,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.99, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!136 &136596237472711520
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ public enum HenchMeleeState
     Chase,
     Attack,
     Hit,
+    Faint,
     Dead
 }
 
@@ -22,6 +23,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         public static readonly int Speed = Animator.StringToHash("Speed");
         public static readonly int IsDetected = Animator.StringToHash("IsDetected");
         public static readonly int Attack = Animator.StringToHash("Attack");
+        public static readonly int GetUpFront = Animator.StringToHash("GetUpFront");
+        public static readonly int GetUpBack = Animator.StringToHash("GetUpBack");
         public static readonly int IsDead = Animator.StringToHash("IsDead");
     }
 
@@ -143,6 +146,13 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 }
                 break;
 
+            case HenchMeleeState.Faint:
+                {
+                    RichAI.isStopped = true;
+                    RichAI.canSearch = false;
+                }
+                break;
+
             case HenchMeleeState.Dead:
                 {
 
@@ -238,16 +248,13 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             case HenchMeleeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                    {
-                        if (Animator.GetBool(Hash.IsDetected))
-                        {
-                            ChangeState(HenchMeleeState.Combat);
-                        }
-                        else
-                        {
-                            ChangeState(HenchMeleeState.Detected);
-                        }
-                    }
+                        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchMeleeState.Combat : HenchMeleeState.Detected);
+                }
+                break;
+
+            case HenchMeleeState.Faint:
+                {
+                 
                 }
                 break;
 
@@ -303,6 +310,13 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 }
                 break;
 
+            case HenchMeleeState.Faint:
+                {
+                    RichAI.isStopped = false;
+                    RichAI.canSearch = true;
+                }
+                break;
+
             case HenchMeleeState.Dead:
                 {
 
@@ -330,7 +344,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
         base.ReactToHit(boneType, point, force, enableRagdoll);
 
         if (!IsDead)
-            ChangeState(HenchMeleeState.Hit);
+            ChangeState(enableRagdoll ? HenchMeleeState.Faint : HenchMeleeState.Hit);
     }
 
     public override void ReactToHit(Collider collider, Vector3 point, Vector3 force)
@@ -339,6 +353,21 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
         if (!IsDead)
             ChangeState(HenchMeleeState.Hit);
+    }
+
+    protected override void OnFaint()
+    {
+        base.OnFaint();
+
+        Animator.ResetTrigger(Hash.Attack);
+        ChangeState(HenchMeleeState.Faint);
+    }
+
+    protected override void OnGetUp(bool isFront)
+    {
+        base.OnGetUp(isFront);
+
+        Animator.SetTrigger(isFront ? Hash.GetUpFront : Hash.GetUpBack);
     }
 
     public override PhysiqueType PhysiqueType => PhysiqueType.Light;
@@ -353,6 +382,11 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     private void CheckHit(int attackID)
     {
         _meleeWeapon.Hit(Target.gameObject, attackID);
+    }
+
+    private void OnGetUpExit()
+    {
+        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchMeleeState.Combat : HenchMeleeState.Detected);
     }
 
     #endregion

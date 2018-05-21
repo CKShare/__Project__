@@ -2,7 +2,6 @@
 using Pathfinding;
 using Pathfinding.RVO;
 using Sirenix.OdinInspector;
-using System;
 
 [RequireComponent(typeof(TimeController))]
 [RequireComponent(typeof(Seeker))]
@@ -67,22 +66,25 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     protected bool IsTargetInView(float maxDistance, float maxAngle)
     {
         Vector3 diff = _target.position - _head.position;
-        float sqrDist = diff.sqrMagnitude;
-        if (sqrDist < _detectMaxDistance * _detectMaxDistance)
+        float angle = Vector3.Angle(Transform.forward, diff);
+        if (angle < maxAngle)
         {
-            float angle = Vector3.Angle(Transform.forward, diff);
-            if (angle < maxAngle)
+            float offset = _targetCollider.bounds.size.y * 0.9F;
+            RaycastHit rayHitInfo;
+            if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, maxDistance, (1 << Target.gameObject.layer | 1 << LayerMask.NameToLayer("Obstacle"))))
             {
-                float offset = _targetCollider.bounds.size.y * 0.9F;
-                RaycastHit rayHitInfo;
-                if (Physics.Raycast(_head.position, diff + new Vector3(0F, offset, 0F), out rayHitInfo, maxDistance, (1 << Target.gameObject.layer | 1 << LayerMask.NameToLayer("Obstacle"))))
-                {
-                    return rayHitInfo.transform.gameObject.layer == _target.gameObject.layer;
-                }
+                return rayHitInfo.transform.gameObject.layer == _target.gameObject.layer;
             }
         }
 
         return false;
+    }
+
+    protected override void OnDeathInternal()
+    {
+        base.OnDeathInternal();
+
+        GetComponent<RVOController>().enabled = false;
     }
 
     protected abstract void OnStateEnter(TState state);

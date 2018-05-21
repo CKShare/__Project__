@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using RootMotion.FinalIK;
+using Pathfinding;
 
+[RequireComponent(typeof(Seeker))]
 [RequireComponent(typeof(GrounderFBBIK))]
 [RequireComponent(typeof(FullBodyBipedIK))]
 public class PlayerController : CharacterControllerBase
@@ -17,13 +18,16 @@ public class PlayerController : CharacterControllerBase
         public static readonly int ComboNumber = Animator.StringToHash("ComboNumber");
         public static readonly int PatternType = Animator.StringToHash("PatternType");
         public static readonly int Attack = Animator.StringToHash("Attack");
-        public static readonly int ReactionID = Animator.StringToHash("ReactionID");
         public static readonly int IsAiming = Animator.StringToHash("IsAiming");
         public static readonly int Aim = Animator.StringToHash("Aim");
         public static readonly int Pitch = Animator.StringToHash("Pitch");
         public static readonly int Trigger = Animator.StringToHash("Trigger");
         public static readonly int Dash = Animator.StringToHash("Dash");
         public static readonly int CancelDash = Animator.StringToHash("CancelDash");
+        public static readonly int GetUpFront = Animator.StringToHash("GetUpFront");
+        public static readonly int GetUpBack = Animator.StringToHash("GetUpBack");
+        public static readonly int Crouch = Animator.StringToHash("Crouch");
+        public static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
     }
 
     [SerializeField, TitleGroup("Stats")]
@@ -68,7 +72,7 @@ public class PlayerController : CharacterControllerBase
     private float _dashLerpSpeed = 10F;
     [SerializeField, TitleGroup("Dash")]
     private float _dashRotateSpeed = 10F;
-    
+
     [SerializeField, Required, TitleGroup("Input")]
     private string _horizontalAxisName = "Horizontal";
     [SerializeField, Required, TitleGroup("Input")]
@@ -78,12 +82,13 @@ public class PlayerController : CharacterControllerBase
     [SerializeField, Required, TitleGroup("Input")]
     private string _aimButtonName = "Aim";
     [SerializeField, Required, TitleGroup("Input")]
-    private string _concentrateButtonName = "Concentrate";
+    private string _crouchButtonName = "Crouch";
     [SerializeField, Required, TitleGroup("Input")]
     private string _dashButtonName = "Dash";
 
     private Camera _camera;
     private Transform _cameraTr;
+    private Seeker _seeker;
 
     private Vector3 _velocity;
     private Quaternion _rotation;
@@ -106,8 +111,6 @@ public class PlayerController : CharacterControllerBase
     private bool _comboTransitionEnabled;
     private bool _lockMeleeAttack;
 
-    private bool _concentratePressed;
-
     private event Action<bool> _onAimActiveChanged;
     private bool _aimPressing;
     private bool _lockSlowGun;
@@ -118,9 +121,12 @@ public class PlayerController : CharacterControllerBase
     private Coroutine _dashCrt;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
     private bool _lockDash;
-    
-    private GameObject _concentrateCamera;
-    private bool _isConcentrateEnabled;
+
+    private bool _crouchPressed;
+    private Transform _crouchPoint;
+    private Coroutine _crouchCrt;
+    private bool _cancelCrouch;
+    private bool _lockCrouch;
 
     protected override void Awake()
     {
@@ -128,10 +134,7 @@ public class PlayerController : CharacterControllerBase
         
         _camera = Camera.main;
         _cameraTr = _camera.transform;
-        var concentrateCamera = _cameraTr.GetChild(0).GetComponent<Camera>();
-        concentrateCamera.SetReplacementShader(Shader.Find("Hidden/XRay"), "XRay");
-        concentrateCamera.clearStencilAfterLightingPass = true;
-        _concentrateCamera = concentrateCamera.gameObject;
+        _seeker = GetComponent<Seeker>();
 
         foreach (var weapon in GetComponentsInChildren<Weapon>())
             weapon.Owner = gameObject;
@@ -139,6 +142,16 @@ public class PlayerController : CharacterControllerBase
         // Cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void OnEnable()
+    {
+        _seeker.pathCallback += OnPathComplete;
+    }
+
+    private void OnDisable()
+    {
+        _seeker.pathCallback -= OnPathComplete;
     }
 
     protected override void Start()
@@ -156,6 +169,20 @@ public class PlayerController : CharacterControllerBase
             velocity.y = Rigidbody.velocity.y;
             Rigidbody.velocity = velocity;
         }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        int layer = LayerMask.NameToLayer("CrouchPoint");
+        if (col.gameObject.layer == layer)
+            _crouchPoint = col.transform;
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        int layer = LayerMask.NameToLayer("CrouchPoint");
+        if (col.gameObject.layer == layer)
+            _crouchPoint = null;
     }
 
     private void FixedUpdate()
@@ -180,7 +207,7 @@ public class PlayerController : CharacterControllerBase
         MeleeAttack();
         Dash();
         SlowGun();
-        Concentrate();
+        Crouch();
 
         RegenHealth();
     }
@@ -190,37 +217,40 @@ public class PlayerController : CharacterControllerBase
         _axisValue = new Vector2(Input.GetAxisRaw(_horizontalAxisName), Input.GetAxisRaw(_verticalAxisName));
         _axisSqrMagnitude = _axisValue.sqrMagnitude;
         _attackPressed = Input.GetButtonDown(_attackButtonName);
-        _concentratePressed = Input.GetButtonDown(_concentrateButtonName);
+        _crouchPressed = Input.GetButtonDown(_crouchButtonName);
         _aimPressing = Input.GetButton(_aimButtonName);
         _dashPressed = Input.GetButtonDown(_dashButtonName);
     }
     
     private void Movement()
     {
-        bool isControlling = _axisSqrMagnitude > 0F && !_lockMove;
-        if (isControlling)
+        if (!LockMove)
         {
-            Vector3 controlDir = _cameraTr.forward * _axisValue.y + _cameraTr.right * _axisValue.x;
-            controlDir.y = 0F;
-            controlDir.Normalize();
+            bool isControlling = _axisSqrMagnitude > 0F;
+            if (isControlling)
+            {
+                Vector3 controlDir = _cameraTr.forward * _axisValue.y + _cameraTr.right * _axisValue.x;
+                controlDir.y = 0F;
+                controlDir.Normalize();
 
-            _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeed, DeltaTime * _moveLerpSpeed);
-            _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), DeltaTime * _moveRotateSpeed);
-        }
-        else
-        {
-            _velocity = Vector3.zero;
-            _rotation = Quaternion.LookRotation(Transform.forward);
-        }
+                _velocity = Vector3.Lerp(Rigidbody.velocity, controlDir * _moveSpeed, DeltaTime * _moveLerpSpeed);
+                _rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(controlDir), DeltaTime * _moveRotateSpeed);
+            }
+            else
+            {
+                _velocity = Vector3.zero;
+                _rotation = Quaternion.LookRotation(Transform.forward);
+            }
 
-        // Animator
-        Animator.SetFloat(Hash.Accel, Mathf.Clamp01(_axisSqrMagnitude), 0.1F, DeltaTime);
-        Animator.SetBool(Hash.IsMoving, isControlling);
+            // Animator
+            Animator.SetFloat(Hash.Accel, Mathf.Clamp01(_axisSqrMagnitude), 0.1F, DeltaTime);
+            Animator.SetBool(Hash.IsMoving, isControlling);
+        }
     }
 
     private void MeleeAttack()
     {
-        if (_lockMeleeAttack)
+        if (LockMeleeAttack)
             return;
 
         if (_attackPressed)
@@ -278,21 +308,113 @@ public class PlayerController : CharacterControllerBase
         }
     }
 
-    private void Concentrate()
+    private void Crouch()
     {
-        if (_concentratePressed)
+        if (_crouchPressed)
         {
-            if (!_isConcentrateEnabled)
+            if (_crouchCrt == null)
             {
-                _concentrateCamera.SetActive(true);
-                _isConcentrateEnabled = true;
+                if (!LockCrouch && _crouchPoint != null)
+                {
+                    _crouchCrt = StartCoroutine(CrouchCrt());
+                }
             }
             else
             {
-                _concentrateCamera.SetActive(false);
-                _isConcentrateEnabled = false;
+                _cancelCrouch = true;
             }
         }
+        else if (_crouchCrt != null)
+        {
+            if (_axisSqrMagnitude > 0F || HitReaction.inProgress)
+            {
+                _cancelCrouch = true;
+            }
+        }
+    }
+
+    private IEnumerator CrouchCrt()
+    {
+        _updateRigidbody = false;
+        LockMove = true;
+        LockDash = true;
+        LockSlowGun = true;
+        LockMeleeAttack = true;
+
+        Path p = _seeker.StartPath(Transform.position, _crouchPoint.position);
+        while (true)
+        {
+            if (p.CompleteState == PathCompleteState.Error)
+            {
+                _cancelCrouch = true;
+                break;
+            }
+            else if (p.CompleteState == PathCompleteState.Complete)
+            {
+                break;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        // First, Move to the crouch point.
+        Animator.SetBool(Hash.IsMoving, true);
+        int current = 0;
+        var points = p.vectorPath;
+        while (current < points.Count && !_cancelCrouch)
+        {
+            Vector3 diff = points[current] - Transform.position;
+            diff.y = 0F;
+            float sqrDist = diff.sqrMagnitude;
+            if (sqrDist < 0.01F)
+            {
+                current++;
+                continue;
+            }
+
+            Rigidbody.velocity = Vector3.Lerp(Rigidbody.velocity, diff.normalized * _moveSpeed, DeltaTime * _moveLerpSpeed);
+            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(diff), DeltaTime * _moveRotateSpeed);
+            yield return _waitForFixedUpdate;
+        }
+        Rigidbody.velocity = Vector3.zero;
+        if (p != null && !p.error)
+            p.Release(this);
+        Animator.SetBool(Hash.IsMoving, false);
+
+        // Second, Crouch down and Rotate towards the facing direction of the crouch point.
+        Animator.SetTrigger(Hash.Crouch);
+        Animator.SetBool(Hash.IsCrouching, true);
+        // Enable Shader.
+
+        while (!_cancelCrouch)
+        {
+            Vector3 forward = _crouchPoint.forward;
+            forward.y = 0F;
+            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(forward), DeltaTime * _moveRotateSpeed);
+            yield return _waitForFixedUpdate;
+        }
+        _rotation = Rigidbody.rotation;
+
+        Animator.ResetTrigger(Hash.Crouch);
+        Animator.SetBool(Hash.IsCrouching, false);
+        // Disable Shader.
+
+        _updateRigidbody = true;
+        LockMove = false;
+        LockDash = false;
+        LockSlowGun = false;
+        LockMeleeAttack = false;
+
+        _cancelCrouch = false;
+        _crouchCrt = null;
+    }
+
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+            p.Claim(this);
     }
 
     private void Dash()
@@ -304,7 +426,7 @@ public class PlayerController : CharacterControllerBase
                 _dashRemainingTime = 0F;
         }
 
-        if (_dashPressed && _dashRemainingTime <= 0F)
+        if (!LockDash && _dashPressed && _dashRemainingTime <= 0F)
         {
             if (_dashCrt != null)
                 StopCoroutine(_dashCrt);
@@ -321,15 +443,15 @@ public class PlayerController : CharacterControllerBase
         dashDirection.Normalize();
 
         _updateRigidbody = false;
-        _lockMove = true;
-        _lockSlowGun = true;
+        LockMove = true;
+        LockSlowGun = true;
         Animator.SetTrigger(Hash.Dash);
 
         int layer = 1 << LayerMask.NameToLayer("Obstacle") | 1 << LayerMask.NameToLayer("Enemy");
         float h = (Collider.height - Collider.radius * 2F) * 0.5F;
         Vector3 offset = Vector3.up * h;
         float distance = 0F;
-        while (distance < _dashDistance)
+        while (distance < _dashDistance && !LockDash)
         {
             Vector3 nextPosition = Rigidbody.position + dashDirection * _dashSpeed;
             Vector3 diff = nextPosition - Rigidbody.position;
@@ -359,8 +481,8 @@ public class PlayerController : CharacterControllerBase
 
         Animator.ResetTrigger(Hash.CancelDash);
         _updateRigidbody = true;
-        _lockMove = false;
-        _lockSlowGun = false;
+        LockMove = false;
+        LockSlowGun = false;
         
         // Reset velocity not to move abnormally fast.
         Rigidbody.velocity = Vector3.zero;
@@ -377,55 +499,56 @@ public class PlayerController : CharacterControllerBase
                 _slowGunRemainingTime = 0F;
         }
 
-        bool isAiming = _aimPressing && !_lockSlowGun;
-        if (isAiming)
+        if (!LockSlowGun)
         {
-            if (!Animator.GetBool(Hash.IsAiming))
+            bool isAiming = _aimPressing;
+            if (isAiming)
             {
-                _onAimActiveChanged?.Invoke(true);
-                _lockMove = true;
-                _lockMeleeAttack = true;
-                _lockDash = true;
-                Animator.SetTrigger(Hash.Aim);
+                if (!Animator.GetBool(Hash.IsAiming))
+                {
+                    _onAimActiveChanged?.Invoke(true);
+                    LockMove = true;
+                    LockMeleeAttack = true;
+                    Animator.SetTrigger(Hash.Aim);
+                }
+
+                // Rotate towards aiming direction.
+                Ray ray = new Ray(_cameraTr.position, _cameraTr.forward);
+                Vector3 lookPoint = ray.GetPoint(30F);
+                Vector3 dir = lookPoint - _cameraTr.position;
+
+                Vector3 xzDir = dir;
+                xzDir.y = 0F;
+                Quaternion look = Quaternion.LookRotation(xzDir);
+                _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * DeltaTime);
+
+                float pitch = _cameraTr.eulerAngles.x;
+                if (pitch > 180F)
+                    pitch -= 360F;
+                pitch *= -1F;
+                Animator.SetFloat(Hash.Pitch, pitch);
+
+                // Fire
+                if (_attackPressed && _slowGunRemainingTime <= 0F)
+                {
+                    _slowGunRemainingTime = _slowGunCoolTime;
+
+                    _slowGun.Trigger(dir);
+                    Animator.SetTrigger(Hash.Trigger);
+                }
+            }
+            else if (Animator.GetBool(Hash.IsAiming))
+            {
+                _onAimActiveChanged?.Invoke(false);
+                LockMove = false;
+                LockMeleeAttack = false;
+
+                if (LockSlowGun)
+                    HolsterGun();
             }
 
-            // Rotate towards aiming direction.
-            Ray ray = new Ray(_cameraTr.position, _cameraTr.forward);
-            Vector3 lookPoint = ray.GetPoint(30F);
-            Vector3 dir = lookPoint - _cameraTr.position;
-
-            Vector3 xzDir = dir;
-            xzDir.y = 0F;
-            Quaternion look = Quaternion.LookRotation(xzDir);
-            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * DeltaTime);
-
-            float pitch = _cameraTr.eulerAngles.x;
-            if (pitch > 180F)
-                pitch -= 360F;
-            pitch *= -1F;
-            Animator.SetFloat(Hash.Pitch, pitch);
-
-            // Fire
-            if (_attackPressed && _slowGunRemainingTime <= 0F)
-            {
-                _slowGunRemainingTime = _slowGunCoolTime;
-
-                _slowGun.Trigger(dir);
-                Animator.SetTrigger(Hash.Trigger);
-            }
+            Animator.SetBool(Hash.IsAiming, isAiming);
         }
-        else if (Animator.GetBool(Hash.IsAiming))
-        {
-            _onAimActiveChanged?.Invoke(false);
-            _lockMove = false;
-            _lockMeleeAttack = false;
-            _lockDash = false;
-
-            if (_lockSlowGun)
-                HolsterGun();
-        }
-
-        Animator.SetBool(Hash.IsAiming, isAiming);
     }
     
     private void RegenHealth()
@@ -433,17 +556,120 @@ public class PlayerController : CharacterControllerBase
         CurrentHealth += _healthRegenUnit * DeltaTime;
     }
 
-    protected override void SetRagdollActive(bool active, LayerMask layer)
+    protected override void SetRagdollActive(bool active)
     {
-        base.SetRagdollActive(active, layer);
+        base.SetRagdollActive(active);
 
         Rigidbody.isKinematic = active;
+    }
+
+    protected override void OnGetUp(bool isFront)
+    {
+        base.OnGetUp(isFront);
+
+        Animator.SetTrigger(isFront ? Hash.GetUpFront : Hash.GetUpBack);
     }
 
     public event Action<bool> OnAimActiveChanged
     {
         add { _onAimActiveChanged += value; }
         remove { _onAimActiveChanged -= value; }
+    }
+
+    private bool LockMove
+    {
+        get
+        {
+            return _lockMove;
+        }
+
+        set
+        {
+            _lockMove = value;
+            if (value)
+            {
+                _velocity = Vector3.zero;
+                _rotation = Quaternion.LookRotation(Transform.forward);
+                Animator.SetFloat(Hash.Accel, 0F);
+                Animator.SetBool(Hash.IsMoving, false);
+            }
+        }
+    }
+
+    private bool LockMeleeAttack
+    {
+        get
+        {
+            return _lockMeleeAttack;
+        }
+
+        set
+        {
+            _lockMeleeAttack = value;
+            if (value)
+            {
+                _rotation = Quaternion.LookRotation(Transform.forward);
+                ResetCombo();
+                Animator.ResetTrigger(Hash.Attack);
+            }
+        }
+    }
+
+    private bool LockSlowGun
+    {
+        get
+        {
+            return _lockSlowGun;
+        }
+
+        set
+        {
+            _lockSlowGun = value;
+            if (value)
+            {
+                Animator.ResetTrigger(Hash.Aim);
+                Animator.SetBool(Hash.IsAiming, false);
+            }
+        }
+    }
+
+    private bool LockDash
+    {
+        get
+        {
+            return _lockDash;
+        }
+
+        set
+        {
+            _lockDash = value;
+            if (value)
+            {
+                Animator.ResetTrigger(Hash.Dash);
+                Animator.ResetTrigger(Hash.CancelDash);
+            }
+        }
+    }
+
+    private bool LockCrouch
+    {
+        get
+        {
+            return _lockCrouch;
+        }
+
+        set
+        {
+            _lockCrouch = value;
+            if (value)
+            {
+                Animator.ResetTrigger(Hash.Crouch);
+                Animator.SetBool(Hash.IsCrouching, false);
+
+                if (_crouchCrt != null)
+                    _cancelCrouch = true;
+            }
+        }
     }
 
     public float DashCoolTime => _dashCoolTime;
@@ -464,7 +690,7 @@ public class PlayerController : CharacterControllerBase
     private void EnableComboTransition()
     {
         _comboTransitionEnabled = true;
-        _lockSlowGun = false;
+        LockSlowGun = false;
     }
 
     private void CheckHit(int attackID)
@@ -478,8 +704,8 @@ public class PlayerController : CharacterControllerBase
     private void OnAttackEnter()
     {
         _applyRootMotion = true;
-        _lockMove = true;
-        _lockSlowGun = true;
+        LockMove = true;
+        LockSlowGun = true;
     }
 
     private void OnAttackExit()
@@ -487,8 +713,8 @@ public class PlayerController : CharacterControllerBase
         //if (_comboTransitionEnabled)
         {
             _applyRootMotion = false;
-            _lockMove = false;
-            _lockSlowGun = false;
+            LockMove = false;
+            LockSlowGun = false;
         }
     }
     
@@ -515,7 +741,7 @@ public class PlayerController : CharacterControllerBase
 
     private void UnholsterGun()
     {
-        if (!_lockSlowGun)
+        if (!LockSlowGun)
             _slowGun.transform.SetParent(_grip, false);
     }
 

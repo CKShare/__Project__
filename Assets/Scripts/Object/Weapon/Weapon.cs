@@ -13,8 +13,12 @@ public abstract class Weapon : SerializedMonoBehaviour
 
         // Now, this weapon can be affected by physics.
         var collider = GetComponent<Collider>();
-        if (collider != null)
+        var rigid = GetComponent<Rigidbody>();
+        if (rigid != null && collider != null)
+        {
             collider.isTrigger = false;
+            rigid.isKinematic = false;
+        }
 
         transform.SetParent(null, true);
         Owner = null;
