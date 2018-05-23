@@ -93,8 +93,8 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             case HenchRangeState.Patrol:
                 {
                     RichAI.endReachedDistance = _patrolEndReachedDistance;
-                    RichAI.maxSpeed = _patrolSpeed;
-
+                    TimeControlRichAI.MaxSpeed = _patrolSpeed;
+                    
                     if (_patrolToNearest)
                     {
                         Seeker.StartMultiTargetPath(Transform.position, _patrolPoints, false, OnMultiPathComplete);
@@ -117,7 +117,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
             case HenchRangeState.Chase:
                 {
-                    RichAI.maxSpeed = _chaseSpeed;
+                    TimeControlRichAI.MaxSpeed = _chaseSpeed;
                     RichAI.endReachedDistance = _chaseKeepDistance;
                     RichAI.destination = Target.position;
                     RichAI.SearchPath();

@@ -121,7 +121,7 @@ public class PlayerController : CharacterControllerBase
     private Coroutine _dashCrt;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
     private bool _lockDash;
-
+    
     private bool _crouchPressed;
     private Transform _crouchPoint;
     private Coroutine _crouchCrt;
@@ -133,6 +133,7 @@ public class PlayerController : CharacterControllerBase
         base.Awake();
         
         _camera = Camera.main;
+        //_camera.clearStencilAfterLightingPass = true;
         _cameraTr = _camera.transform;
         _seeker = GetComponent<Seeker>();
 
@@ -386,6 +387,9 @@ public class PlayerController : CharacterControllerBase
         // Second, Crouch down and Rotate towards the facing direction of the crouch point.
         Animator.SetTrigger(Hash.Crouch);
         Animator.SetBool(Hash.IsCrouching, true);
+        // Scale Collider.
+        Collider.height *= 0.5F;
+        Collider.center = Vector3.Scale(Collider.center, new Vector3(1F, 0.5F, 1F));
         // Enable Shader.
 
         while (!_cancelCrouch)
@@ -399,6 +403,9 @@ public class PlayerController : CharacterControllerBase
 
         Animator.ResetTrigger(Hash.Crouch);
         Animator.SetBool(Hash.IsCrouching, false);
+        // Scale Collider.
+        Collider.height *= 2F;
+        Collider.center = Vector3.Scale(Collider.center, new Vector3(1F, 2F, 1F));
         // Disable Shader.
 
         _updateRigidbody = true;
@@ -444,6 +451,7 @@ public class PlayerController : CharacterControllerBase
 
         _updateRigidbody = false;
         LockMove = true;
+        LockMeleeAttack = true;
         LockSlowGun = true;
         Animator.SetTrigger(Hash.Dash);
 
@@ -482,6 +490,7 @@ public class PlayerController : CharacterControllerBase
         Animator.ResetTrigger(Hash.CancelDash);
         _updateRigidbody = true;
         LockMove = false;
+        LockMeleeAttack = false;
         LockSlowGun = false;
         
         // Reset velocity not to move abnormally fast.

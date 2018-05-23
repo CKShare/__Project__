@@ -1,5 +1,6 @@
 ﻿
 public interface ITimeControl
 {
-    void AdjustTimeScale(float ratio);
+    void Initialize();
+    void AdjustTimeScale(float timeScale);
 }

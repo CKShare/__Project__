@@ -1,72 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 [DefaultExecutionOrder(-32000)]
 public class TimeController : SerializedMonoBehaviour
 {
     [ShowInInspector, ReadOnly]
     private float _timeScale = 1F;
-    [SerializeField, HideReferenceObjectPicker]
+    [OdinSerialize, HideReferenceObjectPicker]
     private ITimeControl[] _components = new ITimeControl[0];
 
-    private Dictionary<object, float> _effectors = new Dictionary<object, float>();
-    private bool _isChanged = false;
+    private Dictionary<Type, ITimeControl> _compDict = new Dictionary<Type, ITimeControl>();
 
-    private void FixedUpdate()
+    private void Awake()
     {
-        DeltaTime = Time.fixedDeltaTime * TimeScale;
+        foreach (var comp in _components)
+        {
+            _compDict[comp.GetType()] = comp;
+            comp.Initialize();
+        }
     }
 
-    private void Update()
+    public T GetTimeControlComponent<T>() where T : class, ITimeControl
     {
-        DeltaTime = Time.deltaTime * TimeScale;
-    }
-
-    public void AddOrSetEffector(object key, float value)
-    {
-        _effectors[key] = value;
-        _isChanged = true;
-    }
-
-    public void RemoveEffector(object key)
-    {
-        _effectors.Remove(key);
-        _isChanged = true;
-    }
-
-    private void Calculate()
-    {
-        float timeScale = 1F;
-        foreach (var effector in _effectors)
-            timeScale *= effector.Value;
-
-        TimeScale = timeScale;
+        ITimeControl comp;
+        return _compDict.TryGetValue(typeof(T), out comp) ? (T)comp: null;
     }
     
     public float TimeScale
     {
         get
         {
-            if (_isChanged)
-            {
-                Calculate();
-                _isChanged = false;
-            }
-
             return _timeScale;
         }
 
-        private set
+        set
         {
-            float prev = _timeScale;
-            _timeScale = Mathf.Approximately(value, 0F) ? 0.001F : value;
-
-            float ratio = _timeScale / prev;
+            _timeScale = value;
             foreach (var comp in _components)
-                comp.AdjustTimeScale(ratio);
+                comp.AdjustTimeScale(value);
         }
     }
-
-    public float DeltaTime { get; private set; }
+    
+    public float DeltaTime => Time.deltaTime * TimeScale;
 }

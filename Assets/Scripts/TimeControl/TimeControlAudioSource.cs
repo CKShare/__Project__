@@ -6,9 +6,16 @@ public class TimeControlAudioSource : ITimeControl
 {
     [SerializeField]
     private AudioSource _audioSource;
+    
+    private float _pitch;
 
-    public void AdjustTimeScale(float ratio)
+    public void Initialize()
     {
-        _audioSource.pitch *= ratio;
+        _pitch = _audioSource.pitch;
+    }
+
+    public void AdjustTimeScale(float timeScale)
+    {
+        _audioSource.pitch = _pitch * timeScale;
     }
 }

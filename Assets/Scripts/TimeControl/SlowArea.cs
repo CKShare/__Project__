@@ -47,7 +47,7 @@ public class SlowArea : MonoBehaviour
     private void OnDisable()
     {
         foreach (var target in _targets)
-            target.TimeController.RemoveEffector(this);
+            target.TimeController.TimeScale = 1F;
         
         _targets.Clear();
     }
@@ -69,7 +69,7 @@ public class SlowArea : MonoBehaviour
             int index = _targets.FindIndex(x => x.Transform == collider.transform);
             _targets.RemoveAt(index);
 
-            timeController.RemoveEffector(this);
+            timeController.TimeScale = 1F;
         }
     }
 
@@ -95,7 +95,7 @@ public class SlowArea : MonoBehaviour
                 float ratio = Mathf.Clamp(distance, 0F, radius) / radius;
                 float timeScale = _slowCurve.Evaluate(ratio);
 
-                target.TimeController.AddOrSetEffector(this, timeScale);
+                target.TimeController.TimeScale = timeScale;
             }
 
             _scaleElapsed -= _applyDelay;

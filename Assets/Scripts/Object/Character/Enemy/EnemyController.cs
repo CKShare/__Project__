@@ -20,6 +20,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     private float _detectMaxAngle = 90F;
 
     private TimeController _timeController;
+    private TimeControlRichAI _timeControlRichAI;
     private RichAI _richAI;
     private Seeker _seeker;
     private Collider _targetCollider;
@@ -32,6 +33,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
         base.Awake();
 
         _timeController = GetComponent<TimeController>();
+        _timeControlRichAI = _timeController.GetTimeControlComponent<TimeControlRichAI>();
         _richAI = GetComponent<RichAI>();
         _seeker = GetComponent<Seeker>();
         _targetCollider = _target.GetComponent<Collider>();
@@ -94,6 +96,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     protected Transform Target => _target;
     protected Collider TargetCollider => _targetCollider;
     protected TimeController TimeController => _timeController;
+    protected TimeControlRichAI TimeControlRichAI => _timeControlRichAI;
     protected RichAI RichAI => _richAI;
     protected Seeker Seeker => _seeker;
 

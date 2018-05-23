@@ -51,7 +51,6 @@ namespace UnityEditor
 
             public static string xrayThickness = "XRay Thickness";
             public static string xrayColor = "XRay Color";
-            public static string xrayDistanceThreshold = "XRay Distance Threshold";
 
             public static string primaryMapsText = "Main Maps";
             public static string secondaryMapsText = "Secondary Maps";
@@ -91,7 +90,6 @@ namespace UnityEditor
 
         MaterialProperty xrayColor = null;
         MaterialProperty xrayThickness = null;
-        MaterialProperty xrayDistanceThreshold = null;
 
         MaterialEditor m_MaterialEditor;
         WorkflowMode m_WorkflowMode = WorkflowMode.Specular;
@@ -136,7 +134,6 @@ namespace UnityEditor
 
             xrayColor = FindProperty("_XRayColor", props);
             xrayThickness = FindProperty("_Thickness", props);
-            xrayDistanceThreshold = FindProperty("_DistanceThreshold", props);
         }
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
@@ -201,7 +198,6 @@ namespace UnityEditor
                 GUILayout.Label(Styles.xrayText, EditorStyles.boldLabel);
                 m_MaterialEditor.ShaderProperty(xrayThickness, Styles.xrayThickness);
                 m_MaterialEditor.ShaderProperty(xrayColor, Styles.xrayColor);
-                m_MaterialEditor.ShaderProperty(xrayDistanceThreshold, Styles.xrayDistanceThreshold);
             }
             if (EditorGUI.EndChangeCheck())
             {

@@ -8,8 +8,9 @@ public enum HenchMeleeState
     Idle,
     Patrol,
     Detected,
-    Combat,
     Chase,
+    Combat,
+    Retreat,
     Attack,
     Hit,
     Faint,
@@ -43,11 +44,15 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     [SerializeField]
     private float _chaseSpeed = 3F;
     [SerializeField]
-    private float _chaseKeepDistance = 5F;
+    private float _chaseKeepDistance = 8F;
     [SerializeField]
     private float _combatStrafeSpeed = 1.5F;
     [SerializeField]
-    private float _combatKeepDistance = 2F;
+    private float _combatKeepDistance = 4F;
+    [SerializeField]
+    private float _attackRunSpeed = 3F;
+    [SerializeField]
+    private float _attackKeepDistance = 1F;
     [SerializeField, Required]
     private MeleeWeapon _meleeWeapon;
     [SerializeField]
@@ -91,8 +96,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             case HenchMeleeState.Patrol:
                 {
                     RichAI.endReachedDistance = _patrolEndReachedDistance;
-                    RichAI.maxSpeed = _patrolSpeed;
-
+                    TimeControlRichAI.MaxSpeed = _patrolSpeed;
+                    
                     if (_patrolToNearest)
                     {
                         Seeker.StartMultiTargetPath(Transform.position, _patrolPoints, false, OnMultiPathComplete);
@@ -216,7 +221,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                     }
 
                     bool isFast = RichAI.remainingDistance > _chaseKeepDistance;
-                    RichAI.maxSpeed = isFast ? _chaseSpeed : _combatStrafeSpeed;
+                    TimeControlRichAI.MaxSpeed = isFast ? _chaseSpeed : _combatStrafeSpeed;
                     RichAI.destination = Target.position;
                     Animator.SetFloat(Hash.Speed, isFast ? 2F : 1F, 0.1F, TimeController.DeltaTime);
                 }
