@@ -7,10 +7,9 @@ public enum HenchMeleeState
 {
     Idle,
     Patrol,
-    Detected,
     Chase,
     Combat,
-    Retreat,
+    Raid,
     Attack,
     Hit,
     Faint,
@@ -38,8 +37,6 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     [SerializeField]
     private float _patrolEndReachedDistance = 0.5F;
     [SerializeField]
-    private float _detectDelay = 1.5F;
-    [SerializeField]
     private float _lookRotateSpeed = 10F;
     [SerializeField]
     private float _chaseSpeed = 3F;
@@ -50,19 +47,24 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
     [SerializeField]
     private float _combatKeepDistance = 4F;
     [SerializeField]
-    private float _attackRunSpeed = 3F;
+    private float _combatDistanceError = 1F;
+    [SerializeField, MinValue(0F)]
+    private float _raidMinDelay, _raidMaxDelay;
     [SerializeField]
-    private float _attackKeepDistance = 1F;
-    [SerializeField, Required]
-    private MeleeWeapon _meleeWeapon;
+    private float _raidRunSpeed = 3F;
+    [SerializeField]
+    private float _raidKeepDistance = 1F;
     [SerializeField]
     private float _attackDelay = 1F;
+    [SerializeField, Required]
+    private MeleeWeapon _meleeWeapon;
 
     private Vector3[] _patrolPoints;
     private int _currentPatrolPointIdx;
     private bool _patrolToNearest;
-
-    private float _detectElapsedTime;
+    
+    private float _raidDelay;
+    private float _raidElapsedTime;
     private float _attackElapsedTime;
 
     protected override void Awake()
@@ -105,25 +107,15 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                         RichAI.isStopped = true;
                         _patrolToNearest = false;
                     }
-
-                    Animator.SetFloat(Hash.Speed, 0F);
-                }
-                break;
-
-            case HenchMeleeState.Detected:
-                {
-                    RichAI.isStopped = true;
-                    _detectElapsedTime = 0F;
-                    Animator.SetBool(Hash.IsDetected, true);
                 }
                 break;
 
             case HenchMeleeState.Chase:
                 {
-                    RichAI.endReachedDistance = _combatKeepDistance;
+                    TimeControlRichAI.MaxSpeed = _chaseSpeed;
+                    RichAI.endReachedDistance = _chaseKeepDistance;
                     RichAI.destination = Target.position;
                     RichAI.SearchPath();
-                    Animator.SetFloat(Hash.Speed, 0F);
                 }
                 break;
 
@@ -131,7 +123,17 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 {
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
-                    _attackElapsedTime = 0F;
+                    RichAI.updateRotation = false;
+                    Animator.SetBool(Hash.IsDetected, true);
+                }
+                break;
+
+            case HenchMeleeState.Raid:
+                {
+                    TimeControlRichAI.MaxSpeed = _raidRunSpeed;
+                    RichAI.endReachedDistance = _raidKeepDistance;
+                    RichAI.destination = Target.position;
+                    RichAI.SearchPath();
                 }
                 break;
 
@@ -173,7 +175,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             case HenchMeleeState.Idle:
                 {
                     if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
-                        ChangeState(HenchMeleeState.Detected);
+                        ChangeState(HenchMeleeState.Combat);
                 }
                 break;
 
@@ -181,7 +183,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 {
                     if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                     {
-                        ChangeState(HenchMeleeState.Detected);
+                        ChangeState(HenchMeleeState.Combat);
                         return;
                     }
 
@@ -197,21 +199,6 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 }
                 break;
 
-            case HenchMeleeState.Detected:
-                {
-                    _detectElapsedTime += TimeController.DeltaTime;
-                    if (_detectElapsedTime >= _detectDelay)
-                    {
-                        ChangeState(HenchMeleeState.Combat);
-                        return;
-                    }
-
-                    Vector3 dir = Target.position - Transform.position;
-                    dir.y = 0F;
-                    Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(dir), _lookRotateSpeed * TimeController.DeltaTime);
-                }
-                break;
-
             case HenchMeleeState.Chase:
                 {
                     if (!RichAI.pathPending && RichAI.reachedEndOfPath)
@@ -220,10 +207,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                         return;
                     }
 
-                    bool isFast = RichAI.remainingDistance > _chaseKeepDistance;
-                    TimeControlRichAI.MaxSpeed = isFast ? _chaseSpeed : _combatStrafeSpeed;
                     RichAI.destination = Target.position;
-                    Animator.SetFloat(Hash.Speed, isFast ? 2F : 1F, 0.1F, TimeController.DeltaTime);
+                    Animator.SetFloat(Hash.Speed, 2F, 0.1F, TimeController.DeltaTime);
                 }
                 break;
 
@@ -231,29 +216,76 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 {
                     Vector3 diff = Target.position - Transform.position;
                     diff.y = 0F;
-                    if (diff.sqrMagnitude > _combatKeepDistance * _combatKeepDistance || !IsTargetInView(_combatKeepDistance, DetectMaxAngle))
+
+                    bool isBackwards = false;
+                    bool isBlocked = false;
+                    float targetSpeed = 0F;
+                    float sqrDist = diff.sqrMagnitude;
+                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance || !IsTargetInView(_chaseKeepDistance, DetectMaxAngle))
                     {
                         ChangeState(HenchMeleeState.Chase);
                         return;
                     }
+                    else if (sqrDist > _combatKeepDistance * _combatKeepDistance)
+                    {
+                        targetSpeed = 1F;
+                    }
+                    else if (sqrDist < (_combatKeepDistance - _combatDistanceError) * (_combatKeepDistance - _combatDistanceError))
+                    {
+                        targetSpeed = -1F;
+                        isBackwards = true;
+                    }
 
                     Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(diff), _lookRotateSpeed * TimeController.DeltaTime);
-                    Animator.SetFloat(Hash.Speed, 0F, 0.1F, TimeController.DeltaTime);
 
-                    _attackElapsedTime += TimeController.DeltaTime;
-                    if (_attackElapsedTime >= _attackDelay)
+                    Vector3 dv = diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime);
+                    if (isBackwards)
+                    {
+                        float d = dv.magnitude;
+                        LayerMask layer = LayerMask.NameToLayer("Obstacle");
+                        float h = (Collider.height - Collider.radius * 2F) * 0.5F;
+                        Vector3 offset = Vector3.up * h;
+                        Vector3 center = Collider.bounds.center;
+                        Vector3 point1 = center + offset;
+                        Vector3 point2 = center - offset;
+                        if (Physics.CapsuleCast(point1, point2, Collider.radius, -diff, d, 1 << layer))
+                        {
+                            targetSpeed = 0F;
+                            isBlocked = true;
+                        }
+                    }
+
+                    if (!isBlocked)
+                    {
+                        RichAI.Move(diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime));
+                    }
+                    Animator.SetFloat(Hash.Speed, targetSpeed, 0.1F, TimeController.DeltaTime);
+
+                    _raidElapsedTime += TimeController.DeltaTime;
+                    if (_raidElapsedTime >= _raidDelay)
+                    {
+                        //ChangeState(HenchMeleeState.Raid);
+                    }
+                }
+                break;
+
+            case HenchMeleeState.Raid:
+                {
+                    if (!RichAI.pathPending && RichAI.reachedEndOfPath)
                     {
                         ChangeState(HenchMeleeState.Attack);
                         return;
                     }
 
+                    RichAI.destination = Target.position;
+                    Animator.SetFloat(Hash.Speed, 2F, 0.1F, TimeController.DeltaTime);
                 }
                 break;
 
             case HenchMeleeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchMeleeState.Combat : HenchMeleeState.Detected);
+                        ChangeState(HenchMeleeState.Combat);
                 }
                 break;
 
@@ -288,16 +320,11 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 }
                 break;
 
-            case HenchMeleeState.Detected:
-                {
-                    RichAI.isStopped = false;
-                }
-                break;
-                
             case HenchMeleeState.Combat:
                 {
-                    RichAI.canSearch = true;
                     RichAI.isStopped = false;
+                    RichAI.canSearch = true;
+                    RichAI.updateRotation = true;
                 }
                 break;
 
@@ -391,7 +418,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
     private void OnGetUpExit()
     {
-        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchMeleeState.Combat : HenchMeleeState.Detected);
+        ChangeState(HenchMeleeState.Combat);
     }
 
     #endregion
