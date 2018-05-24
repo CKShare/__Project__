@@ -7,7 +7,7 @@ public enum HenchRangeState
 {
     Idle,
     Patrol,
-    Detected,
+    Detect,
     Combat,
     Chase,
     Hit,
@@ -107,7 +107,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Detected:
+            case HenchRangeState.Detect:
                 {
                     RichAI.isStopped = true;
                     _detectElapsedTime = 0F;
@@ -164,7 +164,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             case HenchRangeState.Idle:
                 {
                     if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
-                        ChangeState(HenchRangeState.Detected);
+                        ChangeState(HenchRangeState.Detect);
                 }
                 break;
 
@@ -172,7 +172,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 {
                     if (IsTargetInView(DetectMaxDistance, DetectMaxAngle))
                     {
-                        ChangeState(HenchRangeState.Detected);
+                        ChangeState(HenchRangeState.Detect);
                         return;
                     }
 
@@ -188,7 +188,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Detected:
+            case HenchRangeState.Detect:
                 {
                     _detectElapsedTime += TimeController.DeltaTime;
                     if (_detectElapsedTime >= _detectDelay)
@@ -282,7 +282,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
             case HenchRangeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detected);
+                        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detect);
                 }
                 break;
 
@@ -317,7 +317,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Detected:
+            case HenchRangeState.Detect:
                 {
                     RichAI.isStopped = false;
                 }
@@ -411,7 +411,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
     private void OnGetUpExit()
     {
-        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detected);
+        ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detect);
     }
 
     #endregion

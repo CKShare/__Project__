@@ -86,6 +86,9 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
 
     public virtual void ApplyDamage(GameObject attacker, int damage)
     {
+        if (IsDead)
+            return;
+
         CurrentHealth -= damage;
         _onDamaged?.Invoke(attacker, gameObject, damage);
     }

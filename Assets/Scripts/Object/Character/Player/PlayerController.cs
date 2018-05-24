@@ -551,9 +551,6 @@ public class PlayerController : CharacterControllerBase
                 _onAimActiveChanged?.Invoke(false);
                 LockMove = false;
                 LockMeleeAttack = false;
-
-                if (LockSlowGun)
-                    HolsterGun();
             }
 
             Animator.SetBool(Hash.IsAiming, isAiming);
@@ -636,6 +633,7 @@ public class PlayerController : CharacterControllerBase
             _lockSlowGun = value;
             if (value)
             {
+                HolsterGun();
                 Animator.ResetTrigger(Hash.Aim);
                 Animator.SetBool(Hash.IsAiming, false);
             }
