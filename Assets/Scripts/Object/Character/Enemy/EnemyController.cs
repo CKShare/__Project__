@@ -10,20 +10,19 @@ using Sirenix.OdinInspector;
 public abstract class EnemyController<TState> : CharacterControllerBase
 {
     [TitleGroup("AI")]
-    [SerializeField]
-    private Transform _target;
-    [SerializeField]
-    private Transform _head;
-    [SerializeField]
+    [SerializeField, Tooltip("적을 감지하는 최대 거리")]
     private float _detectMaxDistance = 10F;
-    [SerializeField]
+    [SerializeField, Tooltip("적을 감지하는 최대 각도")]
     private float _detectMaxAngle = 90F;
 
+    private Transform _target;
+    private PlayerController _targetController;
+    private Collider _targetCollider;
+    private Transform _head;
     private TimeController _timeController;
     private TimeControlRichAI _timeControlRichAI;
     private RichAI _richAI;
     private Seeker _seeker;
-    private Collider _targetCollider;
 
     private TState _currentState;
     private bool _delayFrame;
@@ -32,11 +31,14 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     {
         base.Awake();
 
+        _target = GameObject.FindGameObjectWithTag("Player").transform;
+        _targetController = _target.GetComponent<PlayerController>();
+        _targetCollider = _target.GetComponent<Collider>();
         _timeController = GetComponent<TimeController>();
         _timeControlRichAI = _timeController.GetTimeControlComponent<TimeControlRichAI>();
         _richAI = GetComponent<RichAI>();
         _seeker = GetComponent<Seeker>();
-        _targetCollider = _target.GetComponent<Collider>();
+        _head = FBBIK.references.head;
     }
 
     protected void Initialize(TState initialState)
@@ -94,6 +96,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     protected abstract void OnStateExit(TState state);
 
     protected Transform Target => _target;
+    protected PlayerController TargetController => _targetController;
     protected Collider TargetCollider => _targetCollider;
     protected TimeController TimeController => _timeController;
     protected TimeControlRichAI TimeControlRichAI => _timeControlRichAI;

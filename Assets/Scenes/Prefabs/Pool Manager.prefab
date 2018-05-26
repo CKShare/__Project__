@@ -1,0 +1,306 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1875712702205158}
+  m_IsPrefabParent: 1
+--- !u!1 &1875712702205158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4631974530425554}
+  - component: {fileID: 114523619903226022}
+  m_Layer: 0
+  m_Name: Pool Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4631974530425554
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875712702205158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114523619903226022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875712702205158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c99adfb366786f438f052ca009d918e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1592689068824102, guid: 52d7d7bdfba6fdf4cbb5865e9f907f9b, type: 2}
+    - {fileID: 1349467175153366, guid: 151137b0bb83c4c4c81c0d62083f9512, type: 2}
+    - {fileID: 1252613854234990, guid: bcd1a74e8a7da854c98706151b72ffd9, type: 2}
+    - {fileID: 1025162488114960, guid: 870c2b4249e622b4cb07579a04846eee, type: 2}
+    - {fileID: 1656281032905050, guid: 2de16b34072363c49a88a920c5cc5ddc, type: 2}
+    - {fileID: 1561485346603880, guid: 1e16ee5de9572fb47b437b295dc8390f, type: 2}
+    - {fileID: 1441393737960346, guid: a767c89353c6e774cb93a3ad97cf8a08, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _preloadDict
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[PoolManager+PreloadInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 8
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: DmgDust
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 0
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: DmgBlood
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 1
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: PistolBullet
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 2
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: SlowBullet
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 3
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: FootConcrete
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 0
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: DmgSign
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 4
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: SlowArea
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 5
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: DmgFist
+    - Name: 
+      Entry: 7
+      Data: PoolManager+PreloadInfo, Assembly-CSharp
+    - Name: _parent
+      Entry: 6
+      Data: 
+    - Name: _prefab
+      Entry: 10
+      Data: 6
+    - Name: _initialCapacity
+      Entry: 3
+      Data: 0
+    - Name: _extendCapacity
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _isPersistent: 0

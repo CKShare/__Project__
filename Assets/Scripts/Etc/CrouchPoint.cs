@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class CrouchPoint : MonoBehaviour
 {
     private void OnDrawGizmos()

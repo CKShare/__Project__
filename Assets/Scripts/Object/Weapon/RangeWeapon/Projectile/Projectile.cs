@@ -21,6 +21,8 @@ public class Projectile : MonoBehaviour
         if (Physics.Linecast(transform.position, newPosition, out rayHitInfo, _hitLayer))
         {
             GameObject target = rayHitInfo.transform.gameObject;
+            if (target.layer == gameObject.layer)
+                return;
 
             var sceneObj = target.GetComponent<SceneObject>();
             if (sceneObj == null)

@@ -190,7 +190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1099434998228274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   wallForce: 3
   wallDist: 1
   funnelSimplification: 1
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   animCompatibility: {fileID: 0}
 --- !u!114 &114828455099403730
 MonoBehaviour:
@@ -3997,12 +3997,8 @@ MonoBehaviour:
     SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
   _maxHealth: 100
-  _leftFoot: {fileID: 4933234790832854}
-  _rightFoot: {fileID: 4938147741351472}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _faintRecoveryTime: 2.5
-  _target: {fileID: 0}
-  _head: {fileID: 4902195751520870}
   _detectMaxDistance: 10
   _detectMaxAngle: 90
   _patrolOnAwake: 0
@@ -4013,10 +4009,14 @@ MonoBehaviour:
   _lookRotateSpeed: 10
   _chaseSpeed: 3
   _chaseKeepDistance: 5
-  _combatStrafeSpeed: 1.5
-  _combatKeepDistance: 1.5
+  _retreatSpeed: 1.5
+  _retreatKeepDistance: 4
+  _retreatKeepDistanceError: 0.5
+  _patternMinDelay: 0
+  _patternMaxDelay: 0
+  _attackMinDelay: 0
+  _attackMaxDelay: 0
   _meleeWeapon: {fileID: 114119366547980476}
-  _attackDelay: 1
 --- !u!114 &114964519305696594
 MonoBehaviour:
   m_ObjectHideFlags: 1

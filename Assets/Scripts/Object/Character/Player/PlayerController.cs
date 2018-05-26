@@ -30,25 +30,25 @@ public class PlayerController : CharacterControllerBase
         public static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
     }
 
-    [SerializeField, TitleGroup("Stats")]
+    [SerializeField, TitleGroup("Stats"), Tooltip("초당 체력 회복 단위")]
     private float _healthRegenUnit = 5F;
 
-    [SerializeField, TitleGroup("Movement")]
+    [SerializeField, TitleGroup("Movement"), Tooltip("이동 속도")]
     private float _moveSpeed = 7.5F;
-    [SerializeField, TitleGroup("Movement")]
+    [SerializeField, TitleGroup("Movement"), Tooltip("이동 속도까지 도달하는데 걸리는 속도 (가속도 개념)")]
     private float _moveLerpSpeed = 7.5F;
-    [SerializeField, TitleGroup("Movement")]
+    [SerializeField, TitleGroup("Movement"), Tooltip("회전 속도")]
     private float _moveRotateSpeed = 10F;
 
     [SerializeField, InlineEditor, Required, TitleGroup("Melee Attack")]
     private MeleeWeapon _meleeWeapon;
     [SerializeField, TitleGroup("Melee Attack")]
     private int[] _maxCombos = new int[0];
-    [SerializeField, TitleGroup("Melee Attack")]
+    [SerializeField, TitleGroup("Melee Attack"), Tooltip("공격 중 회전 속도")]
     private float _attackRotateSpeed = 10F;
-    [SerializeField, TitleGroup("Melee Attack")]
+    [SerializeField, TitleGroup("Melee Attack"), Tooltip("타겟팅 최대 거리")]
     private float _targetingMaxDistance = 2F;
-    [SerializeField, TitleGroup("Melee Attack")]
+    [SerializeField, TitleGroup("Melee Attack"), Tooltip("타겟팅 최대 각도")]
     private float _targetingMaxAngle = 75F;
 
     [SerializeField, InlineEditor, Required, TitleGroup("Slow Gun")]
@@ -57,20 +57,20 @@ public class PlayerController : CharacterControllerBase
     private Transform _holster;
     [SerializeField, Required, TitleGroup("Slow Gun")]
     private Transform _grip;
-    [SerializeField, TitleGroup("Slow Gun")]
+    [SerializeField, TitleGroup("Slow Gun"), Tooltip("슬로우 건 발사 쿨타임")]
     private float _slowGunCoolTime = 5F;
-    [SerializeField, TitleGroup("Slow Gun")]
+    [SerializeField, TitleGroup("Slow Gun"), Tooltip("에임 중 회전 속도")]
     private float _aimRotateSpeed = 15F;
 
-    [SerializeField, TitleGroup("Dash")]
+    [SerializeField, TitleGroup("Dash"), Tooltip("대시 쿨타임")]
     private float _dashCoolTime = 3F;
-    [SerializeField, TitleGroup("Dash")]
+    [SerializeField, TitleGroup("Dash"), Tooltip("대시 거리")]
     private float _dashDistance = 3F;
-    [SerializeField, TitleGroup("Dash")]
+    [SerializeField, TitleGroup("Dash"), Tooltip("대시 속도")]
     private float _dashSpeed = 10F;
-    [SerializeField, TitleGroup("Dash")]
+    [SerializeField, TitleGroup("Dash"), Tooltip("대시 속도까지 도달하는데 걸리는 속도 (가속도 개념)")]
     private float _dashLerpSpeed = 10F;
-    [SerializeField, TitleGroup("Dash")]
+    [SerializeField, TitleGroup("Dash"), Tooltip("대시 회전 속도")]
     private float _dashRotateSpeed = 10F;
 
     [SerializeField, Required, TitleGroup("Input")]
@@ -679,6 +679,7 @@ public class PlayerController : CharacterControllerBase
         }
     }
 
+    public bool IsAttacking => _isAttacking;
     public float DashCoolTime => _dashCoolTime;
     public float DashRemainingTime => _dashRemainingTime;
     public float SlowGunCoolTime => _slowGunCoolTime;
@@ -733,6 +734,8 @@ public class PlayerController : CharacterControllerBase
         _comboSaved = false;
         _comboInputEnabled = false;
         _comboTransitionEnabled = false;
+
+        OnAttackExit();
     }
 
     private void CheckResetCombo()

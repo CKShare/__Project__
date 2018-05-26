@@ -12,15 +12,12 @@ using RootMotion.FinalIK;
 [RequireComponent(typeof(FullBodyBipedIK))]
 public abstract class CharacterControllerBase : SceneObject, IHitReactive
 {
-    [SerializeField, TitleGroup("Stats")]
+    [SerializeField, TitleGroup("Stats"), Tooltip("최대 체력")]
     private float _maxHealth = 100F;
 
-    [SerializeField, TitleGroup("Foot"), Required]
-    private Transform _leftFoot, _rightFoot;
-    [SerializeField, TitleGroup("Foot")]
-    private EffectSettings _footstepEffect;
-
     [SerializeField, TitleGroup("Etc")]
+    private EffectSettings _footstepEffect;
+    [SerializeField, TitleGroup("Etc"), Tooltip("기절 후 일어나는 시간")]
     private float _faintRecoveryTime = 2.5F;
 
     private Transform _transform;
@@ -32,6 +29,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private FullBodyBipedIK _fbbik;
     private List<Collider> _hitColliders = new List<UnityEngine.Collider>();
 
+    private Transform _leftFoot, _rightFoot;
     private event Action<GameObject, GameObject, int> _onDamaged;
     private event Action<float> _onHealthChanged;
     private event Action _onDeath;
@@ -48,6 +46,8 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _ragdoll = GetComponent<RagdollUtility>();
         _hitReaction = GetComponent<HitReaction>();
         _fbbik = GetComponent<FullBodyBipedIK>();
+        _leftFoot = _fbbik.references.leftFoot;
+        _rightFoot = _fbbik.references.rightFoot;
 
         var colliders = GetComponentsInChildren<Collider>();
         foreach (var collider in colliders)
@@ -247,6 +247,7 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public CapsuleCollider Collider => _collider;
     public Animator Animator => _animator;
     public HitReaction HitReaction => _hitReaction;
+    public FullBodyBipedIK FBBIK => _fbbik;
 
     public abstract PhysiqueType PhysiqueType { get; }
     public abstract float DeltaTime { get; }

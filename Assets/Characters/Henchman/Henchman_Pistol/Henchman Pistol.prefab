@@ -1190,7 +1190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1989516396826678
 GameObject:
   m_ObjectHideFlags: 1
@@ -2712,7 +2712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _follow: {fileID: 4983921373869986}
-  _heightOffset: 1.5
+  _heightOffset: 1.25
 --- !u!114 &114239948097275194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3467,7 +3467,7 @@ MonoBehaviour:
   wallForce: 3
   wallDist: 1
   funnelSimplification: 1
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   animCompatibility: {fileID: 0}
 --- !u!114 &114401180834268606
 MonoBehaviour:
@@ -3976,7 +3976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _follow: {fileID: 4983921373869986}
-  _heightOffset: 1.5
+  _heightOffset: 1.25
 --- !u!114 &114733013015986098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4073,12 +4073,8 @@ MonoBehaviour:
     SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
   _maxHealth: 100
-  _leftFoot: {fileID: 4205502906159962}
-  _rightFoot: {fileID: 4347095092089634}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _faintRecoveryTime: 2.5
-  _target: {fileID: 0}
-  _head: {fileID: 4985404318719396}
   _detectMaxDistance: 10
   _detectMaxAngle: 90
   _patrolOnAwake: 0
@@ -4087,14 +4083,17 @@ MonoBehaviour:
   _patrolEndReachedDistance: 0.5
   _detectDelay: 0.5
   _lookRotateSpeed: 10
-  _chaseSpeed: 3
-  _chaseKeepDistance: 15
-  _combatStrafeSpeed: 1.5
-  _combatKeepDistance: 10
-  _combatDistanceError: 1
-  _rangeWeapon: {fileID: 114230702219704004}
+  _coverPoint: {fileID: 0}
+  _coverSpeed: 3
+  _minHideTime: 2
+  _maxHideTime: 3
+  _minFireTime: 3
+  _maxFireTime: 3.5
   _minFireDelay: 0.25
   _maxFireDelay: 1
+  _retreatKeepDistance: 5
+  _retreatSpeed: 1.5
+  _rangeWeapon: {fileID: 114230702219704004}
 --- !u!135 &135452647528317950
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -8271,8 +8270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.06, y: 0}
-  m_SizeDelta: {x: 0.15, y: 0.67}
+  m_AnchoredPosition: {x: -0.06, y: -0.31}
+  m_SizeDelta: {x: 0.05, y: 0.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224179315960769720
 RectTransform:

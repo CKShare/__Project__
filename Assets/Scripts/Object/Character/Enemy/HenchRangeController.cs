@@ -8,8 +8,9 @@ public enum HenchRangeState
     Idle,
     Patrol,
     Detect,
+    RunToCover,
+    Cover,
     Combat,
-    Chase,
     Hit,
     Faint,
     Dead
@@ -21,46 +22,54 @@ public class HenchRangeController : EnemyController<HenchRangeState>
     {
         public static readonly int Speed = Animator.StringToHash("Speed");
         public static readonly int IsDetected = Animator.StringToHash("IsDetected");
+        public static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
         public static readonly int Trigger = Animator.StringToHash("Trigger");
         public static readonly int GetUpFront = Animator.StringToHash("GetUpFront");
         public static readonly int GetUpBack = Animator.StringToHash("GetUpBack");
         public static readonly int IsDead = Animator.StringToHash("IsDead");
     }
 
-    [SerializeField]
+    [SerializeField, Tooltip("참이면, 씬이 시작됬을 때 바로 정찰을 시작함")]
     private bool _patrolOnAwake = false;
-    [SerializeField, Required]
+    [SerializeField, Required, Tooltip("정찰 포인트들을 담고있는 컨테이너 오브젝트")]
     private Transform _patrolContainer;
-    [SerializeField]
+    [SerializeField, Tooltip("정찰 속도")]
     private float _patrolSpeed = 1.5F;
-    [SerializeField]
+    [SerializeField, Tooltip("정찰 포인트에 도달했다고 가정할 거리")]
     private float _patrolEndReachedDistance = 0.5F;
-    [SerializeField]
+    [SerializeField, Tooltip("적 감지후 몇초후에 다음 상태로 이어지는가")]
     private float _detectDelay = 1.5F;
-    [SerializeField]
+    [SerializeField, Tooltip("적을 바라보는 회전 속도")]
     private float _lookRotateSpeed = 10F;
-    [SerializeField]
-    private float _chaseSpeed = 3F;
-    [SerializeField]
-    private float _chaseKeepDistance = 15F;
-    [SerializeField]
-    private float _combatStrafeSpeed = 1.5F;
-    [SerializeField]
-    private float _combatKeepDistance = 10F;
-    [SerializeField]
-    private float _combatDistanceError = 1F;
+    [SerializeField, Required, Tooltip("엄폐 포인트 오브젝트")]
+    private Transform _coverPoint;
+    [SerializeField, Tooltip("엄폐 하기위해 달려가는 속도")]
+    private float _coverSpeed = 3F;
+    [SerializeField, HorizontalGroup("Hide"), Tooltip("엄폐하고있는 최소/최대 시간 (랜덤)")]
+    private float _minHideTime, _maxHideTime;
+    [SerializeField, HorizontalGroup("FireTime"), Tooltip("엄폐 전 공격하는 최소/최대 시간 (랜덤)")]
+    private float _minFireTime, _maxFireTime;
+    [SerializeField, HorizontalGroup("FireDelay"), Tooltip("공격간의 최소/최대 시간 (랜덤)")]
+    private float _minFireDelay = 0.25F, _maxFireDelay = 1F;
+    [SerializeField, Tooltip("후퇴할 때 유지 거리")]
+    private float _retreatKeepDistance = 5F;
+    [SerializeField, Tooltip("후퇴 속도")]
+    private float _retreatSpeed = 1.5F;
     [SerializeField, Required]
     private RangeWeapon _rangeWeapon;
-    [SerializeField]
-    private float _minFireDelay = 0.25F, _maxFireDelay = 1F;
 
     private Vector3[] _patrolPoints;
     private int _currentPatrolPointIdx;
     private bool _patrolToNearest;
 
     private float _detectElapsedTime;
-    private float _fireDelay;
+    private float _hideTime;
+    private float _hideElapsedTime;
+    private float _fireTime;
     private float _fireElapsedTime;
+    private float _fireDelay;
+    private float _fireElapsedDelay;
+    private bool _isStanding;
 
     protected override void Awake()
     {
@@ -115,13 +124,29 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Chase:
+            case HenchRangeState.RunToCover:
                 {
-                    TimeControlRichAI.MaxSpeed = _chaseSpeed;
-                    RichAI.endReachedDistance = _chaseKeepDistance;
-                    RichAI.destination = Target.position;
+                    TimeControlRichAI.MaxSpeed = _coverSpeed;
+                    RichAI.destination = _coverPoint.position;
+                    RichAI.endReachedDistance = 0.1F;
                     RichAI.SearchPath();
-                    Animator.SetFloat(Hash.Speed, 0F);
+                }
+                break;
+
+            case HenchRangeState.Cover:
+                {
+                    if (Vector3.Angle(_coverPoint.forward, Target.position - _coverPoint.position) >= 75F)
+                    {
+                        ChangeState(HenchRangeState.Combat);
+                        return;
+                    }
+
+                    RichAI.isStopped = true;
+                    RichAI.canSearch = false;
+                    Animator.SetBool(Hash.IsCrouching, true);
+                    _hideTime = UnityEngine.Random.Range(_minHideTime, _maxHideTime);
+                    _hideElapsedTime = 0F;
+                    _isStanding = false;
                 }
                 break;
 
@@ -129,9 +154,10 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 {
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
-                    RichAI.updateRotation = false;
-                    _fireDelay = UnityEngine.Random.Range(_minFireDelay, _maxFireDelay);
+                    _fireTime = UnityEngine.Random.Range(_minFireTime, _maxFireTime);
                     _fireElapsedTime = 0F;
+                    _fireDelay = UnityEngine.Random.Range(_minFireDelay, _maxFireDelay);
+                    _fireElapsedDelay = 0F;
                 }
                 break;
 
@@ -203,16 +229,37 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Chase:
+            case HenchRangeState.RunToCover:
                 {
-                    if (!RichAI.pathPending && RichAI.reachedEndOfPath)
+                    float sqrDist = (Target.position - Transform.position).sqrMagnitude;
+                    if (sqrDist <= _retreatKeepDistance)
                     {
                         ChangeState(HenchRangeState.Combat);
                         return;
                     }
 
-                    RichAI.destination = Target.position;
-                    Animator.SetFloat(Hash.Speed, 2F, 0.1F, TimeController.DeltaTime);
+                    if (!RichAI.pathPending && RichAI.reachedEndOfPath)
+                    {
+                        ChangeState(HenchRangeState.Cover);
+                        return;
+                    }
+                    
+                    Animator.SetFloat(Hash.Speed, 2F * Mathf.Clamp01(RichAI.remainingDistance * 2F), 0.1F, TimeController.DeltaTime);
+                }
+                break;
+
+            case HenchRangeState.Cover:
+                {
+                    Vector3 forward = _coverPoint.forward;
+                    forward.y = 0F;
+                    Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(forward), _lookRotateSpeed * TimeController.DeltaTime);
+
+                    _hideElapsedTime += TimeController.DeltaTime;
+                    if ((Target.position - Transform.position).sqrMagnitude <= _retreatKeepDistance || _hideElapsedTime >= _hideTime && IsTargetInView(DetectMaxDistance, DetectMaxAngle))
+                    {
+                        ChangeState(HenchRangeState.Combat);
+                        return;
+                    }
                 }
                 break;
 
@@ -221,59 +268,60 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     Vector3 diff = Target.position - Transform.position;
                     diff.y = 0F;
 
-                    bool isBackwards = false;
-                    bool isBlocked = false;
-                    float targetSpeed = 0F;
+                    bool isRetreating = false;
+                    float targetSpeed = 0;
                     float sqrDist = diff.sqrMagnitude;
-                    if (sqrDist > _chaseKeepDistance * _chaseKeepDistance || !IsTargetInView(_chaseKeepDistance, DetectMaxAngle))
+                    if (sqrDist < (_retreatKeepDistance * _retreatKeepDistance))
                     {
-                        ChangeState(HenchRangeState.Chase);
-                        return;
-                    }
-                    else if (sqrDist > _combatKeepDistance * _combatKeepDistance)
-                    {
-                        targetSpeed = 1F;
-                    }
-                    else if (sqrDist < (_combatKeepDistance - _combatDistanceError) * (_combatKeepDistance - _combatDistanceError))
-                    {
+                        bool isBlocked = false;
+
+                        isRetreating = true;
                         targetSpeed = -1F;
-                        isBackwards = true;
-                    }
-
-                    Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(diff), _lookRotateSpeed * TimeController.DeltaTime);
-
-                    Vector3 dv = diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime);
-                    if (isBackwards)
-                    {
+                        diff.Normalize();
+                        Vector3 dv = diff * (targetSpeed * _retreatSpeed * TimeController.DeltaTime);
                         float d = dv.magnitude;
-                        LayerMask layer = LayerMask.NameToLayer("Obstacle");
+                        LayerMask layer = 1 << LayerMask.NameToLayer("Obstacle") | 1 << gameObject.layer;
                         float h = (Collider.height - Collider.radius * 2F) * 0.5F;
                         Vector3 offset = Vector3.up * h;
                         Vector3 center = Collider.bounds.center;
                         Vector3 point1 = center + offset;
                         Vector3 point2 = center - offset;
-                        if (Physics.CapsuleCast(point1, point2, Collider.radius, -diff, d, 1 << layer))
+                        RaycastHit hitInfo;
+                        if (Physics.CapsuleCast(point1, point2, Collider.radius, -diff, out hitInfo, d, layer))
                         {
-                            targetSpeed = 0F;
-                            isBlocked = true;
+                            if (hitInfo.transform.gameObject != gameObject)
+                            {
+                                targetSpeed = 0F;
+                                dv = Vector3.zero;
+                                isBlocked = true;
+                            }
+                        }
+
+                        if (!isBlocked)
+                        {
+                            RichAI.Move(dv);
                         }
                     }
-
-                    if (!isBlocked)
-                    {
-                        RichAI.Move(diff.normalized * (targetSpeed * _combatStrafeSpeed * TimeController.DeltaTime));
-                    }
+                    Transform.rotation = Quaternion.Slerp(Transform.rotation, Quaternion.LookRotation(diff), _lookRotateSpeed * TimeController.DeltaTime);
                     Animator.SetFloat(Hash.Speed, targetSpeed, 0.1F, TimeController.DeltaTime);
 
                     _fireElapsedTime += TimeController.DeltaTime;
-                    if (_fireElapsedTime >= _fireDelay)
+                    if (_fireElapsedTime >= _fireTime && !isRetreating && Vector3.Angle(_coverPoint.forward, Target.position - _coverPoint.position) < 75F)
+                    {
+                        ChangeState(HenchRangeState.RunToCover);
+                        return;
+
+                    }
+
+                    _fireElapsedDelay += TimeController.DeltaTime;
+                    if (_fireElapsedDelay >= _fireDelay)
                     {
                         Vector3 targetPos = Target.position + new Vector3(0F, TargetCollider.bounds.size.y * 0.6F, 0F);
                         Vector3 dir = (targetPos - _rangeWeapon.MuzzlePosition).normalized;
 
                         _rangeWeapon.Trigger(dir);
                         Animator.SetTrigger(Hash.Trigger);
-                        _fireElapsedTime = 0F;
+                        _fireElapsedDelay = 0F;
                         _fireDelay = UnityEngine.Random.Range(_minFireDelay, _maxFireDelay);
                     }
                 }
@@ -323,9 +371,17 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 }
                 break;
 
-            case HenchRangeState.Chase:
+            case HenchRangeState.RunToCover:
                 {
-                    Animator.SetFloat(Hash.Speed, 0F);
+
+                }
+                break;
+
+            case HenchRangeState.Cover:
+                {
+                    RichAI.isStopped = false;
+                    RichAI.canSearch = true;
+                    Animator.SetBool(Hash.IsCrouching, false);
                 }
                 break;
                 
@@ -333,8 +389,6 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 {
                     RichAI.isStopped = false;
                     RichAI.canSearch = true;
-                    RichAI.updateRotation = true;
-                    Animator.SetFloat(Hash.Speed, 0F);
                 }
                 break;
 
@@ -412,6 +466,11 @@ public class HenchRangeController : EnemyController<HenchRangeState>
     private void OnGetUpExit()
     {
         ChangeState(Animator.GetBool(Hash.IsDetected) ? HenchRangeState.Combat : HenchRangeState.Detect);
+    }
+
+    private void OnStandUpExit()
+    {
+        _isStanding = true;
     }
 
     #endregion
