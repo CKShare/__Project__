@@ -121,6 +121,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                     RichAI.isStopped = true;
                     _detectElapsedTime = 0F;
                     Animator.SetBool(Hash.IsDetected, true);
+                    ShowDetectUI();
                 }
                 break;
 
@@ -172,6 +173,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
                 {
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
+                    ShowFaintUI();
                 }
                 break;
 

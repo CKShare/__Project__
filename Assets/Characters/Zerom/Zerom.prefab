@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 114813244710823376}
   m_Layer: 10
   m_Name: Zerom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3720,8 +3720,6 @@ MonoBehaviour:
     SerializationNodes: []
   _textureType: {fileID: 11400000, guid: 7ea07ad6899a7464fb6f322cabb3c31b, type: 2}
   _maxHealth: 500
-  _leftFoot: {fileID: 4521952600177100}
-  _rightFoot: {fileID: 4689258273205206}
   _footstepEffect: {fileID: 11400000, guid: c758014b1afe6874f9e029b69a465f6b, type: 2}
   _faintRecoveryTime: 2.5
   _healthRegenUnit: 8

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Pathfinding;
 using Pathfinding.RVO;
 using Sirenix.OdinInspector;
@@ -15,6 +16,13 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     [SerializeField, Tooltip("적을 감지하는 최대 각도")]
     private float _detectMaxAngle = 90F;
 
+    [SerializeField, Required, TitleGroup("Etc")]
+    private GameObject _detectUI;
+    [SerializeField, Required, TitleGroup("Etc")]
+    private GameObject _faintUI;
+    [SerializeField, TitleGroup("Etc")]
+    private float _uiShowTime = 2F;
+
     private Transform _target;
     private PlayerController _targetController;
     private Collider _targetCollider;
@@ -23,6 +31,9 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     private TimeControlRichAI _timeControlRichAI;
     private RichAI _richAI;
     private Seeker _seeker;
+
+    private Coroutine _showUICrt;
+    private WaitForSeconds _uiShowTimeRef;
 
     private TState _currentState;
     private bool _delayFrame;
@@ -39,6 +50,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
         _richAI = GetComponent<RichAI>();
         _seeker = GetComponent<Seeker>();
         _head = FBBIK.references.head;
+        _uiShowTimeRef = new WaitForSeconds(_uiShowTime);
     }
 
     protected void Initialize(TState initialState)
@@ -82,6 +94,27 @@ public abstract class EnemyController<TState> : CharacterControllerBase
         }
 
         return false;
+    }
+
+    protected void ShowDetectUI()
+    {
+        if (_showUICrt != null)
+            StopCoroutine(_showUICrt);
+         _showUICrt = StartCoroutine(ShowUICrt(_detectUI));
+    }
+
+    protected void ShowFaintUI()
+    {
+        if (_showUICrt != null)
+            StopCoroutine(_showUICrt);
+        _showUICrt = StartCoroutine(ShowUICrt(_faintUI));
+    }
+
+    private IEnumerator ShowUICrt(GameObject ui)
+    {
+        ui.SetActive(true);
+        yield return _uiShowTimeRef;
+        ui.SetActive(false);
     }
 
     protected override void OnDeathInternal()

@@ -127,6 +127,7 @@ public class PlayerController : CharacterControllerBase
     private Coroutine _crouchCrt;
     private bool _cancelCrouch;
     private bool _lockCrouch;
+    private event Action<bool> _onCrouchActiveChanged;
 
     protected override void Awake()
     {
@@ -176,14 +177,20 @@ public class PlayerController : CharacterControllerBase
     {
         int layer = LayerMask.NameToLayer("CrouchPoint");
         if (col.gameObject.layer == layer)
+        {
             _crouchPoint = col.transform;
+            _onCrouchActiveChanged?.Invoke(true);
+        }
     }
 
     private void OnTriggerExit(Collider col)
     {
         int layer = LayerMask.NameToLayer("CrouchPoint");
         if (col.gameObject.layer == layer)
+        {
             _crouchPoint = null;
+            _onCrouchActiveChanged?.Invoke(false);
+        };
     }
 
     private void FixedUpdate()
@@ -323,6 +330,7 @@ public class PlayerController : CharacterControllerBase
             else
             {
                 _cancelCrouch = true;
+                _seeker.CancelCurrentPathRequest();
             }
         }
         else if (_crouchCrt != null)
@@ -330,6 +338,7 @@ public class PlayerController : CharacterControllerBase
             if (_axisSqrMagnitude > 0F || HitReaction.inProgress)
             {
                 _cancelCrouch = true;
+                _seeker.CancelCurrentPathRequest();
             }
         }
     }
@@ -366,7 +375,7 @@ public class PlayerController : CharacterControllerBase
         var points = p.vectorPath;
         while (current < points.Count && !_cancelCrouch)
         {
-            Vector3 diff = points[current] - Transform.position;
+            Vector3 diff = points[current] - Rigidbody.position;
             diff.y = 0F;
             float sqrDist = diff.sqrMagnitude;
             if (sqrDist < 0.01F)
@@ -374,7 +383,7 @@ public class PlayerController : CharacterControllerBase
                 current++;
                 continue;
             }
-
+            
             Rigidbody.velocity = Vector3.Lerp(Rigidbody.velocity, diff.normalized * _moveSpeed, DeltaTime * _moveLerpSpeed);
             Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(diff), DeltaTime * _moveRotateSpeed);
             yield return _waitForFixedUpdate;
@@ -383,7 +392,7 @@ public class PlayerController : CharacterControllerBase
         if (p != null && !p.error)
             p.Release(this);
         Animator.SetBool(Hash.IsMoving, false);
-
+        
         // Second, Crouch down and Rotate towards the facing direction of the crouch point.
         Animator.SetTrigger(Hash.Crouch);
         Animator.SetBool(Hash.IsCrouching, true);
@@ -400,7 +409,7 @@ public class PlayerController : CharacterControllerBase
             yield return _waitForFixedUpdate;
         }
         _rotation = Rigidbody.rotation;
-
+        
         Animator.ResetTrigger(Hash.Crouch);
         Animator.SetBool(Hash.IsCrouching, false);
         // Scale Collider.
@@ -484,8 +493,11 @@ public class PlayerController : CharacterControllerBase
             yield return _waitForFixedUpdate;
         }
 
-        Animator.SetTrigger(Hash.CancelDash);
-        yield return _waitForFixedUpdate;
+        if (!LockDash)
+        {
+            Animator.SetTrigger(Hash.CancelDash);
+            yield return _waitForFixedUpdate;
+        }
 
         Animator.ResetTrigger(Hash.CancelDash);
         _updateRigidbody = true;
@@ -507,54 +519,55 @@ public class PlayerController : CharacterControllerBase
             if (_slowGunRemainingTime <= 0F)
                 _slowGunRemainingTime = 0F;
         }
-
-        if (!LockSlowGun)
+        
+        bool isAiming = _aimPressing && !LockSlowGun;
+        if (isAiming)
         {
-            bool isAiming = _aimPressing;
-            if (isAiming)
+            if (!Animator.GetBool(Hash.IsAiming))
             {
-                if (!Animator.GetBool(Hash.IsAiming))
-                {
-                    _onAimActiveChanged?.Invoke(true);
-                    LockMove = true;
-                    LockMeleeAttack = true;
-                    Animator.SetTrigger(Hash.Aim);
-                }
+                if (_isAttacking)
+                    OnAttackExit();
 
-                // Rotate towards aiming direction.
-                Ray ray = new Ray(_cameraTr.position, _cameraTr.forward);
-                Vector3 lookPoint = ray.GetPoint(30F);
-                Vector3 dir = lookPoint - _cameraTr.position;
-
-                Vector3 xzDir = dir;
-                xzDir.y = 0F;
-                Quaternion look = Quaternion.LookRotation(xzDir);
-                _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * DeltaTime);
-
-                float pitch = _cameraTr.eulerAngles.x;
-                if (pitch > 180F)
-                    pitch -= 360F;
-                pitch *= -1F;
-                Animator.SetFloat(Hash.Pitch, pitch);
-
-                // Fire
-                if (_attackPressed && _slowGunRemainingTime <= 0F)
-                {
-                    _slowGunRemainingTime = _slowGunCoolTime;
-
-                    _slowGun.Trigger(dir);
-                    Animator.SetTrigger(Hash.Trigger);
-                }
-            }
-            else if (Animator.GetBool(Hash.IsAiming))
-            {
-                _onAimActiveChanged?.Invoke(false);
-                LockMove = false;
-                LockMeleeAttack = false;
+                _onAimActiveChanged?.Invoke(true);
+                LockMove = true;
+                LockMeleeAttack = true;
+                Animator.SetTrigger(Hash.Aim);
             }
 
-            Animator.SetBool(Hash.IsAiming, isAiming);
+            // Rotate towards aiming direction.
+            Ray ray = new Ray(_cameraTr.position, _cameraTr.forward);
+            Vector3 lookPoint = ray.GetPoint(30F);
+            Vector3 dir = lookPoint - _cameraTr.position;
+
+            Vector3 xzDir = dir;
+            xzDir.y = 0F;
+            Quaternion look = Quaternion.LookRotation(xzDir);
+            _rotation = Quaternion.Slerp(Rigidbody.rotation, look, _aimRotateSpeed * DeltaTime);
+
+            float pitch = _cameraTr.eulerAngles.x;
+            if (pitch > 180F)
+                pitch -= 360F;
+            pitch *= -1F;
+            Animator.SetFloat(Hash.Pitch, pitch);
+
+            // Fire
+            if (_attackPressed && _slowGunRemainingTime <= 0F)
+            {
+                _slowGunRemainingTime = _slowGunCoolTime;
+
+                _slowGun.Trigger(dir);
+                Animator.SetTrigger(Hash.Trigger);
+            }
         }
+        else if (Animator.GetBool(Hash.IsAiming))
+        {
+            _onAimActiveChanged?.Invoke(false);
+            LockMove = false;
+            LockMeleeAttack = false;
+            HolsterGun();
+        }
+
+        Animator.SetBool(Hash.IsAiming, isAiming);
     }
     
     private void RegenHealth()
@@ -580,6 +593,12 @@ public class PlayerController : CharacterControllerBase
     {
         add { _onAimActiveChanged += value; }
         remove { _onAimActiveChanged -= value; }
+    }
+
+    public event Action<bool> OnCrouchActiveChanged
+    {
+        add { _onCrouchActiveChanged += value; }
+        remove { _onCrouchActiveChanged -= value; }
     }
 
     private bool LockMove
@@ -615,7 +634,7 @@ public class PlayerController : CharacterControllerBase
             if (value)
             {
                 _rotation = Quaternion.LookRotation(Transform.forward);
-                ResetCombo();
+                //ResetCombo();
                 Animator.ResetTrigger(Hash.Attack);
             }
         }
@@ -633,9 +652,9 @@ public class PlayerController : CharacterControllerBase
             _lockSlowGun = value;
             if (value)
             {
-                HolsterGun();
-                Animator.ResetTrigger(Hash.Aim);
-                Animator.SetBool(Hash.IsAiming, false);
+                //HolsterGun();
+                //Animator.ResetTrigger(Hash.Aim);
+                //Animator.SetBool(Hash.IsAiming, false);
             }
         }
     }
@@ -653,7 +672,6 @@ public class PlayerController : CharacterControllerBase
             if (value)
             {
                 Animator.ResetTrigger(Hash.Dash);
-                Animator.ResetTrigger(Hash.CancelDash);
             }
         }
     }
@@ -670,11 +688,12 @@ public class PlayerController : CharacterControllerBase
             _lockCrouch = value;
             if (value)
             {
-                Animator.ResetTrigger(Hash.Crouch);
-                Animator.SetBool(Hash.IsCrouching, false);
-
+                Animator.ResetTrigger(Hash.Dash);
                 if (_crouchCrt != null)
+                {
                     _cancelCrouch = true;
+                    _seeker.CancelCurrentPathRequest();
+                }
             }
         }
     }
@@ -734,8 +753,6 @@ public class PlayerController : CharacterControllerBase
         _comboSaved = false;
         _comboInputEnabled = false;
         _comboTransitionEnabled = false;
-
-        OnAttackExit();
     }
 
     private void CheckResetCombo()

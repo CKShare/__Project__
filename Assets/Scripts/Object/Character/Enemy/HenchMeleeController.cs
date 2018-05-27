@@ -120,6 +120,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                     RichAI.isStopped = true;
                     _detectElapsedTime = 0F;
                     Animator.SetBool(Hash.IsDetected, true);
+                    ShowDetectUI();
                 }
                 break;
 
@@ -189,6 +190,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
                 {
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
+                    ShowFaintUI();
                 }
                 break;
 
