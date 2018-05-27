@@ -446,7 +446,7 @@ public class PlayerController : CharacterControllerBase
         {
             if (_dashCrt != null)
                 StopCoroutine(_dashCrt);
-            _dashCrt = StartCoroutine(DashCrt());
+            Animator.SetTrigger(Hash.Dash);
 
             _dashRemainingTime = _dashCoolTime;
         }
@@ -458,11 +458,12 @@ public class PlayerController : CharacterControllerBase
         dashDirection.y = 0F;
         dashDirection.Normalize();
 
+        OnAttackExit();
         _updateRigidbody = false;
         LockMove = true;
         LockMeleeAttack = true;
         LockSlowGun = true;
-        Animator.SetTrigger(Hash.Dash);
+        //Animator.SetTrigger(Hash.Dash);
 
         int layer = 1 << LayerMask.NameToLayer("Obstacle") | 1 << LayerMask.NameToLayer("Enemy");
         float h = (Collider.height - Collider.radius * 2F) * 0.5F;
@@ -728,11 +729,18 @@ public class PlayerController : CharacterControllerBase
         _meleeWeapon.Hit(_target.gameObject, attackID);
     }
 
+    private void SlowMotion(TimeScaleSettings settings)
+    {
+        GameUtility.SetTimeScale(settings.TimeScale, settings.Duration);
+    }
+
     private void OnAttackEnter()
     {
         _applyRootMotion = true;
         LockMove = true;
         LockSlowGun = true;
+        LockDash = true;
+        LockCrouch = true;
     }
 
     private void OnAttackExit()
@@ -742,6 +750,8 @@ public class PlayerController : CharacterControllerBase
             _applyRootMotion = false;
             LockMove = false;
             LockSlowGun = false;
+            LockDash = false;
+            LockCrouch = false;
         }
     }
     
@@ -768,8 +778,13 @@ public class PlayerController : CharacterControllerBase
 
     private void UnholsterGun()
     {
-        if (!LockSlowGun)
+        if (!LockSlowGun && Animator.GetBool(Hash.IsAiming))
             _slowGun.transform.SetParent(_grip, false);
+    }
+
+    private void StartDash()
+    {
+        _dashCrt = StartCoroutine(DashCrt());
     }
 
     #endregion

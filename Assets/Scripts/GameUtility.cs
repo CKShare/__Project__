@@ -24,7 +24,7 @@ public class GameUtility : MonoSingleton<GameUtility>
     private static IEnumerator TimeScaleCrt(float timeScale, float duration)
     {
         Time.timeScale = timeScale;
-        Time.fixedDeltaTime = 0.02F * timeScale;
+        Time.fixedDeltaTime = Mathf.Clamp01(0.02F * timeScale);
 
         float elapsedTime = 0F;
         while (elapsedTime < duration)
@@ -34,7 +34,7 @@ public class GameUtility : MonoSingleton<GameUtility>
         }
 
         Time.timeScale = 1F;
-        Time.fixedDeltaTime = 0.02F;
+        Time.fixedDeltaTime = Mathf.Clamp01(0.02F * Time.timeScale);
         Instance._timeScaleCrt = null;
     }
 

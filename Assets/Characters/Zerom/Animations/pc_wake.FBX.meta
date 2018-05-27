@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 92b2953d2696cc345b5415939a7b61fb
-timeCreated: 1525102086
+guid: 93d49cf222495df438f822a258a9f56b
+timeCreated: 1527433505
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -89,14 +89,20 @@ ModelImporter:
     100162: Bone011
     100164: Bone012
     100166: Bone013
-    100168: jerome_clothes
-    100170: jerome_eyelash
-    100172: jerome_eyes
-    100174: jerome_eyespec
-    100176: jerome_hairbase
-    100178: jerome_hairflow
-    100180: jerome_skin
-    100182: //RootNode
+    100168: Bone014
+    100170: Bone014(mirrored)
+    100172: Bone015
+    100174: Bone015(mirrored)
+    100176: Bone016
+    100178: Bone016(mirrored)
+    100180: jerome_clothes
+    100182: jerome_eyelash
+    100184: jerome_eyes
+    100186: jerome_eyespec
+    100188: jerome_hairbase
+    100190: jerome_hairflow
+    100192: jerome_skin
+    100194: //RootNode
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -181,22 +187,28 @@ ModelImporter:
     400162: Bone011
     400164: Bone012
     400166: Bone013
-    400168: jerome_clothes
-    400170: jerome_eyelash
-    400172: jerome_eyes
-    400174: jerome_eyespec
-    400176: jerome_hairbase
-    400178: jerome_hairflow
-    400180: jerome_skin
-    400182: //RootNode
+    400168: Bone014
+    400170: Bone014(mirrored)
+    400172: Bone015
+    400174: Bone015(mirrored)
+    400176: Bone016
+    400178: Bone016(mirrored)
+    400180: jerome_clothes
+    400182: jerome_eyelash
+    400184: jerome_eyes
+    400186: jerome_eyespec
+    400188: jerome_hairbase
+    400190: jerome_hairflow
+    400192: jerome_skin
+    400194: //RootNode
     2100000: default
-    4300000: jerome_eyespec
-    4300002: jerome_hairbase
-    4300004: jerome_hairflow
-    4300006: jerome_skin
-    4300008: jerome_eyes
-    4300010: jerome_eyelash
-    4300012: jerome_clothes
+    4300000: jerome_hairbase
+    4300002: jerome_hairflow
+    4300004: jerome_skin
+    4300006: jerome_clothes
+    4300008: jerome_eyelash
+    4300010: jerome_eyespec
+    4300012: jerome_eyes
     7400000: Take 001
     9500000: //RootNode
     13700000: jerome_clothes
@@ -237,7 +249,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 7
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -248,10 +260,10 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -294,7 +306,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 2
     human:
-    - boneName: Bip001 Pelvis
+    - boneName: Bip001
       humanName: Hips
       limit:
         min: {x: 0, y: 0, z: 0}

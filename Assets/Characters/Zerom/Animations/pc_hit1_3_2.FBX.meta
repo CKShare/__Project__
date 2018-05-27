@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 99cd12c3ad0bed14b8a10c03c5c1b97c
-timeCreated: 1526331424
+guid: 51b171573a16ef04c945d3fb5ca3a4c2
+timeCreated: 1527433503
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -249,7 +249,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -269,7 +269,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.2939979
+      - time: 0.320442
         functionName: CheckHit
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -20,7 +20,7 @@ public abstract class EnemyController<TState> : CharacterControllerBase
     private GameObject _detectUI;
     [SerializeField, Required, TitleGroup("Etc")]
     private GameObject _faintUI;
-    [SerializeField, TitleGroup("Etc")]
+    [SerializeField, TitleGroup("Etc"), Tooltip("상태 UI가 보여지는 시간(초)")]
     private float _uiShowTime = 2F;
 
     private Transform _target;

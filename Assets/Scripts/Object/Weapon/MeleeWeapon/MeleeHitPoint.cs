@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cinemachine;
 
 public class MeleeHitPoint : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MeleeHitPoint : MonoBehaviour
     private ReactionInfo _heavyReactionInfo;
     [SerializeField]
     private EffectSettings _hitEffect;
+    [SerializeField]
+    private NoiseSettings _hitNoise;
+    [SerializeField]
+    private float _noiseDuration = 0F;
 
     private void OnDrawGizmosSelected()
     {
@@ -27,4 +32,6 @@ public class MeleeHitPoint : MonoBehaviour
     public ReactionInfo LightReactionInfo => _lightReactionInfo;
     public ReactionInfo HeavyReactionInfo => _heavyReactionInfo;
     public EffectSettings HitEffect => _hitEffect;
+    public NoiseSettings HitNoise => _hitNoise;
+    public float NoiseDuration => _noiseDuration;
 }

@@ -378,7 +378,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             case HenchMeleeState.Hit:
                 {
                     if (!HitReaction.inProgress)
-                        ChangeState(HenchMeleeState.Combat);
+                        ChangeState(!Animator.GetBool(Hash.IsDetected) ? HenchMeleeState.Detect : HenchMeleeState.Combat);
                 }
                 break;
 

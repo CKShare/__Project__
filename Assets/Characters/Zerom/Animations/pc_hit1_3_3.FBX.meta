@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c8747fc4145904b4c869ea54e88b0702
-timeCreated: 1526331426
+guid: b154db7271ef4fd42bb1df0c7c574c4f
+timeCreated: 1527433507
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -249,7 +249,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -269,12 +269,20 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.24278846
+      - time: 0.26519337
         functionName: CheckHit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 133
+        messageOptions: 0
+      - time: 0.12983425
+        functionName: SlowMotion
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: 347f6c5b586020242a790a75e3e960b7,
+          type: 2}
+        floatParameter: 0
+        intParameter: 0
         messageOptions: 0
       transformMask: []
       maskType: 3
