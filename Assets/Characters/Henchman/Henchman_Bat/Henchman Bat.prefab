@@ -3319,6 +3319,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 0}
+  _noiseDuration: 0
 --- !u!114 &114209717539453302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3960,6 +3962,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 0}
+  _noiseDuration: 0
 --- !u!114 &114588955742157342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4160,6 +4164,7 @@ MonoBehaviour:
   _faintUI: {fileID: 1849857855603188}
   _uiShowTime: 2
   _patrolOnAwake: 0
+  _patrolToNearest: 0
   _patrolContainer: {fileID: 0}
   _patrolSpeed: 1.5
   _patrolEndReachedDistance: 0.5

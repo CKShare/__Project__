@@ -73,6 +73,11 @@ public class PlayerController : CharacterControllerBase
     [SerializeField, TitleGroup("Dash"), Tooltip("대시 회전 속도")]
     private float _dashRotateSpeed = 10F;
 
+    [SerializeField, TitleGroup("Crouch"), Tooltip("적 스캔 반지름 (카메라 기준)")]
+    private float _scanRadius = 30F;
+    [SerializeField, TitleGroup("Crouch"), Tooltip("적 스캔 속도")]
+    private float _scanSpeed = 5F;
+
     [SerializeField, Required, TitleGroup("Input")]
     private string _horizontalAxisName = "Horizontal";
     [SerializeField, Required, TitleGroup("Input")]
@@ -129,13 +134,19 @@ public class PlayerController : CharacterControllerBase
     private bool _lockCrouch;
     private event Action<bool> _onCrouchActiveChanged;
 
+    private Camera _scanCamera;
+    private int _scanRadiusID;
+
     protected override void Awake()
     {
         base.Awake();
         
         _camera = Camera.main;
-        //_camera.clearStencilAfterLightingPass = true;
         _cameraTr = _camera.transform;
+        _scanCamera = _cameraTr.GetChild(0).GetComponent<Camera>();
+        _scanCamera.SetReplacementShader(Shader.Find("Hidden/XRay"), "XRay");
+        _scanCamera.clearStencilAfterLightingPass = true;
+        _scanRadiusID = Shader.PropertyToID("_Radius");
         _seeker = GetComponent<Seeker>();
 
         foreach (var weapon in GetComponentsInChildren<Weapon>())
@@ -208,8 +219,10 @@ public class PlayerController : CharacterControllerBase
         Rigidbody.rotation = _rotation;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         UpdateInput();
         Movement();
         MeleeAttack();
@@ -400,9 +413,14 @@ public class PlayerController : CharacterControllerBase
         Collider.height *= 0.5F;
         Collider.center = Vector3.Scale(Collider.center, new Vector3(1F, 0.5F, 1F));
         // Enable Shader.
+        _scanCamera.enabled = true;
+        Shader.SetGlobalFloat(_scanRadiusID, 0.01F);
 
         while (!_cancelCrouch)
         {
+            float radius = Shader.GetGlobalFloat(_scanRadiusID);
+            Shader.SetGlobalFloat(_scanRadiusID, Mathf.Lerp(radius, _scanRadius, DeltaTime * _scanSpeed));
+
             Vector3 forward = _crouchPoint.forward;
             forward.y = 0F;
             Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(forward), DeltaTime * _moveRotateSpeed);
@@ -416,6 +434,7 @@ public class PlayerController : CharacterControllerBase
         Collider.height *= 2F;
         Collider.center = Vector3.Scale(Collider.center, new Vector3(1F, 2F, 1F));
         // Disable Shader.
+        _scanCamera.enabled = false;
 
         _updateRigidbody = true;
         LockMove = false;
@@ -463,7 +482,6 @@ public class PlayerController : CharacterControllerBase
         LockMove = true;
         LockMeleeAttack = true;
         LockSlowGun = true;
-        //Animator.SetTrigger(Hash.Dash);
 
         int layer = 1 << LayerMask.NameToLayer("Obstacle") | 1 << LayerMask.NameToLayer("Enemy");
         float h = (Collider.height - Collider.radius * 2F) * 0.5F;
@@ -537,7 +555,7 @@ public class PlayerController : CharacterControllerBase
 
             // Rotate towards aiming direction.
             Ray ray = new Ray(_cameraTr.position, _cameraTr.forward);
-            Vector3 lookPoint = ray.GetPoint(30F);
+            Vector3 lookPoint = ray.GetPoint(100F);
             Vector3 dir = lookPoint - _cameraTr.position;
 
             Vector3 xzDir = dir;
@@ -709,7 +727,20 @@ public class PlayerController : CharacterControllerBase
     public override float DeltaTime => Time.deltaTime;
 
     #region Animation Events
-    
+
+    private void OnStopRunningEnter()
+    {
+        _updateRigidbody = false;
+        _applyRootMotion = true;
+    }
+
+    private void OnStopRunningExit()
+    {
+        if (_crouchCrt == null)
+            _updateRigidbody = true;
+        _applyRootMotion = false;
+    }
+
     private void EnableComboInput()
     {
         _comboInputEnabled = true;

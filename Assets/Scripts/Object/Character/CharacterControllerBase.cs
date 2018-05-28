@@ -30,6 +30,9 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     private List<Collider> _hitColliders = new List<UnityEngine.Collider>();
 
     private Transform _leftFoot, _rightFoot;
+    private int _lFootHash, _rFootHash;
+    private float _lFootLastValue, _rFootLastValue;
+
     private event Action<GameObject, GameObject, int> _onDamaged;
     private event Action<float> _onHealthChanged;
     private event Action _onDeath;
@@ -49,6 +52,9 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
         _leftFoot = _fbbik.references.leftFoot;
         _rightFoot = _fbbik.references.rightFoot;
 
+        _lFootHash = Animator.StringToHash("LFoot");
+        _rFootHash = Animator.StringToHash("RFoot");
+
         var colliders = GetComponentsInChildren<Collider>();
         foreach (var collider in colliders)
         {
@@ -62,6 +68,12 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     protected virtual void Start()
     {
         _currentHealth = _maxHealth;
+    }
+
+    protected virtual void Update()
+    {
+        OnFootPlant(_leftFoot.position, _lFootHash, ref _lFootLastValue);
+        OnFootPlant(_rightFoot.position, _rFootHash, ref _rFootLastValue);
     }
 
     private bool TryFootRaycast(Vector3 origin, out RaycastHit hitInfo)
@@ -252,40 +264,46 @@ public abstract class CharacterControllerBase : SceneObject, IHitReactive
     public abstract PhysiqueType PhysiqueType { get; }
     public abstract float DeltaTime { get; }
 
-    private void OnFootPlant(Vector3 origin)
+    private void OnFootPlant(Vector3 origin, int hash, ref float lastFootValue)
     {
-        RaycastHit hitInfo;
-        if (TryFootRaycast(origin, out hitInfo))
+        float current = Animator.GetFloat(hash);
+        if (lastFootValue < 0F && current > 0F)
         {
-
-            var sceneObj = hitInfo.transform.GetComponent<SceneObject>();
-            if (sceneObj != null)
+            RaycastHit hitInfo;
+            if (TryFootRaycast(origin, out hitInfo))
             {
-                EffectInfo effectInfo;
-                if (_footstepEffect.TryGetEffectInfo(sceneObj.TextureType, out effectInfo))
-                {
-                    // Vfx
-                    GameObject particle = effectInfo.ParticlePool.Spawn();
-                    particle.transform.position = hitInfo.point;
 
-                    // Sfx
-                    FMODUnity.RuntimeManager.PlayOneShot(effectInfo.Sound, hitInfo.point);
+                var sceneObj = hitInfo.transform.GetComponent<SceneObject>();
+                if (sceneObj != null)
+                {
+                    EffectInfo effectInfo;
+                    if (_footstepEffect.TryGetEffectInfo(sceneObj.TextureType, out effectInfo))
+                    {
+                        // Vfx
+                        GameObject particle = effectInfo.ParticlePool.Spawn();
+                        particle.transform.position = hitInfo.point;
+
+                        // Sfx
+                        FMODUnity.RuntimeManager.PlayOneShot(effectInfo.Sound, hitInfo.point);
+                    }
                 }
             }
         }
+
+        lastFootValue = current;
     }
 
     #region Animation Events
 
-    private void OnLeftFootPlant()
-    {
-        OnFootPlant(_leftFoot.position);
-    }
+    //private void OnLeftFootPlant()
+    //{
+    //    OnFootPlant(_leftFoot.position, _lFootHash, ref _lFootLastValue);
+    //}
 
-    private void OnRightFootPlant()
-    {
-        OnFootPlant(_rightFoot.position);
-    }
+    //private void OnRightFootPlant()
+    //{
+    //    OnFootPlant(_rightFoot.position, _rFootHash, ref _rFootLastValue);
+    //}
 
     #endregion
 }

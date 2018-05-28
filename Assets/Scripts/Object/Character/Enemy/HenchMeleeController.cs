@@ -31,6 +31,8 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
     [SerializeField, Tooltip("참이면, 씬이 시작됬을 때 바로 정찰을 시작함")]
     private bool _patrolOnAwake = false;
+    [SerializeField, Tooltip("참이면, 가장 가까운 위치부터 정찰을 시작함")]
+    private bool _patrolToNearest = false;
     [SerializeField, Required, Tooltip("정찰 포인트들을 담고있는 컨테이너 오브젝트")]
     private Transform _patrolContainer;
     [SerializeField, Tooltip("정찰 속도")]
@@ -60,7 +62,6 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
     private Vector3[] _patrolPoints;
     private int _currentPatrolPointIdx;
-    private bool _patrolToNearest;
 
     private float _detectElapsedTime;
     private float _patternDelay;

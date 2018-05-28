@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884fcdb37b9d0164b860ca36f2609e8c, type: 3}
   m_Name: 1-3-4 TimeScale Settings
   m_EditorClassIdentifier: 
-  _timeScale: 0.01
-  _duration: 0.15
+  _timeScale: 0.05
+  _duration: 0.3

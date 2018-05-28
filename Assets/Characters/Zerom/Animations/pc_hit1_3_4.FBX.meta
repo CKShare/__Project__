@@ -269,13 +269,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3122384
-        functionName: CheckHit
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 134
-        messageOptions: 0
       - time: 0.13535912
         functionName: SlowMotion
         data: 
@@ -283,6 +276,13 @@ ModelImporter:
           type: 2}
         floatParameter: 0
         intParameter: 0
+        messageOptions: 0
+      - time: 0.339594
+        functionName: CheckHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 134
         messageOptions: 0
       transformMask: []
       maskType: 3

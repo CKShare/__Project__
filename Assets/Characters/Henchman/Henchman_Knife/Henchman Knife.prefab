@@ -206,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1171964785119668
 GameObject:
   m_ObjectHideFlags: 1
@@ -3680,6 +3680,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 0}
+  _hitNoise: {fileID: 0}
+  _noiseDuration: 0
 --- !u!114 &114345010200323558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3938,6 +3940,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 0}
+  _hitNoise: {fileID: 0}
+  _noiseDuration: 0
 --- !u!114 &114750797166031180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3968,6 +3972,7 @@ MonoBehaviour:
   _faintUI: {fileID: 1896404322392094}
   _uiShowTime: 2
   _patrolOnAwake: 0
+  _patrolToNearest: 0
   _patrolContainer: {fileID: 0}
   _patrolSpeed: 1.5
   _patrolEndReachedDistance: 0.5

@@ -68,8 +68,10 @@ public abstract class EnemyController<TState> : CharacterControllerBase
         _delayFrame = true;
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (_delayFrame)
         {
             _delayFrame = false;

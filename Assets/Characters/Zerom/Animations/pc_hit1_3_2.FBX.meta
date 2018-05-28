@@ -269,6 +269,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.30470914
+        functionName: SlowMotion
+        data: 
+        objectReferenceParameter: {fileID: 11400000, guid: b47a97ea6db955c4f81148ae03eb6f2b,
+          type: 2}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.320442
         functionName: CheckHit
         data: 

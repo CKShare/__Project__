@@ -3049,13 +3049,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753105797060164}
-  m_LocalRotation: {x: 0.65157497, y: -0.3604639, z: 0.1697923, w: 0.6455125}
+  m_LocalRotation: {x: 0.3980066, y: -0.36342725, z: -0.4606494, w: 0.70520467}
   m_LocalPosition: {x: 0.029, y: 0.013, z: 0.015}
   m_LocalScale: {x: 1.0000002, y: 1.0000013, z: 1.0000012}
   m_Children: []
   m_Father: {fileID: 4258608111049432}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 74.495, y: -114.05601, z: -69.586006}
+  m_LocalEulerAnglesHint: {x: 13.093, y: -64.519005, z: -74.592}
 --- !u!4 &4871051562055620
 Transform:
   m_ObjectHideFlags: 1
@@ -3771,6 +3771,8 @@ MonoBehaviour:
   _dashSpeed: 1
   _dashLerpSpeed: 4
   _dashRotateSpeed: 20
+  _scanRadius: 30
+  _scanSpeed: 3
   _horizontalAxisName: Horizontal
   _verticalAxisName: Vertical
   _attackButtonName: Attack
@@ -3799,6 +3801,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 6f44a54264c38b54f8f79544ce6db561, type: 2}
+  _noiseDuration: 0.25
 --- !u!114 &114237161871188828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3821,6 +3825,8 @@ MonoBehaviour:
     _force: 3
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: a6260f800c186034e9c65a0c29d79112, type: 2}
+  _noiseDuration: 0.75
 --- !u!114 &114247101323665526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4312,6 +4318,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 6f44a54264c38b54f8f79544ce6db561, type: 2}
+  _noiseDuration: 0.25
 --- !u!114 &114402323141192772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5003,6 +5011,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 558c6262e6799cf4e885ce33e08008d2, type: 2}
+  _noiseDuration: 0.75
 --- !u!114 &114526830363165050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5072,7 +5082,9 @@ MonoBehaviour:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 6f44a54264c38b54f8f79544ce6db561, type: 2}
+  _noiseDuration: 0.25
 --- !u!114 &114700594274919782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5228,6 +5240,8 @@ MonoBehaviour:
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 6f44a54264c38b54f8f79544ce6db561, type: 2}
+  _noiseDuration: 0.25
 --- !u!114 &114944326043653590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5275,13 +5289,15 @@ MonoBehaviour:
   _damage: 50
   _lightReactionInfo:
     _boneType: 0
-    _force: 15
+    _force: 45
     _enableRagdoll: 1
   _heavyReactionInfo:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: d583a4e894829cf4984a637913e8a93c, type: 2}
+  _noiseDuration: 0.75
 --- !u!114 &114955521404122500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5313,13 +5329,15 @@ MonoBehaviour:
   _damage: 50
   _lightReactionInfo:
     _boneType: 1
-    _force: 15
+    _force: 30
     _enableRagdoll: 1
   _heavyReactionInfo:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
+  _hitNoise: {fileID: 11400000, guid: 660b8bbe76ef3934eb57bb08b9fd2bd5, type: 2}
+  _noiseDuration: 0.75
 --- !u!135 &135534986324137400
 SphereCollider:
   m_ObjectHideFlags: 1
