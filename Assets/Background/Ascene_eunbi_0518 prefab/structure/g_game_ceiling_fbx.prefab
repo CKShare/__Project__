@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33414549251235748}
   - component: {fileID: 23004635042017876}
   - component: {fileID: 65885027388886384}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: g_game_ceiling_fbx
   m_TagString: Untagged
   m_Icon: {fileID: 0}

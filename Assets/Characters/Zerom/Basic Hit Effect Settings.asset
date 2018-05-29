@@ -52,7 +52,7 @@ MonoBehaviour:
       Data: PoolInfo, Assembly-CSharp
     - Name: _poolName
       Entry: 1
-      Data: DmgFist
+      Data: DmgCritical
     - Name: 
       Entry: 8
       Data: 

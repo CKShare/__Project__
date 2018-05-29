@@ -97,4 +97,11 @@ public class MeleeWeapon : Weapon
             }
         }
     }
+
+    public void SetVFXActive(int attackID, bool active)
+    {
+        var point = _hitPointDict[attackID];
+        var vfx = point.Vfx;
+        vfx?.SetActive(active);
+    }
 }

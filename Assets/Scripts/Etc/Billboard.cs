@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Billboard : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class Billboard : MonoBehaviour
     private void Update()
     {
         Vector3 euler = _cameraTr.eulerAngles;
-        _transform.position = _follow.position + Vector3.up * _heightOffset;
+        if (_follow != null)
+            _transform.position = _follow.position + Vector3.up * _heightOffset;
         _transform.rotation = Quaternion.Euler(0F, euler.y, 0F);
     }
 }

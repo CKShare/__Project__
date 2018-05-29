@@ -284,6 +284,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 132
         messageOptions: 0
+      - time: 0.2762431
+        functionName: ActivateVFX
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 132
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Cinemachine;
+using Sirenix.OdinInspector;
 
 public class MeleeHitPoint : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MeleeHitPoint : MonoBehaviour
     private ReactionInfo _lightReactionInfo;
     [SerializeField]
     private ReactionInfo _heavyReactionInfo;
+    [SerializeField, SceneObjectsOnly]
+    private GameObject _vfx;
     [SerializeField]
     private EffectSettings _hitEffect;
     [SerializeField]
@@ -31,6 +34,7 @@ public class MeleeHitPoint : MonoBehaviour
     public int Damage => _damage;
     public ReactionInfo LightReactionInfo => _lightReactionInfo;
     public ReactionInfo HeavyReactionInfo => _heavyReactionInfo;
+    public GameObject Vfx => _vfx;
     public EffectSettings HitEffect => _hitEffect;
     public NoiseSettings HitNoise => _hitNoise;
     public float NoiseDuration => _noiseDuration;

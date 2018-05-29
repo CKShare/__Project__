@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54535047116372304}
   m_Layer: 13
   m_Name: g_gamechair_fbx
-  m_TagString: Untagged
+  m_TagString: Dynamic Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267966652272866}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.7068671, y: 0.018411092, z: 0.018411092, w: 0.7068671}
+  m_LocalPosition: {x: -17.665, y: -6.571, z: -7.66}
+  m_LocalScale: {x: 1.1, y: 1.1000003, z: 1.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 2.9840002}
 --- !u!23 &23005177616891450
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 3f300429790183b48a9feecbea9bb7bb, type: 3}
+  - {fileID: 2100000, guid: 6724b2cc2aa90e5468872514237630e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
