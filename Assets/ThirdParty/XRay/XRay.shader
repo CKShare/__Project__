@@ -19,7 +19,7 @@ Shader "Hidden/XRay"
 
 		ZWrite Off
 		ZTest Always
-		Blend One Zero
+		Blend One One
 
 		Pass
 		{

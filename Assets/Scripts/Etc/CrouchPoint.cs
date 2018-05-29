@@ -46,6 +46,7 @@ public class CrouchPoint : MonoBehaviour
         _canvas.gameObject.SetActive(true);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         DebugExtension.DrawCapsule(transform.position + Vector3.up * _height, transform.position, Color.green, _radius);
@@ -53,4 +54,5 @@ public class CrouchPoint : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * (_height * 0.5F);
         Gizmos.DrawLine(origin, origin + transform.forward);
     }
+#endif
 }

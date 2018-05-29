@@ -9,7 +9,6 @@ public class CoverPoint : MonoBehaviour
     private float _radius;
     [SerializeField]
     private float _height;
-#endif
 
     private void OnDrawGizmos()
     {
@@ -18,4 +17,5 @@ public class CoverPoint : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * (_height * 0.5F);
         Gizmos.DrawLine(origin, origin + transform.forward);
     }
+#endif
 }

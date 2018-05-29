@@ -11,6 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AScene/AScene_Background.unity
     guid: decc5df3379df0a4eb260cdfce415213
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/AScene/AScene_Lighting.unity
     guid: 791b42b743034714d91207bee6dbbb43

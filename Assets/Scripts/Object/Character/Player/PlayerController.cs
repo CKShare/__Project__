@@ -196,6 +196,9 @@ public class PlayerController : CharacterControllerBase
 
     private void OnCrouchPointExit(Transform crouchPoint)
     {
+        if (crouchPoint != _crouchPoint)
+            return;
+
         _crouchPoint = null;
         _onCrouchActiveChanged?.Invoke(false);
     }
