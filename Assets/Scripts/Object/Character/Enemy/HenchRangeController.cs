@@ -171,6 +171,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
             case HenchRangeState.Hit:
                 {
+                    FBBIK.solver.IKPositionWeight = 1F;
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
                 }
@@ -403,6 +404,7 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
             case HenchRangeState.Hit:
                 {
+                    FBBIK.solver.IKPositionWeight = 0F;
                     RichAI.isStopped = false;
                     RichAI.canSearch = true;
                 }

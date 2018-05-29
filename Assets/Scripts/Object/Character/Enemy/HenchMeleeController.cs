@@ -186,6 +186,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
+                    FBBIK.solver.IKPositionWeight = 1F;
                     RichAI.isStopped = true;
                     RichAI.canSearch = false;
                     Animator.SetFloat(Hash.Speed, 0F);
@@ -449,6 +450,7 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
 
             case HenchMeleeState.Hit:
                 {
+                    FBBIK.solver.IKPositionWeight = 0F;
                     RichAI.isStopped = false;
                     RichAI.canSearch = true;
                 }

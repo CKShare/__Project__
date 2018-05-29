@@ -3546,7 +3546,7 @@ MonoBehaviour:
     eyes: []
   solver:
     IKPosition: {x: 0, y: 0, z: 0}
-    IKPositionWeight: 1
+    IKPositionWeight: 0
     root: {fileID: 4315102457904014}
     iterations: 4
     chain:
