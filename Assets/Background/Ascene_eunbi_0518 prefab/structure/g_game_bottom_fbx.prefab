@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33326405793640996}
   - component: {fileID: 23139212615800482}
   - component: {fileID: 65298763966284538}
-  - component: {fileID: 114090781898186432}
   m_Layer: 12
   m_Name: g_game_bottom_fbx
   m_TagString: Untagged
@@ -96,24 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0000005, y: 4.0000014, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114090781898186432
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1523252516385560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ac017fc9e0e6f7419aafe1b33cef899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  _textureType: {fileID: 11400000, guid: 180f48514014e784ab12ec58ed91bba7, type: 2}

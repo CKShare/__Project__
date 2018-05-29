@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33857942160970684}
   - component: {fileID: 23192154993404636}
   - component: {fileID: 65625151662795286}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: g_support_fbx
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33127809423255890}
   - component: {fileID: 23615847822374028}
   - component: {fileID: 65298522004484460}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: h_silling_fbx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4808232880894066
 Transform:

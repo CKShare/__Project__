@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 using Sirenix.OdinInspector;
 using RootMotion.FinalIK;
 using Pathfinding;
@@ -78,8 +77,6 @@ public class PlayerController : CharacterControllerBase
     private float _scanRadius = 30F;
     [SerializeField, TitleGroup("Crouch"), Tooltip("적 스캔 속도")]
     private float _scanSpeed = 5F;
-    [SerializeField, TitleGroup("Crouch"), Tooltip("Grayscale 속도")]
-    private float _grayScaleSpeed = 2F;
 
     [SerializeField, Required, TitleGroup("Input")]
     private string _horizontalAxisName = "Horizontal";
@@ -118,7 +115,6 @@ public class PlayerController : CharacterControllerBase
     private bool _comboInputEnabled;
     private bool _comboTransitionEnabled;
     private bool _lockMeleeAttack;
-    private int _lastAttackID = -1;
 
     private event Action<bool> _onAimActiveChanged;
     private bool _aimPressing;
@@ -188,16 +184,24 @@ public class PlayerController : CharacterControllerBase
         }
     }
 
-    private void OnCrouchPointEnter(Transform crouchPoint)
+    private void OnTriggerEnter(Collider col)
     {
-        _crouchPoint = crouchPoint;
-        _onCrouchActiveChanged?.Invoke(true);
+        int layer = LayerMask.NameToLayer("CrouchPoint");
+        if (col.gameObject.layer == layer)
+        {
+            _crouchPoint = col.transform;
+            _onCrouchActiveChanged?.Invoke(true);
+        }
     }
 
-    private void OnCrouchPointExit(Transform crouchPoint)
+    private void OnTriggerExit(Collider col)
     {
-        _crouchPoint = null;
-        _onCrouchActiveChanged?.Invoke(false);
+        int layer = LayerMask.NameToLayer("CrouchPoint");
+        if (col.gameObject.layer == layer)
+        {
+            _crouchPoint = null;
+            _onCrouchActiveChanged?.Invoke(false);
+        };
     }
 
     private void FixedUpdate()
@@ -411,29 +415,15 @@ public class PlayerController : CharacterControllerBase
         // Enable Shader.
         _scanCamera.enabled = true;
         Shader.SetGlobalFloat(_scanRadiusID, 0.01F);
-        //
-        _crouchPoint.SendMessage("OnPlayerCrouch");
-        //
-        var pp = _camera.GetComponent<PostProcessingBehaviour>();
-        var settings = pp.profile.colorGrading.settings;
-        settings.basic.saturation = 1F;
 
         while (!_cancelCrouch)
         {
-            float delta = DeltaTime;
-
-            //
             float radius = Shader.GetGlobalFloat(_scanRadiusID);
-            Shader.SetGlobalFloat(_scanRadiusID, Mathf.Lerp(radius, _scanRadius, delta * _scanSpeed));
-            
-            //
-            settings.basic.saturation = Mathf.Lerp(settings.basic.saturation, 0F, delta * _grayScaleSpeed);
-            pp.profile.colorGrading.settings = settings; 
+            Shader.SetGlobalFloat(_scanRadiusID, Mathf.Lerp(radius, _scanRadius, DeltaTime * _scanSpeed));
 
-            //
             Vector3 forward = _crouchPoint.forward;
             forward.y = 0F;
-            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(forward), delta * _moveRotateSpeed);
+            Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.LookRotation(forward), DeltaTime * _moveRotateSpeed);
             yield return _waitForFixedUpdate;
         }
         _rotation = Rigidbody.rotation;
@@ -445,11 +435,6 @@ public class PlayerController : CharacterControllerBase
         Collider.center = Vector3.Scale(Collider.center, new Vector3(1F, 2F, 1F));
         // Disable Shader.
         _scanCamera.enabled = false;
-        //
-        _crouchPoint.SendMessage("OnPlayerStandUp");
-        //
-        settings.basic.saturation = 1F;
-        pp.profile.colorGrading.settings = settings;
 
         _updateRigidbody = true;
         LockMove = false;
@@ -791,28 +776,14 @@ public class PlayerController : CharacterControllerBase
 
     private void OnAttackExit()
     {
-        _applyRootMotion = false;
-        LockMove = false;
-        LockSlowGun = false;
-        LockDash = false;
-        LockCrouch = false;
-
-        if (_lastAttackID != -1)
+        //if (_comboTransitionEnabled)
         {
-            DeactivateVFX(_lastAttackID);
-            _lastAttackID = -1;
+            _applyRootMotion = false;
+            LockMove = false;
+            LockSlowGun = false;
+            LockDash = false;
+            LockCrouch = false;
         }
-    }
-
-    private void ActivateVFX(int attackID)
-    {
-        _lastAttackID = attackID;
-        _meleeWeapon.SetVFXActive(attackID, true);
-    }
-
-    private void DeactivateVFX(int attackID)
-    {
-        _meleeWeapon.SetVFXActive(attackID, false);
     }
     
     private void ResetCombo()

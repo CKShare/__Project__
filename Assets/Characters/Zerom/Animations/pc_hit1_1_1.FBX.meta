@@ -276,13 +276,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.20947596
-        functionName: ActivateVFX
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 111
-        messageOptions: 0
       - time: 0.33650607
         functionName: CheckHit
         data: 
