@@ -83,6 +83,12 @@ public class HenchRangeController : EnemyController<HenchRangeState>
 
         _rangeWeapon.Owner = gameObject;
 
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
         Initialize(HenchRangeState.Idle);
     }
 

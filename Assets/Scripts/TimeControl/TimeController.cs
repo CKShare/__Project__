@@ -9,17 +9,16 @@ public class TimeController : SerializedMonoBehaviour
 {
     [ShowInInspector, ReadOnly]
     private float _timeScale = 1F;
-    [OdinSerialize, HideReferenceObjectPicker]
-    private ITimeControl[] _components = new ITimeControl[0];
 
+    private ITimeControl[] _components = new ITimeControl[0];
     private Dictionary<Type, ITimeControl> _compDict = new Dictionary<Type, ITimeControl>();
 
     private void Awake()
     {
+        _components = GetComponentsInChildren<ITimeControl>();
         foreach (var comp in _components)
         {
             _compDict[comp.GetType()] = comp;
-            comp.Initialize();
         }
     }
 

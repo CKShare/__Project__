@@ -8,7 +8,7 @@
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000000042BDD8F8 isAsync 1 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000000B01B3D28 isAsync 1 updatePeriod 0.02
 [LOG] Thread::initThread                       : Init FMOD Studio update thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
@@ -26,14 +26,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun04', format=2, channels=1, frequency=48000, lengthbytes=3104, lengthpcm=18073, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.365387.
@@ -42,14 +42,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='ClothBed FS02_31_2_1 (2)', format=2, channels=2, frequency=48000, lengthbytes=5856, lengthpcm=27468, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.678772.
@@ -58,14 +58,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun06', format=2, channels=1, frequency=48000, lengthbytes=3008, lengthpcm=17815, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.291534.
@@ -74,14 +74,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun01', format=2, channels=1, frequency=48000, lengthbytes=3104, lengthpcm=17339, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.313782.
@@ -90,14 +90,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun08', format=2, channels=1, frequency=48000, lengthbytes=3328, lengthpcm=18882, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.400513.
@@ -106,14 +106,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='ClothBed FS02_31_2_2', format=2, channels=2, frequency=48000, lengthbytes=3776, lengthpcm=17794, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.039459.
@@ -122,14 +122,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun02', format=2, channels=1, frequency=48000, lengthbytes=3136, lengthpcm=18332, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519318.
@@ -138,14 +138,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='ClothBed FS02_31_2_3', format=2, channels=2, frequency=48000, lengthbytes=6528, lengthpcm=31921, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.916626.
@@ -154,14 +154,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun05', format=2, channels=1, frequency=48000, lengthbytes=2784, lengthpcm=16117, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.372162.
@@ -170,14 +170,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun07', format=2, channels=1, frequency=48000, lengthbytes=2816, lengthpcm=16461, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.155273.
@@ -186,14 +186,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D64E98
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000000428600F8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Foot_Conc_SneakerRun03', format=2, channels=1, frequency=48000, lengthbytes=3072, lengthpcm=15550, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.174408.
@@ -202,14 +202,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D652D8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000005CF25018
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Punch_Boxing_BodyHit03', format=2, channels=1, frequency=48000, lengthbytes=2688, lengthpcm=15320, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.792175.
@@ -218,14 +218,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D652D8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000005CF25018
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Punch_Boxing_BodyHit01', format=2, channels=1, frequency=48000, lengthbytes=3744, lengthpcm=20473, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.861786.
@@ -234,14 +234,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D652D8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000005CF25018
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Punch_Boxing_BodyHit02', format=2, channels=1, frequency=48000, lengthbytes=2656, lengthpcm=15336, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.801819.
@@ -250,14 +250,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D676F8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000043B3D7C8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Gun_NailRifle_Shot02', format=2, channels=1, frequency=48000, lengthbytes=7136, lengthpcm=39560, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.949524.
@@ -266,14 +266,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D676F8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000043B3D7C8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Gun_NailRifle_Shot03', format=2, channels=1, frequency=48000, lengthbytes=7936, lengthpcm=42910, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
@@ -282,14 +282,14 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D676F8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000043B3D7C8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Gun_NailRifle_Shot04', format=2, channels=1, frequency=48000, lengthbytes=10080, lengthpcm=59363, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.949493.
@@ -298,53 +298,53 @@
 [LOG] SystemI::createSoundInternal             : exinfo->length             = 192384
 [LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 50784
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000C4C4F5FC
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000000E30CF5FC
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8D0C0E310
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8D0C0E2E0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8D0C0E3E0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8D0C0E490
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000042D676F8
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8CE6CE310
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8CE6CE2E0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8CE6CE3E0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8CE6CE490
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000000043B3D7C8
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             : Sample 0/1: name='Gun_NailRifle_Shot01', format=2, channels=1, frequency=48000, lengthbytes=6080, lengthpcm=34115, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SoundI::release                          :  (0000000042301DB8)
-[LOG] SoundI::release                          :     Punch_Boxing_BodyHit01 (0000000044AC99C8)
-[LOG] SoundI::release                          :  (00000000422E5A58)
-[LOG] SoundI::release                          :     Punch_Boxing_BodyHit02 (0000000044ACBA48)
-[LOG] SoundI::release                          :  (0000000042301C48)
-[LOG] SoundI::release                          :     Punch_Boxing_BodyHit03 (0000000044AC9828)
-[LOG] SoundI::release                          :  (00000000422F8DF8)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun01 (0000000044AC9B68)
-[LOG] SoundI::release                          :  (00000000422F6168)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun02 (0000000044AC91A8)
-[LOG] SoundI::release                          :  (00000000422F62D8)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun03 (0000000044AC9348)
-[LOG] SoundI::release                          :  (00000000422F5D18)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun04 (0000000044AC9008)
-[LOG] SoundI::release                          :  (00000000422FA668)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun05 (0000000044ACA868)
-[LOG] SoundI::release                          :  (00000000422F76F8)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun06 (0000000044ACAD48)
-[LOG] SoundI::release                          :  (00000000422F90D8)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun07 (0000000044ACBBE8)
-[LOG] SoundI::release                          :  (00000000422F7868)
-[LOG] SoundI::release                          :     Foot_Conc_SneakerRun08 (0000000044ACA6C8)
-[LOG] SoundI::release                          :  (00000000422F7588)
-[LOG] SoundI::release                          :     ClothBed FS02_31_2_1 (2) (0000000044ACB3C8)
-[LOG] SoundI::release                          :  (00000000422F5BA8)
-[LOG] SoundI::release                          :     ClothBed FS02_31_2_2 (0000000044ACB228)
-[LOG] SoundI::release                          :  (00000000422F8108)
-[LOG] SoundI::release                          :     ClothBed FS02_31_2_3 (0000000044ACB708)
-[LOG] SoundI::release                          :  (00000000422FA0A8)
-[LOG] SoundI::release                          :     Gun_NailRifle_Shot01 (0000000044AC9688)
-[LOG] SoundI::release                          :  (00000000422F0118)
-[LOG] SoundI::release                          :     Gun_NailRifle_Shot02 (0000000044ACAEE8)
-[LOG] SoundI::release                          :  (00000000422F0288)
-[LOG] SoundI::release                          :     Gun_NailRifle_Shot03 (0000000044ACB088)
-[LOG] SoundI::release                          :  (00000000422F03F8)
-[LOG] SoundI::release                          :     Gun_NailRifle_Shot04 (0000000044AC94E8)
+[LOG] SoundI::release                          :  (00000000AFA7E988)
+[LOG] SoundI::release                          :     Gun_NailRifle_Shot01 (00000000C080C7A8)
+[LOG] SoundI::release                          :  (00000000AFA7BCF8)
+[LOG] SoundI::release                          :     Gun_NailRifle_Shot02 (00000000C08108A8)
+[LOG] SoundI::release                          :  (00000000AFA7D568)
+[LOG] SoundI::release                          :     Gun_NailRifle_Shot03 (00000000C0810A48)
+[LOG] SoundI::release                          :  (00000000AFA7F398)
+[LOG] SoundI::release                          :     Gun_NailRifle_Shot04 (00000000C080C2C8)
+[LOG] SoundI::release                          :  (00000000AFA7FC38)
+[LOG] SoundI::release                          :     Punch_Boxing_BodyHit01 (00000000C080EEA8)
+[LOG] SoundI::release                          :  (00000000AFA7DF78)
+[LOG] SoundI::release                          :     Punch_Boxing_BodyHit02 (00000000C08115A8)
+[LOG] SoundI::release                          :  (00000000AFA7C708)
+[LOG] SoundI::release                          :     Punch_Boxing_BodyHit03 (00000000C080F868)
+[LOG] SoundI::release                          :  (00000000AFA7DC98)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun01 (00000000C080BC48)
+[LOG] SoundI::release                          :  (00000000AFA80368)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun02 (00000000C080FA08)
+[LOG] SoundI::release                          :  (00000000AFA7F678)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun03 (00000000C080D648)
+[LOG] SoundI::release                          :  (00000000AFA7B8A8)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun04 (00000000C080D7E8)
+[LOG] SoundI::release                          :  (00000000AFA7E3C8)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun05 (00000000C0810228)
+[LOG] SoundI::release                          :  (00000000AFA7DB28)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun06 (00000000C080E828)
+[LOG] SoundI::release                          :  (00000000AFA80088)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun07 (00000000C080ED08)
+[LOG] SoundI::release                          :  (00000000AFA7BE68)
+[LOG] SoundI::release                          :     Foot_Conc_SneakerRun08 (00000000C08118E8)
+[LOG] SoundI::release                          :  (00000000AFA807B8)
+[LOG] SoundI::release                          :     ClothBed FS02_31_2_1 (2) (00000000C0811408)
+[LOG] SoundI::release                          :  (00000000AFA7C148)
+[LOG] SoundI::release                          :     ClothBed FS02_31_2_2 (00000000C080DE68)
+[LOG] SoundI::release                          :  (00000000AFA7C2B8)
+[LOG] SoundI::release                          :     ClothBed FS02_31_2_3 (00000000C080EB68)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients

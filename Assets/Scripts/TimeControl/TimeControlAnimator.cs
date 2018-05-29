@@ -1,16 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public class TimeControlAnimator : ITimeControl
+public class TimeControlAnimator : MonoBehaviour, ITimeControl
 {
-    [SerializeField]
     private Animator _animator;
-    
     private float _speed;
 
-    public void Initialize()
+    private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _speed = _animator.speed;
     }
 

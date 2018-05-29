@@ -2,15 +2,14 @@
 using UnityEngine;
 
 [Serializable]
-public class TimeControlAudioSource : ITimeControl
+public class TimeControlAudioSource : MonoBehaviour, ITimeControl
 {
-    [SerializeField]
     private AudioSource _audioSource;
-    
     private float _pitch;
 
-    public void Initialize()
+    private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _pitch = _audioSource.pitch;
     }
 

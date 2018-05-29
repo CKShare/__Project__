@@ -3,18 +3,17 @@ using UnityEngine;
 using Pathfinding;
 
 [Serializable]
-public class TimeControlRichAI : ITimeControl
+public class TimeControlRichAI : MonoBehaviour, ITimeControl
 {
-    [SerializeField]
     private RichAI _richAI;
-
     private float _timeScale = 1F;
     private float _maxSpeed;
     private float _rotationSpeed;
     private float _gravity;
 
-    public void Initialize()
+    private void Awake()
     {
+        _richAI = GetComponent<RichAI>();
         _timeScale = 1F;
         _maxSpeed = _richAI.maxSpeed;
         _rotationSpeed = _richAI.rotationSpeed;

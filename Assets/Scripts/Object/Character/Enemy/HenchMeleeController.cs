@@ -83,6 +83,11 @@ public class HenchMeleeController : EnemyController<HenchMeleeState>
             _patrolPoints[i] = _patrolContainer.GetChild(i).position;
 
         _meleeWeapon.Owner = gameObject;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
 
         Initialize(HenchMeleeState.Idle);
     }

@@ -779,6 +779,8 @@ GameObject:
   - component: {fileID: 114354434296659524}
   - component: {fileID: 114506733814281524}
   - component: {fileID: 114990493171861530}
+  - component: {fileID: 114042634360366076}
+  - component: {fileID: 114172881632477350}
   m_Layer: 11
   m_Name: Henchman Pistol
   m_TagString: Untagged
@@ -2520,6 +2522,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneObject: {fileID: 114990493171861530}
+--- !u!114 &114042634360366076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664860875928318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2746d027e996bb54fa7a49473ad03c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114058171984201514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2595,6 +2608,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneObject: {fileID: 114990493171861530}
+--- !u!114 &114172881632477350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664860875928318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d854699dccdf99e41b1b6af1e9f8d621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114206384911293948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2654,44 +2678,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 95860343701210854}
-    - {fileID: 114358535553161618}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _components
-      Entry: 7
-      Data: 0|ITimeControl[], Assembly-CSharp
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|TimeControlAnimator, Assembly-CSharp
-    - Name: _animator
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|TimeControlRichAI, Assembly-CSharp
-    - Name: _richAI
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
 --- !u!114 &114237113310290258
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,15 +2,14 @@
 using UnityEngine;
 
 [Serializable]
-public class TimeControlParticleSystem : ITimeControl
+public class TimeControlParticleSystem : MonoBehaviour, ITimeControl
 {
-    [SerializeField]
     private ParticleSystem _particleSystem;
-    
     private float _simulationSpeed;
 
-    public void Initialize()
+    private void Awake()
     {
+        _particleSystem = GetComponent<ParticleSystem>();
         _simulationSpeed = _particleSystem.main.simulationSpeed;
     }
 

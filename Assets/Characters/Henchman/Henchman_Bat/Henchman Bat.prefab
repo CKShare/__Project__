@@ -201,6 +201,8 @@ GameObject:
   - component: {fileID: 114104467823126986}
   - component: {fileID: 114366655156632242}
   - component: {fileID: 114959673576398818}
+  - component: {fileID: 114455404119400738}
+  - component: {fileID: 114746835738997948}
   m_Layer: 11
   m_Name: Henchman Bat
   m_TagString: Untagged
@@ -3318,6 +3320,7 @@ MonoBehaviour:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
+  _vfx: {fileID: 0}
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
   _hitNoise: {fileID: 0}
   _noiseDuration: 0
@@ -3890,44 +3893,23 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 95392883005169302}
-    - {fileID: 114705244583859434}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _components
-      Entry: 7
-      Data: 0|ITimeControl[], Assembly-CSharp
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|TimeControlAnimator, Assembly-CSharp
-    - Name: _animator
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|TimeControlRichAI, Assembly-CSharp
-    - Name: _richAI
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+--- !u!114 &114455404119400738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094564284598502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2746d027e996bb54fa7a49473ad03c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114493943065617094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3961,6 +3943,7 @@ MonoBehaviour:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
+  _vfx: {fileID: 0}
   _hitEffect: {fileID: 11400000, guid: cf8e1ce3da4d30e4bbc94e5766f56b1a, type: 2}
   _hitNoise: {fileID: 0}
   _noiseDuration: 0
@@ -4073,6 +4056,17 @@ MonoBehaviour:
   funnelSimplification: 1
   slowWhenNotFacingTarget: 0
   animCompatibility: {fileID: 0}
+--- !u!114 &114746835738997948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094564284598502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d854699dccdf99e41b1b6af1e9f8d621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114756206496282964
 MonoBehaviour:
   m_ObjectHideFlags: 1

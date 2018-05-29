@@ -200,6 +200,8 @@ GameObject:
   - component: {fileID: 114335442337829512}
   - component: {fileID: 114215969477542270}
   - component: {fileID: 114750797166031180}
+  - component: {fileID: 114377323407038096}
+  - component: {fileID: 114870301083182594}
   m_Layer: 11
   m_Name: Henchman Knife
   m_TagString: Untagged
@@ -3679,6 +3681,7 @@ MonoBehaviour:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
+  _vfx: {fileID: 0}
   _hitEffect: {fileID: 0}
   _hitNoise: {fileID: 0}
   _noiseDuration: 0
@@ -3694,6 +3697,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneObject: {fileID: 114750797166031180}
+--- !u!114 &114377323407038096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1152112284624310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2746d027e996bb54fa7a49473ad03c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114386352608870252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3939,6 +3953,7 @@ MonoBehaviour:
     _boneType: 0
     _force: 0
     _enableRagdoll: 0
+  _vfx: {fileID: 0}
   _hitEffect: {fileID: 0}
   _hitNoise: {fileID: 0}
   _noiseDuration: 0
@@ -4002,44 +4017,23 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 95923507938997138}
-    - {fileID: 114988402514588422}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _components
-      Entry: 7
-      Data: 0|ITimeControl[], Assembly-CSharp
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|TimeControlAnimator, Assembly-CSharp
-    - Name: _animator
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|TimeControlRichAI, Assembly-CSharp
-    - Name: _richAI
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+--- !u!114 &114870301083182594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1152112284624310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d854699dccdf99e41b1b6af1e9f8d621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114945894668029152
 MonoBehaviour:
   m_ObjectHideFlags: 1

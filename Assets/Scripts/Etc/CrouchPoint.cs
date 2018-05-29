@@ -23,17 +23,19 @@ public class CrouchPoint : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
+        {
             collider.SendMessage("OnCrouchPointEnter", transform);
-
-        _canvas.gameObject.SetActive(true);
+            _canvas.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider collider)
     {
         if (collider.CompareTag("Player"))
+        {
             collider.SendMessage("OnCrouchPointExit", transform);
-
-        _canvas.gameObject.SetActive(false);
+            _canvas.gameObject.SetActive(false);
+        }
     }
 
     private void OnPlayerCrouch()
