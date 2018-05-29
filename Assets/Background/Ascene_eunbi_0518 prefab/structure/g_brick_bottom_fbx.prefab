@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23408941933220552}
   - component: {fileID: 65775005097828226}
   - component: {fileID: 114585732051670354}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: g_brick_bottom_fbx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
